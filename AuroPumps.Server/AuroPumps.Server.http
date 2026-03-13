@@ -1,0 +1,6 @@
+@AuroPumps.Server_HostAddress = http://localhost:5114
+
+GET {{AuroPumps.Server_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
