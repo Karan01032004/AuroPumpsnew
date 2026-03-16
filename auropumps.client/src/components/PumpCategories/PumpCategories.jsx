@@ -7,7 +7,7 @@ const pumpData = [
     {
         id: 1,
         name: "MOLTEN SULFER",
-        title: "Product of MOLTEN SULFER",
+        title: "MOLTEN SULFER",
         tags: ["ACC-J", "ACCV-J"],
         mainImage: `${import.meta.env.BASE_URL}/assets/images/home-molten-sulfer-1.png`,
         sideImage: `${import.meta.env.BASE_URL}/assets/images/home-molten-sulfer-2.png`,
@@ -29,7 +29,7 @@ const pumpData = [
     {
         id: 2,
         name: "MOLTEN ZINC & GALVALUM",
-        title: "Product of MOLTEN ZINC & GALVALUM",
+        title: "MOLTEN ZINC & GALVALUM",
         tags: ["AMZ"],
         mainImage: `${import.meta.env.BASE_URL}/assets/images/home-molten-sulfer-1.png`,
         sideImage: `${import.meta.env.BASE_URL}/assets/images/home-molten-sulfer-2.png`,
@@ -45,7 +45,7 @@ const pumpData = [
     {
         id: 3,
         name: "MOLTEN LEAD & TIN",
-        title: "Product of MOLTEN LEAD & TIN",
+        title: "MOLTEN LEAD & TIN",
         tags: ["AML"],
         mainImage: `${import.meta.env.BASE_URL}/assets/images/home-molten-sulfer-1.png`,
         sideImage: `${import.meta.env.BASE_URL}/assets/images/home-molten-sulfer-2.png`,
@@ -58,7 +58,7 @@ const pumpData = [
     {
         id: 4,
         name: "MOLTEN SALT",
-        title: "Product of MOLTEN SALT",
+        title: "MOLTEN SALT",
         tags: ["ACCV"],
         mainImage: `${import.meta.env.BASE_URL}/assets/images/home-molten-sulfer-1.png`,
         sideImage: `${import.meta.env.BASE_URL}/assets/images/home-molten-sulfer-2.png`,
@@ -80,7 +80,7 @@ const pumpData = [
     {
         id: 5,
         name: "SULFURIC ACID",
-        title: "Product of SULFURIC ACID",
+        title: "SULFURIC ACID",
         tags: ["ACC", "ACCV","APP"],
         mainImage: `${import.meta.env.BASE_URL}/assets/images/home-molten-sulfer-1.png`,
         sideImage: `${import.meta.env.BASE_URL}/assets/images/home-molten-sulfer-2.png`,
