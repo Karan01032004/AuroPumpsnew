@@ -2,32 +2,35 @@ import { useState } from "react";
 import productData from "./productData";
 import ProductSidebar from "./ProductSidebar";
 import ProductContent from "./ProductContent";
-import ProductAccordion from "./ProductAccordion";
+
 function AuroProducts() {
 
     const [activeCategory, setActiveCategory] = useState(productData[0].id);
+    const [selectedProduct, setSelectedProduct] = useState(
+        productData[0].products[0]
+    );
 
     const selectedCategory = productData.find(
         (item) => item.id === activeCategory
     );
 
     return (
-        <section className="py-8 sm:py-14 md:py-16 lg:py-100">
-            <div className="container mx-auto grid lg:grid-cols-[1.2fr_3fr] gap-0 md:gap-5 lg:gap-7">
+        <section className="py-8 sm:py-14 md:py-16 lg:py-20">
+
+            <div className="container mx-auto grid lg:grid-cols-[1.2fr_3fr] gap-5 lg:gap-7 items-start">
 
                 <ProductSidebar
                     categories={productData}
-                    active={activeCategory}
-                    setActive={setActiveCategory}
+                    activeCategory={activeCategory}
+                    setActiveCategory={setActiveCategory}
+                    selectedProduct={selectedProduct}
+                    setSelectedProduct={setSelectedProduct}
                 />
 
-                {selectedCategory.products.length > 1 ? (
-                    <ProductAccordion products={selectedCategory.products} />
-                ) : (
-                    <ProductContent product={selectedCategory.products[0]} />
-                )}
+                <ProductContent product={selectedProduct} />
 
             </div>
+
         </section>
     );
 }
