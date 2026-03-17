@@ -1,10 +1,12 @@
 const productData = [
     {
         id: "pumps",
+        slug: "pumps",
         title: "PUMPS",
         products: [
             {
                 id: "acc",
+                slug: "acc",
                 name: "ACC",
                 title: "PUMPS",
                 image: `${import.meta.env.BASE_URL}/assets/images/acc-j.png`,
@@ -23,6 +25,7 @@ const productData = [
             },
             {
                 id: "acc-j",
+                slug: "acc-j",
                 name: "ACC-J",
                 title: "PUMPS",
                 image: `${import.meta.env.BASE_URL}/assets/images/acc-j.png`,
@@ -41,6 +44,7 @@ const productData = [
 
             {
                 id: "accv-j-products",
+                slug: "accv-j",
                 name: "ACCV-J",
                 image: `${import.meta.env.BASE_URL}/assets/images/accv-j.png`,
                 pdf: `${import.meta.env.BASE_URL}/assets/pdf/ACC-J & ACCV-J.pdf`,
@@ -57,6 +61,7 @@ const productData = [
             },
             {
                 id: "accv-product",
+                slug: "accv",
                 name: "ACCV",
                 image: `${import.meta.env.BASE_URL}/assets/images/accv-j.png`,
                 pdf: `${import.meta.env.BASE_URL}/assets/pdf/ACCV.pdf`,
@@ -73,6 +78,7 @@ const productData = [
             },
             {
                 id: "actf-product",
+                slug: "actf",
                 name: "ACTF",
                 image: `${import.meta.env.BASE_URL}/assets/images/acc.png`,
                 pdf: `${import.meta.env.BASE_URL}/assets/pdf/ACTF & ACCTF.pdf`,
@@ -89,6 +95,7 @@ const productData = [
             },
             {
                 id: "acctf-product",
+                slug: "acctf",
                 name: "ACCTF",
                 image: `${import.meta.env.BASE_URL}/assets/images/acc.png`,
                 pdf: `${import.meta.env.BASE_URL}/assets/pdf/ACTF & ACCTF.pdf`,
@@ -107,6 +114,7 @@ const productData = [
             },
             {
                 id: "app",
+                slug: "app",
                 name: "APP",
                 image: `${import.meta.env.BASE_URL}/assets/images/acc.png`,
                 pdf: `${import.meta.env.BASE_URL}/assets/pdf/APP CATALOG.pdf`,
@@ -119,10 +127,12 @@ const productData = [
     },
     {
         id: "agitators",
+        slug: "agitators",
         title: "AGITATORS",
         products: [
             {
                 id: "acc-j",
+                slug: "acc-j",
                 name: "ACC-J",
                 title: "PUMPS",
                 image: `${import.meta.env.BASE_URL}/assets/images/acc-j.png`,
@@ -143,10 +153,12 @@ const productData = [
 
     {
         id: "dross-grabber",
+        slug: "dross-grabber",
         title: "DROSS GRABBER",
         products: [
             {
                 id: "dg-1",
+                slug: "dg-1",
                 name: "DG-1",
                 image: `${import.meta.env.BASE_URL}/assets/images/product.jpg`,
                 pdf: "#",
@@ -160,10 +172,12 @@ const productData = [
     },
     {
         id: "molten-salt-systems",
+        slug: "molten-salt-systems",
         title: "MOLTEN SALT SYSTEMS",
         products: [
             {
                 id: "accv-product",
+                slug: "accv",
                 name: "ACCV",
                 image: `${import.meta.env.BASE_URL}/assets/images/accv-j.png`,
                 pdf: `${import.meta.env.BASE_URL}/assets/pdf/ACCV.pdf`,
@@ -182,10 +196,12 @@ const productData = [
     },
     {
         id: "molten-metal-systems",
+        slug: "molten-metal-systems",
         title: "MOLTEN METAL SYSTEMS",
         products: [
             {
                 id: "amz-product",
+                slug: "amz",
                 name: "AMZ",
                 image: `${import.meta.env.BASE_URL}/assets/images/product.jpg`,
                 pdf: "#",
@@ -197,6 +213,7 @@ const productData = [
             },
             {
                 id: "aml-product",
+                slug: "aml",
                 name: "AML",
                 image: `${import.meta.env.BASE_URL}/assets/images/product.jpg`,
                 pdf: "#",
