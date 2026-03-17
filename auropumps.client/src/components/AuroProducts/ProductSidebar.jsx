@@ -1,7 +1,7 @@
 ﻿import { useState, useRef, useEffect } from "react";
 import { FiChevronDown } from "react-icons/fi";
 import { FaPlus, FaMinus } from "react-icons/fa";
-
+import { useNavigate } from "react-router-dom";
 function ProductSidebar({
     categories,
     activeCategory,
@@ -9,7 +9,7 @@ function ProductSidebar({
     selectedProduct,
     setSelectedProduct
 }) {
-
+    const navigate = useNavigate();
     const [openCategory, setOpenCategory] = useState(activeCategory);
     const [open, setOpen] = useState(false);
     const dropdownRef = useRef(null);
@@ -23,12 +23,15 @@ function ProductSidebar({
             setOpenCategory(id);
             setActiveCategory(id);
 
-            // Find selected category
             const selectedCategory = categories.find(cat => cat.id === id);
 
-            // Set first product active
             if (selectedCategory?.products?.length > 0) {
-                setSelectedProduct(selectedCategory.products[0]);
+                const firstProduct = selectedCategory.products[0];
+
+                setSelectedProduct(firstProduct);
+
+                // ✅ ADD THIS
+                navigate(`/products/${selectedCategory.slug}/${firstProduct.slug}`);
             }
         }
     };
@@ -60,6 +63,21 @@ function ProductSidebar({
 
     }, []);
 
+    useEffect(() => {
+        if (!activeCategory && categories.length > 0) {
+
+            const firstCategory = categories[0];
+            const firstProduct = firstCategory.products?.[0];
+
+            if (firstProduct) {
+                setActiveCategory(firstCategory.id);
+                setSelectedProduct(firstProduct);
+                setOpenCategory(firstCategory.id);
+
+                navigate(`/products/${firstCategory.slug}/${firstProduct.slug}`);
+            }
+        }
+    }, [categories, activeCategory]);
     return (
         <>
             {/* DESKTOP SIDEBAR */}
@@ -112,7 +130,10 @@ function ProductSidebar({
 
                                         <li
                                             key={product.id}
-                                            onClick={() => setSelectedProduct(product)}
+                                            onClick={() => {
+                                                setSelectedProduct(product);
+                                                navigate(`/products/${category.slug}/${product.slug}`);
+                                            }}
                                             className={`group flex items-center gap-3 text-gray font-semibold cursor-pointer text-md transition-all duration-200
     
                                                 ${selectedProduct?.id === product.id
@@ -220,6 +241,7 @@ function ProductSidebar({
                                                 onClick={() => {
                                                     setSelectedProduct(product);
                                                     setOpen(false);
+                                                    navigate(`/products/${item.slug}/${product.slug}`);
                                                 }}
                                                 className={`flex items-center gap-3 cursor-pointer text-sm transition-all
                                                     ${selectedProduct?.id === product.id

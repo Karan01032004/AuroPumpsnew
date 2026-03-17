@@ -1,13 +1,52 @@
-import { useState } from "react";
+﻿import { useParams } from "react-router-dom";
+import { useEffect, useState } from "react";
 import productData from "./productData";
 import ProductSidebar from "./ProductSidebar";
 import ProductContent from "./ProductContent";
 
 function AuroProducts() {
 
-    const [activeCategory, setActiveCategory] = useState(productData[0].id);
-    const [selectedProduct, setSelectedProduct] = useState(
-        productData[0].products[0]
+    const { categorySlug, productSlug } = useParams();
+
+    const [activeCategory, setActiveCategory] = useState(null);
+    const [selectedProduct, setSelectedProduct] = useState(null);
+
+    useEffect(() => {
+
+        if (!categorySlug || !productSlug) return;
+
+        const category = productData.find(
+            (cat) => cat.slug === categorySlug
+        );
+
+        if (!category) return;
+
+        const product = category.products.find(
+            (p) => p.slug === productSlug
+        );
+
+        if (!product) return;
+
+        setActiveCategory(category.id);
+        setSelectedProduct(product);
+
+    }, [categorySlug, productSlug]);
+
+    useEffect(() => {
+
+        if (!activeCategory && productData.length > 0) {
+
+            const firstCategory = productData[0];
+            const firstProduct = firstCategory.products[0];
+
+            setActiveCategory(firstCategory.id);
+            setSelectedProduct(firstProduct);
+        }
+
+    }, []);
+
+    const selectedCategory = productData.find(
+        (cat) => cat.id === activeCategory
     );
 
     return (
@@ -23,7 +62,10 @@ function AuroProducts() {
                     setSelectedProduct={setSelectedProduct}
                 />
 
-                <ProductContent product={selectedProduct} />
+                <ProductContent
+                    product={selectedProduct}
+                    categoryTitle={selectedCategory?.title}
+                />
 
             </div>
 

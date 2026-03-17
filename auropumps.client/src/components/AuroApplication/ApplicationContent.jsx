@@ -1,6 +1,7 @@
 ﻿import { useState, useEffect } from "react";
 
-function ApplicationContent({ product, products, categoryDescription }) {
+function ApplicationContent({ product, products, categoryTitle
+    , categoryDescription }) {
     if (!product) return null;
 
     const [currentIndex, setCurrentIndex] = useState(0);
@@ -48,11 +49,11 @@ function ApplicationContent({ product, products, categoryDescription }) {
         }
     }, [currentIndex, products.length]);
 
-    return (
+    return (    
         <>
             <div>
-                <h2 className="text-xl md:text-3xl font-bold text-[#2D258E] mb-3 lg:mb-4">
-                    Associated Products
+                <h2 className="text-xl md:text-2xl font-bold text-[#2D258E] uppercase mb-3 lg:mb-4">
+                    {categoryTitle}
                 </h2>
 
                 <div className="relative">
@@ -104,11 +105,18 @@ function ApplicationContent({ product, products, categoryDescription }) {
                 </div>
 
                 {categoryDescription && (
-                    <p className="my-3 md:my-5 text-md text-[#595959] leading-relaxed">
+                    <p className="my-3 md:my-5 text-md text-gray leading-relaxed">
                         {categoryDescription}
                     </p>
                 )}
-              
+                <h2 className="text-xl md:text-2xl font-bold text-primary mb-3 lg:mb-3">
+                    Associated Products
+                </h2>
+
+                <h3 className="text-xl md:text-xl font-bold text-gray mb-3 lg:mb-3 uppercase">
+                    {product.name}
+                </h3>
+
                 <div className="bg-[#F4F3FF] p-0 lg:p-4">
                     <p className="mb-3 lg:mb-6 text-md text-gray">
                         {product.firstdescription}
