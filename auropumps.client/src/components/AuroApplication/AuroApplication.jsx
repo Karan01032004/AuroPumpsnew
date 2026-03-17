@@ -71,6 +71,7 @@ function AuroApplication() {
                 <ApplicationContent
                     product={selectedProduct}
                     products={selectedCategory.products}
+                    categoryTitle={selectedCategory.title}
                     categoryDescription={selectedCategory?.categoryDescription}
                 />
 
