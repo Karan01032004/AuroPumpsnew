@@ -10,10 +10,6 @@ function AuroProducts() {
         productData[0].products[0]
     );
 
-    const selectedCategory = productData.find(
-        (item) => item.id === activeCategory
-    );
-
     return (
         <section className="py-8 sm:py-14 md:py-16 lg:py-20">
 

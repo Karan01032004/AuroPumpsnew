@@ -49,6 +49,7 @@ function App() {
                     <Route path="contact-us" element={<ContactUs />} />
                     <Route path="company" element={<Company />} />
                     <Route path="application" element={<Application />} />
+                    <Route path="application/:categoryId/:productId" element={<Application />} />
                     <Route path="products" element={<Products />} />
                     <Route
                         path="/thank-you"

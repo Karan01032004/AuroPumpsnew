@@ -113,7 +113,7 @@ function ProductSidebar({
                                         <li
                                             key={product.id}
                                             onClick={() => setSelectedProduct(product)}
-                                            className={`group flex items-center gap-3 cursor-pointer text-md transition-all duration-200
+                                            className={`group flex items-center gap-3 text-gray font-semibold cursor-pointer text-md transition-all duration-200
     
                                                 ${selectedProduct?.id === product.id
                                                     ? "text-primary font-semibold"
