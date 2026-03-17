@@ -1,19 +1,30 @@
-﻿function ProductContent({ product }) {
+﻿
+import { IMAGE_BASE_URL } from "../../poweradmin/api/axios";
+function ProductContent({ product, categoryTitle }) {
     if (!product) return null;
 
     return (
         <div className="bg-[#F4F3FF] p-0 lg:p-4">
+            <h2 className="text-xl md:text-2xl font-bold text-primary mb-3 lg:mb-3">
+                {categoryTitle}
+            </h2>
+
+            <h3 className="text-xl md:text-xl font-bold text-gray mb-3 lg:mb-3 uppercase">
+                {product.name}
+            </h3>
             <div className="grid lg:grid-cols-[1fr_1.4fr] gap-6 lg:mt-2">
                 <div>
                     <img
-                        src={product.image}
+                        src={`${IMAGE_BASE_URL}${product.image}`}
+                        
                         alt={product.name}
                         className="w-full rounded-xl object-cover" />
                 </div>
 
                 <div className="relative">
                     <a 
-                        href={product.pdf}
+                        href={`${IMAGE_BASE_URL}${product.pdf}`}
+                        
                         target="_blank"
                         rel="noreferrer"
                         className="absolute right-0 top-0 text-primary text-md font-semibold flex items-center gap-1" >

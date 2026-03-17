@@ -15,6 +15,24 @@ namespace Poweradmin.Server.Controllers
         { 
             _db = db; 
         }
+
+        [HttpGet("category-list")]
+        public IActionResult GettCategories()
+        {
+            var categories = _db.ProductsCategory
+                .Where(x => x.isvisible) // sirf visible
+                .OrderBy(x => x.id)
+                .Select(x => new
+                {
+                    id = x.id,
+                    title = x.title
+                })
+                .ToList();
+
+            return Ok(categories);
+        }
+
+        #region Poweradmin
         [HttpPost("add")]
         public IActionResult AddCategory(ProductsCategoryDTO dto)
         {
@@ -96,5 +114,8 @@ namespace Poweradmin.Server.Controllers
 
             return Ok(new { message = "Category updated successfully" });
         }
-    } 
+        #endregion
+
+
+    }
 }

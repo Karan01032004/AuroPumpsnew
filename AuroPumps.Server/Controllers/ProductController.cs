@@ -13,7 +13,27 @@ namespace Poweradmin.Server.Controllers
         public ProductController(AppDbContext db)
         {
             _db = db;
-        } 
+        }
+        [HttpGet("list-by-category/{categoryId}")]
+        public IActionResult GetProductsByCategory(int categoryId)
+        {
+            string searchId = categoryId.ToString();
+
+            var products = _db.Product
+                .Where(x => x.Visible == true &&
+                            x.CategoryId != null &&
+                            ("," + x.CategoryId + ",").Contains("," + searchId + ","))
+                .OrderBy(x => x.title)
+                .Select(x => new
+                {
+                    id = x.id,
+                    name = x.title
+                })
+                .ToList();
+
+            return Ok(products);
+        }
+        #region Poweradmin
         [HttpPost("add")]
         public IActionResult Add(
             [FromForm] ProductDTO dto,
@@ -45,10 +65,9 @@ namespace Poweradmin.Server.Controllers
                     image3 = image3Path,
                     catelogue = cataloguePath,
 
-                    technicalDetails = dto.technicalDetails,
+                    
                     description = dto.description,
-                    MOC = dto.MOC,
-                    applications = dto.applications,
+                     
 
                     Visible = dto.Visible,
                     isFeatured = dto.isFeatured,
@@ -111,10 +130,7 @@ namespace Poweradmin.Server.Controllers
                     x.catelogue,
                     CategoryId = x.CategoryId ?? "",
                     // x.CategoryId,
-                    x.description,
-                    x.technicalDetails,
-                    x.MOC,
-                    x.applications,
+                    x.description, 
                     Capacity = x.Capacity,
                     producthead = x.producthead,
                     productsize = x.productsize,
@@ -154,10 +170,7 @@ namespace Poweradmin.Server.Controllers
 
                 // Update Text Fields
                 product.title = dto.title;
-                product.description = dto.description;
-                product.technicalDetails = dto.technicalDetails;
-                product.MOC = dto.MOC;
-                product.applications = dto.applications;
+                product.description = dto.description; 
                 product.Capacity = dto.Capacity;
                 product.producthead = dto.producthead;
                 product.productsize = dto.productsize;
@@ -227,5 +240,6 @@ namespace Poweradmin.Server.Controllers
 
             return $"/Webfiles/{folder}/{fileName}";
         }
+        #endregion
     }
 }

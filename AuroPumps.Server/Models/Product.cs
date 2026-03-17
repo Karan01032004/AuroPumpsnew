@@ -17,8 +17,7 @@ namespace Poweradmin.Server.Models
         public string MOC { get; set; }
         public string applications { get; set; }
 
-        public string catelogue { get; set; }   // PDF path
-
+        public string catelogue { get; set; }   // PDF path  
         public bool? Visible { get; set; }      // Display on frontend
         public int? sortorder { get; set; }
 

@@ -345,17 +345,28 @@ const AddProduct = () => {
                 </div>
 
                 {/* EDITORS */}
-                {[
-                    ["Product Description", description, setDescription],
-                    ["Technical Details", technicalDetails, setTechnicalDetails],
-                    ["MOC", moc, setMoc],
-                    ["Applications", applications, setApplications],
-                ].map(([label, val, setter]) => (
-                    <div className="mt-6" key={label}>
-                        <label className="font-medium">{label}</label>
-                        <TinyEditor value={val} onChange={setter} />
-                    </div>
-                ))}
+                {/*{[*/}
+                {/*    ["Product Description", description, setDescription],*/}
+                {/*    ["Technical Details", technicalDetails, setTechnicalDetails],*/}
+                {/*    ["MOC", moc, setMoc],*/}
+                {/*    ["Applications", applications, setApplications],*/}
+                {/*].map(([label, val, setter]) => (*/}
+                {/*    <div className="mt-6" key={label}>*/}
+                {/*        <label className="font-medium">{label}</label>*/}
+                {/*        <TinyEditor value={val} onChange={setter} />*/}
+                {/*    </div>*/}
+                {/*))}*/}
+
+                <div className="mt-6">
+                    <label className="font-medium text-gray-700">Product Description</label>
+                    <textarea
+                        className="w-full mt-2 p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                        rows="6"
+                        placeholder="Enter product description here..."
+                        value={description}
+                        onChange={(e) => setDescription(e.target.value)}
+                    />
+                </div>
 
                 <div className="mt-6 grid grid-cols-1 md:grid-cols-2 gap-4">
 
