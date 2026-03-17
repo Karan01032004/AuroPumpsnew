@@ -2,107 +2,11 @@ import { useState } from "react";
 import PumpTabs from "./PumpTabs";
 import PumpCategoryContent from "./PumpCategoryContent";
 import ThemeButton from "../../components/ThemeButton";
-
-const pumpData = [
-    {
-        id: 1,
-        name: "MOLTEN SULFER",
-        title: "MOLTEN SULFER",
-        tags: ["ACC-J", "ACCV-J"],
-        mainImage: `${import.meta.env.BASE_URL}/assets/images/home-molten-sulfer-1.png`,
-        sideImage: `${import.meta.env.BASE_URL}/assets/images/home-molten-sulfer-2.png`,
-        applications: [
-            "Organic and Inorganic Chemicals",
-            "Acids and Corrosive Chemicals",
-            "Solvent Hydrocarbons",
-            "Chloralkali and Caustic Soda",
-            "Sulphuric Acid and Molten Sulfur",
-            "Bitumen and Coal Tar",
-            "Waste Water Treatment",
-            "Heat Treatment Furnaces",
-            "Steel Production",
-            "Power Plants and Mining",
-            "Fertilizer Industry",
-            "Nuclear Power",
-        ],
-    },
-    {
-        id: 2,
-        name: "MOLTEN ZINC & GALVALUM",
-        title: "MOLTEN ZINC & GALVALUM",
-        tags: ["AMZ"],
-        mainImage: `${import.meta.env.BASE_URL}/assets/images/home-molten-sulfer-1.png`,
-        sideImage: `${import.meta.env.BASE_URL}/assets/images/home-molten-sulfer-2.png`,
-        applications: [
-            "Galvanizing Plants",
-            "Metal Processing",
-            "Steel Plants",
-            "Industrial Coating",
-            "Alloy Manufacturing",
-            "Metal Smelting",
-        ],
-    },
-    {
-        id: 3,
-        name: "MOLTEN LEAD & TIN",
-        title: "MOLTEN LEAD & TIN",
-        tags: ["AML"],
-        mainImage: `${import.meta.env.BASE_URL}/assets/images/home-molten-sulfer-1.png`,
-        sideImage: `${import.meta.env.BASE_URL}/assets/images/home-molten-sulfer-2.png`,
-        applications: [
-            "Battery Manufacturing",
-            "Metal Smelting",
-            "Casting Plants",
-        ],
-    },
-    {
-        id: 4,
-        name: "MOLTEN SALT",
-        title: "MOLTEN SALT",
-        tags: ["ACCV"],
-        mainImage: `${import.meta.env.BASE_URL}/assets/images/home-molten-sulfer-1.png`,
-        sideImage: `${import.meta.env.BASE_URL}/assets/images/home-molten-sulfer-2.png`,
-        applications: [
-            "Organic and Inorganic Chemicals",
-            "Acids",
-            "Solvent and Petrochemicals",
-            "Chloroalkali and Caustic Soda",
-            "Sulphuric Acid and Oleum",
-            "Molten Sulfur",
-            "Molten Salts and Solar Power Plants",
-            "Heat Treatment Furnaces and Automotive Paint Lines",
-            "Steel Production and Processing",
-            "Power Plants and Mining",
-            "Fertilizer Industry",
-            "Nuclear Power"
-        ]
-    },
-    {
-        id: 5,
-        name: "SULFURIC ACID",
-        title: "SULFURIC ACID",
-        tags: ["ACC", "ACCV","APP"],
-        mainImage: `${import.meta.env.BASE_URL}/assets/images/home-molten-sulfer-1.png`,
-        sideImage: `${import.meta.env.BASE_URL}/assets/images/home-molten-sulfer-2.png`,
-        applications: [
-            "Organic and Inorganic Chemicals",
-            "Acids and Corrosive Chemicals",
-            "Solvent, Hydrocarbons and Petrochemicals",
-            "Chloroalkali and Caustic Soda",
-            "Sulphuric Acid and Molten Sulfur",
-            "Bitumen and Coal-Tar",
-            "Waste Water Treatment and Effluent Treatment Plants",
-            "Heat Treatment Furnaces and Cooling Towers",
-            "Steel Production and Processing",
-            "Power Plants and Mining",
-            "Fertilizer Industry",
-            "Nuclear Power"
-        ]
-    },
-];
+import applicationData from "../AuroApplication/applicationData";
 
 export default function PumpCategories() {
-    const [active, setActive] = useState(pumpData[0]);
+
+    const [active, setActive] = useState(applicationData[0]);
 
     return (
         <section className="py-10 bg-[#F4F3FF]">
@@ -129,15 +33,13 @@ export default function PumpCategories() {
 
                 </div>
             </div>
-             
-            {/* Tabs */}
+
             <PumpTabs
-                data={pumpData}
+                data={applicationData}
                 active={active}
                 setActive={setActive}
             />
 
-            {/* Content */}
             <PumpCategoryContent data={active} />
 
         </section>

@@ -1,10 +1,13 @@
 const applicationData = [
     {
         id: "molten-sulfur",
+        slug: "molten-sulfur",
         title: "MOLTEN SULFER",
+        categoryDescription: "Molten sulfur handling requires specialized pumps capable of operating at high temperatures while preventing solidification and corrosion. These pumps are commonly used in sulfur recovery units, refineries, chemical plants, and fertilizer manufacturing facilities. Designed for durability and thermal stability, molten sulfur pumps ensure safe and efficient transfer of sulfur in demanding industrial environments.",
         products: [
             {
                 id: "acc-j",
+                slug: "acc-j",
                 name: "ACC-J",
                 title: "MOLTEN SULFER",
                 image: `${import.meta.env.BASE_URL}/assets/images/acc-j.png`,
@@ -24,7 +27,8 @@ const applicationData = [
             },
 
             {
-                id: "acc-k",
+                id: "accv-j",
+                slug: "accv-j",
                 name: "ACCV-J",
                 image: `${import.meta.env.BASE_URL}/assets/images/accv-j.png`,
                 pdf: `${import.meta.env.BASE_URL}/assets/pdf/ACC-J & ACCV-J.pdf`,
@@ -44,10 +48,13 @@ const applicationData = [
     },
     {
         id: "molten-zinc-galvalume",
+        slug: "molten-zinc-galvalume",
         title: "MOLTEN ZINC & GALVALUM",
+        categoryDescription: "Molten zinc and galvalume processing applications require pumps that can withstand high temperatures, corrosive conditions, and continuous operation in galvanizing plants. These pumps are used to transfer molten metal efficiently during coating and galvanizing processes, ensuring consistent metal flow, improved coating quality, and reliable plant operation.",
         products: [
             {
                 id: "amz",
+                slug: "amz",
                 name: "AMZ",
                 image: `${import.meta.env.BASE_URL}/assets/images/acc-j.png`,
                 pdf: `${import.meta.env.BASE_URL}/assets/pdf/AMZ - AML.pdf`,
@@ -63,10 +70,13 @@ const applicationData = [
 
     {
         id: "molten-lead-tin",
+        slug: "molten-lead-tin",
         title: "MOLTEN LEAD & TIN",
+        categoryDescription: "Molten lead and tin applications are common in battery manufacturing, metal processing, and alloy production. Pumps designed for these applications must handle high temperatures and dense molten metals while maintaining operational safety and efficiency. These pumps provide reliable circulation and transfer of molten lead and tin in demanding industrial processes.",
         products: [
             {
                 id: "aml",
+                slug: "aml",
                 name: "AML",
                 image: `${import.meta.env.BASE_URL}/assets/images/product.jpg`,
                 pdf: `${import.meta.env.BASE_URL}/assets/pdf/AMZ - AML.pdf`,
@@ -81,10 +91,13 @@ const applicationData = [
     },
     {
         id: "molten-salt",
+        slug: "molten-salt",
         title: "MOLTEN SALT",
+        categoryDescription: "Molten salt systems are widely used in solar thermal power plants, chemical processing, and heat transfer applications. Pumps designed for molten salt must operate reliably at extremely high temperatures while resisting corrosion and thermal stress. These pumps ensure efficient circulation of molten salt used for heat storage, heat transfer, and industrial processing.",
         products: [
             {
                 id: "accv",
+                slug: "accv",
                 name: "ACCV",
                 image: `${import.meta.env.BASE_URL}/assets/images/accv-j.png`,
                 pdf: `${import.meta.env.BASE_URL}/assets/pdf/ACCV.pdf`,
@@ -104,10 +117,13 @@ const applicationData = [
     },
     {
         id: "sulfuric-acid",
+        slug: "sulfuric-acid",
         title: "SULFURIC ACID",
+        categoryDescription: "Sulfuric acid handling requires specially engineered pumps capable of withstanding highly corrosive environments. These pumps are commonly used in chemical plants, fertilizer industries, mining operations, and metal processing facilities. Designed with corrosion-resistant materials and robust construction, sulfuric acid pumps ensure safe, efficient, and reliable transfer of aggressive chemical fluids.",
         products: [
             {
                 id: "acc",
+                slug: "acc",
                 name: "ACC",
                 title: "PUMPS",
                 image: `${import.meta.env.BASE_URL}/assets/images/acc-j.png`,
@@ -126,7 +142,8 @@ const applicationData = [
                 ]
             },
             {
-                id: "accv",
+                id: "accv-sulfuric-acid",
+                slug: "accv",
                 name: "ACCV",
                 image: `${import.meta.env.BASE_URL}/assets/images/accv-j.png`,
                 pdf: `${import.meta.env.BASE_URL}/assets/pdf/ACCV.pdf`,
@@ -144,6 +161,7 @@ const applicationData = [
             },
             {
                 id: "app",
+                slug: "app",
                 name: "APP",
                 image: `${import.meta.env.BASE_URL}/assets/images/acc.png`,
                 pdf: `${import.meta.env.BASE_URL}/assets/pdf/APP CATALOG.pdf`,

@@ -32,7 +32,7 @@
                         DOWNLOAD PDF
                     </a>
 
-                    <div className="inline-block uppercase mb-4 px-4 py-1.5 rounded-full border border-primary text-[#4B4B4B] text-md font-semibold bg-white">
+                    <div className="inline-block uppercase mb-4 px-4 py-1.5 rounded-full border border-primary text-gray text-md font-semibold bg-white">
                         {product.name}
                     </div>
 

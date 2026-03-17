@@ -1,10 +1,113 @@
-function ApplicationContent({ product }) {
+﻿import { useState, useEffect } from "react";
+
+function ApplicationContent({ product, products, categoryDescription }) {
     if (!product) return null;
+
+    const [currentIndex, setCurrentIndex] = useState(0);
+    const [itemsPerView, setItemsPerView] = useState(3);
+    const [isTransitioning, setIsTransitioning] = useState(true);
+
+    const isSliderActive = products.length > itemsPerView;
+    const extendedProducts = isSliderActive
+        ? [...products, ...products]
+        : products;
+
+    useEffect(() => {
+        const handleResize = () => {
+            if (window.innerWidth < 769) {
+                setItemsPerView(1);
+            } else if (window.innerWidth < 992) {
+                setItemsPerView(2);
+            } else {
+                setItemsPerView(3);
+            }
+        };
+
+        handleResize();
+        window.addEventListener("resize", handleResize);
+        return () => window.removeEventListener("resize", handleResize);
+    }, []);
+
+    useEffect(() => {
+        if (products.length <= itemsPerView) return;
+
+        const interval = setInterval(() => {
+            setCurrentIndex((prev) => prev + 1);
+            setIsTransitioning(true);
+        }, 3000);
+
+        return () => clearInterval(interval);
+    }, [products, itemsPerView]);
+
+    useEffect(() => {
+        if (currentIndex >= products.length) {
+            setTimeout(() => {
+                setIsTransitioning(false);
+                setCurrentIndex(0);
+            }, 700);
+        }
+    }, [currentIndex, products.length]);
 
     return (
         <>
             <div>
-                
+                <h2 className="text-xl md:text-3xl font-bold text-[#2D258E] mb-3 lg:mb-4">
+                    Associated Products
+                </h2>
+
+                <div className="relative">
+                    <div className="overflow-hidden">
+                        <div
+                            className={`flex ${isTransitioning
+                                    ? "transition-transform duration-700 ease-in-out"
+                                    : ""
+                                }`}
+                            style={{
+                                transform: `translateX(-${currentIndex * (100 / itemsPerView)
+                                    }%)`,
+                            }}
+                        >
+                            {extendedProducts.map((item, index) => (
+                                <div
+                                    key={index}
+                                    className="flex-shrink-0 px-3"
+                                    style={{
+                                        width: `${100 / itemsPerView}%`,
+                                    }}
+                                >
+                                    <div className="bg-white p-2 md:p-3 rounded-lg border border-gray-200 transition-all duration-300 overflow-hidden h-full">
+
+                                        {/* IMAGE */}
+                                        <div className="relative h-[200px] overflow-hidden">
+                                            <img
+                                                src={item.image}
+                                                alt={item.name}
+                                                className="w-full h-full object-contain transition-transform duration-500"
+                                            />
+
+                                            {/* subtle overlay */}
+                                            <div className="absolute inset-0 bg-gradient-to-t from-black/10 to-transparent opacity-0 transition duration-300"></div>
+                                        </div>
+
+                                        {/* CONTENT */}
+                                        <div className="text-center">
+                                            <h3 className="text-md mt-3 font-semibold text-primary transition">
+                                                {item.name}
+                                            </h3>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            ))}
+                        </div>
+                    </div>
+                </div>
+
+                {categoryDescription && (
+                    <p className="my-3 md:my-5 text-md text-[#595959] leading-relaxed">
+                        {categoryDescription}
+                    </p>
+                )}
               
                 <div className="bg-[#F4F3FF] p-0 lg:p-4">
                     <p className="mb-3 lg:mb-6 text-md text-gray">
@@ -40,7 +143,7 @@ function ApplicationContent({ product }) {
                                 DOWNLOAD PDF
                             </a>
 
-                            <div className="inline-block uppercase mb-4 px-4 py-1.5 rounded-full border border-primary text-[#4B4B4B] text-md font-semibold bg-white">
+                            <div className="inline-block uppercase mb-4 px-4 py-1.5 rounded-full border border-primary text-gray text-md font-semibold bg-white">
                                 {product.name}
                             </div>
 
