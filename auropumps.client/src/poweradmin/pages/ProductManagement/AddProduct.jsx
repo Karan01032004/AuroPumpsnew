@@ -6,6 +6,7 @@ import Select from "react-select"; // 1. Import Select
 import SeoMetaSection from "../../components/Forms/SeoMetaSection";
 import PageHeader from "../../components/PageHeader";
 import api from "../../api/axios";
+import { IMAGE_BASE_URL } from "../../api/axios";
 
 const AddProduct = () => {
     const { id } = useParams();
@@ -30,6 +31,7 @@ const AddProduct = () => {
     const [productSize, setProductSize] = useState("");
     const [temperature, setTemperature] = useState("");
     const [viscosity, setViscosity] = useState("");
+    const [SubmergenceLength, setSubmergenceLength] = useState("");
     const [operatingFrequency, setOperatingFrequency] = useState("");
     const [material, setMaterial] = useState(""); 
     const [images, setImages] = useState([]);
@@ -39,8 +41,7 @@ const AddProduct = () => {
     const [existingCatalogue, setExistingCatalogue] = useState("");
 
     const [loading, setLoading] = useState(false);
-    //const BACKEND_URL = "https://localhost:7051"; 
-    const BACKEND_URL = "https://dotcompreview.com/auropumps";
+ 
     useEffect(() => {
         document.title = isEdit
             ? "Edit Product | PowerAdmin"
@@ -94,6 +95,7 @@ const AddProduct = () => {
         setProductSize(p.productsize || "");
         setTemperature(p.temperature || "");
         setViscosity(p.viscosity || "");
+        setSubmergenceLength(p.SubmergenceLength || "");
         setOperatingFrequency(p.operating_frequency || "");
         setMaterial(p.material || "");
         setSeoTitle(p.pageIETitle);
@@ -102,7 +104,7 @@ const AddProduct = () => {
         setExistingImages({
             image1: p.image1,
             image2: p.image2,
-            image3: p.image3,
+            //image3: p.image3,
         });
         //if (p.categoryId) {
         //    const ids = p.categoryId.split(",");
@@ -136,6 +138,7 @@ const AddProduct = () => {
             formData.append("productsize", productSize);
             formData.append("temperature", temperature);
             formData.append("viscosity", viscosity);
+            formData.append("SubmergenceLength", SubmergenceLength);
             formData.append("operating_frequency", operatingFrequency);
             formData.append("material", material);
             formData.append("PageIETitle", seoTitle);
@@ -144,7 +147,7 @@ const AddProduct = () => {
             // Files
             if (images[0]) formData.append("image1", images[0]);
             if (images[1]) formData.append("image2", images[1]);
-            if (images[2]) formData.append("image3", images[2]);
+            //if (images[2]) formData.append("image3", images[2]);
             if (catalogue) formData.append("catalogue", catalogue);
 
             if (isEdit) {
@@ -196,7 +199,7 @@ const AddProduct = () => {
                     />
                 </div>
                 <div className="mt-6">
-                    <label className="font-medium">Select Categories</label>
+                    <label className="font-medium">Select Categories  <span className="text-red-500">*</span></label>
                     <Select
                         isMulti
                         options={categoryOptions}
@@ -208,9 +211,9 @@ const AddProduct = () => {
                 </div>
                  <div className="mt-6 grid grid-cols-1 md:grid-cols-3 gap-4">
                     {[
-                        ["Display on Frontend?", visible, setVisible],
-                        ["Is Featured?", isFeatured, setIsFeatured],
-                        ["Only Viw Contact Button?", isAddContact, setIsAddContact],
+                        ["Display on Frontend? ", visible, setVisible],
+                        //["Is Featured?", isFeatured, setIsFeatured],
+                        //["Only Viw Contact Button?", isAddContact, setIsAddContact],
                       
                     ].map(([label, value, setter]) => (
                         <div key={label}>
@@ -239,13 +242,13 @@ const AddProduct = () => {
                 {/* PRODUCT IMAGES */}
                 <div className="mt-6">
                     <p className="mb-2 font-medium text-gray-700">
-                        Product Images
+                        Product Images 
                     </p>
 
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                         {/* IMAGE 1 */}
                         <div>
-                            <label className="text-sm font-medium">Image 1</label>
+                            <label className="text-sm font-medium">Upload Gif</label>
                             <input
                                 type="file"
                                 accept="image/*"
@@ -260,7 +263,7 @@ const AddProduct = () => {
 
                         {/* IMAGE 2 */}
                         <div>
-                            <label className="text-sm font-medium">Image 2</label>
+                            <label className="text-sm font-medium">Upload Image  <span className="text-red-500">*</span></label>
                             <input
                                 type="file"
                                 accept="image/*"
@@ -274,19 +277,19 @@ const AddProduct = () => {
                         </div>
 
                         {/* IMAGE 3 */}
-                        <div>
-                            <label className="text-sm font-medium">Image 3</label>
-                            <input
-                                type="file"
-                                accept="image/*"
-                                onChange={(e) => {
-                                    const files = [...images];
-                                    files[2] = e.target.files[0];
-                                    setImages(files);
-                                }}
-                                className="w-full rounded border px-2 py-1 text-sm"
-                            />
-                        </div>
+                        {/*<div>*/}
+                        {/*    <label className="text-sm font-medium">Image 3</label>*/}
+                        {/*    <input*/}
+                        {/*        type="file"*/}
+                        {/*        accept="image/*"*/}
+                        {/*        onChange={(e) => {*/}
+                        {/*            const files = [...images];*/}
+                        {/*            files[2] = e.target.files[0];*/}
+                        {/*            setImages(files);*/}
+                        {/*        }}*/}
+                        {/*        className="w-full rounded border px-2 py-1 text-sm"*/}
+                        {/*    />*/}
+                        {/*</div>*/}
                     </div>
                 </div>
 
@@ -304,7 +307,7 @@ const AddProduct = () => {
                                         <img
                                             key={i}
                                             /*  src={img}*/
-                                            src={`${BACKEND_URL}/${img}`}
+                                            src={`${IMAGE_BASE_URL}/${img}`}
                                             className="h-24 w-24 rounded border object-cover"
                                         />
                                     )
@@ -333,7 +336,7 @@ const AddProduct = () => {
                             Existing Catalogue:{" "}
                             <a
                               //  href={existingCatalogue}
-                                href={`${BACKEND_URL}${existingCatalogue}`}
+                                href={`${IMAGE_BASE_URL}${existingCatalogue}`}
                                 target="_blank"
                                 rel="noreferrer"
                                 className="text-blue-600 underline"
@@ -358,7 +361,7 @@ const AddProduct = () => {
                 {/*))}*/}
 
                 <div className="mt-6">
-                    <label className="font-medium text-gray-700">Product Description</label>
+                    <label className="font-medium text-gray-700">Product Description  <span className="text-red-500">*</span></label>
                     <textarea
                         className="w-full mt-2 p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                         rows="6"
@@ -422,14 +425,21 @@ const AddProduct = () => {
                             onChange={(e) => setOperatingFrequency(e.target.value)}
                             className="w-full rounded-lg border px-3 py-2"
                         />
-                    </div>
-
+                    </div> 
                     <div>
                         <label className="font-medium">Material</label>
                         <textarea
                             value={material}
                             onChange={(e) => setMaterial(e.target.value)}
                             rows={3}
+                            className="w-full rounded-lg border px-3 py-2"
+                        />
+                    </div>
+                    <div>
+                        <label className="font-medium">Submergence Length</label>
+                        <input
+                            value={SubmergenceLength}
+                            onChange={(e) => setOperatingFrequency(e.target.value)}
                             className="w-full rounded-lg border px-3 py-2"
                         />
                     </div>

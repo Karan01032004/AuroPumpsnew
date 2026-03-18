@@ -37,10 +37,10 @@ namespace Poweradmin.Server.Controllers
         [HttpPost("add")]
         public IActionResult Add(
             [FromForm] ProductDTO dto,
-            IFormFile image1,   
+            IFormFile? image1,   
             IFormFile image2,
-            IFormFile image3,
-            IFormFile catalogue
+            //IFormFile image3,
+            IFormFile? catalogue
         )
 
         {
@@ -48,7 +48,7 @@ namespace Poweradmin.Server.Controllers
             {
                 string image1Path = image1 != null ? SaveFile(image1, "products") : null;
                 string image2Path = image2 != null ? SaveFile(image2, "products") : null;
-                string image3Path = image3 != null ? SaveFile(image3, "products") : null;
+                //string image3Path = image3 != null ? SaveFile(image3, "products") : null;
                 string cataloguePath = catalogue != null ? SaveFile(catalogue, "catalogue") : null;
 
                 //int maxOrder = _db.Product
@@ -62,7 +62,7 @@ namespace Poweradmin.Server.Controllers
 
                     image1 = image1Path,
                     image2 = image2Path,
-                    image3 = image3Path,
+                    //image3 = image3Path,
                     catelogue = cataloguePath,
 
                     
@@ -81,6 +81,7 @@ namespace Poweradmin.Server.Controllers
                     productsize = dto.productsize,
                     temperature = dto.temperature,
                     viscosity = dto.viscosity,
+                    SubmergenceLength = dto.SubmergenceLength,
                     operating_frequency = dto.operating_frequency,
                     material = dto.material,
                     sortorder = maxOrder + 1,
@@ -124,26 +125,27 @@ namespace Poweradmin.Server.Controllers
                     x.id,
                     x.title,
 
-                    x.image1,
-                    x.image2,
-                    x.image3,
-                    x.catelogue,
+                    image1 = x.image1 ?? "",
+                    image2 = x.image2 ?? "",
+                    //x.image3,
+                    catelogue = x.catelogue ?? "",
                     CategoryId = x.CategoryId ?? "",
                     // x.CategoryId,
                     x.description, 
-                    Capacity = x.Capacity,
-                    producthead = x.producthead,
-                    productsize = x.productsize,
-                    temperature = x.temperature,
-                    viscosity = x.viscosity,
-                    operating_frequency = x.operating_frequency,
-                    material = x.material,
+                    Capacity = x.Capacity ?? "",
+                    producthead = x.producthead ?? "",
+                    productsize = x.productsize ?? "",
+                    temperature = x.temperature ?? "",
+                    viscosity = x.viscosity ?? "",
+                    SubmergenceLength = x.SubmergenceLength ?? "",
+                    operating_frequency = x.operating_frequency ?? "",
+                    material = x.material ?? "",
                     visible = x.Visible,
                     isFeatured = x.isFeatured,
                     isaddcontact = x.isaddcontact,
 
-                    pageIETitle = x.PageIETitle,
-                    meta = x.Meta
+                    pageIETitle = x.PageIETitle ?? "",
+                    meta = x.Meta ?? ""
                 })
                 .FirstOrDefault();
 
@@ -159,7 +161,7 @@ namespace Poweradmin.Server.Controllers
             [FromForm] ProductDTO dto,
             IFormFile? image1,
             IFormFile? image2,
-            IFormFile? image3,
+            //IFormFile? image3,
             IFormFile? catalogue
         )
         {
@@ -176,6 +178,7 @@ namespace Poweradmin.Server.Controllers
                 product.productsize = dto.productsize;
                 product.temperature = dto.temperature;
                 product.viscosity = dto.viscosity;
+                product.SubmergenceLength = dto.SubmergenceLength;
                 product.operating_frequency = dto.operating_frequency;
                 product.material = dto.material;
                 product.Visible = dto.Visible;
@@ -192,7 +195,7 @@ namespace Poweradmin.Server.Controllers
                 // Image Handling: Agar nayi file upload hui hai tabhi update karo
                 if (image1 != null) product.image1 = SaveFile(image1, "products");
                 if (image2 != null) product.image2 = SaveFile(image2, "products");
-                if (image3 != null) product.image3 = SaveFile(image3, "products");
+                //if (image3 != null) product.image3 = SaveFile(image3, "products");
                 if (catalogue != null) product.catelogue = SaveFile(catalogue, "catalogue");
 
                 _db.Product.Update(product);
