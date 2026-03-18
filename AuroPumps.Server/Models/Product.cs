@@ -9,7 +9,7 @@ namespace Poweradmin.Server.Models
         [Key]
         public int id { get; set; } 
         public string title { get; set; } 
-        public string image1 { get; set; }
+        public string? image1 { get; set; }
         public string image2 { get; set; }
         //public string image3 { get; set; } 
         //public string technicalDetails { get; set; }

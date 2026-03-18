@@ -51,7 +51,8 @@ namespace Poweradmin.Server.Controllers
                 {
                     id = x.id,
                     categoryName = x.title,
-                    visible = x.isvisible
+                    visible = x.isvisible,
+                     slug = x.title.ToLower().Replace(" ", "-")
                 })
                 .ToList();
 

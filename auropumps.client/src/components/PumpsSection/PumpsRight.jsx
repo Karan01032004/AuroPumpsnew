@@ -1,112 +1,49 @@
-﻿// src/components/PumpsSection/PumpsRight.jsx
-
-import React, { useState, useEffect } from "react";
+﻿import React, { useState, useEffect } from "react";
 import { FiChevronDown } from "react-icons/fi";
-
-const tabs = [
-    {
-        id: "pumps",
-        label: "PUMPS",
-        products: [
-            {
-                name: "ACC",
-                img: `${import.meta.env.BASE_URL}/assets/images/acc.png`,
-            },
-            {
-                name: "AML",
-                img: `${import.meta.env.BASE_URL}/assets/images/aml.png`,
-            },
-            {
-                name: "APP",
-                img: `${import.meta.env.BASE_URL}/assets/images/app.png`,
-            },
-        ],
-    },
-    {
-        id: "agitators",
-        label: "AGITATORS",
-        products: [
-            {
-                name: "AG1",
-                img: `${import.meta.env.BASE_URL}/assets/images/pump1.png`,
-            },
-            {
-                name: "AG2",
-                img: `${import.meta.env.BASE_URL}/assets/images/pump2.png`,
-            },
-            {
-                name: "AG3",
-                img: `${import.meta.env.BASE_URL}/assets/images/pump3.png`,
-            },
-        ],
-    },
-    {
-        id: "dross",
-        label: "DROSS GRABBER",
-        products: [
-            {
-                name: "DG1",
-                img: `${import.meta.env.BASE_URL}/assets/images/pump1.png`,
-            },
-            {
-                name: "DG2",
-                img: `${import.meta.env.BASE_URL}/assets/images/pump2.png`,
-            },
-            {
-                name: "DG3",
-                img: `${import.meta.env.BASE_URL}/assets/images/pump3.png`,
-            },
-        ],
-    },
-
-    {
-        id: "molten-salt",
-        label: "MOLTEN SALT SYSTEMS",
-        products: [
-            {
-                name: "DG1",
-                img: `${import.meta.env.BASE_URL}/assets/images/pump1.png`,
-            },
-            {
-                name: "DG2",
-                img: `${import.meta.env.BASE_URL}/assets/images/pump2.png`,
-            },
-            {
-                name: "DG3",
-                img: `${import.meta.env.BASE_URL}/assets/images/pump3.png`,
-            },
-        ],
-    },
-
-    {
-        id: "molten-metal",
-        label: "MOLTEN METAL SYSTEMS",
-        products: [
-            {
-                name: "DG1",
-                img: `${import.meta.env.BASE_URL}/assets/images/pump1.png`,
-            },
-            {
-                name: "DG2",
-                img: `${import.meta.env.BASE_URL}/assets/images/pump2.png`,
-            },
-            {
-                name: "DG3",
-                img: `${import.meta.env.BASE_URL}/assets/images/pump3.png`,
-            },
-        ],
-    },
-];
-
+import api from "../../poweradmin/api/axios";
+import { useNavigate } from "react-router-dom";
+import { IMAGE_BASE_URL } from "../../poweradmin/api/axios";  
 const PumpsRight = () => {
-    const [activeTab, setActiveTab] = useState("pumps");
+    const [activeTab, setActiveTab] = useState(null);
     const [isOpen, setIsOpen] = useState(false);
-    const currentTab = tabs.find((tab) => tab.id === activeTab);
-
+    const navigate = useNavigate();
+    const [categories, setCategories] = useState([]);
+    //const [activeTab, setActiveTab] = useState(null);
+    const [products, setProducts] = useState([]);
     const [currentIndex, setCurrentIndex] = useState(0);
     const [itemsPerView, setItemsPerView] = useState(3);
     const [isTransitioning, setIsTransitioning] = useState(true);
+    const activeCategoryObj = categories.find(
+        cat => cat.id === activeTab
+    );
+    useEffect(() => {
+        const loadCategories = async () => {
+            try {
+                const res = await api.get("/ProductsCategory/category-list");
+                setCategories(res.data);
 
+                if (res.data.length > 0) {
+                    setActiveTab(res.data[0].id); // first active
+                }
+            } catch (err) {
+                console.error(err);
+            }
+        }; 
+        loadCategories();
+    }, []);
+    useEffect(() => {
+        if (!activeTab) return;
+
+        const loadProducts = async () => {
+            try {
+                const res = await api.get(`/product/list-by-category/${activeTab}`);
+                setProducts(res.data);
+            } catch (err) {
+                console.error(err);
+            }
+        }; 
+        loadProducts();
+    }, [activeTab]);
     useEffect(() => {
         const handleResize = () => {
             if (window.innerWidth < 769) {
@@ -116,17 +53,13 @@ const PumpsRight = () => {
             } else {
                 setItemsPerView(3);
             }
-        };
-
+        }; 
         handleResize();
         window.addEventListener("resize", handleResize);
         return () => window.removeEventListener("resize", handleResize);
-    }, []);
-
-    const products = currentTab.products;
-
-    const isSliderActive = products.length > itemsPerView;
-
+    }, []); 
+    const displayProducts = products; 
+    const isSliderActive = products.length > itemsPerView; 
     const extendedProducts = isSliderActive
         ? [...products, ...products]
         : products;
@@ -140,7 +73,7 @@ const PumpsRight = () => {
         }, 3000);
 
         return () => clearInterval(interval);
-    }, [products, itemsPerView]);
+    }, [displayProducts, itemsPerView]);
 
     useEffect(() => {
         if (currentIndex >= products.length) {
@@ -152,9 +85,8 @@ const PumpsRight = () => {
     }, [currentIndex, products.length]);
 
     useEffect(() => {
-        setCurrentIndex(0);
-    }, [activeTab]);
-
+       
+    }, [activeTab]); 
     return (
         <div className="w-full lg:w-2/3 lg:mt-10">
 
@@ -165,7 +97,7 @@ const PumpsRight = () => {
                     className="w-full flex justify-between items-center px-4 py-3 rounded-md 
                     bg-[#F4F3FF] border border-gray-200 text-secondary text-sm font-medium"
                 >
-                    {tabs.find((tab) => tab.id === activeTab)?.label}
+                    {categories.find((tab) => tab.id === activeTab)?.title}
                     <FiChevronDown
                         className={`text-primary text-sm transition-transform duration-300 ${isOpen ? "rotate-180" : ""
                             }`}
@@ -174,7 +106,7 @@ const PumpsRight = () => {
 
                 {isOpen && (
                     <div className="absolute left-0 w-full mt-2 bg-white shadow-md rounded-md z-50 overflow-hidden">
-                        {tabs.map((tab) => (
+                        {categories.map((tab) => (
                             <div
                                 key={tab.id}
                                 onClick={() => {
@@ -187,7 +119,7 @@ const PumpsRight = () => {
                                         : "text-secondary hover:bg-[#F4F3FF]"
                                     }`}
                             >
-                                {tab.label}
+                                {tab.title}
                             </div>
                         ))}
                     </div>
@@ -196,7 +128,7 @@ const PumpsRight = () => {
 
             {/* ================= DESKTOP TABS (>=769px) ================= */}
             <div className="hidden lg:flex flex-wrap gap-1 mb-6 bg-[#F4F3FF] p-1 rounded-md">
-                {tabs.map((tab) => (
+                {categories.map((tab) => (
                     <button
                         key={tab.id}
                         onClick={() => setActiveTab(tab.id)}
@@ -206,11 +138,10 @@ const PumpsRight = () => {
                                 : "text-secondary hover:bg-white"
                             }`}
                     >
-                        {tab.label}
+                        {tab.title}
                     </button>
                 ))}
-            </div>
-
+            </div> 
             {/* ================= PRODUCTS ================= */}
             <div className="relative">
                 <div className="overflow-hidden">
@@ -232,9 +163,10 @@ const PumpsRight = () => {
                                     width: `${100 / itemsPerView}%`,
                                 }}
                             >
-                                <div className="bg-[#F4F3FF] rounded-xl shadow-sm p-4 hover:shadow-md transition h-full">
+                                <div onClick={() => navigate(`/products/${activeCategoryObj ?.slug}/${product.slug}`)} className="bg-[#F4F3FF] rounded-xl shadow-sm p-4 hover:shadow-md transition h-full cursor-pointer">
                                     <img
-                                        src={product.img}
+                                  
+                                        src={`${IMAGE_BASE_URL}${product.image}`}
                                         alt={product.name}
                                         className="w-full h-48 object-contain"
                                     />
@@ -249,6 +181,5 @@ const PumpsRight = () => {
             </div>
         </div>
     );
-};
-
+}; 
 export default PumpsRight;

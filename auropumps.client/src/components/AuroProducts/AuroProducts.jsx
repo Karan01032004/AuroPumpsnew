@@ -2,11 +2,14 @@ import { useState, useEffect } from "react";
 import ProductSidebar from "./ProductSidebar";
 import ProductContent from "./ProductContent";
 import api from "../../poweradmin/api/axios";
-
+import { useParams } from "react-router-dom";
+ 
 function AuroProducts() {
     const [categories, setCategories] = useState([]);
     const [activeCategory, setActiveCategory] = useState(null);
     const [products, setProducts] = useState([]);
+    //const { id } = useParams();
+    const { categorySlug, productSlug } = useParams();
     const [selectedProduct, setSelectedProduct] = useState(null);
     const selectedCategory = categories.find(
         (cat) => cat.id === activeCategory
@@ -20,7 +23,8 @@ function AuroProducts() {
             setSelectedProduct({
                 id: data.id,
                 name: data.title,
-                image: data.image1,
+                image: data.image1 || data.image2,
+                //image: data.image1,
                 pdf: data.catelogue,
                 description: data.description,
                 specifications: [
@@ -29,13 +33,35 @@ function AuroProducts() {
                     { label: "Size", value: data.productsize },
                     { label: "Temperature", value: data.temperature },
                     { label: "Viscosity", value: data.viscosity },
+                    { label: "Submergence Length", value: data.SubmergenceLength },
                     { label: "Operating Frequency", value: data.operating_frequency },
                     { label: "Material", value: data.material }
-                ]
+                ]   
             });
         } catch (err) { console.error(err); }
     };
+    useEffect(() => {
+        if (!categories.length || !categorySlug) return;
 
+        const matchedCategory = categories.find(
+            cat => cat.slug === categorySlug
+        );
+
+        if (matchedCategory) {
+            setActiveCategory(matchedCategory.id);
+        }
+    }, [categories, categorySlug]);
+    useEffect(() => {
+        if (!products.length || !productSlug) return;
+
+        const matchedProduct = products.find(
+            p => p.slug?.toLowerCase() === productSlug?.toLowerCase()
+        );
+
+        if (matchedProduct) {
+            fetchProductDetails(matchedProduct.id);
+        }
+    }, [products, productSlug]);
     // 2. Load Categories on Mount
     useEffect(() => {
         const loadCategories = async () => {
@@ -49,6 +75,7 @@ function AuroProducts() {
         };
         loadCategories();
     }, []); // Empty array - runs once
+ 
 
     // 3. Load Products when category changes
     useEffect(() => {
@@ -58,32 +85,19 @@ function AuroProducts() {
             try {
                 const res = await api.get(`/product/list-by-category/${activeCategory}`);
                 setProducts(res.data);
-                if (res.data.length > 0) {
-                    // Yahan hum details fetch kar rahe hain
-                    const detailRes = await api.get(`/product/${res.data[0].id}`);
-                    const data = detailRes.data;
-                    setSelectedProduct({
-                        id: data.id,
-                        name: data.title,
-                        image: data.image1,
-                        pdf: data.catelogue,
-                        description: data.description,
-                        specifications: [
-                            { label: "Capacity", value: data.capacity },
-                            { label: "Head", value: data.producthead },
-                            { label: "Size", value: data.productsize },
-                            { label: "Temperature", value: data.temperature },
-                            { label: "Viscosity", value: data.viscosity },
-                            { label: "Operating Frequency", value: data.operating_frequency },
-                            { label: "Material", value: data.material }
-                        ]
-                    });
+
+                // default product load (only if no slug)
+                if (!productSlug && res.data.length > 0) {
+                    fetchProductDetails(res.data[0].id);
                 }
-            } catch (err) { console.error(err); }
+
+            } catch (err) {
+                console.error(err);
+            }
         };
 
         loadProducts();
-    }, [activeCategory]); // Runs only when category changes
+    }, [activeCategory]);
 
     return (
         <section className="py-8 sm:py-14 md:py-16 lg:py-20">

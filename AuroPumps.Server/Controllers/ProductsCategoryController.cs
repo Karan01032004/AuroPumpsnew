@@ -25,7 +25,8 @@ namespace Poweradmin.Server.Controllers
                 .Select(x => new
                 {
                     id = x.id,
-                    title = x.title
+                    title = x.title,
+                       slug = x.title.ToLower().Replace(" ", "-")
                 })
                 .ToList();
 

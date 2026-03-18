@@ -22,6 +22,7 @@ function ProductContent({ product, categoryTitle }) {
                 </div>
 
                 <div className="relative">
+                    {product.pdf && (
                     <a 
                         href={`${IMAGE_BASE_URL}${product.pdf}`}
                         
@@ -42,7 +43,7 @@ function ProductContent({ product, categoryTitle }) {
                         </picture>
                         DOWNLOAD PDF
                     </a>
-
+                    )}
                     <div className="inline-block uppercase mb-4 px-4 py-1.5 rounded-full border border-primary text-gray text-md font-semibold bg-white">
                         {product.name}
                     </div>
@@ -54,7 +55,10 @@ function ProductContent({ product, categoryTitle }) {
             </div>
 
             <div className="mt-5 space-y-1">
-                {product.specifications.map((spec, index) => (
+                {/*{product.specifications.map((spec, index) => (*/}
+                {product.specifications
+                    .filter(spec => spec.value && spec.value.trim() !== "")
+                    .map((spec, index) => (
                     <div
                         key={index}
                         className={`grid grid-cols-1 md:grid-cols-[1.3fr_2fr] 

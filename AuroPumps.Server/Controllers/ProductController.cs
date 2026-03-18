@@ -27,7 +27,10 @@ namespace Poweradmin.Server.Controllers
                 .Select(x => new
                 {
                     id = x.id,
-                    name = x.title
+                    name = x.title,
+                        image = x.image2,
+                          x.CategoryId,
+                    slug = x.title.Replace(" ", "-").ToLower()
                 })
                 .ToList();
 
@@ -108,7 +111,8 @@ namespace Poweradmin.Server.Controllers
                 {
                     id = x.id,
                     productName = x.title,
-                    visible = x.Visible
+                    visible = x.Visible,
+                    slug = x.title.Replace(" ", "-").ToLower()
                 })
                 .ToList();
 
@@ -118,6 +122,28 @@ namespace Poweradmin.Server.Controllers
         [HttpGet("{id}")]
         public IActionResult GetById(int id)
         {
+            var productData = _db.Product
+      .Where(x => x.id == id)
+      .FirstOrDefault();
+
+            if (productData == null)
+                return NotFound(new { message = "Product not found" });
+            // 2. CategorySlug nikalne ke liye logic (Memory mein)
+            string firstCatSlug = "";
+            if (!string.IsNullOrEmpty(productData.CategoryId))
+            {
+                // Pehli ID nikalna safely
+                var firstCatIdStr = productData.CategoryId.Split(',').FirstOrDefault();
+
+                if (int.TryParse(firstCatIdStr, out int catId))
+                {
+                    // Category table se slug uthao
+                    firstCatSlug = _db.ProductsCategory
+                        .Where(c => c.id == catId)
+                        .Select(c => c.title.ToLower().Replace(" ", "-"))
+                        .FirstOrDefault() ?? "";
+                }
+            }
             var product = _db.Product
                 .Where(x => x.id == id)
                 .Select(x => new
@@ -145,7 +171,9 @@ namespace Poweradmin.Server.Controllers
                     isaddcontact = x.isaddcontact,
 
                     pageIETitle = x.PageIETitle ?? "",
-                    meta = x.Meta ?? ""
+                    meta = x.Meta ?? "",
+                    productSlug = x.title.Replace(" ", "-").ToLower(),
+                    categorySlug = firstCatSlug
                 })
                 .FirstOrDefault();
 
