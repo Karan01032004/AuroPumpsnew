@@ -1,6 +1,6 @@
 ﻿// src/components/PumpsSection/PumpsRight.jsx
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { FiChevronDown } from "react-icons/fi";
 
 const tabs = [
@@ -103,6 +103,58 @@ const PumpsRight = () => {
     const [isOpen, setIsOpen] = useState(false);
     const currentTab = tabs.find((tab) => tab.id === activeTab);
 
+    const [currentIndex, setCurrentIndex] = useState(0);
+    const [itemsPerView, setItemsPerView] = useState(3);
+    const [isTransitioning, setIsTransitioning] = useState(true);
+
+    useEffect(() => {
+        const handleResize = () => {
+            if (window.innerWidth < 769) {
+                setItemsPerView(1);
+            } else if (window.innerWidth < 992) {
+                setItemsPerView(2);
+            } else {
+                setItemsPerView(3);
+            }
+        };
+
+        handleResize();
+        window.addEventListener("resize", handleResize);
+        return () => window.removeEventListener("resize", handleResize);
+    }, []);
+
+    const products = currentTab.products;
+
+    const isSliderActive = products.length > itemsPerView;
+
+    const extendedProducts = isSliderActive
+        ? [...products, ...products]
+        : products;
+
+    useEffect(() => {
+        if (!isSliderActive) return;
+
+        const interval = setInterval(() => {
+            setCurrentIndex((prev) => prev + 1);
+            setIsTransitioning(true);
+        }, 3000);
+
+        return () => clearInterval(interval);
+    }, [products, itemsPerView]);
+
+    useEffect(() => {
+        if (currentIndex >= products.length) {
+            setTimeout(() => {
+                setIsTransitioning(false);
+                setCurrentIndex(0);
+            }, 700);
+        }
+    }, [currentIndex, products.length]);
+
+    useEffect(() => {
+        setCurrentIndex(0);
+    }, [activeTab]);
+
     return (
         <div className="w-full lg:w-2/3 lg:mt-10">
 
@@ -160,22 +212,40 @@ const PumpsRight = () => {
             </div>
 
             {/* ================= PRODUCTS ================= */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
-                {currentTab.products.map((product, index) => (
+            <div className="relative">
+                <div className="overflow-hidden">
                     <div
-                        key={index}
-                        className="bg-[#F4F3FF] rounded-xl shadow-sm p-4 hover:shadow-md transition"
+                        className={`flex ${isTransitioning
+                                ? "transition-transform duration-700 ease-in-out"
+                                : ""
+                            }`}
+                        style={{
+                            transform: `translateX(-${currentIndex * (100 / itemsPerView)
+                                }%)`,
+                        }}
                     >
-                        <img
-                            src={product.img}
-                            alt={product.name}
-                            className="w-full h-48 object-contain"
-                        />
-                        <h4 className="mt-4 text-sm font-semibold text-secondary">
-                            {product.name}
-                        </h4>
+                        {extendedProducts.map((product, index) => (
+                            <div
+                                key={index}
+                                className="flex-shrink-0 px-3"
+                                style={{
+                                    width: `${100 / itemsPerView}%`,
+                                }}
+                            >
+                                <div className="bg-[#F4F3FF] rounded-xl shadow-sm p-4 hover:shadow-md transition h-full">
+                                    <img
+                                        src={product.img}
+                                        alt={product.name}
+                                        className="w-full h-48 object-contain"
+                                    />
+                                    <h4 className="mt-4 text-sm font-semibold text-secondary text-center">
+                                        {product.name}
+                                    </h4>
+                                </div>
+                            </div>
+                        ))}
                     </div>
-                ))}
+                </div>
             </div>
         </div>
     );
