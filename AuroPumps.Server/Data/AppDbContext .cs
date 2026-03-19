@@ -16,5 +16,6 @@ namespace Poweradmin.Server.Data
         public DbSet<Inquiry> inquiry { get; set; }
         public DbSet<PageContent> pagecontent { get; set; }
         public DbSet<ProductsCategory> ProductsCategory { get; set; }
+        public DbSet<Application> Application { get; set; }
     }
 }

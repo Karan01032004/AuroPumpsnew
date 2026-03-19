@@ -2,56 +2,156 @@
 import { useParams } from "react-router-dom";
 import CategorySidebar from "./CategorySidebar";
 import ApplicationContent from "./ApplicationContent";
-import applicationData from "./applicationData";
 import { useNavigate } from "react-router-dom";
-
+import api from "../../poweradmin/api/axios"; 
+import { IMAGE_BASE_URL } from "../../poweradmin/api/axios";
 function AuroApplication() {
 
     const { categoryId, productId } = useParams();
-
+    const [applications, setApplications] = useState([]);
+    const [loading, setLoading] = useState(true);
     const [activeCategory, setActiveCategory] = useState(null);
     const [selectedProduct, setSelectedProduct] = useState(null);
     const navigate = useNavigate();
 
     useEffect(() => {
+       
+        const loadApplications = async () => {
+            try {
+                const res = await api.get("/application/list");
 
-        // CASE 1: URL has category + product
-        if (categoryId && productId) {
+                const formatted = res.data.map(app => ({
+                    id: app.id,
+                    title: app.title,
+                    slug: app.title
+                        ?.toLowerCase()
+                        .replace(/[^a-z0-9]+/g, "-")
+                        .replace(/(^-|-$)/g, ""),
+                    description: app.description,
+                    product_ids: app.product_ids,
 
-            const category = applicationData.find(
-                (cat) => cat.slug === categoryId
-            );
+                    images: [
+                        app.image1,
+                        app.image2,
+                        app.image3,
+                        app.image4,
+                        app.image5,
+                        app.image6,
+                        app.image7,
+                        app.image8
+                    ].filter(Boolean)
+                }));
 
-            if (category) {
+                setApplications(formatted);
 
-                setActiveCategory(category.id);
+            } catch (err) {
+                console.error(err);
+            } finally {
 
-                const product = category.products.find(
-                    (p) => p.slug === productId
+                setLoading(false);
+            }
+        };
+
+        loadApplications();
+    }, []);
+    useEffect(() => {
+        if (loading) return;
+        if (!applications.length) return;
+
+        const init = async () => {
+
+            if (categoryId && productId) {
+
+                const category = applications.find(
+                    (cat) => cat.slug === categoryId
                 );
 
-                setSelectedProduct(product || category.products[0]);
+                if (category) {
+
+                    setActiveCategory(category.id);
+
+                    let products = category.products;
+
+                    if (!products || products.length === 0) {
+                        products = await loadProductsByIds(category.product_ids);
+
+                        setApplications(prev =>
+                            prev.map(c =>
+                                c.id === category.id
+                                    ? { ...c, products }
+                                    : c
+                            )
+                        );
+                    }
+
+                    const product = products.find(
+                        (p) => p.slug === productId
+                    );
+
+                    setSelectedProduct(product || products[0]);
+                }
+
+            } else if (!categoryId && applications.length > 0) {
+
+                const firstCategory = applications[0];
+                const products = await loadProductsByIds(firstCategory.product_ids);
+
+                if (products.length > 0) {
+                    navigate(`/application/${firstCategory.slug}/${products[0].slug}`, { replace: true });
+                }
             }
+        };
 
+        init();
+
+    }, [categoryId, productId, loading]);
+    const loadProductsByIds = async (ids) => {
+        try {
+            const idsArray = ids?.split(",").map(x => x.trim());
+            const productPromises = idsArray.map(id => api.get(`/product/${id}`));
+            const responses = await Promise.all(productPromises);
+
+            return responses.map(res => {
+                const data = res.data;
+
+                // 🔥 Logic 1: Image 1 agar hai toh wo, nahi toh Image 2
+                const selectedImg = data.image1 ? data.image1 : data.image2;
+
+                // 🔥 Logic 2: Specifications filter (sirf wo jinme value ho)
+                const allSpecs = [
+                    { label: "Capacity", value: data.capacity },
+                    { label: "Head", value: data.producthead },
+                    { label: "Size", value: data.productsize },
+                    { label: "Temperature", value: data.temperature },
+                    { label: "Viscosity", value: data.viscosity },
+                    { label: "Submergence Length", value: data.SubmergenceLength },
+                    { label: "Operating Frequency", value: data.operating_frequency },
+                    { label: "Material", value: data.material }
+                ];
+
+                // Filter out null, undefined, or empty strings
+                const filteredSpecs = allSpecs.filter(spec => spec.value && spec.value.toString().trim() !== "");
+
+                return {
+                    id: data.id,
+                    name: data.title,
+                    slug: data.productSlug,
+                    image: `${IMAGE_BASE_URL}${selectedImg}`,
+                    description: data.description,
+                    // Agar catelogue null ya empty hai toh pdf null rakhein
+                    pdf: data.catelogue ? `${IMAGE_BASE_URL}${data.catelogue}` : null,
+                    specifications: filteredSpecs
+                };
+            });
+        } catch (err) {
+            console.error(err);
+            return [];
         }
-
-        // CASE 2: ONLY /application (no params)
-        else if (!categoryId && applicationData.length > 0) {
-
-            const firstCategory = applicationData[0];
-            const firstProduct = firstCategory.products?.[0];
-
-            if (firstProduct) {
-                navigate(`/application/${firstCategory.slug}/${firstProduct.slug}`, { replace: true });
-            }
-        }
-
-    }, [categoryId, productId]);
-
-    const selectedCategory = applicationData.find(
+    };
+    const selectedCategory = applications.find(
         (item) => item.id === activeCategory
-    );
-
+    )     || {};
+    if (loading) return <div>Loading...</div>;
     if (!selectedCategory || !selectedProduct) return null;
 
     return (
@@ -61,18 +161,20 @@ function AuroApplication() {
             <div className="container mx-auto grid lg:grid-cols-[1.2fr_3fr] gap-5 lg:gap-7 items-start">
 
                 <CategorySidebar
-                    categories={applicationData}
+                    categories={applications}
                     activeCategory={activeCategory}
                     setActiveCategory={setActiveCategory}
                     selectedProduct={selectedProduct}
                     setSelectedProduct={setSelectedProduct}
+                    loadProductsByIds={loadProductsByIds}   // ✅ ADD THIS
+                    setApplications={setApplications}  
                 />
 
                 <ApplicationContent
                     product={selectedProduct}
-                    products={selectedCategory.products}
+                    products={selectedCategory.images}
                     categoryTitle={selectedCategory.title}
-                    categoryDescription={selectedCategory?.categoryDescription}
+                    categoryDescription={selectedCategory.description}
                 />
 
             </div>

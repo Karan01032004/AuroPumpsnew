@@ -7,14 +7,18 @@ function CategorySidebar({
     activeCategory,
     setActiveCategory,
     selectedProduct,
-    setSelectedProduct
-}) {
+    setSelectedProduct,
+    loadProductsByIds,
+    setApplications
+
+})
+{
     const navigate = useNavigate();
     const [openCategory, setOpenCategory] = useState(activeCategory);
     const [open, setOpen] = useState(false);
     const dropdownRef = useRef(null);
 
-    const toggleCategory = (id) => {
+    const toggleCategory = async (id) => {
 
         if (openCategory === id) {
             setOpenCategory(null);
@@ -23,11 +27,27 @@ function CategorySidebar({
             setOpenCategory(id);
             setActiveCategory(id);
 
-            const selectedCategory = categories.find(cat => cat.id === id);
+            let selectedCategory = categories.find(cat => cat.id === id);
 
-            if (selectedCategory?.products?.length > 0) {
+            let products = selectedCategory.products;
 
-                const firstProduct = selectedCategory.products[0];
+            //  LOAD PRODUCTS IF NOT EXISTS
+            if (!products || products.length === 0) {
+
+                products = await loadProductsByIds(selectedCategory.product_ids);
+
+                setApplications(prev =>
+                    prev.map(c =>
+                        c.id === id
+                            ? { ...c, products }
+                            : c
+                    )
+                );
+            }
+
+            //  NOW SAFE
+            if (products && products.length > 0) {
+                const firstProduct = products[0];
 
                 setSelectedProduct(firstProduct);
 
@@ -128,7 +148,7 @@ function CategorySidebar({
 
                                 <ul className="ml-4 space-y-3">
 
-                                    {category.products.map((product) => (
+                                    {category.products?.map((product) => (
 
                                         <li
                                             key={product.id}
@@ -239,7 +259,7 @@ function CategorySidebar({
 
                                     <ul className="mt-2 mb-3 ml-4 pl-4 space-y-3">
 
-                                        {item.products.map((product) => (
+                                        {item.products?.map((product) => (
 
                                             <li
                                                 key={product.id}
@@ -277,6 +297,5 @@ function CategorySidebar({
             </div>
         </>
     );
-}
-
+} 
 export default CategorySidebar;

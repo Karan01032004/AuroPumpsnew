@@ -346,7 +346,42 @@ const AppSidebar = ({ open, collapsed, onClose }) => {
                             </NavLink>
                         </div>
                     )}
+                   
+                    <button
+                        onClick={() => toggle("Application")}
+                        className={`${baseItem} w-full justify-between hover:bg-gray-100 dark:hover:bg-gray-800 mt-1`}
+                    >
+                        <div className="flex items-center gap-3">
+                            <BsBox className="w-5 h-5" />
 
+                            {!collapsed && <span>Applications</span>}
+                        </div>
+
+                        {!collapsed && (
+                            <ChevronIcon
+                                className={`transition-transform ${menuOpen.Applications ? "rotate-90" : ""}`}
+                            />
+                        )}
+                    </button>
+                    {/* Products */}
+                    {menuOpen.Application && !collapsed && (
+                        <div className="ml-4 mt-1 space-y-1 border-l border-gray-200 dark:border-gray-700 pl-3 animate-fadeIn">
+                           
+                            <NavLink
+                                to="/poweradmin/add-application"
+                                className="block px-3 py-2 rounded hover:bg-indigo-50 hover:text-indigo-600"
+                            >
+                                Add Application
+                            </NavLink>
+
+                            <NavLink
+                                to="/poweradmin/view-application"
+                                className="block px-3 py-2 rounded hover:bg-indigo-50 hover:text-indigo-600"
+                            >
+                                View Application
+                            </NavLink>
+                        </div>
+                    )}
                     {/* Other Items */}
                     {[
                         { to: "/poweradmin/page-content", label: "Page Content", Icon: RiFileEditLine },

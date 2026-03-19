@@ -1,5 +1,5 @@
 ﻿import { useState, useEffect } from "react";
-
+import { IMAGE_BASE_URL } from "../../poweradmin/api/axios";
 function ApplicationContent({ product, products, categoryTitle
     , categoryDescription }) {
     if (!product) return null;
@@ -8,7 +8,8 @@ function ApplicationContent({ product, products, categoryTitle
     const [itemsPerView, setItemsPerView] = useState(3);
     const [isTransitioning, setIsTransitioning] = useState(true);
 
-    const isSliderActive = products.length > itemsPerView;
+    //const isSliderActive = products.length > itemsPerView;
+    const isSliderActive = (products?.length || 0) > itemsPerView;
     const extendedProducts = isSliderActive
         ? [...products, ...products]
         : products;
@@ -68,33 +69,19 @@ function ApplicationContent({ product, products, categoryTitle
                                     }%)`,
                             }}
                         >
-                            {extendedProducts.map((item, index) => (
+                            {extendedProducts?.map((item, index) => (
                                 <div
                                     key={index}
                                     className="flex-shrink-0 px-3"
-                                    style={{
-                                        width: `${100 / itemsPerView}%`,
-                                    }}
+                                    style={{ width: `${100 / itemsPerView}%` }}
                                 >
                                     <div className="bg-white p-2 md:p-3 rounded-lg border border-gray-200 transition-all duration-300 overflow-hidden h-full">
 
-                                        {/* IMAGE */}
                                         <div className="relative h-[200px] overflow-hidden">
                                             <img
-                                                src={item.image}
-                                                alt={item.name}
-                                                className="w-full h-full object-contain transition-transform duration-500"
+                                                src={`${IMAGE_BASE_URL}${item}`}
+                                                className="w-full h-full object-contain"
                                             />
-
-                                            {/* subtle overlay */}
-                                            <div className="absolute inset-0 bg-gradient-to-t from-black/10 to-transparent opacity-0 transition duration-300"></div>
-                                        </div>
-
-                                        {/* CONTENT */}
-                                        <div className="text-center">
-                                            <h3 className="text-md mt-3 font-semibold text-primary transition">
-                                                {item.name}
-                                            </h3>
                                         </div>
 
                                     </div>
@@ -131,26 +118,27 @@ function ApplicationContent({ product, products, categoryTitle
                         </div>
 
                         <div className="relative">
-                            <a
-                                href={product.pdf}
-                                target="_blank"
-                                rel="noreferrer"
-                                className="absolute right-0 top-0 text-primary text-md font-semibold flex items-center gap-1" >
-                                <picture>
-                                    <source
-                                        srcSet={`${import.meta.env.BASE_URL}/assets/images/download-icon.webp`}
-                                        type="image/webp" />
-                                    <source
-                                        srcSet={`${import.meta.env.BASE_URL}/assets/images/download-icon.png`}
-                                        type="image/png" />
-                                    <img
-                                        src={`${import.meta.env.BASE_URL}/assets/images/download-icon.png`}
-                                        alt="Download Icon"
-                                        className="w-6 h-6" />
-                                </picture>
-                                DOWNLOAD PDF
-                            </a>
-
+                            {product.pdf && product.pdf !== IMAGE_BASE_URL && (
+                                <a
+                                    href={product.pdf}
+                                    target="_blank"
+                                    rel="noreferrer"
+                                    className="absolute right-0 top-0 text-primary text-md font-semibold flex items-center gap-1" >
+                                    <picture>
+                                        <source
+                                            srcSet={`${import.meta.env.BASE_URL}/assets/images/download-icon.webp`}
+                                            type="image/webp" />
+                                        <source
+                                            srcSet={`${import.meta.env.BASE_URL}/assets/images/download-icon.png`}
+                                            type="image/png" />
+                                        <img
+                                            src={`${import.meta.env.BASE_URL}/assets/images/download-icon.png`}
+                                            alt="Download Icon"
+                                            className="w-6 h-6" />
+                                    </picture>
+                                    DOWNLOAD PDF
+                                </a>
+                            )}
                             <div className="inline-block uppercase mb-4 px-4 py-1.5 rounded-full border border-primary text-gray text-md font-semibold bg-white">
                                 {product.name}
                             </div>
@@ -162,7 +150,7 @@ function ApplicationContent({ product, products, categoryTitle
                     </div>
 
                     <div className="mt-5 space-y-1">
-                        {product.specifications.map((spec, index) => (
+                        {product.specifications?.map((spec, index) => (
                             <div
                                 key={index}
                                 className={`grid grid-cols-1 md:grid-cols-[1.3fr_2fr] 

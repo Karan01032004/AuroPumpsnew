@@ -23,7 +23,9 @@ import InquiryTable from "./poweradmin/pages/InquiryManagement/InquiryTable";
 import PageContentTable from "./poweradmin/pages/PageContent/PageContentTable";
 import PageDetailsForm from "./poweradmin/pages/PageContent/PageDetailsForm";
 import AddProduct from "./poweradmin/pages/ProductManagement/AddProduct";
+import AddApplication from "./poweradmin/pages/ApplicationManagement/AddApplication";
 import ViewProduct from "./poweradmin/pages/ProductManagement/ViewProduct";
+import ViewApplication from "./poweradmin/pages/ApplicationManagement/ViewApplication";
 import AddCategory from "./poweradmin/pages/CategoryManagement/AddCategory";
 import ViewCategory from "./poweradmin/pages/CategoryManagement/ViewCategory";
 import SignIn from "./poweradmin/pages/SignIn/SignIn";
@@ -91,7 +93,10 @@ function App() {
                         <Route path="inquiry" element={<InquiryTable />} />
                         <Route path="page-content" element={<PageContentTable />} />
                         <Route path="add-product" element={<AddProduct />} />
+                        <Route path="add-application" element={<AddApplication />} />
                         <Route path="view-product" element={<ViewProduct />} />
+                        <Route path="view-Application" element={<ViewApplication />} />
+
                         <Route path="add-category" element={<AddCategory />} />
                         <Route path="Addimagegallery" element={<AddImageGallery />} />
                         <Route path="Viewimagegallery" element={<Viewimagegallery />} />
@@ -100,6 +105,7 @@ function App() {
                         <Route path="edit-category/:id" element={<AddCategory />} />
                         <Route path="edit-image-gallery/:id" element={<AddImageGallery />} />
                         <Route path="edit-product/:id" element={<AddProduct />} />
+                        <Route path="edit-application/:id" element={<AddApplication />} />
                         <Route path="page-content/:id" element={<PageDetailsForm />} />
                         <Route path="pagecontent/add" element={<PageDetailsForm />} />
                         <Route path="add-blog" element={<AddBlog />} />

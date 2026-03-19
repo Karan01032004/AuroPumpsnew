@@ -18,7 +18,7 @@ export default function PumpCategoryContent({ data }) {
 
                             <Link
                                 key={product.id}
-                                to={`/application/${data.id}/${product.id}`}
+                                to={`/application/${data.slug}/${product.slug}`}
                                 className="inline-block uppercase px-4 py-1.5 rounded-full border border-primary text-gray text-md font-semibold bg-white"
                             >
                                 {product.name}
@@ -37,7 +37,7 @@ export default function PumpCategoryContent({ data }) {
 
                     {/* Description */}
                     <p className="text-gray leading-relaxed mb-3 md:mb-6">
-                        {data.categoryDescription}
+                        {data.description}
                     </p>
 
                     <ThemeButton
@@ -52,7 +52,7 @@ export default function PumpCategoryContent({ data }) {
                 <div className="hidden lg:flex justify-center w-full">
 
                     <img
-                        src={data.products?.[0]?.image}
+                        src={data.image}
                         alt={data.title}
                         className="w-full max-w-[460px] h-auto max-h-[420px] object-contain"
                     />
