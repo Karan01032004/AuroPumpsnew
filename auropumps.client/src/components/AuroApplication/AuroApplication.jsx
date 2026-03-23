@@ -10,6 +10,7 @@ function AuroApplication() {
     const { categoryId, productId } = useParams();
     const [applications, setApplications] = useState([]);
     const [loading, setLoading] = useState(true);
+ 
     const [activeCategory, setActiveCategory] = useState(null);
     const [selectedProduct, setSelectedProduct] = useState(null);
     const navigate = useNavigate();
@@ -17,6 +18,7 @@ function AuroApplication() {
     useEffect(() => {
        
         const loadApplications = async () => {
+            setLoading(true);
             try {
                 const res = await api.get("/application/list");
 
@@ -104,8 +106,9 @@ function AuroApplication() {
 
         init();
 
-    }, [categoryId, productId, loading]);
+    }, [categoryId, productId, loading, applications]);
     const loadProductsByIds = async (ids) => {
+    
         try {
             const idsArray = ids?.split(",").map(x => x.trim());
             const productPromises = idsArray.map(id => api.get(`/product/${id}`));
@@ -147,13 +150,40 @@ function AuroApplication() {
             console.error(err);
             return [];
         }
+         
     };
     const selectedCategory = applications.find(
         (item) => item.id === activeCategory
     )     || {};
-    if (loading) return <div>Loading...</div>;
-    if (!selectedCategory || !selectedProduct) return null;
+    //if (loading) return <div>Loading...</div>;
+    //if (!selectedCategory || !selectedProduct) return null;
+    if (loading) {
+        return (
+            <section className="py-8 sm:py-14 md:py-16 lg:py-20">
+                <div className="container mx-auto grid lg:grid-cols-[1.2fr_3fr] gap-5 lg:gap-7">
 
+                    {/* Sidebar Skeleton */}
+                    <div className="space-y-4">
+                        <div className="h-6 w-32 bg-gray-200 rounded animate-pulse"></div>
+                        <div className="h-6 w-40 bg-gray-200 rounded animate-pulse"></div>
+                        <div className="h-6 w-28 bg-gray-200 rounded animate-pulse"></div>
+                    </div>
+
+                    {/* Content Skeleton */}
+                    <div className="space-y-4">
+                        <div className="h-8 w-1/2 bg-gray-200 rounded animate-pulse"></div>
+                        <div className="h-40 w-full bg-gray-200 rounded animate-pulse"></div>
+                        <div className="h-4 w-full bg-gray-200 rounded animate-pulse"></div>
+                        <div className="h-4 w-3/4 bg-gray-200 rounded animate-pulse"></div>
+                    </div>
+
+                </div>
+            </section>
+        );
+    }
+    //if (!selectedCategory || !selectedProduct) {
+    //    return <div className="p-6">No data found</div>;
+    //}
     return (
 
         <section className="py-8 sm:py-14 md:py-16 lg:py-20">
@@ -162,7 +192,7 @@ function AuroApplication() {
 
                 <CategorySidebar
                     categories={applications}
-                    activeCategory={activeCategory}
+                    activeCategory={activeCategory} 
                     setActiveCategory={setActiveCategory}
                     selectedProduct={selectedProduct}
                     setSelectedProduct={setSelectedProduct}
