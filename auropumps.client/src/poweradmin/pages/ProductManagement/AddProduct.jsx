@@ -451,11 +451,10 @@ const AddProduct = () => {
                         />
                     </div> 
                     <div>
-                        <label className="font-medium">Material</label>
-                        <textarea
-                            value={material}
-                            onChange={(e) => setMaterial(e.target.value)}
-                            rows={3}
+                        <label className="font-medium">Suction Lift</label>
+                        <input
+                            value={applications}
+                            onChange={(e) => setApplications(e.target.value)}
                             className="w-full rounded-lg border px-3 py-2"
                         />
                     </div>
@@ -463,7 +462,16 @@ const AddProduct = () => {
                         <label className="font-medium">Submergence Length</label>
                         <input
                             value={SubmergenceLength}
-                            onChange={(e) => setOperatingFrequency(e.target.value)}
+                            onChange={(e) => setSubmergenceLength(e.target.value)}
+                            className="w-full rounded-lg border px-3 py-2"
+                        />
+                    </div> 
+                    <div>
+                        <label className="font-medium">Material</label>
+                        <textarea
+                            value={material}
+                            onChange={(e) => setMaterial(e.target.value)}
+                            rows={3}
                             className="w-full rounded-lg border px-3 py-2"
                         />
                     </div>
@@ -475,7 +483,6 @@ const AddProduct = () => {
                             className="w-full rounded-lg border px-3 py-2"
                         />
                     </div>
-
                 </div>
 
 

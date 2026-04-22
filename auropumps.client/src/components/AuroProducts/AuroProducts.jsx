@@ -57,6 +57,7 @@ function AuroProducts() {
                     { label: "Head", value: data.producthead },
                     { label: "Size", value: data.productsize },
                     { label: "Solid Size", value: data.moc },
+                    { label: "Suction Lift", value: data.applications },
                     { label: "Temperature", value: data.temperature },
                     { label: "Viscosity", value: data.viscosity },
                     { label: "Submergence Length", value: data.SubmergenceLength },

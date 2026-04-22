@@ -85,6 +85,7 @@ namespace Poweradmin.Server.Controllers
                     productsize = dto.productsize,
                     temperature = dto.temperature,
                     MOC = dto.MOC,
+                    applications = dto.applications,
                     viscosity = dto.viscosity,
                     SubmergenceLength = dto.SubmergenceLength,
                     operating_frequency = dto.operating_frequency,
@@ -166,6 +167,7 @@ namespace Poweradmin.Server.Controllers
                     temperature = x.temperature ?? "",
                     viscosity = x.viscosity ?? "",
                     MOC = x.MOC ?? "",
+                    applications = x.applications ?? "",
                     SubmergenceLength = x.SubmergenceLength ?? "",
                     operating_frequency = x.operating_frequency ?? "",
                     material = x.material ?? "",
@@ -210,6 +212,7 @@ namespace Poweradmin.Server.Controllers
                 product.temperature = dto.temperature;
                 product.viscosity = dto.viscosity;
                 product.MOC = dto.MOC;
+                product.applications = dto.applications;
                 product.SubmergenceLength = dto.SubmergenceLength;
                 product.operating_frequency = dto.operating_frequency;
                 product.material = dto.material;
