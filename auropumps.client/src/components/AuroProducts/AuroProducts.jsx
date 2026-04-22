@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import ProductSidebar from "./ProductSidebar";
 import ProductContent from "./ProductContent";
 
@@ -10,6 +10,8 @@ function AuroProducts() {
     const [activeCategory, setActiveCategory] = useState(null);
     const [products, setProducts] = useState([]);
     const [loading, setLoading] = useState(true);
+    const contentRef = useRef(null);
+    const hasMountedRef = useRef(false);
     //const { id } = useParams();
     const { categorySlug, productSlug } = useParams();
     const [selectedProduct, setSelectedProduct] = useState(null);
@@ -21,6 +23,21 @@ function AuroProducts() {
     const selectedCategory = categoryList.find(
         (cat) => cat.id === activeCategory
     );
+
+    const scrollToContent = () => {
+        if (!contentRef.current) return;
+
+        const top =
+            contentRef.current.getBoundingClientRect().top +
+            window.scrollY -
+            100;
+
+        window.scrollTo({
+            top,
+            behavior: "smooth"
+        });
+    };
+
     // 1. Helper function for Product Details (Isse Sidebar bhi use kar sakega)
     const fetchProductDetails = async (id) => {
         if (!id) return;
@@ -120,6 +137,18 @@ function AuroProducts() {
 
         loadProducts();
     }, [activeCategory]);
+
+    useEffect(() => {
+        if (!selectedProduct || !contentRef.current) return;
+
+        if (!hasMountedRef.current) {
+            hasMountedRef.current = true;
+            return;
+        }
+
+        scrollToContent();
+    }, [selectedProduct]);
+
     if (loading) {
         return (
             <section className="py-8 sm:py-14 md:py-16 lg:py-20">
@@ -152,14 +181,17 @@ function AuroProducts() {
                     products={products}
                     activeCategory={activeCategory}
                     setActiveCategory={setActiveCategory}
+                    onCategoryClick={scrollToContent}
                     selectedProduct={selectedProduct}
                     onProductClick={fetchProductDetails}
                 />
-                {/*<ProductContent product={selectedProduct} />*/}
-                <ProductContent
-                    product={selectedProduct}
-                    categoryTitle={selectedCategory?.title}
-                />
+                <div ref={contentRef}>
+                    {/*<ProductContent product={selectedProduct} />*/}
+                    <ProductContent
+                        product={selectedProduct}
+                        categoryTitle={selectedCategory?.title}
+                    />
+                </div>
             </div>
         </section>
     );

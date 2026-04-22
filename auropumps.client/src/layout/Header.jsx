@@ -199,7 +199,7 @@ const Header = () => {
 >
                                             <div className="max-w-[1300px] mx-auto px-6 lg:px-10 py-8">
 
-                                                <div className="grid grid-cols-2 md:grid-cols-6 lg:grid-cols-12 gap-10 text-sm">
+                                                <div className="grid grid-cols-2 md:grid-cols-5 gap-10 text-sm">
 
                                                     {categories.map((category) => (
                                                         <div key={category.id}>

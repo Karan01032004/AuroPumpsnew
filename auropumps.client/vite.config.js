@@ -1,4 +1,4 @@
-import { fileURLToPath, URL } from 'node:url';
+﻿import { fileURLToPath, URL } from 'node:url';
 import react from '@vitejs/plugin-react';
 import tailwindcss from '@tailwindcss/vite';
 import { defineConfig } from 'vite';
@@ -37,7 +37,6 @@ if (!fs.existsSync(certFilePath) || !fs.existsSync(keyFilePath)) {
 const target = env.ASPNETCORE_HTTPS_PORT ? `https://localhost:${env.ASPNETCORE_HTTPS_PORT}` :
     env.ASPNETCORE_URLS ? env.ASPNETCORE_URLS.split(';')[0] : 'https://dotcompreview.com';
 
-// https://vitejs.dev/config/
 export default defineConfig({
     base: '/auropumps',
     plugins: [react(), tailwindcss()],
@@ -47,6 +46,9 @@ export default defineConfig({
         }
     },
     server: {
+        host: '127.0.0.1', // ✅ force IPv4
+        port: 5173,        // ✅ use safe common Vite port
+
         proxy: {
             '/api': {
                 target,
@@ -54,10 +56,35 @@ export default defineConfig({
                 changeOrigin: true
             }
         },
-        port: parseInt(env.DEV_SERVER_PORT || '61905'),
+
         https: {
             key: fs.readFileSync(keyFilePath),
             cert: fs.readFileSync(certFilePath),
         }
     }
 })
+
+// https://vitejs.dev/config/
+//export default defineConfig({
+//    base: '/auropumps',
+//    plugins: [react(), tailwindcss()],
+//    resolve: {
+//        alias: {
+//            '@': fileURLToPath(new URL('./src', import.meta.url))
+//        }
+//    },
+//    server: {
+//        proxy: {
+//            '/api': {
+//                target,
+//                secure: false,
+//                changeOrigin: true
+//            }
+//        },
+//        port: parseInt(env.DEV_SERVER_PORT || '61905'),
+//        https: {
+//            key: fs.readFileSync(keyFilePath),
+//            cert: fs.readFileSync(certFilePath),
+//        }
+//    }
+//})
