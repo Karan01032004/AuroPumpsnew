@@ -28,7 +28,8 @@ namespace Poweradmin.Server.Controllers
                 {
                     id = x.id,
                     name = x.title,
-                        image = x.image2,
+                        image = x.image1,
+                        image2=x.image2,
                           x.CategoryId,
                     slug = x.title.Replace(" ", "-").ToLower()
                 })
@@ -83,6 +84,7 @@ namespace Poweradmin.Server.Controllers
                     producthead = dto.producthead,
                     productsize = dto.productsize,
                     temperature = dto.temperature,
+                    MOC = dto.MOC,
                     viscosity = dto.viscosity,
                     SubmergenceLength = dto.SubmergenceLength,
                     operating_frequency = dto.operating_frequency,
@@ -163,6 +165,7 @@ namespace Poweradmin.Server.Controllers
                     productsize = x.productsize ?? "",
                     temperature = x.temperature ?? "",
                     viscosity = x.viscosity ?? "",
+                    MOC = x.MOC ?? "",
                     SubmergenceLength = x.SubmergenceLength ?? "",
                     operating_frequency = x.operating_frequency ?? "",
                     material = x.material ?? "",
@@ -206,6 +209,7 @@ namespace Poweradmin.Server.Controllers
                 product.productsize = dto.productsize;
                 product.temperature = dto.temperature;
                 product.viscosity = dto.viscosity;
+                product.MOC = dto.MOC;
                 product.SubmergenceLength = dto.SubmergenceLength;
                 product.operating_frequency = dto.operating_frequency;
                 product.material = dto.material;
@@ -272,5 +276,26 @@ namespace Poweradmin.Server.Controllers
             return $"/Webfiles/{folder}/{fileName}";
         }
         #endregion
+
+        [HttpGet("by-slug/{slug}")]
+        public IActionResult GetBySlug(string slug)
+        {
+            var product = _db.Product
+                .Where(x => x.title.ToLower().Replace(" ", "-") == slug)
+                .Select(x => new {
+                    x.id,
+                    x.title,
+                    image2 = x.image2 ?? "",
+                    x.description,
+                    productSlug = x.title.Replace(" ", "-").ToLower()
+                })
+                .FirstOrDefault();
+
+            if (product == null)
+                return NotFound();
+
+            return Ok(product);
+        }
+
     }
 }

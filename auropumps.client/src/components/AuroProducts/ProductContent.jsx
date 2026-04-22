@@ -25,11 +25,30 @@ function ProductContent({ product, categoryTitle }) {
 
             <div className="grid gap-6 lg:grid-cols-[1fr_1.25fr] lg:items-start">
                 <div className="overflow-hidden rounded-2xl border border-primary/10 bg-white p-2">
-                    <img
-                        src={`${IMAGE_BASE_URL}${product.image}`}
-                        alt={product.name}
-                        className="h-full w-full rounded-xl object-cover"
-                    />
+                    {/*<img*/}
+                    {/*    src={`${IMAGE_BASE_URL}${product.image}`}*/}
+                    {/*    alt={product.name}*/}
+                    {/*    className="h-full w-full rounded-xl object-cover"*/}
+                    {product.image && product.image.toLowerCase().endsWith(".mp4") ? (
+                        <video
+                            src={`${IMAGE_BASE_URL}${product.image}`}
+                            className="h-full w-full rounded-xl object-cover"
+                            controls
+                            autoPlay
+                            muted
+                            loop
+                            playsInline
+                        >
+                            Your browser does not support the video tag.
+                        </video>
+                    ) : (
+                        <img
+                            src={`${IMAGE_BASE_URL}${product.image}`}
+                            alt={product.name}
+                            className="h-full w-full rounded-xl object-cover"
+                        />
+                    )}
+           
                 </div>
 
                 <div className="">

@@ -30,7 +30,8 @@ function AuroProducts() {
             setSelectedProduct({
                 id: data.id,
                 name: data.title,
-                image: data.image1 || data.image2,
+                //image: data.image1 || data.image2,
+                image: data.image1 ? data.image1 : data.image2,
                 //image: data.image1,
                 pdf: data.catelogue,
                 description: data.description,
@@ -38,6 +39,7 @@ function AuroProducts() {
                     { label: "Capacity", value: data.capacity },
                     { label: "Head", value: data.producthead },
                     { label: "Size", value: data.productsize },
+                    { label: "Solid Size", value: data.moc },
                     { label: "Temperature", value: data.temperature },
                     { label: "Viscosity", value: data.viscosity },
                     { label: "Submergence Length", value: data.SubmergenceLength },

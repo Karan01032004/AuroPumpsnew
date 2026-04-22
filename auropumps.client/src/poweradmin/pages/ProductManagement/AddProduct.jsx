@@ -209,10 +209,10 @@ const AddProduct = () => {
                         placeholder="Choose categories..."
                     />
                 </div>
-                 <div className="mt-6 grid grid-cols-1 md:grid-cols-3 gap-4">
+                 <div className="mt-6 grid grid-cols-1 md:grid-cols-4 gap-4">
                     {[
                         ["Display on Frontend? ", visible, setVisible],
-                        //["Is Featured?", isFeatured, setIsFeatured],
+                        ["PDF Send on Mail?", isFeatured, setIsFeatured],
                         //["Only Viw Contact Button?", isAddContact, setIsAddContact],
                       
                     ].map(([label, value, setter]) => (
@@ -251,7 +251,7 @@ const AddProduct = () => {
                             <label className="text-sm font-medium">Upload Gif</label>
                             <input
                                 type="file"
-                                accept="image/*"
+                                accept="image/*,video/mp4"
                                 onChange={(e) => {
                                     const files = [...images];
                                     files[0] = e.target.files[0];
@@ -440,6 +440,14 @@ const AddProduct = () => {
                         <input
                             value={SubmergenceLength}
                             onChange={(e) => setOperatingFrequency(e.target.value)}
+                            className="w-full rounded-lg border px-3 py-2"
+                        />
+                    </div>
+                    <div>
+                        <label className="font-medium">Solid Size</label>
+                        <input
+                            value={moc}
+                            onChange={(e) => setMoc(e.target.value)}
                             className="w-full rounded-lg border px-3 py-2"
                         />
                     </div>
