@@ -14,6 +14,11 @@ function CategorySidebar({
 })
 {
     const navigate = useNavigate();
+    const categoryList = Array.isArray(categories)
+        ? categories
+        : Array.isArray(categories?.data)
+            ? categories.data
+            : [];
     const [openCategory, setOpenCategory] = useState(activeCategory);
     const [open, setOpen] = useState(false);
     const dropdownRef = useRef(null);
@@ -27,7 +32,7 @@ function CategorySidebar({
             setOpenCategory(id);
             setActiveCategory(id);
 
-            let selectedCategory = categories.find(cat => cat.id === id);
+            let selectedCategory = categoryList.find(cat => cat.id === id);
 
             let products = selectedCategory.products;
 
@@ -56,7 +61,7 @@ function CategorySidebar({
         }
     };
 
-    const activeCategoryItem = categories.find(
+    const activeCategoryItem = categoryList.find(
         (cat) => cat.id === activeCategory
     );
 
@@ -84,9 +89,9 @@ function CategorySidebar({
     }, []);
 
     useEffect(() => {
-        if (!activeCategory && categories.length > 0) {
+        if (!activeCategory && categoryList.length > 0) {
 
-            const firstCategory = categories[0];
+            const firstCategory = categoryList[0];
             const firstProduct = firstCategory.products?.[0];
 
             if (firstProduct) {
@@ -97,7 +102,7 @@ function CategorySidebar({
                 navigate(`/application/${firstCategory.slug}/${firstProduct.slug}`);
             }
         }
-    }, [categories, activeCategory]);
+    }, [categoryList, activeCategory]);
 
     return (
         <>
@@ -112,7 +117,7 @@ function CategorySidebar({
 
                 <div className="h-[2px] bg-primary mt-4 mb-6"></div>
 
-                {categories.map((category) => {
+                {categoryList.map((category) => {
 
                     const isOpen = openCategory === category.id;
 
@@ -217,7 +222,7 @@ function CategorySidebar({
                     <div className="absolute z-50 mt-2 w-full 
                     bg-white border border-gray-200 
                     rounded-lg shadow-lg overflow-hidden">
-                        {categories.map((item) => (
+                        {categoryList.map((item) => (
                             <div key={item.id} className="border-b border-gray-100">
 
                                 {/* CATEGORY */}

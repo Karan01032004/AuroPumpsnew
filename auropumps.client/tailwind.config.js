@@ -40,7 +40,8 @@ export default {
         },
         extend: {
             fontFamily: {
-                primary: ["Geist", "sans-serif"],
+                //primary: ["Geist", "sans-serif"],
+                primary: ["Inter", "sans-serif"],
             },
             backgroundImage: {
                 'primary-gradient': 'linear-gradient(90deg, #F89B32 0%, #CF3A38 100%)',

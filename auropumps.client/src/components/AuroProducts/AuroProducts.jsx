@@ -1,10 +1,10 @@
 import { useState, useEffect } from "react";
 import ProductSidebar from "./ProductSidebar";
 import ProductContent from "./ProductContent";
- 
+
 import api from "../../poweradmin/api/axios";
 import { useParams } from "react-router-dom";
- 
+
 function AuroProducts() {
     const [categories, setCategories] = useState([]);
     const [activeCategory, setActiveCategory] = useState(null);
@@ -13,7 +13,12 @@ function AuroProducts() {
     //const { id } = useParams();
     const { categorySlug, productSlug } = useParams();
     const [selectedProduct, setSelectedProduct] = useState(null);
-    const selectedCategory = categories.find(
+    const categoryList = Array.isArray(categories)
+        ? categories
+        : Array.isArray(categories?.data)
+            ? categories.data
+            : [];
+    const selectedCategory = categoryList.find(
         (cat) => cat.id === activeCategory
     );
     // 1. Helper function for Product Details (Isse Sidebar bhi use kar sakega)
@@ -38,21 +43,21 @@ function AuroProducts() {
                     { label: "Submergence Length", value: data.SubmergenceLength },
                     { label: "Operating Frequency", value: data.operating_frequency },
                     { label: "Material", value: data.material }
-                ]   
+                ]
             });
         } catch (err) { console.error(err); }
     };
     useEffect(() => {
-        if (!categories.length || !categorySlug) return;
+        if (!categoryList.length || !categorySlug) return;
 
-        const matchedCategory = categories.find(
+        const matchedCategory = categoryList.find(
             cat => cat.slug === categorySlug
         );
 
         if (matchedCategory) {
             setActiveCategory(matchedCategory.id);
         }
-    }, [categories, categorySlug]);
+    }, [categoryList, categorySlug]);
     useEffect(() => {
         if (!products.length || !productSlug) return;
 
@@ -70,9 +75,15 @@ function AuroProducts() {
             setLoading(true); //   start loading
             try {
                 const res = await api.get("/ProductsCategory/category-list");
-                setCategories(res.data);
-                if (res.data.length > 0) {
-                    setActiveCategory(res.data[0].id);
+                const nextCategories = Array.isArray(res.data)
+                    ? res.data
+                    : Array.isArray(res.data?.data)
+                        ? res.data.data
+                        : [];
+
+                setCategories(nextCategories);
+                if (nextCategories.length > 0) {
+                    setActiveCategory(nextCategories[0].id);
                 }
             } catch (err) {
                 console.error(err);
@@ -82,7 +93,7 @@ function AuroProducts() {
         };
         loadCategories();
     }, []);
- 
+
 
     // 3. Load Products when category changes
     useEffect(() => {
@@ -135,7 +146,7 @@ function AuroProducts() {
         <section className="py-8 sm:py-14 md:py-16 lg:py-20">
             <div className="container mx-auto grid lg:grid-cols-[1.2fr_3fr] gap-5 lg:gap-7 items-start">
                 <ProductSidebar
-                    categories={categories}
+                    categories={categoryList}
                     products={products}
                     activeCategory={activeCategory}
                     setActiveCategory={setActiveCategory}

@@ -1,119 +1,199 @@
 ﻿import { NavLink } from "react-router-dom";
+import { FaPhoneAlt, FaEnvelope } from "react-icons/fa";
+import { FaLinkedinIn } from "react-icons/fa";
 
 const Footer = () => {
     return (
-        <footer className="w-full bg-[#F5F4FF] text-[#2D258E]">
+        <div className="w-full bg-primary text-white">
 
-            {/* TOP SECTION */}
-            <div className="container mx-auto">
+            {/* MAIN SECTION */}
+            <div className="container mx-auto px-4 py-6 lg:py-8 flex flex-col lg:flex-row items-center justify-between gap-6 lg:gap-8">
 
-                <div className="flex flex-col lg:flex-row justify-between gap-8 lg:gap-16">
+                {/* LEFT - LOGO */}
+                <NavLink to="/" className="flex justify-center lg:justify-start">
+                    <picture>
+                        <source
+                            srcSet={`${import.meta.env.BASE_URL}/assets/images/auropumps-technology-transfer-from-pompe-vergani-spa-of-italy.webp`}
+                            type="image/webp"
+                        />
+                        <img
+                            src={`${import.meta.env.BASE_URL}/assets/images/auropumps-technology-transfer-from-pompe-vergani-spa-of-italy.png`}
+                            alt="Auro Pumps"
+                            className="h-20 lg:h-28 w-auto"
+                        />
+                    </picture>
+                </NavLink>
 
-                    {/* LEFT - LOGO + TEXT */}
-                    <div className="w-full xl:max-w-[320px] lg:pb-12">
-                        <picture>
-                            <source
-                                srcSet={`${import.meta.env.BASE_URL}/assets/images/auro-pumps-logo.webp`}
-                                type="image/webp"
-                            />
-                            <img
-                                src={`${import.meta.env.BASE_URL}/assets/images/auro-pumps-logo.png`}
-                                alt="Auro Pumps"
-                                className="h-44 w-auto"
-                            />
-                        </picture>
+                {/* CENTER - CONTENT */}
+                <div className="text-center lg:text-left text-[12px] lg:text-sm text-white/90 leading-relaxed space-y-2 max-w-2xl">
 
-                        <p className="mt-4 text-md text-gray leading-relaxed">
-                            A specialist in critical application pumping, AURO PUMPS has comprehensive knowledge in many specific industrial pumping areas. 
-                        </p>
-                    </div>
+                    {/* ADDRESS */}
+                    <p>
+                        {/* Desktop */}
+                        <span className="hidden lg:inline">
+                            WORKS: 104/5/6, G.I.D.C., Palej - 32220, Bharuch, Gujarat, India
+                        </span>
 
-                    {/* RIGHT SIDE */}
-                    <div className="flex-1 pb-6 pt-0 lg:pt-26">
+                        {/* Mobile */}
+                        <span className="lg:hidden font-semibold">WORKS:</span>
+                        <span className="lg:hidden block">
+                            104/5/6, G.I.D.C., Palej - 32220<br />
+                            Bharuch, Gujarat, India
+                        </span>
+                    </p>
 
-                        {/* QUICK LINKS */}
-                        <h3 className="font-semibold mb-4 tracking-wide text-gray text-lg">
-                            QUICK LINKS
-                        </h3>
+                    <p>
+                        {/* Desktop */}
+                        <span className="hidden lg:inline">
+                            OFFICE: 309 Nilamber Primero, Vasna - Bhayli Road, Vadodara - 391410, Gujarat, India
+                        </span>
 
-                        <div className="flex flex-col xl:flex-row justify-center xl:justify-start gap-3 xl:gap-8 text-md text-gray">
-                            <NavLink to="/" className="hover:text-primary transition">Home</NavLink>
-                            <NavLink to="/products" className="hover:text-primary transition">Process Pumps</NavLink>
-                            <NavLink to="/products" className="hover:text-primary transition">Molten Salt Pumps</NavLink>
-                            <NavLink to="/products" className="hover:text-primary transition">Molten Metal Pumps</NavLink>
-                            <NavLink to="/company" className="hover:text-primary transition">About Us</NavLink>
-                            <NavLink to="/contact-us" className="hover:text-primary transition">Contact Us</NavLink>
+                        {/* Mobile */}
+                        <span className="lg:hidden font-semibold">OFFICE:</span>
+                        <span className="lg:hidden block">
+                            309 Nilamber Primero<br />
+                            Vasna - Bhayli Road<br />
+                            Vadodara - 391410
+                        </span>
+                    </p>
+
+                    {/* PHONE */}
+                    <div className="flex flex-col lg:flex-row justify-center lg:justify-start items-center gap-1 lg:gap-3 text-white/80 text-[12px] lg:text-sm">
+
+                        {/* Desktop single icon */}
+                        <div className="hidden lg:flex items-center gap-2">
+                            <FaPhoneAlt size={14} />
                         </div>
 
-                        {/* SOCIAL MEDIA */}
-                        <div className="mt-8 text-gray">
-                            <h3 className="font-semibold mb-4 tracking-wide text-lg">
-                                SOCIAL MEDIA
-                            </h3>
-                            <div className="flex gap-6">
-
-                                <a
-                                    href="https://in.linkedin.com/company/auro-pumps-private-limited" target="_blank"
-                                    rel="noopener noreferrer"
-                                    className="w-10 h-10 rounded-full bg-primary flex items-center justify-center hover:scale-110 transition"
-                                >
-                                    <picture>
-                                        <source
-                                            srcSet={`${import.meta.env.BASE_URL}/assets/images/linkedin.webp`}
-                                            type="image/webp"
-                                        />
-                                        <img
-                                            src={`${import.meta.env.BASE_URL}/assets/images/linkedin.png`}
-                                            alt="LinkedIn"
-                                            className="w-5 h-5 object-contain"
-                                        />
-                                    </picture>
-                                </a>
-
-                               
-
-                            </div>
+                        {/* Mobile items (each with icon) */}
+                        <div className="flex items-center gap-2 lg:hidden">
+                            <FaPhoneAlt size={12} />
+                            <a href="tel:+919227227768">+91 92272 27768</a>
                         </div>
+
+                        {/* Desktop item */}
+                        <a href="tel:+919227227768" className="hidden lg:inline hover:text-white">
+                            +91 92272 27768
+                        </a>
+
+                        <span className="hidden lg:inline">|</span>
+
+                        <div className="flex items-center gap-2 lg:hidden">
+                            <FaPhoneAlt size={12} />
+                            <a href="tel:+918866927768">+91 88669 27768</a>
+                        </div>
+
+                        <a href="tel:+918866927768" className="hidden lg:inline hover:text-white">
+                            +91 88669 27768
+                        </a>
+
+                        <span className="hidden lg:inline">|</span>
+
+                        <div className="flex items-center gap-2 lg:hidden">
+                            <FaPhoneAlt size={12} />
+                            <a href="tel:+919727955542">+91 97279 55542</a>
+                        </div>
+
+                        <a href="tel:+919727955542" className="hidden lg:inline hover:text-white">
+                            +91 97279 55542
+                        </a>
 
                     </div>
 
+                    {/* EMAIL */}
+                    <div className="flex flex-col lg:flex-row justify-center lg:justify-start items-center gap-1 lg:gap-3 text-white/80 text-xs lg:text-sm">
+
+                        {/* Desktop single icon */}
+                        <div className="hidden lg:flex items-center gap-2">
+                            <FaEnvelope size={14} />
+                        </div>
+
+                        {/* Mobile */}
+                        <div className="flex items-center gap-2 lg:hidden">
+                            <FaEnvelope size={12} />
+                            <a href="mailto:sales@auropumps.com">sales@auropumps.com</a>
+                        </div>
+
+                        {/* Desktop */}
+                        <a href="mailto:sales@auropumps.com" className="hidden lg:inline hover:text-white">
+                            sales@auropumps.com
+                        </a>
+
+                        <span className="hidden lg:inline">|</span>
+
+                        {/* Mobile */}
+                        <div className="flex items-center gap-2 lg:hidden">
+                            <FaEnvelope size={12} />
+                            <a href="mailto:purchase@auropumps.com">purchase@auropumps.com</a>
+                        </div>
+
+                        {/* Desktop */}
+                        <a href="mailto:purchase@auropumps.com" className="hidden lg:inline hover:text-white">
+                            purchase@auropumps.com
+                        </a>
+
+                    </div>
                 </div>
 
+                {/* RIGHT - CERTIFICATIONS */}
+                <div className="flex items-center gap-4 lg:gap-5 justify-center mt-2 lg:mt-0">
+
+                    <picture>
+                        <source
+                            srcSet={`${import.meta.env.BASE_URL}/assets/images/ce-certification-mark-europe-compliance-logo.webp`}
+                            type="image/webp"
+                        />
+                        <img
+                            src={`${import.meta.env.BASE_URL}/assets/images/ce-certification-mark-europe-compliance-logo.png`}
+                            alt="CE Certification"
+                            className="h-12 lg:h-18 w-auto hover:opacity-100 transition"
+                            loading="lazy"
+                        />
+                    </picture>
+
+                    <picture>
+                        <source
+                            srcSet={`${import.meta.env.BASE_URL}/assets/images/iso-9001-2015-quality-certification-logo.webp`}
+                            type="image/webp"
+                        />
+                        <img
+                            src={`${import.meta.env.BASE_URL}/assets/images/iso-9001-2015-quality-certification-logo.png`}
+                            alt="ISO Certification"
+                            className="h-12 lg:h-18 w-auto hover:opacity-100 transition"
+                            loading="lazy"
+                        />
+                    </picture>
+                </div>
             </div>
 
-            {/* GRADIENT BORDER LINE */}
-            <div
-                className="h-[1px] mb-2"
-                style={{
-                    background:
-                        "linear-gradient(90deg, rgba(45,37,142,0) 0%, #2D258E 51.44%, rgba(45,37,142,0) 100%)",
-                }}
-            />
+            {/* DIVIDER */}
+            <div className="h-[1px] bg-white/20 w-full" />
 
-            {/* BOTTOM BAR */}
-            <div className="container mx-auto py-4 flex flex-col md:flex-row justify-between items-center text-md text-[#464646] font-medium">
-                <p>©2026 Auro Pumps. All rights reserved.  |{" "}
+            {/* BOTTOM */}
+            <div className="container mx-auto px-4 py-3 lg:py-4 flex flex-col md:flex-row justify-between items-center text-xs lg:text-sm text-white text-center md:text-left">
+
+                <p>
+                    ©{new Date().getFullYear()} Auro Pumps, All rights reserved |{" "}
                     <NavLink
                         to="/sitemap"
-                        className={({ isActive }) =>
-                            `transition hover:text-primary ${isActive ? "text-primary font-semibold" : ""
-                            }`
-                        }
+                        className="hover:text-white transition"
                     >
                         Sitemap
-                    </NavLink></p>
-                <p className="mt-2 md:mt-0">Website Design by{" "}
+                    </NavLink>
+                </p>
+                <p className="mt-2 md:mt-0">
+                    Website Design by{" "}
                     <a
                         href="https://www.dotsandcoms.in/"
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="hover:text-primary transition"
+                        className="hover:text-white transition"
                     >
                         D&C
-                    </a></p>
+                    </a>
+                </p>
             </div>
-
-        </footer>
+        </div>
     );
 };
 

@@ -13,17 +13,28 @@ const PumpsRight = () => {
     const [currentIndex, setCurrentIndex] = useState(0);
     const [itemsPerView, setItemsPerView] = useState(3);
     const [isTransitioning, setIsTransitioning] = useState(true);
-    const activeCategoryObj = categories.find(
+    const categoryList = Array.isArray(categories)
+        ? categories
+        : Array.isArray(categories?.data)
+            ? categories.data
+            : [];
+    const activeCategoryObj = categoryList.find(
         cat => cat.id === activeTab
     );
     useEffect(() => {
         const loadCategories = async () => {
             try {
                 const res = await api.get("/ProductsCategory/category-list");
-                setCategories(res.data);
+                const nextCategories = Array.isArray(res.data)
+                    ? res.data
+                    : Array.isArray(res.data?.data)
+                        ? res.data.data
+                        : [];
 
-                if (res.data.length > 0) {
-                    setActiveTab(res.data[0].id); // first active
+                setCategories(nextCategories);
+
+                if (nextCategories.length > 0) {
+                    setActiveTab(nextCategories[0].id); // first active
                 }
             } catch (err) {
                 console.error(err);
@@ -97,7 +108,7 @@ const PumpsRight = () => {
                     className="w-full flex justify-between items-center px-4 py-3 rounded-md 
                     bg-[#F4F3FF] border border-gray-200 text-secondary text-sm font-medium"
                 >
-                    {categories.find((tab) => tab.id === activeTab)?.title}
+                    {categoryList.find((tab) => tab.id === activeTab)?.title}
                     <FiChevronDown
                         className={`text-primary text-sm transition-transform duration-300 ${isOpen ? "rotate-180" : ""
                             }`}
@@ -106,7 +117,7 @@ const PumpsRight = () => {
 
                 {isOpen && (
                     <div className="absolute left-0 w-full mt-2 bg-white shadow-md rounded-md z-50 overflow-hidden">
-                        {categories.map((tab) => (
+                        {categoryList.map((tab) => (
                             <div
                                 key={tab.id}
                                 onClick={() => {
@@ -128,7 +139,7 @@ const PumpsRight = () => {
 
             {/* ================= DESKTOP TABS (>=769px) ================= */}
             <div className="hidden lg:flex flex-wrap gap-1 mb-6 bg-[#F4F3FF] p-1 rounded-md">
-                {categories.map((tab) => (
+                {categoryList.map((tab) => (
                     <button
                         key={tab.id}
                         onClick={() => setActiveTab(tab.id)}

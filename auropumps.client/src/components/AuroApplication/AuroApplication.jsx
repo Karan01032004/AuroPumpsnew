@@ -188,17 +188,17 @@ function AuroApplication() {
 
         <section className="py-8 sm:py-14 md:py-16 lg:py-20">
 
-            <div className="container mx-auto grid lg:grid-cols-[1.2fr_3fr] gap-5 lg:gap-7 items-start">
-
-                <CategorySidebar
-                    categories={applications}
-                    activeCategory={activeCategory} 
-                    setActiveCategory={setActiveCategory}
-                    selectedProduct={selectedProduct}
-                    setSelectedProduct={setSelectedProduct}
-                    loadProductsByIds={loadProductsByIds}   // ✅ ADD THIS
-                    setApplications={setApplications}  
-                />
+          {/*  <div className="container mx-auto grid lg:grid-cols-[1.2fr_3fr] gap-5 lg:gap-7 items-start">*/}
+            <div className="container mx-auto items-start">
+                {/*<CategorySidebar*/}
+                {/*    categories={applications}*/}
+                {/*    activeCategory={activeCategory} */}
+                {/*    setActiveCategory={setActiveCategory}*/}
+                {/*    selectedProduct={selectedProduct}*/}
+                {/*    setSelectedProduct={setSelectedProduct}*/}
+                {/*    loadProductsByIds={loadProductsByIds}   // ✅ ADD THIS*/}
+                {/*    setApplications={setApplications}  */}
+                {/*/>*/}
 
                 <ApplicationContent
                     product={selectedProduct}
