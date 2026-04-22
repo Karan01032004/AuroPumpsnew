@@ -96,7 +96,7 @@ function App() {
                         <Route path="add-application" element={<AddApplication />} />
                         <Route path="view-product" element={<ViewProduct />} />
                         <Route path="view-Application" element={<ViewApplication />} />
-
+                         
                         <Route path="add-category" element={<AddCategory />} />
                         <Route path="Addimagegallery" element={<AddImageGallery />} />
                         <Route path="Viewimagegallery" element={<Viewimagegallery />} />
