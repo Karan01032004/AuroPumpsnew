@@ -121,7 +121,7 @@ function App() {
                             element={<SiteMap />}
                         />
                         <Route
-                            path="/error"
+                            path="/error" 
                             element={<Error />}
                         />
                     </Route>
