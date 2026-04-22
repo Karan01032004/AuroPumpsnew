@@ -1,4 +1,5 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { useEffect, useState } from "react";
 import AppLayout from "./layout/AppLayout";
 import Home from "./pages/Home/Home";
 import ContactUs from "./pages/ContactUs/ContactUs";
@@ -38,91 +39,142 @@ import Viewimagegallery from "./poweradmin/pages/CategoryManagement/Viewimagegal
 import InquiryDetails from "./poweradmin/pages/InquiryManagement/InquiryDetails";
 import AddProductCategory from "./poweradmin/pages/ProductManagement/AddCategory";
 import ViewProductCategory from "./poweradmin/pages/ProductManagement/ViewCategory";
+import ClientsPage from "./pages/ClientsPage/ClientsPage";
 
 function App() {
-    return (
-        <BrowserRouter basename="/auropumps">
-            <ScrollToTop />
-            <ScrollToHash />
-            <Routes>
-                {/* Layout Route */}
-                <Route element={<AppLayout />}>
-                    <Route path="/" element={<Home />} />
-                    <Route path="contact-us" element={<ContactUs />} />
-                    <Route path="company" element={<Company />} />
-                    <Route path="application" element={<Application />} />
-                    <Route path="application/:categoryId/:productId" element={<Application />} />
-                    <Route path="products" element={<Products />} />
-                    {/*<Route path="products/:id" element={<Products />} />*/}
-                    <Route path="/products/:categorySlug/:productSlug" element={<Products />} />
-                    <Route path="/products/:productSlug" element={<Products />} />
-                    <Route path="/products/:categorySlug/:productSlug" element={<Products />} />
-                    <Route
-                        path="/thank-you"
-                        element={<ThankYou />}
-                    />
-                    <Route
-                        path="/sitemap"
-                        element={<SiteMap />}
-                    />
-                    <Route
-                        path="/error"
-                        element={<Error />}
-                    />
-                </Route>
-            </Routes>
+    const [showLoader, setShowLoader] = useState(true);
+    const [loaderExit, setLoaderExit] = useState(false);
 
-            <ThemeProvider>
-                <Toaster position="top-right" reverseOrder={false} /> {/* Ye line add karein */}
-                {/*   <BrowserRouter basename="/auropumps">  </BrowserRouter>*/}
-                {/* <BrowserRouter basename="/auropumps/">*/}
+    useEffect(() => {
+        const startExit = window.setTimeout(() => {
+            setLoaderExit(true);
+        }, 1700);
+
+        const hideLoader = window.setTimeout(() => {
+            setShowLoader(false);
+        }, 2300);
+
+        return () => {
+            window.clearTimeout(startExit);
+            window.clearTimeout(hideLoader);
+        };
+    }, []);
+        
+    return (
+        <>
+            {showLoader && (
+                <div
+                    className={`app-loader ${loaderExit ? "app-loader--exit" : ""}`}
+                    aria-hidden="true"
+                >
+                    <div className="app-loader__backdrop"></div>
+                    <div className="app-loader__aurora app-loader__aurora--one"></div>
+                    <div className="app-loader__aurora app-loader__aurora--two"></div>
+
+                    <div className="app-loader__content">
+                        <div className="app-loader__orbit app-loader__orbit--outer"></div>
+                        <div className="app-loader__orbit app-loader__orbit--inner"></div>
+
+                        <div className="app-loader__logo-shell">
+                            <div className="app-loader__logo-glow"></div>
+                            <img
+                                src="/auropumps/assets/images/auropumps-loader-logo.png"
+                                alt="Auro Pumps"
+                                className="app-loader__logo"
+                            />
+                        </div>
+
+                        <div className="app-loader__text-wrap">
+                            <p className="app-loader__eyebrow">Industrial Flow Systems</p>
+                            <h1 className="app-loader__title">Auro Pumps</h1>
+                            <div className="app-loader__pulse-track">
+                                <span className="app-loader__pulse-line"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            )}
+
+            <BrowserRouter basename="/auropumps">
+                <ScrollToTop />
+                <ScrollToHash />
                 <Routes>
-                    <Route path="signin" element={<SignIn />} />
-                    <Route path="/forgot-password" element={<ForgotPassword />} />
-                    <Route path="/verify-otp" element={<OtpVerify />} />
-                    {/*<Route path="/poweradmin" element={<AppLayout />}>*/}
-                    <Route
-                        path="/poweradmin"
-                        element={
-                            <ProtectedRoute>
-                                <PoweradminLayout />
-                            </ProtectedRoute>
-                        }
-                    >
-                        <Route path="dashboard" element={<Dashboard />} />
-                        <Route path="inquiry" element={<InquiryTable />} />
-                        <Route path="page-content" element={<PageContentTable />} />
-                        <Route path="add-product" element={<AddProduct />} />
-                        <Route path="add-application" element={<AddApplication />} />
-                        <Route path="view-product" element={<ViewProduct />} />
-                        <Route path="view-Application" element={<ViewApplication />} />
-                         
-                        <Route path="add-category" element={<AddCategory />} />
-                        <Route path="Addimagegallery" element={<AddImageGallery />} />
-                        <Route path="Viewimagegallery" element={<Viewimagegallery />} />
-                        <Route path="view-category" element={<ViewCategory />} />
-                        <Route path="view-inquiry/:id" element={<InquiryDetails />} />
-                        <Route path="edit-category/:id" element={<AddCategory />} />
-                        <Route path="edit-image-gallery/:id" element={<AddImageGallery />} />
-                        <Route path="edit-product/:id" element={<AddProduct />} />
-                        <Route path="edit-application/:id" element={<AddApplication />} />
-                        <Route path="page-content/:id" element={<PageDetailsForm />} />
-                        <Route path="pagecontent/add" element={<PageDetailsForm />} />
-                        <Route path="add-blog" element={<AddBlog />} />
-                        <Route path="view-blog" element={<ViewBlog />} />
-                        <Route path="add-Productcategory" element={<AddProductCategory />} />
-                        <Route path="edit-Productcategory/:id" element={<AddProductCategory />} />
-                        <Route path="view-Productcategory" element={<ViewProductCategory />} />
-                        <Route path="banner" element={<BannerManagement />}>
-                            <Route index element={<BannerTable />} />
-                            <Route path="add" element={<BannerForm />} />
-                            <Route path="edit/:id" element={<BannerForm />} /> </Route>
+                    {/* Layout Route */}
+                    <Route element={<AppLayout />}>
+                        <Route path="/" element={<Home />} />
+                        <Route path="contact-us" element={<ContactUs />} />
+                        <Route path="company" element={<Company />} />
+                        <Route path="clients" element={<ClientsPage />} />
+                        <Route path="application" element={<Application />} />
+                        <Route path="application/:categoryId/:productId" element={<Application />} />
+                        <Route path="products" element={<Products />} />
+                        {/*<Route path="products/:id" element={<Products />} />*/}
+                        <Route path="/products/:categorySlug/:productSlug" element={<Products />} />
+                        <Route path="/products/:productSlug" element={<Products />} />
+                        <Route path="/products/:categorySlug/:productSlug" element={<Products />} />
+                        <Route
+                            path="/thank-you"
+                            element={<ThankYou />}
+                        />
+                        <Route
+                            path="/sitemap"
+                            element={<SiteMap />}
+                        />
+                        <Route
+                            path="/error" 
+                            element={<Error />}
+                        />
                     </Route>
                 </Routes>
-                {/*</BrowserRouter>*/}
 
-            </ThemeProvider>
-        </BrowserRouter>
+                <ThemeProvider>
+                    <Toaster position="top-right" reverseOrder={false} />
+                    <Routes>
+                        <Route path="signin" element={<SignIn />} />
+                        <Route path="/forgot-password" element={<ForgotPassword />} />
+                        <Route path="/verify-otp" element={<OtpVerify />} />
+                        <Route
+                            path="/poweradmin"
+                            element={
+                                <ProtectedRoute>
+                                    <PoweradminLayout />
+                                </ProtectedRoute>
+                            }
+                        >
+                            <Route path="dashboard" element={<Dashboard />} />
+                            <Route path="inquiry" element={<InquiryTable />} />
+                            <Route path="page-content" element={<PageContentTable />} />
+                            <Route path="add-product" element={<AddProduct />} />
+                            <Route path="add-application" element={<AddApplication />} />
+                            <Route path="view-product" element={<ViewProduct />} />
+                            <Route path="view-Application" element={<ViewApplication />} />
+
+                            <Route path="add-category" element={<AddCategory />} />
+                            <Route path="Addimagegallery" element={<AddImageGallery />} />
+                            <Route path="Viewimagegallery" element={<Viewimagegallery />} />
+                            <Route path="view-category" element={<ViewCategory />} />
+                            <Route path="view-inquiry/:id" element={<InquiryDetails />} />
+                            <Route path="edit-category/:id" element={<AddCategory />} />
+                            <Route path="edit-image-gallery/:id" element={<AddImageGallery />} />
+                            <Route path="edit-product/:id" element={<AddProduct />} />
+                            <Route path="edit-application/:id" element={<AddApplication />} />
+                            <Route path="page-content/:id" element={<PageDetailsForm />} />
+                            <Route path="pagecontent/add" element={<PageDetailsForm />} />
+                            <Route path="add-blog" element={<AddBlog />} />
+                            <Route path="view-blog" element={<ViewBlog />} />
+                            <Route path="add-Productcategory" element={<AddProductCategory />} />
+                            <Route path="edit-Productcategory/:id" element={<AddProductCategory />} />
+                            <Route path="view-Productcategory" element={<ViewProductCategory />} />
+                            <Route path="banner" element={<BannerManagement />}>
+                                <Route index element={<BannerTable />} />
+                                <Route path="add" element={<BannerForm />} />
+                                <Route path="edit/:id" element={<BannerForm />} />
+                            </Route>
+                        </Route>
+                    </Routes>
+                </ThemeProvider>
+            </BrowserRouter>
+        </>
     );
 }
 

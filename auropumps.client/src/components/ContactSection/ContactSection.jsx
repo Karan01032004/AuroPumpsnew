@@ -219,12 +219,18 @@ const ContactSection = () => {
                     {/* ================= RIGHT SIDE ================= */}
                     <div className="bg-[#f3f2fb] py-5 px-3 lg:p-6">
 
-                        <p className="text-primary uppercase font-medium">
+                        
+                        {/* Label */}
+                        <span className="inline-block text-[11px] sm:text-xs tracking-[0.22em] font-bold text-primary uppercase bg-primary/10 px-4 py-2 rounded-full">
                             Get in Touch
-                        </p>
+                        </span>
 
-                        <h2 className="text-xl sm:text-2xl lg:text-3xl font-bold text-secondary mt-2">
-                            Let’s discuss about your project
+                        {/* Heading */}
+                        <h2 className="mt-5 text-3xl sm:text-4xl font-bold text-slate-900 leading-tight">
+                            Let’s discuss about  
+                            <span className="text-primary">
+                                 &nbsp;your project
+                            </span>
                         </h2>
 
                         <form className="mt-6 space-y-4" onSubmit={handleSubmit}>

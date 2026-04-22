@@ -8,12 +8,18 @@ function IndustryTimeline() {
 
                 {/* ================= LEFT SIDE ================= */}
                 <div>
-                    <p className="text-lg font-medium text-primary uppercase">
+                    
+                    {/* Label */}
+                    <span className="inline-block text-[11px] sm:text-xs tracking-[0.22em] font-bold text-primary uppercase bg-primary/10 px-4 py-2 rounded-full">
                         History & Timeline
-                    </p>
+                    </span>
 
-                    <h2 className="text-xl sm:text-2xl lg:text-3xl font-bold mt-2 text-secondary">
-                        Powering Your Industry With Our Technology
+                    {/* Heading */}
+                    <h2 className="mt-5 text-3xl sm:text-4xl font-bold text-slate-900 leading-tight">
+                        Powering Your Industry 
+                        <span className="block text-primary mt-2">
+                            With Our Technology
+                        </span>
                     </h2>
 
                     <div className="mt-8 rounded-xl overflow-hidden">

@@ -7,15 +7,16 @@ const HeroSection = () => {
             <img
                 src={`${import.meta.env.BASE_URL}/assets/images/home-banner.png`}
                 alt="Premier Pumping Solutions"
-                className="absolute inset-0 w-full h-full object-cover"
+                className="hero-image-zoom absolute inset-0 w-full h-full object-cover will-change-transform"
             />
 
             {/* Dark Gradient Overlay */}
             <div className="absolute inset-0 bg-gradient-to-r from-black/75 via-black/40 to-transparent"></div>
+            <div className="hero-soft-glow absolute -left-24 top-1/4 h-60 w-60 rounded-full bg-white/20 blur-3xl"></div>
 
             {/* Content */}
             <div className="relative z-10 container mx-auto h-full flex items-center">
-                <div className="max-w-2xl text-white">
+                <div className="hero-content-rise max-w-2xl text-white">
 
                     <h1 className="text-xl sm:text-3xl md:text-4xl font-bold leading-tight mb-4 text-white drop-shadow-[0_8px_30px_rgba(0,0,0,0.9)]">
                         Premier Pumping Solutions,

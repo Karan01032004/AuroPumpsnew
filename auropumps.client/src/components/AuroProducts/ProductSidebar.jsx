@@ -10,6 +10,11 @@ function ProductSidebar({
     selectedProduct,
     onProductClick
 }) {
+    const categoryList = Array.isArray(categories)
+        ? categories
+        : Array.isArray(categories?.data)
+            ? categories.data
+            : [];
 
     //const [openCategory, setOpenCategory] = useState(null);
     const [open, setOpen] = useState(false);
@@ -27,7 +32,7 @@ function ProductSidebar({
         setActiveCategory(id);
     };
 
-    const activeCategoryItem = categories.find(
+    const activeCategoryItem = categoryList.find(
         (cat) => cat.id === activeCategory
     );
 
@@ -67,7 +72,7 @@ function ProductSidebar({
 
                 <div className="h-[2px] bg-primary mt-4 mb-6"></div>
 
-                {categories.map((category) => {
+                {categoryList.map((category) => {
 
                     //const isOpen = openCategory === category.id;
                     const isOpen = activeCategory === category.id;
@@ -128,7 +133,7 @@ function ProductSidebar({
                 {open && (
                     <div className="absolute z-50 mt-2 w-full bg-white border rounded-lg shadow-lg">
 
-                        {categories.map((item) => (
+                        {categoryList.map((item) => (
 
                             <div key={item.id}>
 
