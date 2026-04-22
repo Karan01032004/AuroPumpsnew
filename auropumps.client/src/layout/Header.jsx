@@ -1,6 +1,8 @@
 ﻿import { useState, useEffect } from "react";
 import { NavLink, useLocation } from "react-router-dom";
 import { FiChevronDown } from "react-icons/fi";
+import  api  from "../poweradmin/api/axios";
+
 const Header = () => {
     const location = useLocation();
     const [open, setOpen] = useState(false);
@@ -9,80 +11,88 @@ const Header = () => {
     const [mobileProductOpen, setMobileProductOpen] = useState(false);
     const [mobileApplicationOpen, setMobileApplicationOpen] = useState(false);
     const headerHeight = scrolled ? 76 : 100;
+    const [categories, setCategories] = useState([]);
+    const [productsMap, setProductsMap] = useState({});
+    const [applications, setApplications] = useState([]);
     const navLinks = [
         { name: "Home", path: "/" },
         { name: "Products", path: "/products" },
         { name: "Application", path: "/application" },
         { name: "Company", path: "/company" },
         { name: "Clients", path: "/clients" },
-    ];
-    const applicationMenu = {
-        moltenSulphur: [
-            { name: "ACC-J", path: "/application/molten-sulphur/acc-j" },
-            { name: "ACCV-J", path: "/application/molten-sulphur/accv-j" },
-        ],
+    ]; 
+    const getProductsByIds = (ids) => {
+        if (!ids) return [];
 
-        moltenZinc: [
-            { name: "AMZ", path: "/application/molten-zinc/amz" },
-        ],
+        const idArray = ids.split(",").map(id => parseInt(id));
 
-        moltenLead: [
-            { name: "AML", path: "/application/molten-lead/aml" },
-        ],
+        const uniqueProducts = new Map(); // ✅ duplicate remove karega
 
-        moltenSalt: [
-            { name: "ACCV", path: "/application/molten-salt/accv" },
-        ],
+        Object.values(productsMap).forEach((productList) => {
+            productList.forEach((product) => {
+                if (idArray.includes(product.id)) {
+                    uniqueProducts.set(product.id, product); // ✅ overwrite same id
+                }
+            });
+        });
 
-        sulfuricAcid: [
-            { name: "ACC", path: "/application/sulfuric-acid/acc" },
-            { name: "APP", path: "/application/sulfuric-acid/app" },
-            { name: "APPV", path: "/application/sulfuric-acid/appv" },
-        ],
+        return Array.from(uniqueProducts.values());
     };
-    const productMenu = {
-        pumps: [
-            { name: "ACC", path: "/products/acc" },
-            { name: "ACC-J", path: "/products/acc-j" },
-            { name: "ACTF", path: "/products/actf" },
-            { name: "ACCTF", path: "/products/acctf" },
-            { name: "ACCV", path: "/products/accv" },
-            { name: "ACCV-J", path: "/products/accv-j" },
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                // 🔥 categories
+                const catRes = await api.get("/ProductsCategory/category-list");
 
-            { name: "ACMAG", path: "/products/acmag" },
-            { name: "ACVMAG", path: "/products/acvmag" },
-            { name: "APP", path: "/products/app" },
-            { name: "APPV", path: "/products/appv" },
-            { name: "ASP", path: "/products/asp" },
-            { name: "PN", path: "/products/pn" },
+                const catData = Array.isArray(catRes.data)
+                    ? catRes.data
+                    : catRes.data?.data || [];
 
-            { name: "VA", path: "/products/va" },
-            { name: "AMZ", path: "/products/amz" },
-            { name: "AML", path: "/products/aml" },
-            { name: "ACM", path: "/products/acm" },
-            { name: "ACV", path: "/products/acv" },
-        ],
+                setCategories(catData);
 
-        moltenSystems: [
-            { name: "ACCV (Salt)", path: "/products/accv-salt" },
-            { name: "AMZ", path: "/products/amz" },
-            { name: "AML", path: "/products/aml" },
-            { name: "AAG", path: "/products/aag" },
-        ],
+                // 🔥 products per category
+                catData.forEach(async (cat) => {
+                    try {
+                        const prodRes = await api.get(`/product/list-by-category/${cat.id}`);
 
-        moltenSulphur: [
-            { name: "ACC-J", path: "/products/acc-j" },
-            { name: "ACCV-J", path: "/products/accv-j" },
-        ],
+                        setProductsMap(prev => ({
+                            ...prev,
+                            [cat.id]: prodRes.data
+                        }));
 
-        dross: [
-            { name: "DROSSER", path: "/products/drosser" },
-        ],
+                    } catch (err) {
+                        console.log(err);
+                    }
+                });
 
-        agitators: [
-            { name: "AAG", path: "/products/aag" },
-        ],
-    };
+            } catch (err) {
+                console.log(err);
+            }
+        };
+
+        fetchData();
+    }, []);
+
+    useEffect(() => {
+        const fetchApplications = async () => {
+            try {
+                const res = await api.get("/application/list");
+
+                const data = Array.isArray(res.data)
+                    ? res.data
+                    : res.data?.data || [];
+
+                setApplications(data);
+
+            } catch (err) {
+                console.log(err);
+            }
+        };
+
+        fetchApplications();
+    }, []);
+    const toSlug = (text) =>
+        text?.toLowerCase().replace(/\s+/g, "-");
     useEffect(() => {
         document.body.style.overflow = open ? "hidden" : "auto";
     }, [open]);
@@ -191,84 +201,27 @@ const Header = () => {
 
                                                 <div className="grid grid-cols-2 md:grid-cols-6 lg:grid-cols-12 gap-10 text-sm">
 
-                                                    {/* 🔥 PUMPS */}
-                                                    <div className="col-span-2 md:col-span-6 lg:col-span-6">
-                                                        <h4 className="font-semibold mb-4 border-b border-white/20 pb-2">
-                                                            Pumps
-                                                        </h4>
-
-                                                        <div className="grid grid-cols-2 sm:grid-cols-3 gap-x-8">
-                                                            {[0, 1, 2].map((col) => (
-                                                                <ul key={col} className="space-y-2 text-white/80">
-                                                                    {productMenu.pumps
-                                                                        .filter((_, i) => i % 3 === col)
-                                                                        .map((item) => (
-                                                                            <li key={item.name}>
-                                                                                <NavLink
-                                                                                    to={item.path}
-                                                                                    onClick={closeAllMenus}
-                                                                                    className="hover:text-white block transition"
-                                                                                >
-                                                                                    {item.name}
-                                                                                </NavLink>
-                                                                            </li>
-                                                                        ))}
-                                                                </ul>
-                                                            ))}
-                                                        </div>
-                                                    </div>
-
-                                                    {/* 🔥 MOLTEN SYSTEMS */}
-                                                    <div className="col-span-2 md:col-span-3 lg:col-span-3 space-y-6">
-                                                        <div>
-                                                            <h4 className="font-semibold mb-3 border-b border-white/20 pb-2">
-                                                                Molten Systems
+                                                    {categories.map((category) => (
+                                                        <div key={category.id}>
+                                                            <h4 className="font-semibold mb-4 border-b border-white/20 pb-2">
+                                                                {category.title}
                                                             </h4>
-                                                            {productMenu.moltenSystems.map((item) => (
-                                                                <NavLink key={item.name} to={item.path} onClick={closeAllMenus} className="block py-1 text-white/80 hover:text-white">
-                                                                    {item.name}
-                                                                </NavLink>
-                                                            ))}
+
+                                                            <ul className="space-y-2 text-white/80">
+                                                                {(productsMap[category.id] || []).map((product) => (
+                                                                    <li key={product.id}>
+                                                                        <NavLink
+                                                                            to={`/products/${category.slug}/${product.slug}`} // ✅ slug URL
+                                                                            onClick={closeAllMenus}
+                                                                            className="hover:text-white block transition"
+                                                                        >
+                                                                            {product.name}
+                                                                        </NavLink>
+                                                                    </li>
+                                                                ))}
+                                                            </ul>
                                                         </div>
-
-                                                        <div>
-                                                            <h4 className="font-semibold mb-3 border-b border-white/20 pb-2">
-                                                                Dross Grabber
-                                                            </h4>
-                                                            {productMenu.dross.map((item) => (
-                                                                <NavLink key={item.name} to={item.path} onClick={closeAllMenus} className="block py-1 text-white/80 hover:text-white">
-                                                                    {item.name}
-                                                                </NavLink>
-                                                            ))}
-                                                        </div>
-                                                    </div>
-
-                                                    {/* 🔥 OTHER */}
-                                                    <div className="col-span-2 md:col-span-3 lg:col-span-3 space-y-6">
-
-                                                        <div>
-                                                            <h4 className="font-semibold mb-3 border-b border-white/20 pb-2">
-                                                                Molten Sulphur
-                                                            </h4>
-                                                            {productMenu.moltenSulphur.map((item) => (
-                                                                <NavLink key={item.name} to={item.path} onClick={closeAllMenus} className="block py-1 text-white/80 hover:text-white">
-                                                                    {item.name}
-                                                                </NavLink>
-                                                            ))}
-                                                        </div>
-
-                                                        <div>
-                                                            <h4 className="font-semibold mb-3 border-b border-white/20 pb-2">
-                                                                Agitators
-                                                            </h4>
-                                                            {productMenu.agitators.map((item) => (
-                                                                <NavLink key={item.name} to={item.path} onClick={closeAllMenus} className="block py-1 text-white/80 hover:text-white">
-                                                                    {item.name}
-                                                                </NavLink>
-                                                            ))}
-                                                        </div>
-
-                                                    </div>
+                                                    ))}
 
                                                 </div>
                                             </div>
@@ -310,18 +263,31 @@ const Header = () => {
 
                                                 <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-10 text-sm">
 
-                                                    {Object.entries(applicationMenu).map(([key, items]) => (
-                                                        <div key={key}>
-                                                            <h4 className="font-semibold mb-3 border-b border-white/20 pb-2 capitalize">
-                                                                {key.replace(/([A-Z])/g, " $1")}
-                                                            </h4>
-                                                            {items.map((item) => (
-                                                                <NavLink key={item.name} to={item.path} onClick={closeAllMenus} className="block py-1 text-white/80 hover:text-white">
-                                                                    {item.name}
-                                                                </NavLink>
-                                                            ))}
-                                                        </div>
-                                                    ))}
+                                                    {applications.map((app) => {
+                                                        const appProducts = getProductsByIds(app.product_ids);
+
+                                                        return (
+                                                            <div key={app.id}>
+                                                                <h4 className="font-semibold mb-3 border-b border-white/20 pb-2">
+                                                                    {app.title}
+                                                                </h4>
+
+                                                                <ul className="space-y-2 text-white/80">
+                                                                    {appProducts.map((product) => (
+                                                                        <li key={product.id}>
+                                                                            <NavLink
+                                                                                to={`/application/${app.slug}/${product.slug}`} // ya full route
+                                                                                onClick={closeAllMenus}
+                                                                                className="hover:text-white block transition"
+                                                                            >
+                                                                                {product.name}
+                                                                            </NavLink>
+                                                                        </li>
+                                                                    ))}
+                                                                </ul>
+                                                            </div>
+                                                        );
+                                                    })}
 
                                                 </div>
                                             </div>
@@ -416,74 +382,27 @@ const Header = () => {
                                         >
                                             <div className="px-4 space-y-4 text-sm text-white/80">
 
-                                                {/* 🔥 PUMPS */}
-                                                <div>
-                                                    <p className="text-white font-semibold mb-2">Pumps</p>
-                                                    <div className="grid grid-cols-2 gap-x-4 gap-y-1">
-                                                        {productMenu.pumps.map((item) => (
-                                                            <NavLink
-                                                                key={item.name}
-                                                                to={item.path}
-                                                                onClick={() => setOpen(false)}
-                                                                className="py-1 hover:text-white"
-                                                            >
-                                                                {item.name}
-                                                            </NavLink>
-                                                        ))}
+                                                {categories.map((category) => (
+                                                    <div key={category.id}>
+                                                        <h4 className="font-semibold mb-4 border-b border-white/20 pb-2">
+                                                            {category.title}
+                                                        </h4>
+
+                                                        <ul className="space-y-2 text-white/80">
+                                                            {(productsMap[category.id] || []).map((product) => (
+                                                                <li key={product.id}>
+                                                                    <NavLink
+                                                                        to={`/products/${category.slug}/${product.slug}`} // ✅ slug URL
+                                                                        onClick={closeAllMenus}
+                                                                        className="hover:text-white block transition"
+                                                                    >
+                                                                        {product.name}
+                                                                    </NavLink>
+                                                                </li>
+                                                            ))}
+                                                        </ul>
                                                     </div>
-                                                </div>
-
-                                                {/* 🔥 DIVIDER */}
-                                                <hr className="border-white/10" />
-
-                                                {/* 🔥 MOLTEN SYSTEMS */}
-                                                <div>
-                                                    <p className="text-white font-semibold mb-2">Molten Systems</p>
-                                                    {productMenu.moltenSystems.map((item) => (
-                                                        <NavLink
-                                                            key={item.name}
-                                                            to={item.path}
-                                                            onClick={() => setOpen(false)}
-                                                            className="block py-1 hover:text-white"
-                                                        >
-                                                            {item.name}
-                                                        </NavLink>
-                                                    ))}
-                                                </div>
-
-                                                <hr className="border-white/10" />
-
-                                                {/* 🔥 MOLTEN SULPHUR */}
-                                                <div>
-                                                    <p className="text-white font-semibold mb-2">Molten Sulphur</p>
-                                                    {productMenu.moltenSulphur.map((item) => (
-                                                        <NavLink
-                                                            key={item.name}
-                                                            to={item.path}
-                                                            onClick={() => setOpen(false)}
-                                                            className="block py-1 hover:text-white"
-                                                        >
-                                                            {item.name}
-                                                        </NavLink>
-                                                    ))}
-                                                </div>
-
-                                                <hr className="border-white/10" />
-
-                                                {/* 🔥 AGITATORS */}
-                                                <div>
-                                                    <p className="text-white font-semibold mb-2">Agitators</p>
-                                                    {productMenu.agitators.map((item) => (
-                                                        <NavLink
-                                                            key={item.name}
-                                                            to={item.path}
-                                                            onClick={() => setOpen(false)}
-                                                            className="block py-1 hover:text-white"
-                                                        >
-                                                            {item.name}
-                                                        </NavLink>
-                                                    ))}
-                                                </div>
+                                                ))}
 
                                             </div>
                                         </div>
@@ -515,88 +434,31 @@ const Header = () => {
                                         >
                                             <div className="px-4 space-y-4 text-sm text-white/80">
 
-                                                {/* 🔥 Molten Sulphur */}
-                                                <div>
-                                                    <p className="text-white font-semibold mb-2">Molten Sulphur</p>
-                                                    {applicationMenu.moltenSulphur.map((item) => (
-                                                        <NavLink
-                                                            key={item.name}
-                                                            to={item.path}
-                                                            onClick={() => setOpen(false)}
-                                                            className="block py-1 hover:text-white"
-                                                        >
-                                                            {item.name}
-                                                        </NavLink>
-                                                    ))}
-                                                </div>
+                                                {applications.map((app) => {
+                                                    const appProducts = getProductsByIds(app.product_ids);
 
-                                                <hr className="border-white/10" />
+                                                    return (
+                                                        <div key={app.id}>
+                                                            <h4 className="font-semibold mb-3 border-b border-white/20 pb-2">
+                                                                {app.title}
+                                                            </h4>
 
-                                                {/* 🔥 Molten Zinc */}
-                                                <div>
-                                                    <p className="text-white font-semibold mb-2">Molten Zinc & Galvalum</p>
-                                                    {applicationMenu.moltenZinc.map((item) => (
-                                                        <NavLink
-                                                            key={item.name}
-                                                            to={item.path}
-                                                            onClick={() => setOpen(false)}
-                                                            className="block py-1 hover:text-white"
-                                                        >
-                                                            {item.name}
-                                                        </NavLink>
-                                                    ))}
-                                                </div>
-
-                                                <hr className="border-white/10" />
-
-                                                {/* 🔥 Molten Lead */}
-                                                <div>
-                                                    <p className="text-white font-semibold mb-2">Molten Lead & Tin</p>
-                                                    {applicationMenu.moltenLead.map((item) => (
-                                                        <NavLink
-                                                            key={item.name}
-                                                            to={item.path}
-                                                            onClick={() => setOpen(false)}
-                                                            className="block py-1 hover:text-white"
-                                                        >
-                                                            {item.name}
-                                                        </NavLink>
-                                                    ))}
-                                                </div>
-
-                                                <hr className="border-white/10" />
-
-                                                {/* 🔥 Molten Salt */}
-                                                <div>
-                                                    <p className="text-white font-semibold mb-2">Molten Salt</p>
-                                                    {applicationMenu.moltenSalt.map((item) => (
-                                                        <NavLink
-                                                            key={item.name}
-                                                            to={item.path}
-                                                            onClick={() => setOpen(false)}
-                                                            className="block py-1 hover:text-white"
-                                                        >
-                                                            {item.name}
-                                                        </NavLink>
-                                                    ))}
-                                                </div>
-
-                                                <hr className="border-white/10" />
-
-                                                {/* 🔥 Sulfuric Acid */}
-                                                <div>
-                                                    <p className="text-white font-semibold mb-2">Sulfuric Acid</p>
-                                                    {applicationMenu.sulfuricAcid.map((item) => (
-                                                        <NavLink
-                                                            key={item.name}
-                                                            to={item.path}
-                                                            onClick={() => setOpen(false)}
-                                                            className="block py-1 hover:text-white"
-                                                        >
-                                                            {item.name}
-                                                        </NavLink>
-                                                    ))}
-                                                </div>
+                                                            <ul className="space-y-2 text-white/80">
+                                                                {appProducts.map((product) => (
+                                                                    <li key={product.id}>
+                                                                        <NavLink
+                                                                            to={`/application/${app.slug}/${product.slug}`}
+                                                                            onClick={() => setOpen(false)}
+                                                                            className="hover:text-white block transition"
+                                                                        >
+                                                                            {product.name}
+                                                                        </NavLink>
+                                                                    </li>
+                                                                ))}
+                                                            </ul>
+                                                        </div>
+                                                    );
+                                                })}
 
                                             </div>
                                         </div>
@@ -620,6 +482,5 @@ const Header = () => {
             </div>
         </>
     );
-};
-
+}; 
 export default Header;

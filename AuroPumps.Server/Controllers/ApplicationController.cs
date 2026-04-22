@@ -101,7 +101,8 @@ namespace AuroPumps.Server.Controllers
                     x.image5,
                     x.image6,
                     x.image7,
-                    x.image8
+                    x.image8,
+                    slug = x.title.Replace("&", "-").Replace(" ", "-").ToLower()
                 })
                 .ToList();
 
@@ -136,8 +137,7 @@ namespace AuroPumps.Server.Controllers
                 return NotFound(new { message = "Application not found" });
 
             return Ok(app);
-        }
-
+        } 
         // ✅ UPDATE
         [HttpPut("update/{id}")]
         public IActionResult Update(

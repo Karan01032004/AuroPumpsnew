@@ -163,6 +163,5 @@ function AuroProducts() {
             </div>
         </section>
     );
-}
-
+} 
 export default AuroProducts;
