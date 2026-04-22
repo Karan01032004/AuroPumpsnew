@@ -48,11 +48,11 @@ function App() {
     useEffect(() => {
         const startExit = window.setTimeout(() => {
             setLoaderExit(true);
-        }, 1700);
+        }, 2100);
 
         const hideLoader = window.setTimeout(() => {
             setShowLoader(false);
-        }, 2300);
+        }, 2750);
 
         return () => {
             window.clearTimeout(startExit);
@@ -70,26 +70,35 @@ function App() {
                     <div className="app-loader__backdrop"></div>
                     <div className="app-loader__aurora app-loader__aurora--one"></div>
                     <div className="app-loader__aurora app-loader__aurora--two"></div>
+                    <div className="app-loader__grid"></div>
 
                     <div className="app-loader__content">
-                        <div className="app-loader__orbit app-loader__orbit--outer"></div>
-                        <div className="app-loader__orbit app-loader__orbit--inner"></div>
+                        <div className="app-loader__badge">Since 1984</div>
+                        <div className="app-loader__visual">
+                            <div className="app-loader__orbit app-loader__orbit--outer"></div>
+                            <div className="app-loader__orbit app-loader__orbit--inner"></div>
+                            <div className="app-loader__ring-highlight"></div>
+                            <span className="app-loader__spark app-loader__spark--one"></span>
+                            <span className="app-loader__spark app-loader__spark--two"></span>
 
-                        <div className="app-loader__logo-shell">
-                            <div className="app-loader__logo-glow"></div>
-                            <img
-                                src="/auropumps/assets/images/auropumps-loader-logo.png"
-                                alt="Auro Pumps"
-                                className="app-loader__logo"
-                            />
+                            <div className="app-loader__logo-shell">
+                                <div className="app-loader__logo-glow"></div>
+                                <img
+                                    src="/auropumps/assets/images/auropumps-loader-logo.png"
+                                    alt="Auro Pumps"
+                                    className="app-loader__logo"
+                                />
+                            </div>
                         </div>
 
                         <div className="app-loader__text-wrap">
-                            <p className="app-loader__eyebrow">Industrial Flow Systems</p>
-                            <h1 className="app-loader__title">Auro Pumps</h1>
+                            <p className="app-loader__eyebrow">Technology Transfer from Pompe Vergani SpA of Italy</p>
+                            <h1 className="app-loader__title">AURO PUMPS PVT.LTD.</h1>
+                           
                             <div className="app-loader__pulse-track">
                                 <span className="app-loader__pulse-line"></span>
                             </div>
+                   
                         </div>
                     </div>
                 </div>

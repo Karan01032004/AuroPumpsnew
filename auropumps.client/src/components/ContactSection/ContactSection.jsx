@@ -154,6 +154,7 @@ const ContactSection = () => {
                                     Registered Office & Works
                                 </h4>
                                 <p className="text-md text-secondary mt-1">
+                                    <strong>AURO PUMPS PVT.LTD.</strong><br />
                                     Plot No. 104/5 & 6<br />
                                     G.I.D.C. Palej, Bharuch District, Gujarat – 392220, INDIA
                                 </p>
