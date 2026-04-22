@@ -166,27 +166,60 @@ const PumpsRight = () => {
                                 }%)`,
                         }}
                     >
-                        {extendedProducts.map((product, index) => (
-                            <div
-                                key={index}
-                                className="flex-shrink-0 px-3"
-                                style={{
-                                    width: `${100 / itemsPerView}%`,
-                                }}
-                            >
-                                <div onClick={() => navigate(`/products/${activeCategoryObj ?.slug}/${product.slug}`)} className="bg-[#F4F3FF] rounded-xl shadow-sm p-4 hover:shadow-md transition h-full cursor-pointer">
-                                    <img
-                                  
-                                        src={`${IMAGE_BASE_URL}${product.image}`}
-                                        alt={product.name}
-                                        className="w-full h-48 object-contain"
-                                    />
-                                    <h4 className="mt-4 text-sm font-semibold text-secondary text-center">
-                                        {product.name}
-                                    </h4>
+                        {extendedProducts.map((product, index) => {
+                            // 1. Media Priority: Pehle image1 check karo, agar null/empty hai toh image2 lo
+                            const displayMedia = product.image || product.image2  ;
+
+                            // 2. Check karo ki select kiya hua media video hai ya nahi
+                            const isVideo = displayMedia?.toLowerCase().endsWith(".mp4");
+
+                            return (
+                                <div
+                                    key={index}
+                                    className="flex-shrink-0 px-3"
+                                    style={{
+                                        width: `${100 / itemsPerView}%`,
+                                    }}
+                                >
+                                    <div
+                                        onClick={() => navigate(`/products/${activeCategoryObj?.slug}/${product.slug}`)}
+                                        className="bg-[#F4F3FF] rounded-xl shadow-sm p-4 hover:shadow-md transition h-full cursor-pointer flex flex-col justify-between"
+                                    >
+                                        <div className="media-wrapper w-full h-48 flex items-center justify-center overflow-hidden rounded-lg">
+                                            {displayMedia ? (
+                                                isVideo ? (
+                                                    <video
+                                                        src={`${IMAGE_BASE_URL}${displayMedia}`}
+                                                        className="w-full h-48 object-contain"
+                                                        autoPlay
+                                                        muted
+                                                        loop
+                                                        playsInline
+                                                    >
+                                                        Your browser does not support the video tag.
+                                                    </video>
+                                                ) : (
+                                                    <img
+                                                        src={`${IMAGE_BASE_URL}${displayMedia}`}
+                                                        alt={product.name || product.title}
+                                                        className="w-full h-48 object-contain"
+                                                    />
+                                                )
+                                            ) : (
+                                                /* Agar koi bhi image na mile toh fallback */
+                                                <div className="w-full h-48 bg-gray-200 flex items-center justify-center text-xs text-gray-500">
+                                                    No Image
+                                                </div>
+                                            )}
+                                        </div>
+
+                                        <h4 className="mt-4 text-sm font-semibold text-secondary text-center">
+                                            {product.name || product.title}
+                                        </h4>
+                                    </div>
                                 </div>
-                            </div>
-                        ))}
+                            );
+                        })}
                     </div>
                 </div>
             </div>

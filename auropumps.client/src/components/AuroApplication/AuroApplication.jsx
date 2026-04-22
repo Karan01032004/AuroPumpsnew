@@ -25,11 +25,12 @@ function AuroApplication() {
                 const formatted = res.data.map(app => ({
                     id: app.id,
                     title: app.title,
-                    slug: app.title
-                        ?.toLowerCase()
-                        .replace(/[^a-z0-9]+/g, "-")
-                        .replace(/(^-|-$)/g, ""),
-                    description: app.description,
+                    //slug: app.title
+                    //    ?.toLowerCase()
+                    //    .replace(/[^a-z0-9]+/g, "-")
+                    //    .replace(/(^-|-$)/g, "-"),
+                   description: app.description,
+                    slug:app.slug,
                     product_ids: app.product_ids,
 
                     images: [
@@ -125,6 +126,7 @@ function AuroApplication() {
                     { label: "Capacity", value: data.capacity },
                     { label: "Head", value: data.producthead },
                     { label: "Size", value: data.productsize },
+                    { label: "Sloid Size", value: data.moc },
                     { label: "Temperature", value: data.temperature },
                     { label: "Viscosity", value: data.viscosity },
                     { label: "Submergence Length", value: data.SubmergenceLength },

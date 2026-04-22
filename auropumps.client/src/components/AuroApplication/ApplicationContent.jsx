@@ -174,11 +174,25 @@ function ApplicationContent({
                         <div className="xl:sticky xl:top-28 xl:self-start">
                             <div className="overflow-hidden rounded-xl border border-slate-200 bg-white shadow-sm">
                                 <div className="flex min-h-[320px] items-center justify-center rounded-[20px] bg-gradient-to-br from-white via-[#F7F5FF] to-[#EEF4FF] p-4">
-                                    <img
-                                        src={product.image}
-                                        alt={product.name}
-                                        className="w-full object-contain max-h-[520px]"
-                                    />
+                                    {product.image && product.image.toLowerCase().endsWith(".mp4") ? (
+                                        <video
+                                            src={product.image}
+                                            className="w-full object-contain max-h-[520px]"
+                                            controls
+                                            autoPlay
+                                            muted
+                                            loop
+                                            playsInline
+                                        >
+                                            Your browser does not support the video tag.
+                                        </video>
+                                    ) : (
+                                        <img
+                                            src={product.image}
+                                            alt={product.name}
+                                            className="w-full object-contain max-h-[520px]"
+                                        />
+                                    )}
                                 </div>
                             </div>
                         </div>
@@ -189,8 +203,8 @@ function ApplicationContent({
                                     {product.name}
                                 </div>
 
-                                <p className="mt-5 text-base leading-8 text-slate-600">
-                                    {product.description}
+                                <p className="mt-5 text-base leading-8 text-slate-600" dangerouslySetInnerHTML={{ __html: product.description }}>
+                                   
                                 </p>
                             </div>
 

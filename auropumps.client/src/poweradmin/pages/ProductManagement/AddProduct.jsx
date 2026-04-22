@@ -209,10 +209,10 @@ const AddProduct = () => {
                         placeholder="Choose categories..."
                     />
                 </div>
-                 <div className="mt-6 grid grid-cols-1 md:grid-cols-3 gap-4">
+                 <div className="mt-6 grid grid-cols-1 md:grid-cols-4 gap-4">
                     {[
                         ["Display on Frontend? ", visible, setVisible],
-                        //["Is Featured?", isFeatured, setIsFeatured],
+                        ["PDF Send on Mail?", isFeatured, setIsFeatured],
                         //["Only Viw Contact Button?", isAddContact, setIsAddContact],
                       
                     ].map(([label, value, setter]) => (
@@ -251,7 +251,7 @@ const AddProduct = () => {
                             <label className="text-sm font-medium">Upload Gif</label>
                             <input
                                 type="file"
-                                accept="image/*"
+                                accept="image/*,video/mp4"
                                 onChange={(e) => {
                                     const files = [...images];
                                     files[0] = e.target.files[0];
@@ -292,29 +292,53 @@ const AddProduct = () => {
                         {/*</div>*/}
                     </div>
                 </div>
-
-
-                {/* EXISTING IMAGES (EDIT) */}
+                 
                 {isEdit && (
                     <div className="mt-4">
                         <p className="mb-2 font-medium text-gray-700">
-                            Existing Images
+                            Existing Media (Image / Video)
                         </p>
                         <div className="flex gap-4">
-                            {Object.values(existingImages).map(
-                                (img, i) =>
-                                    img && (
-                                        <img
-                                            key={i}
-                                            /*  src={img}*/
-                                            src={`${IMAGE_BASE_URL}/${img}`}
-                                            className="h-24 w-24 rounded border object-cover"
-                                        />
-                                    )
-                            )}
+                            {Object.values(existingImages).map((file, i) => {
+                                if (!file) return null;
+
+                                // Extension check kar rahe hain
+                                const isVideo = file.toLowerCase().endsWith(".mp4");
+                                const fileUrl = `${IMAGE_BASE_URL}/${file}`;
+
+                                return (
+                                    <div key={i} className="relative h-24 w-24 rounded border overflow-hidden bg-gray-50">
+                                        {isVideo ? (
+                                            <video
+                                                src={fileUrl}
+                                                className="h-full w-full object-cover"
+                                                muted
+                                                playsInline
+                                                onMouseOver={(e) => e.target.play()} // Hover karne par video chalega
+                                                onMouseOut={(e) => {
+                                                    e.target.pause();
+                                                    e.target.currentTime = 0; // Mouse hatne par reset ho jayega
+                                                }}
+                                            />
+                                        ) : (
+                                            <img
+                                                src={fileUrl}
+                                                alt="Existing"
+                                                className="h-full w-full object-cover"
+                                            />
+                                        )}
+                                        {/* Video pe ek chota indicator (optional) */}
+                                        {isVideo && (
+                                            <span className="absolute bottom-1 right-1 bg-black/50 text-white text-[10px] px-1 rounded">
+                                                MP4
+                                            </span>
+                                        )}
+                                    </div>
+                                );
+                            })}
                         </div>
                     </div>
-                )} 
+                )}
                 <div className="mt-6">
                     <label className="mb-1 block font-medium text-gray-700">
                         Product Catalogue (PDF)
@@ -347,29 +371,29 @@ const AddProduct = () => {
                     )}
                 </div>
 
-                {/* EDITORS */}
-                {/*{[*/}
-                {/*    ["Product Description", description, setDescription],*/}
-                {/*    ["Technical Details", technicalDetails, setTechnicalDetails],*/}
-                {/*    ["MOC", moc, setMoc],*/}
-                {/*    ["Applications", applications, setApplications],*/}
-                {/*].map(([label, val, setter]) => (*/}
-                {/*    <div className="mt-6" key={label}>*/}
-                {/*        <label className="font-medium">{label}</label>*/}
-                {/*        <TinyEditor value={val} onChange={setter} />*/}
-                {/*    </div>*/}
-                {/*))}*/}
+                 EDITORS 
+                {[
+                    ["Product Description", description, setDescription],
+                    //["Technical Details", technicalDetails, setTechnicalDetails],
+                    //["MOC", moc, setMoc],
+                    //["Applications", applications, setApplications],
+                ].map(([label, val, setter]) => (
+                    <div className="mt-6" key={label}>
+                        <label className="font-medium">{label}</label>
+                        <TinyEditor value={val} onChange={setter} />
+                    </div>
+                ))}
 
-                <div className="mt-6">
-                    <label className="font-medium text-gray-700">Product Description  <span className="text-red-500">*</span></label>
-                    <textarea
-                        className="w-full mt-2 p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-                        rows="6"
-                        placeholder="Enter product description here..."
-                        value={description}
-                        onChange={(e) => setDescription(e.target.value)}
-                    />
-                </div>
+                {/*<div className="mt-6">*/}
+                {/*    <label className="font-medium text-gray-700">Product Description  <span className="text-red-500">*</span></label>*/}
+                {/*    <textarea*/}
+                {/*        className="w-full mt-2 p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"*/}
+                {/*        rows="6"*/}
+                {/*        placeholder="Enter product description here..."*/}
+                {/*        value={description}*/}
+                {/*        onChange={(e) => setDescription(e.target.value)}*/}
+                {/*    />*/}
+                {/*</div>*/}
 
                 <div className="mt-6 grid grid-cols-1 md:grid-cols-2 gap-4">
 
@@ -440,6 +464,14 @@ const AddProduct = () => {
                         <input
                             value={SubmergenceLength}
                             onChange={(e) => setOperatingFrequency(e.target.value)}
+                            className="w-full rounded-lg border px-3 py-2"
+                        />
+                    </div>
+                    <div>
+                        <label className="font-medium">Solid Size</label>
+                        <input
+                            value={moc}
+                            onChange={(e) => setMoc(e.target.value)}
                             className="w-full rounded-lg border px-3 py-2"
                         />
                     </div>

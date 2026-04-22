@@ -23,13 +23,37 @@ function ProductContent({ product, categoryTitle }) {
                 </div>
             </div>
 
-            <div className="grid gap-6 lg:grid-cols-[1fr_1.25fr] lg:items-start">
-                <div className="overflow-hidden rounded-2xl border border-primary/10 bg-white p-2">
-                    <img
-                        src={`${IMAGE_BASE_URL}${product.image}`}
-                        alt={product.name}
-                        className="h-full w-full rounded-xl object-cover"
-                    />
+            {/*<div className="grid gap-6 lg:grid-cols-[1fr_1.25fr] lg:items-start">*/}
+            {/*    <div className="overflow-hidden rounded-2xl border border-primary/10 bg-white p-2">*/}
+            <div className="block"> {/* Grid hata kar 'block' kar diya */}
+
+                {/* Image/Video Container */}
+                <div className="overflow-hidden rounded-2xl border border-primary/10 bg-white p-2 
+                    lg:float-left lg:w-[45%] lg:mr-6 mb-5">
+                    {/*<img*/}
+                    {/*    src={`${IMAGE_BASE_URL}${product.image}`}*/}
+                    {/*    alt={product.name}*/}
+                    {/*    className="h-full w-full rounded-xl object-cover"*/}
+                    {product.image && product.image.toLowerCase().endsWith(".mp4") ? (
+                        <video
+                            src={`${IMAGE_BASE_URL}${product.image}`}
+                            className="h-full w-full rounded-xl object-cover"
+                            controls
+                            autoPlay
+                            muted
+                            loop
+                            playsInline
+                        >
+                            Your browser does not support the video tag.
+                        </video>
+                    ) : (
+                        <img
+                            src={`${IMAGE_BASE_URL}${product.image}`}
+                            alt={product.name}
+                            className="h-full w-full rounded-xl object-cover"
+                        />
+                    )}
+           
                 </div>
 
                 <div className="">
@@ -45,12 +69,15 @@ function ProductContent({ product, categoryTitle }) {
                         </a>
                     )}
 
-                    <p className="text-sm leading-relaxed text-gray md:text-base">
-                        {product.description}
-                    </p>
+                     
+                    <div
+                        className="prose prose-sm max-w-none text-sm leading-relaxed text-gray md:text-base"
+                        dangerouslySetInnerHTML={{ __html: product.description }}
+                    />  
+                    
                 </div>
             </div>
-
+            <div className="clear-both"></div>
             {specifications.length > 0 && (
                 <div className="mt-7">
                     <h3 className="mb-3 text-lg font-bold text-primary md:text-xl">
