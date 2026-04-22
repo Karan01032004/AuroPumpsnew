@@ -7,6 +7,7 @@ function ProductSidebar({
     products,
     activeCategory,
     setActiveCategory,
+    onCategoryClick,
     selectedProduct,
     onProductClick
 }) {
@@ -30,6 +31,7 @@ function ProductSidebar({
     //};
     const toggleCategory = (id) => {
         setActiveCategory(id);
+        onCategoryClick?.();
     };
 
     const activeCategoryItem = categoryList.find(
@@ -140,6 +142,7 @@ function ProductSidebar({
                                 <div
                                     onClick={() => {
                                         setActiveCategory(item.id);
+                                        onCategoryClick?.();
                                     //    setOpenCategory(item.id);
                                     }}
                                     className="px-4 py-3 font-semibold cursor-pointer"
