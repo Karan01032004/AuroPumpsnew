@@ -32,6 +32,7 @@ const AddProduct = () => {
     const [productSize, setProductSize] = useState("");
     const [temperature, setTemperature] = useState("");
     const [viscosity, setViscosity] = useState("");
+    const [shaftsealing, setshaftsealing] = useState("");
     const [submergenceLength, setSubmergenceLength] = useState("");
     const [operatingFrequency, setOperatingFrequency] = useState("");
     const [material, setMaterial] = useState(""); 
@@ -97,6 +98,7 @@ const AddProduct = () => {
         setProductSize(p.productsize || "");
         setTemperature(p.temperature || "");
         setViscosity(p.viscosity || "");
+        setshaftsealing(p.shaftsealing || "");
         setSubmergenceLength(p.submergenceLength || "");
         setOperatingFrequency(p.operating_frequency || "");
         setMaterial(p.material || "");
@@ -141,6 +143,7 @@ const AddProduct = () => {
             formData.append("productsize", productSize);
             formData.append("temperature", temperature);
             formData.append("viscosity", viscosity);
+            formData.append("shaftsealing", shaftsealing);
             formData.append("SubmergenceLength", submergenceLength);
             formData.append("operating_frequency", operatingFrequency);
             formData.append("material", material);
@@ -441,6 +444,14 @@ const AddProduct = () => {
                         <input
                             value={viscosity}
                             onChange={(e) => setViscosity(e.target.value)}
+                            className="w-full rounded-lg border px-3 py-2"
+                        />
+                    </div>
+                    <div>
+                        <label className="font-medium">Shaft Sealing Options</label>
+                        <input
+                            value={shaftsealing}
+                            onChange={(e) => setshaftsealing(e.target.value)}
                             className="w-full rounded-lg border px-3 py-2"
                         />
                     </div>

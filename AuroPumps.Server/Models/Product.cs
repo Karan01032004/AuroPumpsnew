@@ -39,6 +39,7 @@ namespace Poweradmin.Server.Models
         public string? productsize { get; set; }
         public string? temperature { get; set; }
         public string? viscosity { get; set; }
+        public string? shaftsealing { get; set; }
         public string? SubmergenceLength { get; set; }
 
         public string? operating_frequency { get; set; }

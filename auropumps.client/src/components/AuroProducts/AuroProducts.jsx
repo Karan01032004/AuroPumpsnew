@@ -61,6 +61,7 @@ function AuroProducts() {
                     { label: "Suction Lift", value: data.applications },
                     { label: "Temperature", value: data.temperature },
                     { label: "Viscosity", value: data.viscosity },
+                    { label: "shaft sealing options", value: data.shaftsealing },
                     { label: "Pressure", value: data.pressure },
                     { label: "Submergence Length", value: data.submergenceLength },
                     { label: "Operating Frequency", value: data.operating_frequency },
