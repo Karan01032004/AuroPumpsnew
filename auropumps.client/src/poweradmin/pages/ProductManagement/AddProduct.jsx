@@ -32,7 +32,7 @@ const AddProduct = () => {
     const [productSize, setProductSize] = useState("");
     const [temperature, setTemperature] = useState("");
     const [viscosity, setViscosity] = useState("");
-    const [SubmergenceLength, setSubmergenceLength] = useState("");
+    const [submergenceLength, setSubmergenceLength] = useState("");
     const [operatingFrequency, setOperatingFrequency] = useState("");
     const [material, setMaterial] = useState(""); 
     const [images, setImages] = useState([]);
@@ -97,7 +97,7 @@ const AddProduct = () => {
         setProductSize(p.productsize || "");
         setTemperature(p.temperature || "");
         setViscosity(p.viscosity || "");
-        setSubmergenceLength(p.SubmergenceLength || "");
+        setSubmergenceLength(p.submergenceLength || "");
         setOperatingFrequency(p.operating_frequency || "");
         setMaterial(p.material || "");
         setSeoTitle(p.pageIETitle);
@@ -141,7 +141,7 @@ const AddProduct = () => {
             formData.append("productsize", productSize);
             formData.append("temperature", temperature);
             formData.append("viscosity", viscosity);
-            formData.append("SubmergenceLength", SubmergenceLength);
+            formData.append("SubmergenceLength", submergenceLength);
             formData.append("operating_frequency", operatingFrequency);
             formData.append("material", material);
             formData.append("PageIETitle", seoTitle);
@@ -464,7 +464,7 @@ const AddProduct = () => {
                     <div>
                         <label className="font-medium">Submergence Length</label>
                         <input
-                            value={SubmergenceLength}
+                            value={submergenceLength}
                             onChange={(e) => setSubmergenceLength(e.target.value)}
                             className="w-full rounded-lg border px-3 py-2"
                         />

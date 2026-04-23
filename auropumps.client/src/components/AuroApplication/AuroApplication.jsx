@@ -131,7 +131,7 @@ function AuroApplication() {
                     { label: "Temperature", value: data.temperature },
                     { label: "Viscosity", value: data.viscosity },
                     { label: "Pressure", value: data.pressure },
-                    { label: "Submergence Length", value: data.SubmergenceLength },
+                    { label: "Submergence Length", value: data.submergenceLength },
                     { label: "Operating Frequency", value: data.operating_frequency },
                     { label: "Material", value: data.material },
                     { label: "Details", value: data.technicalDetails }
