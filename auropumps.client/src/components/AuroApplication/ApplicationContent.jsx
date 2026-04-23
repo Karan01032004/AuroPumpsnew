@@ -10,6 +10,9 @@ function ApplicationContent({
 }) {
     if (!product) return null;
 
+    const isVideoProduct =
+        product.image && product.image.toLowerCase().endsWith(".mp4");
+
     const [currentIndex, setCurrentIndex] = useState(0);
     const [itemsPerView, setItemsPerView] = useState(3);
     const [isTransitioning, setIsTransitioning] = useState(true);
@@ -172,16 +175,27 @@ function ApplicationContent({
                 <div className="px-5 py-6 sm:px-7 lg:px-10 lg:py-8">
                     <div className="grid gap-8 xl:grid-cols-[minmax(320px,0.9fr)_minmax(0,1.3fr)]">
                         <div className="xl:sticky xl:top-28 xl:self-start">
-                            <div className="overflow-hidden rounded-xl border border-slate-200 bg-white shadow-sm">
-                                <div className="flex min-h-[320px] items-center justify-center rounded-[20px] bg-gradient-to-br from-white via-[#F7F5FF] to-[#EEF4FF] p-4">
-                                    {product.image && product.image.toLowerCase().endsWith(".mp4") ? (
-                                        <video
-                                            src={product.image}
-                                            className="w-full object-contain max-h-[520px]"
-                                            controls
-                                            autoPlay
-                                            muted
-                                            loop
+                            <div
+                                className={`overflow-hidden ${isVideoProduct
+                                        ? ""
+                                    : "rounded-xl border border-slate-200 bg-white shadow-sm"
+                                    }`}
+                            >
+                                <div
+                                    className={`flex min-h-[300px] items-center justify-center ${
+                                        isVideoProduct
+                                            ? " p-0 "
+                                        : "bg-gradient-to-br from-white via-[#F7F5FF] to-[#EEF4FF] p-4  rounded-[20px]"
+                                    }`}
+                                >
+                                        {isVideoProduct ? (
+                                            <video
+                                                src={product.image}
+                                            className="block h-full max-h-[520px] w-full bg-white object-contain rounded-xl border border-slate-200 shadow-sm"
+                                                controls
+                                                autoPlay
+                                                muted
+                                                loop
                                             playsInline
                                         >
                                             Your browser does not support the video tag.
@@ -217,19 +231,25 @@ function ApplicationContent({
                                     </div>
 
                                     <div className="divide-y divide-slate-200">
-                                        {product.specifications.map((spec, index) => (
-                                            <div
-                                                key={`${spec.label}-${index}`}
-                                                className={`grid gap-2 px-6 py-4 md:grid-cols-[220px_minmax(0,1fr)] ${index % 2 === 0 ? "bg-white" : "bg-slate-50"}`}
-                                            >
-                                                <div className="text-sm font-semibold uppercase tracking-[0.08em] text-primary">
-                                                    {spec.label}
+                                        {product.specifications.map((spec, index) => {
+                                            const isDetailsRow = spec.label === "Details";
+
+                                            return (
+                                                <div
+                                                    key={`${spec.label}-${index}`}
+                                                    className={`grid gap-2 px-6 py-4 ${isDetailsRow ? "grid-cols-1" : "md:grid-cols-[220px_minmax(0,1fr)]"} ${index % 2 === 0 ? "bg-white" : "bg-slate-50"}`}
+                                                >
+                                                    {!isDetailsRow && (
+                                                        <div className="text-sm font-semibold uppercase tracking-[0.08em] text-primary">
+                                                            {spec.label}
+                                                        </div>
+                                                    )}
+                                                    <div className="text-sm leading-7 text-slate-700 sm:text-base">
+                                                        {spec.value}
+                                                    </div>
                                                 </div>
-                                                <div className="text-sm leading-7 text-slate-700 sm:text-base">
-                                                    {spec.value}
-                                                </div>
-                                            </div>
-                                        ))}
+                                            );
+                                        })}
                                     </div>
                                 </div>
                             )}
