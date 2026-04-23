@@ -183,7 +183,7 @@ const PumpsRight = () => {
                                 >
                                     <div
                                         onClick={() => navigate(`/products/${activeCategoryObj?.slug}/${product.slug}`)}
-                                        className="bg-[#F4F3FF] rounded-xl shadow-sm p-4 hover:shadow-md transition h-full cursor-pointer flex flex-col justify-between"
+                                        className="bg-white rounded-xl shadow-sm p-4 hover:shadow-md transition h-full cursor-pointer flex flex-col justify-between"
                                     >
                                         <div className="media-wrapper w-full h-48 flex items-center justify-center overflow-hidden rounded-lg">
                                             {displayMedia ? (
@@ -212,9 +212,9 @@ const PumpsRight = () => {
                                                 </div>
                                             )}
                                         </div>
-
-                                        <h4 className="mt-4 text-sm font-semibold text-secondary text-center">
-                                            {product.name || product.title}
+                                       
+                                        <h4 className="mt-4 border-t border-gray-200 pt-2 text-sm font-semibold text-secondary text-center">
+                                            {product.name || product.title} 
                                         </h4>
                                     </div>
                                 </div>
