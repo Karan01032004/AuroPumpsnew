@@ -42,17 +42,15 @@ const Header = () => {
         )
     );
 
-    const moltenSystemCategories = categories.filter((category) =>
+    const moltenMetalSystemCategories = categories.filter((category) =>
         matchesCategoryGroup(
             category,
             (title, slug) =>
-                (title.includes("molten") || slug.includes("molten")) &&
-                !title.includes("sulphur") &&
-                !slug.includes("sulphur") &&
-                !title.includes("sulfur") &&
-                !slug.includes("sulfur") &&
-                !title.includes("dross") &&
-                !slug.includes("dross")
+                (title.includes("metal") || slug.includes("metal")) 
+                //!title.includes("metal") &&
+                //!slug.includes("metal")    
+        
+        
         )
     );
 
@@ -60,10 +58,8 @@ const Header = () => {
         matchesCategoryGroup(
             category,
             (title, slug) =>
-                title.includes("sulphur") ||
-                slug.includes("sulphur") ||
-                title.includes("sulfur") ||
-                slug.includes("sulfur")
+                title.includes("salt") ||
+                slug.includes("salt") 
         )
     );
 
@@ -90,8 +86,8 @@ const Header = () => {
         );
 
     const pumpProducts = flattenCategoryProducts(pumpCategories);
-    const moltenSystemProducts = flattenCategoryProducts(moltenSystemCategories);
-    const moltenSulphurProducts = flattenCategoryProducts(moltenSulphurCategories);
+    const moltenMetalSystemProducts = flattenCategoryProducts(moltenMetalSystemCategories);
+    const moltenSaltSystemProducts = flattenCategoryProducts(moltenSulphurCategories);
     const drossProducts = flattenCategoryProducts(drossCategories);
     const agitatorProducts = flattenCategoryProducts(agitatorCategories);
     const pumpColumns = [0, 1, 2];
@@ -305,9 +301,9 @@ const Header = () => {
                                                     <div className="col-span-2 md:col-span-3 lg:col-span-3 space-y-6">
                                                         <div>
                                                             <h4 className="mb-3 border-b border-white/20 pb-2 font-semibold">
-                                                                Molten Systems
+                                                                MOLTEN METAL SYSTEMS
                                                             </h4>
-                                                            {moltenSystemProducts.map((product) => (
+                                                            {moltenMetalSystemProducts.map((product) => (
                                                                 <NavLink
                                                                     key={product.id}
                                                                     to={`/products/${product.categorySlug}/${product.slug}`}
@@ -339,9 +335,9 @@ const Header = () => {
                                                     <div className="col-span-2 md:col-span-3 lg:col-span-3 space-y-6">
                                                         <div>
                                                             <h4 className="mb-3 border-b border-white/20 pb-2 font-semibold">
-                                                                Molten Sulphur
+                                                                MOLTEN SALT SYSTEMS
                                                             </h4>
-                                                            {moltenSulphurProducts.map((product) => (
+                                                            {moltenSaltSystemProducts.map((product) => (
                                                                 <NavLink
                                                                     key={product.id}
                                                                     to={`/products/${product.categorySlug}/${product.slug}`}
