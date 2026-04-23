@@ -214,7 +214,7 @@ const PumpsRight = () => {
                                         </div>
                                        
                                         <h4 className="mt-4 border-t border-gray-200 pt-2 text-sm font-semibold text-secondary text-center">
-                                            {product.name || product.title}
+                                            {product.name || product.title} 
                                         </h4>
                                     </div>
                                 </div>
