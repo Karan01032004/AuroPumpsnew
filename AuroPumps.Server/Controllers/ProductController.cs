@@ -1,7 +1,11 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using AuroPumps.Server.DTOs;
+using AuroPumps.Server.Models;
+using Microsoft.AspNetCore.Mvc;
 using Poweradmin.Server.Data;
 using Poweradmin.Server.DTOs;
 using Poweradmin.Server.Models;
+using System.Net;
+using System.Net.Mail;
 
 namespace Poweradmin.Server.Controllers
 {
@@ -37,74 +41,52 @@ namespace Poweradmin.Server.Controllers
 
             return Ok(products);
         }
-        #region Poweradmin
-        [HttpPost("add")]
-        public IActionResult Add(
-            [FromForm] ProductDTO dto,
-            IFormFile? image1,   
-            IFormFile image2,
-            //IFormFile image3,
-            IFormFile? catalogue
-        )
 
+
+        private string SaveFile(IFormFile file, string folder)
         {
-            try
+            var uploadPath = Path.Combine(
+                Directory.GetCurrentDirectory(),
+                "wwwroot",
+                "Webfiles",
+                folder
+            );
+
+            if (!Directory.Exists(uploadPath))
+                Directory.CreateDirectory(uploadPath);
+
+            var fileName = Guid.NewGuid() + Path.GetExtension(file.FileName);
+            var filePath = Path.Combine(uploadPath, fileName);
+
+            using (var stream = new FileStream(filePath, FileMode.Create))
             {
-                string image1Path = image1 != null ? SaveFile(image1, "products") : null;
-                string image2Path = image2 != null ? SaveFile(image2, "products") : null;
-                //string image3Path = image3 != null ? SaveFile(image3, "products") : null;
-                string cataloguePath = catalogue != null ? SaveFile(catalogue, "catalogue") : null;
-
-                //int maxOrder = _db.Product
-                //    .Select(x => (int?)x.sortorder)
-                //    .DefaultIfEmpty(0)
-                //    .Max() ?? 0;
-                int maxOrder = _db.Product.Max(x => (int?)x.sortorder) ?? 0;
-                var product = new Product
-                {
-                    title = dto.title,
-
-                    image1 = image1Path,
-                    image2 = image2Path,
-                    //image3 = image3Path,
-                    catelogue = cataloguePath,
-
-                    
-                    description = dto.description,
-                     
-
-                    Visible = dto.Visible,
-                    isFeatured = dto.isFeatured,
-                    isaddcontact = dto.isaddcontact,
-
-                    PageIETitle = dto.PageIETitle,
-                    Meta = dto.Meta,
-                    CategoryId = dto.CategoryId,
-                    Capacity = dto.Capacity,
-                    producthead = dto.producthead,
-                    productsize = dto.productsize,
-                    temperature = dto.temperature,
-                    MOC = dto.MOC,
-                    applications = dto.applications,
-                    viscosity = dto.viscosity,
-                    SubmergenceLength = dto.SubmergenceLength,
-                    operating_frequency = dto.operating_frequency,
-                    material = dto.material,
-                    sortorder = maxOrder + 1,
-                    addedDate = DateTime.Now,
-                    addedIp = HttpContext.Connection.RemoteIpAddress?.ToString()
-                };
-
-                _db.Product.Add(product);
-                _db.SaveChanges();
-
-                return Ok(new { message = "Product added successfully" });
+                file.CopyTo(stream);
             }
-            catch (Exception ex)
-            {
-                return StatusCode(500, new { message = ex.Message });
-            }
-        }   
+
+            return $"/Webfiles/{folder}/{fileName}";
+        }
+ 
+        [HttpGet("by-slug/{slug}")]
+        public IActionResult GetBySlug(string slug)
+        {
+            var product = _db.Product
+                .Where(x => x.title.ToLower().Replace(" ", "-") == slug)
+                .Select(x => new {
+                    x.id,
+                    x.title,
+                    image2 = x.image2 ?? "",
+                    x.description,
+                    productSlug = x.title.Replace(" ", "-").ToLower()
+                })
+                .FirstOrDefault();
+
+            if (product == null)
+                return NotFound();
+
+            return Ok(product);
+        }
+
+        
         [HttpGet("list")]
         public IActionResult List()
         {
@@ -167,6 +149,8 @@ namespace Poweradmin.Server.Controllers
                     temperature = x.temperature ?? "",
                     viscosity = x.viscosity ?? "",
                     MOC = x.MOC ?? "",
+                    pressure = x.pressure ?? "",
+                    technicalDetails = x.technicalDetails ?? "",
                     applications = x.applications ?? "",
                     SubmergenceLength = x.SubmergenceLength ?? "",
                     operating_frequency = x.operating_frequency ?? "",
@@ -186,8 +170,207 @@ namespace Poweradmin.Server.Controllers
                 return NotFound(new { message = "Product not found" });
 
             return Ok(product);
-        } 
- 
+        }
+
+        [HttpPost("send-pdf")]
+        public async Task<IActionResult> SendPdf([FromBody] PdfRequestDTO dto)
+        {
+            var product = _db.Product.FirstOrDefault(x => x.id == dto.ProductId);
+
+            if (product == null)
+                return BadRequest("Invalid product");
+
+            // ✅ SAVE TO DB
+            var request = new ProductPdfRequest
+            {
+                ProductId = dto.ProductId,
+                Name = dto.Name,
+                Email = dto.Email,
+                Phone = dto.Phone,
+                CompanyName = dto.CompanyName,
+                Message = dto.Message
+            };
+
+            _db.ProductPdfRequests.Add(request);
+            //await _db.SaveChangesAsync();
+            try
+            {
+                await _db.SaveChangesAsync();
+            }
+            catch (Exception ex)
+            {
+                // Yahan mouse le jao 'ex' par aur InnerException check karo
+                var msg = ex.InnerException?.Message ?? ex.Message;
+                return BadRequest(msg);
+            }
+            // ✅ SEND EMAIL
+            var pdfPath = Path.Combine(
+                Directory.GetCurrentDirectory(),
+                "wwwroot",
+                product.catelogue.TrimStart('/')
+            );
+
+            if (!System.IO.File.Exists(pdfPath))
+                return BadRequest("PDF not found");
+
+            var bytes = await System.IO.File.ReadAllBytesAsync(pdfPath);
+
+            using (var smtp = new SmtpClient("smtp.gmail.com", 587))
+            {
+                smtp.Credentials = new NetworkCredential("karanvaghasiya786@gmail.com", "qofz noqg qrtt zali");
+                smtp.EnableSsl = true;
+
+                var mail = new MailMessage();
+                mail.From = new MailAddress("karanvaghasiya786@gmail.com");
+                mail.To.Add(dto.Email);
+                mail.Subject = "Product PDF";
+
+                mail.Body = $"Hello {dto.Name},\n\nPlease find attached PDF.";
+
+                mail.Attachments.Add(new Attachment(new MemoryStream(bytes), "Product.pdf"));
+
+                await smtp.SendMailAsync(mail);
+            }
+
+            return Ok(new { message = "Email sent successfully" });
+        }
+        [HttpGet("pdf-inquiry")]
+        public IActionResult GetPdfInquiry()
+        {
+            var data = _db.ProductPdfRequests
+                .OrderByDescending(x => x.Id)
+                .Select(x => new
+                {
+                    id = x.Id,
+                    name = x.Name,
+                    email = x.Email,
+                    phone = x.Phone,
+                    companyName = x.CompanyName,
+                    message = x.Message,
+                    addedDate = x.CreatedAt,
+                    productId = x.ProductId,
+                    productName = _db.Product
+                        .Where(p => p.id == x.ProductId)
+                        .Select(p => p.title)
+                        .FirstOrDefault()
+                })
+                .ToList();
+
+            return Ok(data);
+        }
+
+        [HttpGet("pdf-inquiry/{id}")]
+        public IActionResult GetPdfInquiryById(int id)
+        {
+            var data = _db.ProductPdfRequests
+                .Where(x => x.Id == id)
+                .Select(x => new
+                {
+                    id = x.Id,
+                    name = x.Name,
+                    email = x.Email,
+                    phone = x.Phone,
+                    companyName = x.CompanyName,
+                    message = x.Message,
+                    addedDate = x.CreatedAt,
+                    productId = x.ProductId,
+                    productName = _db.Product
+                        .Where(p => p.id == x.ProductId)
+                        .Select(p => p.title)
+                        .FirstOrDefault()
+                })
+                .FirstOrDefault();
+
+            if (data == null)
+                return NotFound();
+
+            return Ok(data);
+        }
+
+        [HttpDelete("pdf-inquiry-delete/{id}")]
+        public IActionResult DeletePdfInquiry(int id)
+        {
+            var data = _db.ProductPdfRequests.FirstOrDefault(x => x.Id == id);
+
+            if (data == null)
+                return NotFound();
+
+            _db.ProductPdfRequests.Remove(data);
+            _db.SaveChanges();
+
+            return Ok(new { message = "Deleted successfully" });
+        }
+        [HttpPost("add")]
+        public IActionResult Add(
+            [FromForm] ProductDTO dto,
+            IFormFile? image1,
+            IFormFile image2,
+            //IFormFile image3,
+            IFormFile? catalogue
+        )
+
+        {
+            try
+            {
+                string image1Path = image1 != null ? SaveFile(image1, "products") : null;
+                string image2Path = image2 != null ? SaveFile(image2, "products") : null;
+                //string image3Path = image3 != null ? SaveFile(image3, "products") : null;
+                string cataloguePath = catalogue != null ? SaveFile(catalogue, "catalogue") : null;
+
+                //int maxOrder = _db.Product
+                //    .Select(x => (int?)x.sortorder)
+                //    .DefaultIfEmpty(0)
+                //    .Max() ?? 0;
+                int maxOrder = _db.Product.Max(x => (int?)x.sortorder) ?? 0;
+                var product = new Product
+                {
+                    title = dto.title,
+
+                    image1 = image1Path,
+                    image2 = image2Path,
+                    //image3 = image3Path,
+                    catelogue = cataloguePath,
+
+
+                    description = dto.description,
+
+
+                    Visible = dto.Visible,
+                    isFeatured = dto.isFeatured,
+                    isaddcontact = dto.isaddcontact,
+
+                    PageIETitle = dto.PageIETitle,
+                    Meta = dto.Meta,
+                    CategoryId = dto.CategoryId,
+                    Capacity = dto.Capacity,
+                    producthead = dto.producthead,
+                    productsize = dto.productsize,
+                    temperature = dto.temperature,
+                    MOC = dto.MOC,
+                    technicalDetails = dto.technicalDetails,
+                    pressure = dto.pressure,
+                    applications = dto.applications,
+                    viscosity = dto.viscosity,
+                    SubmergenceLength = dto.SubmergenceLength,
+                    operating_frequency = dto.operating_frequency,
+                    material = dto.material,
+                    sortorder = maxOrder + 1,
+                    addedDate = DateTime.Now,
+                    addedIp = HttpContext.Connection.RemoteIpAddress?.ToString()
+                };
+
+                _db.Product.Add(product);
+                _db.SaveChanges();
+
+                return Ok(new { message = "Product added successfully" });
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, new { message = ex.Message });
+            }
+        }
+
+
         [HttpPut("edit/{id}")]
         public IActionResult Update(
             int id,
@@ -212,6 +395,8 @@ namespace Poweradmin.Server.Controllers
                 product.temperature = dto.temperature;
                 product.viscosity = dto.viscosity;
                 product.MOC = dto.MOC;
+                product.technicalDetails = dto.technicalDetails;
+                product.pressure = dto.pressure;
                 product.applications = dto.applications;
                 product.SubmergenceLength = dto.SubmergenceLength;
                 product.operating_frequency = dto.operating_frequency;
@@ -256,49 +441,7 @@ namespace Poweradmin.Server.Controllers
 
             return Ok(new { message = "Product deleted successfully" });
         }
-        private string SaveFile(IFormFile file, string folder)
-        {
-            var uploadPath = Path.Combine(
-                Directory.GetCurrentDirectory(),
-                "wwwroot",
-                "Webfiles",
-                folder
-            );
-
-            if (!Directory.Exists(uploadPath))
-                Directory.CreateDirectory(uploadPath);
-
-            var fileName = Guid.NewGuid() + Path.GetExtension(file.FileName);
-            var filePath = Path.Combine(uploadPath, fileName);
-
-            using (var stream = new FileStream(filePath, FileMode.Create))
-            {
-                file.CopyTo(stream);
-            }
-
-            return $"/Webfiles/{folder}/{fileName}";
-        }
-        #endregion
-
-        [HttpGet("by-slug/{slug}")]
-        public IActionResult GetBySlug(string slug)
-        {
-            var product = _db.Product
-                .Where(x => x.title.ToLower().Replace(" ", "-") == slug)
-                .Select(x => new {
-                    x.id,
-                    x.title,
-                    image2 = x.image2 ?? "",
-                    x.description,
-                    productSlug = x.title.Replace(" ", "-").ToLower()
-                })
-                .FirstOrDefault();
-
-            if (product == null)
-                return NotFound();
-
-            return Ok(product);
-        }
+    
 
     }
 }

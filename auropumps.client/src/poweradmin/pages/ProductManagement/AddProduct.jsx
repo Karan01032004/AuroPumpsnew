@@ -22,6 +22,7 @@ const AddProduct = () => {
     const [description, setDescription] = useState("");
     const [technicalDetails, setTechnicalDetails] = useState("");
     const [moc, setMoc] = useState("");
+    const [pressure, setPressure] = useState("");
     const [applications, setApplications] = useState("");
     const [pendingCategoryId, setPendingCategoryId] = useState("");
     const [seoTitle, setSeoTitle] = useState("");
@@ -89,6 +90,7 @@ const AddProduct = () => {
         setDescription(p.description);
         setTechnicalDetails(p.technicalDetails);
         setMoc(p.moc);
+        setPressure(p.pressure);
         setApplications(p.applications);
         setCapacity(p.capacity || "");
         setProductHead(p.producthead || "");
@@ -132,6 +134,7 @@ const AddProduct = () => {
             formData.append("description", description);
             formData.append("technicalDetails", technicalDetails);
             formData.append("MOC", moc);
+            formData.append("pressure", pressure);
             formData.append("applications", applications);
             formData.append("Capacity", capacity);
             formData.append("producthead", productHead);
@@ -466,6 +469,23 @@ const AddProduct = () => {
                             className="w-full rounded-lg border px-3 py-2"
                         />
                     </div> 
+                    
+                    <div>
+                        <label className="font-medium">Solid Size</label>
+                        <input
+                            value={moc}
+                            onChange={(e) => setMoc(e.target.value)}
+                            className="w-full rounded-lg border px-3 py-2"
+                        />
+                    </div>
+                    <div>
+                        <label className="font-medium">Pressure</label>
+                        <input
+                            value={pressure}
+                            onChange={(e) => setPressure(e.target.value)}
+                            className="w-full rounded-lg border px-3 py-2"
+                        />
+                    </div>
                     <div>
                         <label className="font-medium">Material</label>
                         <textarea
@@ -476,10 +496,11 @@ const AddProduct = () => {
                         />
                     </div>
                     <div>
-                        <label className="font-medium">Solid Size</label>
-                        <input
-                            value={moc}
-                            onChange={(e) => setMoc(e.target.value)}
+                        <label className="font-medium">Technical Details</label>
+                        <textarea
+                            value={technicalDetails}
+                            rows={3}
+                            onChange={(e) => setTechnicalDetails(e.target.value)}
                             className="w-full rounded-lg border px-3 py-2"
                         />
                     </div>

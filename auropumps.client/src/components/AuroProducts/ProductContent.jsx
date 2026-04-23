@@ -1,6 +1,8 @@
 import { useState } from "react";
 import { IMAGE_BASE_URL } from "../../poweradmin/api/axios";
 import { FiDownload } from "react-icons/fi";
+import api from "../../poweradmin/api/axios";
+import { toast } from "react-hot-toast";
 
 function ProductContent({ product, categoryTitle }) {
     const [isPdfModalOpen, setIsPdfModalOpen] = useState(false);
@@ -18,11 +20,7 @@ function ProductContent({ product, categoryTitle }) {
     );
 
     const pdfUrl = product.pdf ? `${IMAGE_BASE_URL}${product.pdf}` : "";
-
-    const openPdfModal = () => {
-        setIsPdfModalOpen(true);
-    };
-
+     
     const closePdfModal = () => {
         setIsPdfModalOpen(false);
     };
@@ -34,21 +32,44 @@ function ProductContent({ product, categoryTitle }) {
             [name]: value,
         }));
     };
-
-    const handlePdfSubmit = (event) => {
+    const nameRegex = /^[A-Za-z\s]+$/; // only letters + space
+    const phoneRegex = /^[0-9]{1,15}$/; // max 15 digits
+ 
+    const handleDownloadClick = () => {
+        if (product.isFeatured) {
+            setIsPdfModalOpen(true); // form open
+        } else {
+            if (pdfUrl) {
+                window.open(pdfUrl, "_blank");
+            }
+        }
+    };
+    const handlePdfSubmit = async (event) => {
         event.preventDefault();
 
-        if (pdfUrl) {
-            window.open(pdfUrl, "_blank", "noopener,noreferrer");
-        }
+        try {
 
-        setIsPdfModalOpen(false);
-        setPdfFormData({
-            name: "",
-            email: "",
-            phone: "",
-            message: "",
-        });
+            toast.success("PDF will be sent to your email!");
+
+            setIsPdfModalOpen(false);
+            setPdfFormData({
+                name: "",
+                email: "",
+                phone: "",
+                message: "",
+                companyname: ""
+            });
+            const res = await api.post("/product/send-pdf", {
+                ...pdfFormData,
+                productId: product.id
+            });
+
+             
+
+        } catch (err) {
+            console.error(err);
+            alert("Something went wrong");
+        }
     };
 
     return (
@@ -65,19 +86,13 @@ function ProductContent({ product, categoryTitle }) {
                             {categoryTitle}
                         </span>
                     </div>
-                </div>
-
-                {/*<div className="grid gap-6 lg:grid-cols-[1fr_1.25fr] lg:items-start">*/}
-                {/*    <div className="overflow-hidden rounded-2xl border border-primary/10 bg-white p-2">*/}
+                </div> 
                 <div className="block"> {/* Grid hata kar 'block' kar diya */}
 
                     {/* Image/Video Container */}
                     <div className="overflow-hidden rounded-2xl border border-primary/10 bg-white p-2 
                     lg:float-left lg:w-[45%] lg:mr-6 mb-5">
-                        {/*<img*/}
-                        {/*    src={`${IMAGE_BASE_URL}${product.image}`}*/}
-                        {/*    alt={product.name}*/}
-                        {/*    className="h-full w-full rounded-xl object-cover"*/}
+                        
                         {product.image && product.image.toLowerCase().endsWith(".mp4") ? (
                             <video
                                 src={`${IMAGE_BASE_URL}${product.image}`}
@@ -104,7 +119,7 @@ function ProductContent({ product, categoryTitle }) {
                         {product.pdf && (
                             <button
                                 type="button"
-                                onClick={openPdfModal}
+                                onClick={handleDownloadClick}
                                 className="mb-5 inline-flex items-center gap-2 rounded-full border border-primary/25 bg-primary/5 px-4 py-2 text-xs font-semibold tracking-[0.08em] text-primary uppercase transition hover:bg-primary hover:text-white"
                             >
                                 <FiDownload className="h-4 w-4" />
@@ -181,8 +196,15 @@ function ProductContent({ product, categoryTitle }) {
                                     <input
                                         type="text"
                                         name="name"
+                                         
+                                        maxLength="50"
                                         value={pdfFormData.name}
                                         onChange={handlePdfFormChange}
+                                        onKeyPress={(e) => {
+                                            if (!/[a-zA-Z\s]/.test(e.key)) {
+                                                e.preventDefault();
+                                            }
+                                        }}
                                         placeholder="Enter your name"
                                         required
                                         className="w-full rounded-sm border border-slate-200 px-4 py-3 text-sm outline-none transition focus:border-primary"
@@ -225,6 +247,16 @@ function ProductContent({ product, categoryTitle }) {
                                         name="phone"
                                         value={pdfFormData.phone}
                                         onChange={handlePdfFormChange}
+                                        onKeyPress={(e) => {
+                                            if (!/[0-9]/.test(e.key)) {
+                                                e.preventDefault();
+                                            }
+                                        }}
+
+                                        onInput={(e) => {
+                                            e.target.value = e.target.value.replace(/\D/g, '').slice(0, 15);
+                                        }}
+
                                         placeholder="Enter your phone number"
                                         required
                                         className="w-full rounded-sm border border-slate-200 px-4 py-3 text-sm outline-none transition focus:border-primary"
@@ -238,11 +270,17 @@ function ProductContent({ product, categoryTitle }) {
                                 </label>
                                 <input
                                     type="text"
-                                    name="name"
+                                    name="companyname"
                                     value={pdfFormData.companyname}
                                     onChange={handlePdfFormChange}
+                                    onKeyPress={(e) => {
+                                        if (!/[a-zA-Z\s]/.test(e.key)) {
+                                            e.preventDefault();
+                                        }
+                                    }}
+                                    maxLength="30"
                                     placeholder="Enter your company name"
-                                    required
+                                    
                                     className="w-full rounded-sm border border-slate-200 px-4 py-3 text-sm outline-none transition focus:border-primary"
                                 />
                             </div>
@@ -254,6 +292,11 @@ function ProductContent({ product, categoryTitle }) {
                                     name="message"
                                     value={pdfFormData.message}
                                     onChange={handlePdfFormChange}
+                                    onKeyPress={(e) => {
+                                        if (!/[a-zA-Z0-9\s]/.test(e.key)) {
+                                            e.preventDefault();
+                                        }
+                                    }}
                                     placeholder="Enter your message"
                                     rows="4"
                                     className="w-full rounded-sm border border-slate-200 px-4 py-3 text-sm outline-none transition focus:border-primary"

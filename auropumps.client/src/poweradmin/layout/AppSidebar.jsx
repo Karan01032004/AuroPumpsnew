@@ -386,6 +386,7 @@ const AppSidebar = ({ open, collapsed, onClose }) => {
                     {[
                         { to: "/poweradmin/page-content", label: "Page Content", Icon: RiFileEditLine },
                         { to: "/poweradmin/inquiry", label: "Inquiry Managements", Icon: FaWpforms },
+                        { to: "/poweradmin/pdf-inquiry", label: "Products PDF Inquiry", Icon: FaWpforms },
                     ].map((item) => {
                         const { Icon } = item; // ✅ THIS LINE
 

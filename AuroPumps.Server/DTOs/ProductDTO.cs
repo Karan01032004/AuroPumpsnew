@@ -18,6 +18,7 @@ namespace Poweradmin.Server.DTOs
         public string? description { get; set; }
         public string? MOC { get; set; }
         public string? applications { get; set; }
+        public string? pressure { get; set; }
         public string? Capacity { get; set; }
         public string? producthead { get; set; }
         public string? productsize { get; set; }

@@ -12,7 +12,8 @@ namespace Poweradmin.Server.Models
         public string? image1 { get; set; }
         public string image2 { get; set; }
         //public string image3 { get; set; } 
-        //public string technicalDetails { get; set; }
+        public string? technicalDetails { get; set; }
+        public string? pressure { get; set; }
         public string description { get; set; }
          public string? MOC { get; set; }
         public string? applications { get; set; }

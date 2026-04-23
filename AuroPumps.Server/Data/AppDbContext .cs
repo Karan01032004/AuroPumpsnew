@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using AuroPumps.Server.Models;
+using Microsoft.EntityFrameworkCore;
 using Poweradmin.Server.Models;
 
 namespace Poweradmin.Server.Data
@@ -17,5 +18,6 @@ namespace Poweradmin.Server.Data
         public DbSet<PageContent> pagecontent { get; set; }
         public DbSet<ProductsCategory> ProductsCategory { get; set; }
         public DbSet<Application> Application { get; set; }
+        public DbSet<ProductPdfRequest> ProductPdfRequests { get; set; }
     }
 }

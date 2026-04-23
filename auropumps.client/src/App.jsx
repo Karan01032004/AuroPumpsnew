@@ -21,6 +21,8 @@ import BannerManagement from "./poweradmin/pages/BannerManagemnet/BannerManageme
 import BannerForm from "./poweradmin/pages/BannerManagemnet/BannerForm";
 import BannerTable from "./poweradmin/pages/BannerManagemnet/BannerTable";
 import InquiryTable from "./poweradmin/pages/InquiryManagement/InquiryTable";
+import PdfInquiryTable from "./poweradmin/pages/InquiryManagement/PdfInquiryTable";
+ 
 import PageContentTable from "./poweradmin/pages/PageContent/PageContentTable";
 import PageDetailsForm from "./poweradmin/pages/PageContent/PageDetailsForm";
 import AddProduct from "./poweradmin/pages/ProductManagement/AddProduct";
@@ -40,6 +42,7 @@ import InquiryDetails from "./poweradmin/pages/InquiryManagement/InquiryDetails"
 import AddProductCategory from "./poweradmin/pages/ProductManagement/AddCategory";
 import ViewProductCategory from "./poweradmin/pages/ProductManagement/ViewCategory";
 import ClientsPage from "./pages/ClientsPage/ClientsPage";
+import PdfInquiryDetails from "./poweradmin/pages/InquiryManagement/PdfInquiryDetails";
 
 function App() {
     const [showLoader, setShowLoader] = useState(true);
@@ -152,6 +155,7 @@ function App() {
                         >
                             <Route path="dashboard" element={<Dashboard />} />
                             <Route path="inquiry" element={<InquiryTable />} />
+                            <Route path="pdf-inquiry" element={<PdfInquiryTable />} />
                             <Route path="page-content" element={<PageContentTable />} />
                             <Route path="add-product" element={<AddProduct />} />
                             <Route path="add-application" element={<AddApplication />} />
@@ -163,6 +167,7 @@ function App() {
                             <Route path="Viewimagegallery" element={<Viewimagegallery />} />
                             <Route path="view-category" element={<ViewCategory />} />
                             <Route path="view-inquiry/:id" element={<InquiryDetails />} />
+                            <Route path="view-pdfinquiry/:id" element={<PdfInquiryDetails />} />
                             <Route path="edit-category/:id" element={<AddCategory />} />
                             <Route path="edit-image-gallery/:id" element={<AddImageGallery />} />
                             <Route path="edit-product/:id" element={<AddProduct />} />

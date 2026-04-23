@@ -51,6 +51,7 @@ function AuroProducts() {
                 image: data.image1 ? data.image1 : data.image2,
                 //image: data.image1,
                 pdf: data.catelogue,
+                isFeatured: data.isFeatured,
                 description: data.description,
                 specifications: [
                     { label: "Capacity", value: data.capacity },
@@ -60,9 +61,11 @@ function AuroProducts() {
                     { label: "Suction Lift", value: data.applications },
                     { label: "Temperature", value: data.temperature },
                     { label: "Viscosity", value: data.viscosity },
+                    { label: "Pressure", value: data.pressure },
                     { label: "Submergence Length", value: data.SubmergenceLength },
                     { label: "Operating Frequency", value: data.operating_frequency },
-                    { label: "Material", value: data.material }
+                    { label: "Material", value: data.material },
+                    { label: "", value: data.technicalDetails }
                 ]
             });
         } catch (err) { console.error(err); }
@@ -182,7 +185,7 @@ function AuroProducts() {
                     products={products}
                     activeCategory={activeCategory}
                     setActiveCategory={setActiveCategory}
-                    onCategoryClick={scrollToContent}
+                    onCategoryClick={scrollToContent}       
                     selectedProduct={selectedProduct}
                     onProductClick={fetchProductDetails}
                 />
