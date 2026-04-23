@@ -1,0 +1,163 @@
+.app-data-table-shell.table-theme-light .dt-container table.dataTable.app-data-table,
+.app-data-table-shell.table-theme-light .app-data-table.dataTable {
+    color: rgb(17 24 39) !important;
+    border-color: rgb(229 231 235);
+}
+
+.app-data-table-shell.table-theme-light .dt-container table.dataTable.app-data-table thead th,
+.app-data-table-shell.table-theme-light .dt-container table.dataTable.app-data-table thead td,
+.app-data-table-shell.table-theme-light .app-data-table.dataTable thead th {
+    color: rgb(31 41 55) !important;
+    font-weight: 700;
+    border-bottom: 1px solid rgba(156, 163, 175, 0.55) !important;
+}
+
+.app-data-table-shell.table-theme-light .dt-container table.dataTable.app-data-table tbody th,
+.app-data-table-shell.table-theme-light .dt-container table.dataTable.app-data-table tbody td,
+.app-data-table-shell.table-theme-light .app-data-table.dataTable tbody td {
+    color: rgb(55 65 81) !important;
+    border-top: 1px solid rgba(209, 213, 219, 0.95) !important;
+    background: transparent !important;
+    box-shadow: none !important;
+}
+
+.app-data-table-shell.table-theme-light .app-data-table.dataTable.stripe tbody tr:nth-child(odd) > *,
+.app-data-table-shell.table-theme-light .app-data-table.dataTable.display tbody tr:nth-child(odd) > * {
+    background-color: rgba(248, 250, 252, 0.95) !important;
+    box-shadow: none !important;
+}
+
+.app-data-table-shell.table-theme-light .app-data-table.dataTable.hover tbody tr:hover > *,
+.app-data-table-shell.table-theme-light .app-data-table.dataTable.display tbody tr:hover > * {
+    background-color: rgba(241, 245, 249, 1) !important;
+    box-shadow: none !important;
+}
+
+.app-data-table-shell.table-theme-light .dt-container .dt-length,
+.app-data-table-shell.table-theme-light .dt-container .dt-search,
+.app-data-table-shell.table-theme-light .dt-container .dt-info,
+.app-data-table-shell.table-theme-light .dt-container .dt-paging,
+.app-data-table-shell.table-theme-light .dt-container .dt-length label,
+.app-data-table-shell.table-theme-light .dt-container .dt-search label {
+    color: rgb(100 116 139) !important;
+}
+
+.app-data-table-shell.table-theme-light .app-data-table-select,
+.app-data-table-shell.table-theme-light .app-data-table-search,
+.app-data-table-shell.table-theme-light .dt-container .dt-search input,
+.app-data-table-shell.table-theme-light .dt-container .dt-length select {
+    color: rgb(31 41 55) !important;
+    background-color: rgb(255 255 255) !important;
+    border: 1px solid rgb(203 213 225) !important;
+}
+
+.app-data-table-shell.table-theme-light .app-data-table-search::placeholder,
+.app-data-table-shell.table-theme-light .dt-container .dt-search input::placeholder {
+    color: rgb(148 163 184) !important;
+}
+
+.app-data-table-shell.table-theme-light .dt-container .dt-paging .dt-paging-button {
+    color: rgb(71 85 105) !important;
+    border: 1px solid transparent;
+    border-radius: 0.75rem;
+}
+
+.app-data-table-shell.table-theme-light .dt-container .dt-paging .dt-paging-button:hover {
+    background: rgb(241 245 249) !important;
+    border-color: rgb(226 232 240) !important;
+    color: rgb(15 23 42) !important;
+}
+
+.app-data-table-shell.table-theme-light .dt-container .dt-paging .dt-paging-button.current,
+.app-data-table-shell.table-theme-light .dt-container .dt-paging .dt-paging-button.current:hover {
+    background: rgb(219 234 254) !important;
+    border-color: rgb(147 197 253) !important;
+    color: rgb(30 64 175) !important;
+}
+
+.app-data-table-shell.table-theme-dark .dt-container table.dataTable.app-data-table,
+.app-data-table-shell.table-theme-dark .app-data-table.dataTable {
+    color: rgb(226 232 240) !important;
+    border-color: rgba(71, 85, 105, 0.65);
+}
+
+.app-data-table-shell.table-theme-dark .dt-container table.dataTable.app-data-table thead th,
+.app-data-table-shell.table-theme-dark .dt-container table.dataTable.app-data-table thead td,
+.app-data-table-shell.table-theme-dark .app-data-table.dataTable thead th {
+    color: rgb(241 245 249) !important;
+    font-weight: 700;
+    border-bottom: 1px solid rgba(71, 85, 105, 0.85) !important;
+}
+
+.app-data-table-shell.table-theme-dark .dt-container table.dataTable.app-data-table tbody th,
+.app-data-table-shell.table-theme-dark .dt-container table.dataTable.app-data-table tbody td,
+.app-data-table-shell.table-theme-dark .app-data-table.dataTable tbody td {
+    color: rgb(226 232 240) !important;
+    border-top: 1px solid rgba(51, 65, 85, 0.85) !important;
+    background: transparent !important;
+    box-shadow: none !important;
+}
+
+.app-data-table-shell.table-theme-dark .app-data-table.dataTable.stripe tbody tr:nth-child(odd) > *,
+.app-data-table-shell.table-theme-dark .app-data-table.dataTable.display tbody tr:nth-child(odd) > * {
+    background-color: rgba(255, 255, 255, 0.02) !important;
+    box-shadow: none !important;
+}
+
+.app-data-table-shell.table-theme-dark .app-data-table.dataTable.stripe tbody tr:nth-child(even) > *,
+.app-data-table-shell.table-theme-dark .app-data-table.dataTable.display tbody tr:nth-child(even) > * {
+    background-color: transparent !important;
+    box-shadow: none !important;
+}
+
+.app-data-table-shell.table-theme-dark .app-data-table.dataTable.hover tbody tr:hover > *,
+.app-data-table-shell.table-theme-dark .app-data-table.dataTable.display tbody tr:hover > * {
+    background-color: rgba(59, 130, 246, 0.08) !important;
+    box-shadow: none !important;
+}
+
+.app-data-table-shell.table-theme-dark .dt-container .dt-length,
+.app-data-table-shell.table-theme-dark .dt-container .dt-search,
+.app-data-table-shell.table-theme-dark .dt-container .dt-info,
+.app-data-table-shell.table-theme-dark .dt-container .dt-paging,
+.app-data-table-shell.table-theme-dark .dt-container .dt-search label,
+.app-data-table-shell.table-theme-dark .dt-container .dt-length label {
+    color: rgb(203 213 225) !important;
+}
+
+.app-data-table-shell.table-theme-dark .app-data-table-select,
+.app-data-table-shell.table-theme-dark .app-data-table-search,
+.app-data-table-shell.table-theme-dark .dt-container .dt-search input,
+.app-data-table-shell.table-theme-dark .dt-container .dt-length select {
+    color: rgb(241 245 249) !important;
+    background-color: rgba(15, 23, 42, 0.8) !important;
+    border: 1px solid rgba(71, 85, 105, 0.9) !important;
+}
+
+.app-data-table-shell.table-theme-dark .app-data-table-search::placeholder,
+.app-data-table-shell.table-theme-dark .dt-container .dt-search input::placeholder {
+    color: rgb(148 163 184) !important;
+}
+
+.app-data-table-shell.table-theme-dark .dt-container .dt-paging .dt-paging-button {
+    color: rgb(203 213 225) !important;
+    border: 1px solid transparent;
+    border-radius: 0.75rem;
+}
+
+.app-data-table-shell.table-theme-dark .dt-container .dt-paging .dt-paging-button:hover {
+    background: rgba(255, 255, 255, 0.06) !important;
+    border-color: rgba(71, 85, 105, 0.85) !important;
+    color: rgb(248 250 252) !important;
+}
+
+.app-data-table-shell.table-theme-dark .dt-container .dt-paging .dt-paging-button.current,
+.app-data-table-shell.table-theme-dark .dt-container .dt-paging .dt-paging-button.current:hover {
+    background: rgba(59, 130, 246, 0.18) !important;
+    border-color: rgba(96, 165, 250, 0.5) !important;
+    color: rgb(191 219 254) !important;
+}
+
+.app-data-table-shell.table-theme-dark .dt-container .dt-paging .dt-paging-button.disabled {
+    color: rgb(100 116 139) !important;
+}

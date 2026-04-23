@@ -57,7 +57,7 @@ const AppSidebar = ({ open, collapsed, onClose }) => {
                     >
                         
                         <img
-                            src={`${import.meta.env.BASE_URL}/assets/images/auro-pumps-logo.png`}
+                            src={`${import.meta.env.BASE_URL}/assets/images/auropumps-loader-logo.png`}
                             alt="Logo Icon"
                             className={`
             h-11 w-12 transition-all
