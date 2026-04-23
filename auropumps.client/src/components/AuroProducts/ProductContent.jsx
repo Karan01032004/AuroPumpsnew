@@ -146,15 +146,18 @@ function ProductContent({ product, categoryTitle }) {
                             {specifications.map((spec, index) => (
                                 <div
                                     key={index}
-                                    className={`grid grid-cols-1 items-start gap-2 px-4 py-3 md:grid-cols-[1.1fr_1.9fr] md:items-center lg:px-5 ${
-                                        index % 2 === 0 ? "bg-primary text-white" : "bg-[#f3f1ff] text-gray-700"
-                                    }`}
+                                    className={`grid items-start gap-2 px-4 py-3 lg:px-5 ${spec.label
+                                            ? "grid-cols-1 md:grid-cols-[1.1fr_1.9fr] md:items-center"
+                                            : "grid-cols-1"
+                                        } ${index % 2 === 0 ? "bg-primary text-white" : "bg-[#f3f1ff] text-gray-700"
+                                        }`}
                                 >
-                                    <div className="text-sm font-semibold uppercase tracking-wide md:text-base">
-                                        {spec.label}
-                                    </div>
-
-                                    <div className="text-sm leading-relaxed md:text-base">
+                                    {spec.label && (
+                                        <div className="text-sm font-semibold uppercase tracking-wide md:text-base">
+                                            {spec.label}
+                                        </div>
+                                    )}
+                                    <div className={`text-sm leading-relaxed md:text-base ${!spec.label ? "col-span-full" : ""}`}>
                                         {spec.value}
                                     </div>
                                 </div>
@@ -224,6 +227,9 @@ function ProductContent({ product, categoryTitle }) {
                                         required
                                         className="w-full rounded-sm border border-slate-200 px-4 py-3 text-sm outline-none transition focus:border-primary"
                                     />
+                                    <p className="mt-2 text-xs text-slate-500">
+                                        *You'll get the PDF at the email you provide here.
+                                    </p>
                                 </div>
 
                                 <div>
