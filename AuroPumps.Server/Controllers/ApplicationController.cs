@@ -102,7 +102,12 @@ namespace AuroPumps.Server.Controllers
                     x.image6,
                     x.image7,
                     x.image8,
-                    slug = x.title.Replace("&", "-").Replace(" ", "-").ToLower()
+                    slug = System.Text.RegularExpressions.Regex.Replace(
+                x.title.Replace("&", "").ToLower(),
+                @"[^a-z0-9]+",
+                "-"
+            ).Trim('-')
+                    //slug = x.title.Replace("&", "").Replace(" ", "-").ToLower()
                 })
                 .ToList();
 

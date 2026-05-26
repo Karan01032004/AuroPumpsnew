@@ -218,15 +218,89 @@ namespace Poweradmin.Server.Controllers
 
             using (var smtp = new SmtpClient("smtp.gmail.com", 587))
             {
-                smtp.Credentials = new NetworkCredential("karanvaghasiya786@gmail.com", "qofz noqg qrtt zali");
+                smtp.Credentials = new NetworkCredential("sales.palej@auropumps.com", "mdig soep resa oebr");
                 smtp.EnableSsl = true;
 
                 var mail = new MailMessage();
-                mail.From = new MailAddress("karanvaghasiya786@gmail.com");
+                mail.From = new MailAddress("sales.palej@auropumps.com");
                 mail.To.Add(dto.Email);
                 mail.Subject = "Product PDF";
+                mail.IsBodyHtml = true;
+                mail.Body = $@"
+<html>
+<head>
+    <style>
+        body {{
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }}
+        .container {{
+            max-width: 600px;
+            margin: auto;
+            background: #ffffff;
+            padding: 20px;
+            border-radius: 8px;
+        }}
+        .header {{
+            background: #2c7a7b;
+            color: #ffffff;
+            padding: 15px;
+            text-align: center;
+            border-radius: 8px 8px 0 0;
+        }}
+        .content {{
+            padding: 20px;
+            color: #333;
+        }}
+        .footer {{
+            font-size: 12px;
+            color: #777;
+            text-align: center;
+            padding-top: 20px;
+        }}
+        .btn {{
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #2c7a7b;
+            color: #ffffff !important;
+            text-decoration: none;
+            border-radius: 5px;
+            margin-top: 10px;
+        }}
+    </style>
+</head>
+<body>
+    <div class='container'>
+        
+        <div class='header'>
+            <h2>Auro Pumps</h2>
+        </div>
 
-                mail.Body = $"Hello {dto.Name},\n\nPlease find attached PDF.";
+        <div class='content'>
+            <p>Dear <strong>{dto.Name}</strong>,</p>
+
+            <p>Thank you for your interest in our product.</p>
+
+            <p>Please find the requested product catalogue attached to this email.</p>
+
+            <p>If you have any questions or need further assistance, feel free to contact us.</p>
+
+            <p>Best Regards,<br/>
+            <strong>Auro Pumps Team</strong></p>
+        </div>
+
+        <div class='footer'>
+            © {DateTime.Now.Year} Auro Pumps Pvt. Ltd. All rights reserved.
+        </div>
+
+    </div>
+</body>
+</html>
+";
+
+                //mail.Body = $"Hello {dto.Name},\n\nPlease find attached PDF.";
 
                 mail.Attachments.Add(new Attachment(new MemoryStream(bytes), "Product.pdf"));
 

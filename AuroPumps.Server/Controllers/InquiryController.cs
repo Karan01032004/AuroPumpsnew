@@ -62,26 +62,116 @@ namespace Poweradmin.Server.Controllers
         {
             try
             {
-                string fromEmail = "karanvaghasiya786@gmail.com";
-                string password = "qofz noqg qrtt zali";
+                string fromEmail = "sales.palej@auropumps.com";
+                string password = "mdig soep resa oebr";
                 string toEmail = "karan@dotscoms.com";
 
                 MailMessage mail = new MailMessage();
                 mail.From = new MailAddress(fromEmail);
                 mail.To.Add(toEmail);
                 mail.Subject = "New Inquiry Received";
+                mail.IsBodyHtml = true;
 
                 mail.Body = $@"
-New Inquiry Received
+<html>
+<head>
+    <style>
+        body {{
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }}
+        .container {{
+            max-width: 600px;
+            margin: auto;
+            background: #ffffff;
+            padding: 20px;
+            border-radius: 8px;
+        }}
+        .header {{
+            background: #1e3a8a;
+            color: #ffffff;
+            padding: 15px;
+            text-align: center;
+            border-radius: 8px 8px 0 0;
+        }}
+        .content {{
+            padding: 20px;
+            color: #333;
+        }}
+        .field {{
+            margin-bottom: 10px;
+        }}
+        .label {{
+            font-weight: bold;
+            color: #555;
+        }}
+        .message-box {{
+            margin-top: 15px;
+            padding: 15px; 
+            border-radius: 6px;
+        }}
+        .footer {{
+            font-size: 12px;
+            color: #888;
+            text-align: center;
+            margin-top: 20px;
+        }}
+    </style>
+</head>
 
-Name: {dto.Name}
-Company: {dto.CompanyName}
-Email: {dto.Email}
-Phone: {dto.Phone}
+<body>
+    <div class='container'>
 
-Message:
-{dto.Message}
+        <div class='header'>
+            <h2>📩 New Inquiry</h2>
+        </div>
+
+        <div class='content'>
+
+            <div class='field'>
+                <span class='label'>Name:</span> {dto.Name}
+            </div>
+
+            <div class='field'>
+                <span class='label'>Company:</span> {dto.CompanyName}
+            </div>
+
+            <div class='field'>
+                <span class='label'>Email:</span> {dto.Email}
+            </div>
+
+            <div class='field'>
+                <span class='label'>Phone:</span> {dto.Phone}
+            </div>
+
+            <div class='message-box'>
+                <span class='label'>Message:</span><br/>
+                {dto.Message}
+            </div>
+
+        </div>
+
+        <div class='footer'>
+            Received on {DateTime.Now:dd MMM yyyy hh:mm tt}
+        </div>
+
+    </div>
+</body>
+</html>
 ";
+
+                //                mail.Body = $@"
+                //New Inquiry Received
+
+                //Name: {dto.Name}
+                //Company: {dto.CompanyName}
+                //Email: {dto.Email}
+                //Phone: {dto.Phone}
+
+                //Message:
+                //{dto.Message}
+                //";
 
                 SmtpClient smtp = new SmtpClient("smtp.gmail.com", 587);
                 smtp.Credentials = new NetworkCredential(fromEmail, password);
@@ -104,7 +194,7 @@ Message:
         public async Task<IActionResult> GetAllinquiry()
         {
             var data = await _db.inquiry
-                .OrderByDescending(x => x.AddedDate)
+                .OrderByDescending(x => x.ID)
                 .Select(x => new InquiryDTO
                 {
                     ID = x.ID,
