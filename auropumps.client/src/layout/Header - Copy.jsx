@@ -200,16 +200,16 @@ const Header = () => {
     return (
         <>
             <header
-                className={`fixed top-0 left-0 right-0 z-50 bg-white backdrop-blur-md transition-all duration-500 ease-out ${scrolled ? "shadow-lg shadow-black/30" : "shadow-md"
+                className={`fixed top-0 left-0 right-0 z-50 bg-primary/95 backdrop-blur-md transition-all duration-500 ease-out ${scrolled ? "shadow-lg shadow-black/30" : "shadow-md"
                     }`}
                 style={{ height: `${headerHeight}px` }}
             >
-                <div className="container mx-auto px-4 sm:px-6 lg:px-2 xl:px-8 h-full flex items-center justify-between">
+                <div className="container mx-auto px-4 sm:px-6 lg:px-8 h-full flex items-center justify-between">
 
                     {/* LOGO */}
                     <NavLink to="/" onClick={closeAllMenus} className="flex items-center shrink-0 gap-2">
-                        <div className={`relative overflow-hidden transition-all duration-500 ease-out ${scrolled ? "h-12 w-12 rounded-lg" : "h-22 w-22 rounded-xl"
-                            }  flex items-center justify-center`}>
+                        <div className={`relative overflow-hidden transition-all duration-500 ease-out ${scrolled ? "h-12 w-12 rounded-lg" : "h-20 w-20 rounded-xl"
+                            } bg-white/95 shadow-md ring-1 ring-white/30 flex items-center justify-center`}>
                             <img
                                 src={`${import.meta.env.BASE_URL}/assets/images/auropumps-logo.png`}
                                 alt="Auro Pumps"
@@ -221,12 +221,12 @@ const Header = () => {
                                 }`}
                         >
                             {/* MAIN TITLE */}
-                            <span className="hidden lg:block text-xl sm:text-3xl md:text-[18px] font-bold leading-tight  text-primary drop-shadow-[0_8px_30px_rgba(0,0,0,0.9)] uppercase">
+                            <span className="hidden lg:block text-xl sm:text-3xl md:text-[18px] font-bold leading-tight  text-white drop-shadow-[0_8px_30px_rgba(0,0,0,0.9)] uppercase">
                                 Auro Pumps Pvt Ltd
                             </span>
 
                             {/* SUBTITLE */}
-                            <span className="hidden lg:block text-slate-900 font-bold text-[10px] xl:text-[11px]  mt-[2px]">
+                            <span className="hidden lg:block text-white/70 text-[10px] lg:text-[11px]  mt-[2px]">
                                 Est in 1984 with technology from Pompe Vergani SpA, Italy
                             </span>
                         </div>
@@ -234,18 +234,18 @@ const Header = () => {
 
                     {/* DESKTOP NAV */}
                     {/* DESKTOP NAV */}
-                    <nav className="hidden md:flex items-center xl:gap-6">
+                    <nav className="hidden md:flex items-center gap-6">
 
                         {navLinks.map((item, i) => {
 
                             const navClass = ({ isActive }) =>
                                 `relative px-4 py-2 rounded-lg text-[14px] transition-all duration-200
       ${isActive
-                                    ? "bg-primary/10 text-primary font-bold after:opacity-100 after:w-5"
-                                    : "text-primary hover:text-primary hover:bg-white/10 after:opacity-0 after:w-0"
+                                    ? "bg-white/10 text-white font-medium after:opacity-100 after:w-5"
+                                    : "text-white/80 hover:text-white hover:bg-white/10 after:opacity-0 after:w-0"
                                 }
       after:content-[''] after:absolute after:left-1/2 after:-translate-x-1/2
-      after:bottom-[4px] after:h-[2px] after:rounded-full after:bg-primary
+      after:bottom-[4px] after:h-[2px] after:rounded-full after:bg-white
       after:transition-all after:duration-300`;
 
                             // 🔥 PRODUCTS
@@ -449,7 +449,7 @@ const Header = () => {
                         <NavLink
                             to="/contact-us"
                             onClick={closeAllMenus}
-                            className="ml-3 px-5 lg:px-2 xl:px-5 py-2 rounded-lg text-[14px] lg:text-[12px] xl:text-[14px] font-medium border text-white border-white/30 bg-primary hover:bg-primary/10 transition"
+                            className="ml-3 px-5 py-2 rounded-lg text-[14px] font-medium border text-white border-white/30 bg-white/10 hover:bg-white/20 transition"
                         >
                             Contact Us →
                         </NavLink>
@@ -458,7 +458,7 @@ const Header = () => {
                     {/* MOBILE BTN */}
                     <button
                         onClick={() => setOpen(true)}
-                        className="md:hidden text-black p-2"
+                        className="md:hidden text-white p-2"
                     >
                         ☰
                     </button>

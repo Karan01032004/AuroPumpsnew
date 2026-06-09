@@ -25,7 +25,7 @@ const Footer = () => {
                 </NavLink>
 
                 {/* CENTER - CONTENT */}
-                <div className="text-center lg:text-left text-[12px] lg:text-sm text-white/90 leading-relaxed space-y-2 max-w-2xl">
+                <div className="text-center lg:text-left text-[12px] lg:text-sm text-white/90 leading-relaxed space-y-2 max-w-3xl">
 
                     {/* ADDRESS */}
                     <p>
@@ -36,7 +36,7 @@ const Footer = () => {
 
                         {/* Mobile */}
                         <span className="lg:hidden font-semibold">WORKS:</span>
-                        <span className="lg:hidden block">
+                        <span className="lg:hidden block ">
                             104/5/6, G.I.D.C., Palej - 32220<br />
                             Bharuch, Gujarat, India
                         </span>
@@ -44,12 +44,12 @@ const Footer = () => {
 
                     <p>
                         {/* Desktop */}
-                        <span className="hidden lg:inline">
-                            OFFICE: 309 Nilamber Primero, Vasna - Bhayli Road, Vadodara - 391410, Gujarat, India
+                        <span className="hidden lg:inline text-sm">
+                            CORPORATE OFFICE: 309 Nilamber Primero, Vasna - Bhayli Road, Vadodara - 391410, Gujarat, India
                         </span>
 
                         {/* Mobile */}
-                        <span className="lg:hidden font-semibold">OFFICE:</span>
+                        <span className="lg:hidden font-semibold">CORPORATE OFFICE:</span>
                         <span className="lg:hidden block">
                             309 Nilamber Primero<br />
                             Vasna - Bhayli Road<br />
@@ -138,31 +138,46 @@ const Footer = () => {
                 {/* RIGHT - CERTIFICATIONS */}
                 <div className="flex items-center gap-4 lg:gap-5 justify-center mt-2 lg:mt-0">
 
-                    <picture>
-                        <source
-                            srcSet={`${import.meta.env.BASE_URL}/assets/images/ce-certification-mark-europe-compliance-logo.webp`}
-                            type="image/webp"
-                        />
-                        <img
-                            src={`${import.meta.env.BASE_URL}/assets/images/ce-certification-mark-europe-compliance-logo.png`}
-                            alt="CE Certification"
-                            className="h-12 lg:h-18 w-auto hover:opacity-100 transition"
-                            loading="lazy"
-                        />
-                    </picture>
+                    <a
+                        href={`${import.meta.env.BASE_URL}/assets/pdf/auro-pumps-ce-certificate-md.pdf`}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        aria-label="View CE Certificate"
+                    >
+                        <picture>
+                            <source
+                                srcSet={`${import.meta.env.BASE_URL}/assets/images/ce-certification-mark-europe-compliance-logo.webp`}
+                                type="image/webp"
+                            />
+                            <img
+                                src={`${import.meta.env.BASE_URL}/assets/images/ce-certification-mark-europe-compliance-logo.png`}
+                                alt="CE Certification"
+                                className="h-12 lg:h-18 w-auto hover:opacity-100 transition"
+                                loading="lazy"
+                            />
+                        </picture>
+                    </a>
 
-                    <picture>
-                        <source
-                            srcSet={`${import.meta.env.BASE_URL}/assets/images/iso-9001-2015-quality-certification-logo.webp`}
-                            type="image/webp"
-                        />
-                        <img
-                            src={`${import.meta.env.BASE_URL}/assets/images/iso-9001-2015-quality-certification-logo.png`}
-                            alt="ISO Certification"
-                            className="h-12 lg:h-18 w-auto hover:opacity-100 transition"
-                            loading="lazy"
-                        />
-                    </picture>
+                    <a
+                        href={`${import.meta.env.BASE_URL}/assets/pdf/auro-pumps-iso-9001-2015-certificate.pdf`}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        aria-label="View ISO 9001:2015 Certificate"
+                    >
+                        <picture>
+                            <source
+                                srcSet={`${import.meta.env.BASE_URL}/assets/images/iso-9001-2015-quality-certification-logo.webp`}
+                                type="image/webp"
+                            />
+                            <img
+                                src={`${import.meta.env.BASE_URL}/assets/images/iso-9001-2015-quality-certification-logo.png`}
+                                alt="ISO Certification"
+                                className="h-12 lg:h-18 w-auto hover:opacity-100 transition"
+                                loading="lazy"
+                            />
+                        </picture>
+                    </a>
+
                 </div>
             </div>
 
@@ -189,7 +204,7 @@ const Footer = () => {
                         rel="noopener noreferrer"
                         className="hover:text-white transition"
                     >
-                        D&C
+                        Dots and Coms
                     </a>
                 </p>
             </div>

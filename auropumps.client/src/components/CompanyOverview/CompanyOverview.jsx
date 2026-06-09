@@ -55,14 +55,42 @@ const CompanyOverview = () => {
 
 
                         {/* CTA */}
-                        <div className="mt-8">
+                        {/* CTA + Certifications */}
+                        <div className="mt-8 md:mt-1 flex items-end justify-between gap-4">
                             <ThemeButton
                                 text="Learn More"
                                 link="company"
                                 className="uppercase text-sm font-semibold px-6 py-3"
                             />
-                        </div>
 
+                            <div className="flex items-start gap-3 shrink-0">
+                                <a
+                                    href={`${import.meta.env.BASE_URL}/assets/pdf/auro-pumps-ce-certificate-md.pdf`}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    aria-label="CE Certificate"
+                                >
+                                    <img
+                                        src={`${import.meta.env.BASE_URL}/assets/images/ce-certification-mark-europe-compliance-logo-dark.png`}
+                                        alt="CE Certified"
+                                        className="h-12 sm:h-16 lg:h-22 w-auto hover:scale-105 transition-transform"
+                                    />
+                                </a>
+
+                                <a
+                                    href={`${import.meta.env.BASE_URL}/assets/pdf/auro-pumps-iso-9001-2015-certificate.pdf`}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    aria-label="ISO Certificate"
+                                >
+                                    <img
+                                        src={`${import.meta.env.BASE_URL}/assets/images/iso-9001-2015-quality-certification-logo-dark.png`}
+                                        alt="ISO 9001:2015"
+                                        className="h-12 sm:h-16 lg:h-22 w-auto hover:scale-105 transition-transform"
+                                    />
+                                </a>
+                            </div>
+                        </div>
                     </div>
 
                 </div>

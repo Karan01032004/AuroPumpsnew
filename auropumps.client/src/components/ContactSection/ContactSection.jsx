@@ -5,7 +5,7 @@ import "react-toastify/dist/ReactToastify.css";
 import api from "../../poweradmin/api/axios";
 import ThemeButton from "../ThemeButton";
 import { useNavigate } from "react-router-dom";
-
+import { FaPhoneAlt } from "react-icons/fa";
 const ContactSection = () => {
     const navigate = useNavigate();
     const getRandom = () => Math.floor(Math.random() * 10) + 1;
@@ -155,12 +155,77 @@ const ContactSection = () => {
                                 </h4>
                                 <p className="text-md text-secondary mt-1">
                                     <strong>AURO PUMPS PVT.LTD.</strong><br />
-                                    Plot No. 104/5 & 6<br />
-                                    G.I.D.C. Palej, Bharuch District, Gujarat – 392220, INDIA 
+                                    Plot No. 104/5 & 6
+                                    G.I.D.C. Palej,<br /> Bharuch District, Gujarat – 392220, India 
                                 </p>
                             </div>
                         </div>
 
+                        {/* Corporate Office */}
+                        <div className="flex items-start gap-4 mb-8">
+                            <div className="flex-shrink-0 w-10 h-10 sm:w-12 sm:h-12 lg:w-16 lg:h-16 flex items-center justify-center rounded-full bg-primary">
+                                <picture>
+                                    <source
+                                        srcSet={`${import.meta.env.BASE_URL}/assets/images/location-icon.webp`}
+                                        type="image/webp"
+                                    />
+                                    <img
+                                        src={`${import.meta.env.BASE_URL}/assets/images/location-icon.png`}
+                                        alt="Location icon"
+                                        className="w-5 h-5 sm:w-6 sm:h-6 lg:w-7 lg:h-7 object-contain"
+                                    />
+                                </picture>
+                            </div>
+
+                            <div>
+                                <h4 className="font-semibold text-[#4B4B4B] text-lg">
+                                    Corporate Office
+                                </h4>
+                                <p className="text-md text-secondary mt-1">
+                                    <strong>AURO PUMPS PVT.LTD.</strong><br />
+                                    309 Nilamber Primero,
+                                    Vasna - Bhayli Road,<br />
+                                    Vadodara - 391410,
+                                    Gujarat, India
+                                </p>
+                            </div>
+                        </div>
+
+                        {/* Mobile Numbers */}
+                        <div className="flex items-start gap-4 mb-8">
+                            <div className="flex-shrink-0 w-10 h-10 sm:w-12 sm:h-12 lg:w-16 lg:h-16 flex items-center justify-center rounded-full bg-primary">
+                                <FaPhoneAlt className="text-white text-lg sm:text-lg lg:text-xl" />
+                            </div>
+
+                            <div>
+                                <h4 className="font-semibold text-[#4B4B4B] text-lg">
+                                    Mobile Numbers
+                                </h4>
+
+                                <div className="text-md text-secondary mt-1 space-y-1">
+                                    <a
+                                        href="tel:+919227227768"
+                                        className="block hover:text-[#2D258E] transition-colors duration-300"
+                                    >
+                                        +91 92272 27768
+                                    </a>
+
+                                    <a
+                                        href="tel:+918866927768"
+                                        className="block hover:text-[#2D258E] transition-colors duration-300"
+                                    >
+                                        +91 88669 27768
+                                    </a>
+
+                                    <a
+                                        href="tel:+919727955542"
+                                        className="block hover:text-[#2D258E] transition-colors duration-300"
+                                    >
+                                        +91 97279 55542
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
 
                         {/* Email */}
                         <div className="flex items-start gap-4 mb-8">
