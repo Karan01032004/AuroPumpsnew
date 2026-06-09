@@ -38,7 +38,7 @@ const Header = () => {
         matchesCategoryGroup(
             category,
             (title, slug) =>
-                title === "pumps" || slug === "pumps"
+                title === "HORIZONTAL PUMPS" || slug === "HORIZONTAL PUMPS"
         )
     );
 
@@ -274,7 +274,7 @@ const Header = () => {
 
                                                     <div className="col-span-2 md:col-span-6 lg:col-span-6">
                                                         <h4 className="mb-4 border-b border-white/20 pb-2 font-semibold">
-                                                            Pumps
+                                                            HORIZONTAL PUMPS
                                                         </h4>
 
                                                         <div className="grid grid-cols-2 sm:grid-cols-3 gap-x-8 gap-y-2">
