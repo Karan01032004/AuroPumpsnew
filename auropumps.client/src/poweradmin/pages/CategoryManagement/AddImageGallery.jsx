@@ -31,7 +31,8 @@ const AddImageGallery = () => {
         setDisplay(res.data.displayonfrontend ? "yes" : "no");
         setWatermark(res.data.watermark_on_image ? "yes" : "no");
     };
-    const BACKEND_URL = "https://dotcompreview.com/auropumps";
+    //const BACKEND_URL = "https://dotcompreview.com/auropumps";
+    const BACKEND_URL = "https://yourwebsitepreview.com/auropumps_com";
   //  const BACKEND_URL = "https://localhost:7051";
  useEffect(() => {
     (async () => {

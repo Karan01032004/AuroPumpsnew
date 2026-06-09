@@ -87,7 +87,7 @@ function App() {
                             <div className="app-loader__logo-shell">
                                 <div className="app-loader__logo-glow"></div>
                                 <img
-                                    src="/auropumps/assets/images/auropumps-loader-logo.png"
+                                    src="/auropumps_com/assets/images/auropumps-loader-logo.png"
                                     alt="Auro Pumps"
                                     className="app-loader__logo"
                                 />
@@ -107,7 +107,7 @@ function App() {
                 </div>
             )}
 
-            <BrowserRouter basename="/auropumps">
+            <BrowserRouter basename="/auropumps_com">
                 <ScrollToTop />
                 <ScrollToHash />
                 <Routes>

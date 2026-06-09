@@ -77,7 +77,7 @@ function ClientsPage() {
                     <div className="bg-slate-50 p-3 sm:p-4 md:p-6">
                         <div className="overflow-hidden rounded-2xl border border-slate-200 bg-white">
                             <img
-                                src="/auropumps/assets/images/map-auropumps.png"
+                                src="/auropumps_com/assets/images/map-auropumps.png"
                                 alt="Auro Pumps global client network map"
                                 loading="lazy"
                                 className="h-auto w-full object-cover"

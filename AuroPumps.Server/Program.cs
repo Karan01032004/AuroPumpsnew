@@ -4,7 +4,7 @@ using Poweradmin.Server.Data;
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddCors(options => {
     options.AddPolicy("AllowReact", policy => {
-        policy.WithOrigins("https://localhost:7051", "https://dotcompreview.com", "http://localhost:7148")
+        policy.WithOrigins("https://localhost:7051", "https://dotcompreview.com", "https://yourwebsitepreview.com", "http://localhost:7148")
               .AllowAnyMethod()
               .AllowAnyHeader();
     });

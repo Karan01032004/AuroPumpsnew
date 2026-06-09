@@ -42,8 +42,7 @@ namespace Poweradmin.Server.Controllers
             return Ok(products);
         }
 
-
-        private string SaveFile(IFormFile file, string folder)
+         private string SaveFile(IFormFile file, string folder)
         {
             var uploadPath = Path.Combine(
                 Directory.GetCurrentDirectory(),
@@ -251,14 +250,14 @@ namespace Poweradmin.Server.Controllers
             border-radius: 8px 8px 0 0;
         }}
         .content {{
-            padding: 20px;
+           
             color: #333;
         }}
         .footer {{
             font-size: 12px;
             color: #777;
             text-align: center;
-            padding-top: 20px;
+             
         }}
         .btn {{
             display: inline-block;
@@ -283,7 +282,7 @@ namespace Poweradmin.Server.Controllers
 
             <p>Thank you for your interest in our product.</p>
 
-            <p>Please find the requested product catalogue attached to this email.</p>
+            <p> We have received your inquiry. We will share the product catalogue with you shortly.</p>
 
             <p>If you have any questions or need further assistance, feel free to contact us.</p>
 
@@ -302,7 +301,7 @@ namespace Poweradmin.Server.Controllers
 
                 //mail.Body = $"Hello {dto.Name},\n\nPlease find attached PDF.";
 
-                mail.Attachments.Add(new Attachment(new MemoryStream(bytes), "Product.pdf"));
+                //mail.Attachments.Add(new Attachment(new MemoryStream(bytes), "Product.pdf"));
 
                 await smtp.SendMailAsync(mail);
             }

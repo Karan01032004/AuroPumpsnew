@@ -35,10 +35,10 @@ if (!fs.existsSync(certFilePath) || !fs.existsSync(keyFilePath)) {
 }
 
 const target = env.ASPNETCORE_HTTPS_PORT ? `https://localhost:${env.ASPNETCORE_HTTPS_PORT}` :
-    env.ASPNETCORE_URLS ? env.ASPNETCORE_URLS.split(';')[0] : 'https://dotcompreview.com';
+    env.ASPNETCORE_URLS ? env.ASPNETCORE_URLS.split(';')[0] : 'https://yourwebsitepreview.com';
 
 export default defineConfig({
-    base: '/auropumps',
+    base: '/auropumps_com',
     plugins: [react(), tailwindcss()],
     resolve: {
         alias: {

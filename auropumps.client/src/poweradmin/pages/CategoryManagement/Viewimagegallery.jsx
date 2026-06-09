@@ -57,7 +57,7 @@ function ImageGalleryTable() {
         });
     }; 
     //const BACKEND_URL = "https://localhost:7051";
-    const BACKEND_URL = "https://dotcompreview.com/auropumps";
+    const BACKEND_URL = "https://yourwebsitepreview.com/auropumps_com";
     const columns = [
         {
             title: "IMAGE",
