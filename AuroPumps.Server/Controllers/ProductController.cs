@@ -27,7 +27,7 @@ namespace Poweradmin.Server.Controllers
                 .Where(x => x.Visible == true &&
                             x.CategoryId != null &&
                             ("," + x.CategoryId + ",").Contains("," + searchId + ","))
-                .OrderBy(x => x.title)
+                .OrderBy(x => x.sortorder)
                 .Select(x => new
                 {
                     id = x.id,
@@ -69,7 +69,7 @@ namespace Poweradmin.Server.Controllers
         public IActionResult GetBySlug(string slug)
         {
             var product = _db.Product
-                .Where(x => x.title.ToLower().Replace(" ", "-") == slug)
+                .Where(x => x.title.ToLower().Replace(" ", "-") == slug).OrderBy(x => x.sortorder)
                 .Select(x => new {
                     x.id,
                     x.title,
@@ -90,7 +90,7 @@ namespace Poweradmin.Server.Controllers
         public IActionResult List()
         {
             var products = _db.Product
-                .OrderByDescending(x => x.id)
+                 .OrderBy(x => x.sortorder)
                 .Select(x => new
                 {
                     id = x.id,

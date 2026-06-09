@@ -21,7 +21,7 @@ namespace Poweradmin.Server.Controllers
         {
             var categories = _db.ProductsCategory
                 .Where(x => x.isvisible) // sirf visible
-                .OrderBy(x => x.id)
+                 .OrderBy(x => x.shortorder)
                 .Select(x => new
                 {
                     id = x.id,
@@ -59,7 +59,7 @@ namespace Poweradmin.Server.Controllers
         public IActionResult GetCategories()
         {
             var categories = _db.ProductsCategory
-                .OrderByDescending(x => x.id)
+             .OrderBy(x => x.shortorder)
                 .Select(x => new
                 {
                     id = x.id,
