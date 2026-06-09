@@ -38,7 +38,7 @@ const Header = () => {
         matchesCategoryGroup(
             category,
             (title, slug) =>
-                title === "HORIZONTAL PUMPS" || slug === "HORIZONTAL PUMPS"
+                title === "HORIZONTAL PUMPS" || slug === "horizontal-pumps"
         )
     ); 
 
@@ -46,7 +46,7 @@ const Header = () => {
         matchesCategoryGroup(
             category,
             (title, slug) =>
-                (title.includes("metal") || slug.includes("metal")) 
+                (title.includes("MOLTEN METAL EQUIPMENT") || slug.includes("molten-metal-equipment")) 
                 //!title.includes("metal") &&
                 //!slug.includes("metal")    
         
@@ -58,8 +58,16 @@ const Header = () => {
         matchesCategoryGroup(
             category,
             (title, slug) =>
-                title.includes("salt") ||
-                slug.includes("salt") 
+                title.includes("MOLTEN SALT EQUIPMENTS") ||
+                slug.includes("molten-salt-equipments") 
+        )
+    );
+    const verticalPumpsCategories = categories.filter((category) =>
+        matchesCategoryGroup(
+            category,
+            (title, slug) =>
+                title.includes("VERTICAL PUMPS") ||
+                slug.includes("vertical-pumps")
         )
     );
 
@@ -88,6 +96,7 @@ const Header = () => {
     const pumpProducts = flattenCategoryProducts(pumpCategories);
     const moltenMetalSystemProducts = flattenCategoryProducts(moltenMetalSystemCategories);
     const moltenSaltSystemProducts = flattenCategoryProducts(moltenSulphurCategories);
+    const verticalPumps = flattenCategoryProducts(verticalPumpsCategories);
     const drossProducts = flattenCategoryProducts(drossCategories);
     const agitatorProducts = flattenCategoryProducts(agitatorCategories);
     const pumpColumns = [0, 1, 2];
@@ -268,20 +277,37 @@ const Header = () => {
       transform: activeDesktopMenu === "Products" ? "translateY(0)" : undefined,
   }}
 >
-                                            <div className="max-w-[1300px] mx-auto px-6 lg:px-10 py-8">
+                                            <div className="max-w-[1380px] mx-auto px-6 lg:px-0 py-8">
 
-                                                <div className="grid grid-cols-2 md:grid-cols-6 lg:grid-cols-12 gap-10 text-sm">
+                                                <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-12 gap-10 text-xs">
+                                                    <div className="col-span-2 md:col-span-4 lg:col-span-4 space-y-6">
+                                                        <div>
+                                                            <h4 className="mb-3 border-b border-white/20 pb-2 font-semibold text-sm">
+                                                                VERTICAL PUMPS
+                                                            </h4>
+                                                            {verticalPumps.map((product) => (
+                                                                <NavLink
+                                                                    key={product.id}
+                                                                    to={`/products/${product.categorySlug}/${product.slug}`}
+                                                                    onClick={closeAllMenus}
+                                                                    className="block py-1 text-white/80 transition hover:text-white"
+                                                                >
+                                                                    {product.name}
+                                                                </NavLink>
+                                                            ))}
+                                                        </div>
 
-                                                    <div className="col-span-2 md:col-span-6 lg:col-span-6">
-                                                        <h4 className="mb-4 border-b border-white/20 pb-2 font-semibold">
+                                                    </div>
+                                                    <div className="col-span-2 md:col-span-4 lg:col-span-4">
+                                                        <h4 className="mb-4 border-b border-white/20 pb-2 font-semibold text-sm">
                                                             HORIZONTAL PUMPS
                                                         </h4>
 
-                                                        <div className="grid grid-cols-2 sm:grid-cols-3 gap-x-8 gap-y-2">
+                                                        <div className="grid grid-cols-1 sm:grid-cols-1 gap-x-8 gap-y-2 text-xs">
                                                             {pumpColumns.map((column) => (
                                                                 <ul key={column} className="space-y-2 text-white/80">
                                                                     {pumpProducts
-                                                                        .filter((_, index) => index % 3 === column)
+                                                                        .filter((_, index) => index % 2 === column)
                                                                         .map((product) => (
                                                                             <li key={product.id}>
                                                                                 <NavLink
@@ -297,10 +323,10 @@ const Header = () => {
                                                             ))}
                                                         </div>
                                                     </div>
-
-                                                    <div className="col-span-2 md:col-span-3 lg:col-span-3 space-y-6">
+                                                  
+                                                    <div className="col-span-2 md:col-span-4 lg:col-span-4 space-y-6">
                                                         <div>
-                                                            <h4 className="mb-3 border-b border-white/20 pb-2 font-semibold">
+                                                            <h4 className="mb-3 border-b border-white/20 pb-2 font-semibold text-sm">
                                                                 MOLTEN METAL SYSTEMS
                                                             </h4>
                                                             {moltenMetalSystemProducts.map((product) => (
@@ -308,33 +334,14 @@ const Header = () => {
                                                                     key={product.id}
                                                                     to={`/products/${product.categorySlug}/${product.slug}`}
                                                                     onClick={closeAllMenus}
-                                                                    className="block py-1 text-white/80 transition hover:text-white"
+                                                                    className="block py-1 text-white/80 transition hover:text-white text-xs"
                                                                 >
                                                                     {product.name}
                                                                 </NavLink>
                                                             ))}
                                                         </div>
-
                                                         <div>
-                                                            <h4 className="mb-3 border-b border-white/20 pb-2 font-semibold">
-                                                                Dross Grabber
-                                                            </h4>
-                                                            {drossProducts.map((product) => (
-                                                                <NavLink
-                                                                    key={product.id}
-                                                                    to={`/products/${product.categorySlug}/${product.slug}`}
-                                                                    onClick={closeAllMenus}
-                                                                    className="block py-1 text-white/80 transition hover:text-white"
-                                                                >
-                                                                    {product.name}
-                                                                </NavLink>
-                                                            ))}
-                                                        </div>
-                                                    </div>
-
-                                                    <div className="col-span-2 md:col-span-3 lg:col-span-3 space-y-6">
-                                                        <div>
-                                                            <h4 className="mb-3 border-b border-white/20 pb-2 font-semibold">
+                                                            <h4 className="mb-3 border-b border-white/20 pb-2 font-semibold text-sm">
                                                                 MOLTEN SALT SYSTEMS
                                                             </h4>
                                                             {moltenSaltSystemProducts.map((product) => (
@@ -342,29 +349,15 @@ const Header = () => {
                                                                     key={product.id}
                                                                     to={`/products/${product.categorySlug}/${product.slug}`}
                                                                     onClick={closeAllMenus}
-                                                                    className="block py-1 text-white/80 transition hover:text-white"
+                                                                    className="block py-1 text-white/80 transition hover:text-white text-xs"
                                                                 >
                                                                     {product.name}
                                                                 </NavLink>
                                                             ))}
                                                         </div>
-
-                                                        <div>
-                                                            <h4 className="mb-3 border-b border-white/20 pb-2 font-semibold">
-                                                                Agitators
-                                                            </h4>
-                                                            {agitatorProducts.map((product) => (
-                                                                <NavLink
-                                                                    key={product.id}
-                                                                    to={`/products/${product.categorySlug}/${product.slug}`}
-                                                                    onClick={closeAllMenus}
-                                                                    className="block py-1 text-white/80 transition hover:text-white"
-                                                                >
-                                                                    {product.name}
-                                                                </NavLink>
-                                                            ))}
-                                                        </div>
+                                                      
                                                     </div>
+
                                                 </div>
                                             </div>
                                         </div>
@@ -410,23 +403,23 @@ const Header = () => {
 
                                                         return (
                                                             <div key={app.id}>
-                                                                <h4 className="font-semibold mb-3 border-b border-white/20 pb-2">
+                                                                <h4 className="font-semibold mb-3  pb-2">
                                                                     {app.title}
                                                                 </h4>
 
-                                                                <ul className="space-y-2 text-white/80">
-                                                                    {appProducts.map((product) => (
-                                                                        <li key={product.id}>
-                                                                            <NavLink
-                                                                                to={`/application/${app.slug}/${product.slug}`} // ya full route
-                                                                                onClick={closeAllMenus}
-                                                                                className="hover:text-white block transition"
-                                                                            >
-                                                                                {product.name}
-                                                                            </NavLink>
-                                                                        </li>
-                                                                    ))}
-                                                                </ul>
+                                                                {/*<ul className="space-y-2 text-white/80">*/}
+                                                                {/*    {appProducts.map((product) => (*/}
+                                                                {/*        <li key={product.id}>*/}
+                                                                {/*            <NavLink*/}
+                                                                {/*                to={`/application/${app.slug}/${product.slug}`} // ya full route*/}
+                                                                {/*                onClick={closeAllMenus}*/}
+                                                                {/*                className="hover:text-white block transition"*/}
+                                                                {/*            >*/}
+                                                                {/*                {product.name}*/}
+                                                                {/*            </NavLink>*/}
+                                                                {/*        </li>*/}
+                                                                {/*    ))}*/}
+                                                                {/*</ul>*/}
                                                             </div>
                                                         );
                                                     })}
@@ -526,7 +519,7 @@ const Header = () => {
 
                                                 {categories.map((category) => (
                                                     <div key={category.id}>
-                                                        <h4 className="font-semibold mb-4 border-b border-white/20 pb-2">
+                                                        <h4 className="font-bold mb-4 border-b border-white/20 pb-2">
                                                             {category.title}
                                                         </h4>
 
@@ -536,7 +529,7 @@ const Header = () => {
                                                                     <NavLink
                                                                         to={`/products/${category.slug}/${product.slug}`} // ✅ slug URL
                                                                         onClick={closeAllMenus}
-                                                                        className="hover:text-white block transition"
+                                                                        className="hover:text-white block transition border-b border-white/10"
                                                                     >
                                                                         {product.name}
                                                                     </NavLink>
@@ -577,7 +570,7 @@ const Header = () => {
                                             <div className="px-4 space-y-4 text-sm text-white/80">
 
                                                 {applications.map((app) => {
-                                                    const appProducts = getProductsByIds(app.product_ids);
+                                                   /* const appProducts = getProductsByIds(app.product_ids);*/
 
                                                     return (
                                                         <div key={app.id}>
@@ -585,19 +578,19 @@ const Header = () => {
                                                                 {app.title}
                                                             </h4>
 
-                                                            <ul className="space-y-2 text-white/80">
-                                                                {appProducts.map((product) => (
-                                                                    <li key={product.id}>
-                                                                        <NavLink
-                                                                            to={`/application/${app.slug}/${product.slug}`}
-                                                                            onClick={() => setOpen(false)}
-                                                                            className="hover:text-white block transition"
-                                                                        >
-                                                                            {product.name}
-                                                                        </NavLink>
-                                                                    </li>
-                                                                ))}
-                                                            </ul>
+                                                            {/*<ul className="space-y-2 text-white/80">*/}
+                                                            {/*    {appProducts.map((product) => (*/}
+                                                            {/*        <li key={product.id}>*/}
+                                                            {/*            <NavLink*/}
+                                                            {/*                to={`/application/${app.slug}/${product.slug}`}*/}
+                                                            {/*                onClick={() => setOpen(false)}*/}
+                                                            {/*                className="hover:text-white block transition"*/}
+                                                            {/*            >*/}
+                                                            {/*                {product.name}*/}
+                                                            {/*            </NavLink>*/}
+                                                            {/*        </li>*/}
+                                                            {/*    ))}*/}
+                                                            {/*</ul>*/}
                                                         </div>
                                                     );
                                                 })}
