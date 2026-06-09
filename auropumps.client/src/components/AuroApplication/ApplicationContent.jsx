@@ -140,13 +140,73 @@ function ApplicationContent({
                 {/*)}*/}
             </section>
 
-            <section className="rounded-xl border border-slate-200 bg-[#F7F5FF] shadow-[0_25px_60px_-40px_rgba(45,37,142,0.4)]">
-                <div className="border-b rounded-xl border-primary/10 bg-white px-5 py-7 sm:px-7 lg:px-10">
-                    <span className="inline-flex rounded-full border border-primary/15 bg-primary/10 px-4 py-2 text-[11px] font-bold uppercase tracking-[0.2em] text-primary">
-                        Associated Product
-                    </span>
 
-                    <div className="mt-5 flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between">
+            <section>
+
+                <div className="container mx-auto px-4">
+                    <div className="mx-auto max-w-3xl text-center">
+                        <span className="inline-block rounded-full border border-primary/20 bg-primary/10 px-4 py-2 text-[11px] tracking-[0.22em] font-semibold text-primary uppercase">
+                            Associated Product
+                        </span>
+                        
+                    </div>
+
+                    <div className="mt-7">
+                        {/* Mobile Dropdown */}
+                        <div className="block md:hidden">
+                            <select
+                                className="w-full rounded-lg border border-primary/20 bg-white px-4 py-3 text-sm font-medium text-primary"
+                                onChange={(e) => {
+                                    if (e.target.value) {
+                                        window.location.href = e.target.value;
+                                    }
+                                }}
+                                defaultValue=""
+                            >
+                                <option value="" disabled>
+                                    Select Product
+                                </option>
+                                <option value="#acc-end-suction-pumps">
+                                    ACC - END SUCTION PUMPS
+                                </option>
+                                <option value="#asp-non-clog-self-priming-pumps">
+                                    ASP - NON-CLOG SELF PRIMING PUMPS
+                                </option>
+                                <option value="#app-non-metallic-pp-pumps">
+                                    APP - NON METALLIC PP PUMPS
+                                </option>
+                                <option value="#va-multistage-self-priming-pumps">
+                                    VA - MULTISTAGE SELF PRIMING PUMPS
+                                </option>
+                            </select>
+                        </div>
+
+                        {/* Desktop Buttons */}
+                        <div className="hidden md:flex flex-wrap items-center justify-center gap-2 sm:gap-3">
+                            <a href="#acc-end-suction-pumps" className="rounded-full border border-primary/20 bg-white px-4 py-2 text-[11px] font-semibold tracking-[0.1em] text-primary uppercase transition hover:border-primary/40 hover:bg-primary/5">
+                                ACC - END SUCTION PUMPS
+                            </a>
+
+                            <a href="#asp-non-clog-self-priming-pumps" className="rounded-full border border-primary/20 bg-white px-4 py-2 text-[11px] font-semibold tracking-[0.1em] text-primary uppercase transition hover:border-primary/40 hover:bg-primary/5">
+                                ASP - NON-CLOG SELF PRIMING PUMPS
+                            </a>
+
+                            <a href="#app-non-metallic-pp-pumps" className="rounded-full border border-primary/20 bg-white px-4 py-2 text-[11px] font-semibold tracking-[0.1em] text-primary uppercase transition hover:border-primary/40 hover:bg-primary/5">
+                                APP - NON METALLIC PP PUMPS
+                            </a>
+
+                            <a href="#va-multistage-self-priming-pumps" className="rounded-full border border-primary/20 bg-white px-4 py-2 text-[11px] font-semibold tracking-[0.1em] text-primary uppercase transition hover:border-primary/40 hover:bg-primary/5">
+                                VA - MULTISTAGE SELF PRIMING PUMPS
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <section className="rounded-xl border border-slate-200 bg-[#F7F5FF] shadow-[0_25px_60px_-40px_rgba(45,37,142,0.4)]" id="va-multistage-self-priming-pumps">
+                <div className="border-b rounded-t-xl border-primary/10 bg-white px-5 py-7 sm:px-7 lg:px-10">
+                   
+
+                    <div className="flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between">
                         <div>
                             <h3 className="text-3xl font-bold uppercase tracking-tight text-slate-900">
                                 {product.name}
