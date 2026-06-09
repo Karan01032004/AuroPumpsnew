@@ -40,7 +40,7 @@ const Header = () => {
             (title, slug) =>
                 title === "HORIZONTAL PUMPS" || slug === "HORIZONTAL PUMPS"
         )
-    );
+    ); 
 
     const moltenMetalSystemCategories = categories.filter((category) =>
         matchesCategoryGroup(
