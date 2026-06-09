@@ -173,7 +173,7 @@ function ProductContent({ product, categoryTitle }) {
                         <div className="flex items-start justify-between gap-4 border-b border-primary/10 px-5 py-4 sm:px-6">
                             <div>
                                 <h3 className="text-xl font-bold text-slate-900">
-                                    Download Product PDF
+                                   Contact us for more  details
                                 </h3>
                                 <p className="mt-1 text-sm text-slate-500">
                                     Fill in your details to continue.
@@ -227,9 +227,9 @@ function ProductContent({ product, categoryTitle }) {
                                         required
                                         className="w-full rounded-sm border border-slate-200 px-4 py-3 text-sm outline-none transition focus:border-primary"
                                     />
-                                    <p className="mt-2 text-xs text-slate-500">
-                                        *You'll get the PDF at the email you provide here.
-                                    </p>
+                                    {/*<p className="mt-2 text-xs text-slate-500">*/}
+                                    {/*    *You'll get the details at the email you provide here. */}
+                                    {/*</p>*/}
                                 </div>
 
                                 <div>
