@@ -396,14 +396,14 @@ const Header = () => {
                                         >
                                             <div className="max-w-[1300px] mx-auto px-6 lg:px-10 py-8">
 
-                                                <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-10 text-sm">
+                                                <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4 text-sm">
 
                                                     {applications.map((app) => {
                                                         const appProducts = getProductsByIds(app.product_ids);
 
                                                         return (
                                                             <div key={app.id}>
-                                                                <h4 className="font-semibold mb-3  pb-2">
+                                                                <h4 className="font-semibold   pb-2">
                                                                     {app.title}
                                                                 </h4>
 
