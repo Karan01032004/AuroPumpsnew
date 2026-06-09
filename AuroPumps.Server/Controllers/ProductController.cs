@@ -304,6 +304,66 @@ namespace Poweradmin.Server.Controllers
                 //mail.Attachments.Add(new Attachment(new MemoryStream(bytes), "Product.pdf"));
 
                 await smtp.SendMailAsync(mail);
+
+
+                var adminMail = new MailMessage();
+                adminMail.From = new MailAddress("sales.palej@auropumps.com");
+
+                // Admin email
+                adminMail.To.Add("karan@dotscoms.com"); // ya jo admin email ho
+                //adminMail.To.Add("sales.palej@auropumps.com"); // ya jo admin email ho
+
+                adminMail.Subject = $"New PDF Inquiry - {product.title}";
+
+                adminMail.IsBodyHtml = true;
+
+                adminMail.Body = $@"
+<html>
+<body style='font-family:Arial,sans-serif;'>
+
+    <h2 style='color:#2c7a7b;'>New Product PDF Inquiry Received</h2>
+
+    <table border='1' cellpadding='8' cellspacing='0' style='border-collapse:collapse;width:100%;'>
+        <tr>
+            <td><strong>Product</strong></td>
+            <td>{product.title}</td>
+        </tr>
+        <tr>
+            <td><strong>Name</strong></td>
+            <td>{dto.Name}</td>
+        </tr>
+        <tr>
+            <td><strong>Email</strong></td>
+            <td>{dto.Email}</td>
+        </tr>
+        <tr>
+            <td><strong>Phone</strong></td>
+            <td>{dto.Phone}</td>
+        </tr>
+        <tr>
+            <td><strong>Company Name</strong></td>
+            <td>{dto.CompanyName}</td>
+        </tr>
+        <tr>
+            <td><strong>Message</strong></td>
+            <td>{dto.Message}</td>
+        </tr>
+        <tr>
+            <td><strong>Inquiry Date</strong></td>
+            <td>{DateTime.Now:dd-MM-yyyy HH:mm:ss}</td>
+        </tr>
+    </table>
+
+    <br/>
+
+    <p>
+        This customer has requested the PDF catalogue for the above product.
+    </p>
+
+</body>
+</html>";
+
+                await smtp.SendMailAsync(adminMail);
             }
 
             return Ok(new { message = "Email sent successfully" });
