@@ -179,13 +179,13 @@ function ProductContent({ product, categoryTitle }) {
                             Applications
                         </h3>
 
-                        <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3">
+                        <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
                             {applications.map((item, index) => (
                                 <div
                                     key={index}
-                                    className="group flex sm:min-h-[110px] items-center justify-center rounded-lg bg-gradient-to-br from-[#2d2f86] to-[#4043b3] p-2 text-center shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-lg"
+                                    className="group flex min-h-[90px] items-center justify-center rounded-xl border border-primary/20 bg-white p-4 text-center shadow-lg transition-all duration-300 hover:scale-[1.03] hover:shadow-xl"
                                 >
-                                    <p className="text-sm font-semibold uppercase tracking-wide text-white md:text-[14px]">
+                                    <p className="text-[14px] font-medium leading-5 tracking-tight text-primary transition-all duration-300 group-hover:tracking-normal">
                                         {item}
                                     </p>
                                 </div>

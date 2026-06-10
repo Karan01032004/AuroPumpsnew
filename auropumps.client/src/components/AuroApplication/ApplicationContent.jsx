@@ -310,15 +310,15 @@ function ApplicationContent({
                                 </div>
 
                                 <div className="space-y-6">
-                                    <div className="rounded-xl border border-white/70 bg-white p-6 shadow-sm">
-                                        <div className="inline-flex rounded-full border border-primary/15 bg-primary/5 px-4 py-1.5 text-sm font-semibold uppercase tracking-[0.12em] text-primary">
-                                            {product.name}
-                                        </div>
+                                    {/*<div className="rounded-xl border border-white/70 bg-white p-6 shadow-sm">*/}
+                                    {/*    <div className="inline-flex rounded-full border border-primary/15 bg-primary/5 px-4 py-1.5 text-sm font-semibold uppercase tracking-[0.12em] text-primary">*/}
+                                    {/*        {product.name}*/}
+                                    {/*    </div>*/}
 
-                                        <p className="mt-5 text-base leading-8 text-slate-600" dangerouslySetInnerHTML={{ __html: product.description }}>
+                                    {/*    <p className="mt-5 text-base leading-8 text-slate-600" dangerouslySetInnerHTML={{ __html: product.description }}>*/}
 
-                                        </p>
-                                    </div>
+                                    {/*    </p>*/}
+                                    {/*</div>*/}
 
                                     {product.specifications?.length > 0 && (
                                         <div className="overflow-hidden rounded-xl border border-slate-200 bg-white shadow-sm">

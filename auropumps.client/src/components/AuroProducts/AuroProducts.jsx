@@ -31,7 +31,7 @@ function AuroProducts() {
         const top =
             contentRef.current.getBoundingClientRect().top +
             window.scrollY -
-            100;
+            160;
 
         window.scrollTo({
             top,
@@ -185,8 +185,7 @@ function AuroProducts() {
     }
     return (
         <section className="py-8 sm:py-14 md:py-16 lg:py-20">
-            <div className="container mx-auto grid lg:grid-cols-[1.2fr_3fr] gap-5 lg:gap-7 items-start">
-                <ProductSidebar
+            <div className="container lg:max-w-none lg:px-6 xl:px-8 mx-auto grid lg:grid-cols-[1.2fr_3fr] gap-5 lg:gap-7 items-start">                <ProductSidebar
                     categories={categoryList}
                     products={products}
                     activeCategory={activeCategory}
