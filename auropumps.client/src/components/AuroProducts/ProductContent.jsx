@@ -6,21 +6,7 @@ import { toast } from "react-hot-toast";
 
 function ProductContent({ product, categoryTitle }) {
 
-    const applications = [
-        "Organic and Inorganic Chemicals",
-        "Acids",
-        "Solvent and Petrochemicals",
-        "Chloralkali and Caustic Soda",
-        "Sulphuric Acid and Oleum",
-        "Molten Sulfur",
-        "Molten Salts and Solar Power Plants",
-        "Heat Treatment Furnaces and Automotive Paint Lines",
-        "Steel Production and Processing",
-        "Power Plants and Mining",
-        "Fertilizer Industry",
-        "Nuclear Power",
-    ];
-
+   
     const [isPdfModalOpen, setIsPdfModalOpen] = useState(false);
     const [pdfFormData, setPdfFormData] = useState({
         name: "",
@@ -30,6 +16,12 @@ function ProductContent({ product, categoryTitle }) {
     });
 
     if (!product) return null;
+
+    const applications =
+        product.applicationtags
+            ?.split(",")
+            .map(tag => tag.trim())
+            .filter(tag => tag !== "") || [];
 
     const specifications = (product.specifications || []).filter(
         (spec) => spec?.value && String(spec.value).trim() !== ""
@@ -181,26 +173,26 @@ function ProductContent({ product, categoryTitle }) {
                         </div>
                     </div>
                 )}
-                <div className="mt-7">
-                    <h3 className="mb-3 text-lg font-bold text-primary md:text-xl">
-                        Applications
-                    </h3>
+                {applications.length > 0 && (
+                    <div className="mt-7">
+                        <h3 className="mb-3 text-lg font-bold text-primary md:text-xl">
+                            Applications
+                        </h3>
 
-
-
-                    <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-                        {applications.map((item) => (
-                            <div
-                                key={item}
-                                className="group flex sm:min-h-[110px] items-center justify-center rounded-lg bg-gradient-to-br from-[#2d2f86] to-[#4043b3] p-2 text-center shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-lg"
-                            >
-                                <p className="text-sm font-semibold uppercase tracking-wide text-white md:text-[14px]">
-                                    {item}
-                                </p>
-                            </div>
-                        ))}
+                        <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+                            {applications.map((item, index) => (
+                                <div
+                                    key={index}
+                                    className="group flex sm:min-h-[110px] items-center justify-center rounded-lg bg-gradient-to-br from-[#2d2f86] to-[#4043b3] p-2 text-center shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-lg"
+                                >
+                                    <p className="text-sm font-semibold uppercase tracking-wide text-white md:text-[14px]">
+                                        {item}
+                                    </p>
+                                </div>
+                            ))}
+                        </div>
                     </div>
-                </div>
+                )}
 
             </div>
 

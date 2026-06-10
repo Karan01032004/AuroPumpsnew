@@ -53,6 +53,7 @@ function AuroProducts() {
                 //image: data.image1,
                 pdf: data.catelogue,
                 isFeatured: data.isFeatured,
+                applicationtags: data.applicationtags,
                 description: data.description,
                 specifications: [
                     { label: "Capacity", value: data.capacity },
@@ -64,10 +65,13 @@ function AuroProducts() {
                     { label: "Viscosity", value: data.viscosity },
                     { label: "shaft sealing options", value: data.shaftsealing },
                     { label: "Pressure", value: data.pressure },
+                    { label: "Impeller", value: data.impeller },
+                    { label: "Slurry Handling", value: data.slurryhandling },
                     { label: "Submergence Length", value: data.submergenceLength },
                     { label: "Operating Frequency", value: data.operating_frequency },
                     { label: "Material", value: data.material },
                     { label: "", value: data.technicalDetails }
+                  
                 ]
             });
         } catch (err) { console.error(err); }

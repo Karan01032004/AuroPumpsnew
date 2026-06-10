@@ -23,6 +23,9 @@ const AddProduct = () => {
     const [technicalDetails, setTechnicalDetails] = useState("");
     const [moc, setMoc] = useState("");
     const [pressure, setPressure] = useState("");
+    const [applicationtags, setapplicationtags] = useState("");
+    const [impeller, setimpeller] = useState("");
+    const [slurryhandling, setslurryhandling] = useState("");
     const [applications, setApplications] = useState("");
     const [pendingCategoryId, setPendingCategoryId] = useState("");
     const [seoTitle, setSeoTitle] = useState("");
@@ -92,6 +95,9 @@ const AddProduct = () => {
         setTechnicalDetails(p.technicalDetails);
         setMoc(p.moc);
         setPressure(p.pressure);
+        setslurryhandling(p.slurryhandling);
+        setimpeller(p.impeller);
+        setapplicationtags(p.applicationtags);
         setApplications(p.applications);
         setCapacity(p.capacity || "");
         setProductHead(p.producthead || "");
@@ -137,6 +143,9 @@ const AddProduct = () => {
             formData.append("technicalDetails", technicalDetails);
             formData.append("MOC", moc);
             formData.append("pressure", pressure);
+            formData.append("applicationtags", applicationtags);
+            formData.append("impeller", impeller);
+            formData.append("slurryhandling", slurryhandling);
             formData.append("applications", applications);
             formData.append("Capacity", capacity);
             formData.append("producthead", productHead);
@@ -498,6 +507,22 @@ const AddProduct = () => {
                         />
                     </div>
                     <div>
+                        <label className="font-medium">Impeller</label>
+                        <input
+                            value={impeller}
+                            onChange={(e) => setimpeller(e.target.value)}
+                            className="w-full rounded-lg border px-3 py-2"
+                        />
+                    </div>
+                    <div>
+                        <label className="font-medium">Slurry Handling</label>
+                        <input
+                            value={slurryhandling}
+                            onChange={(e) => setslurryhandling(e.target.value)}
+                            className="w-full rounded-lg border px-3 py-2"
+                        />
+                    </div>
+                    <div>
                         <label className="font-medium">Material</label>
                         <textarea
                             value={material}
@@ -512,6 +537,17 @@ const AddProduct = () => {
                             value={technicalDetails}
                             rows={3}
                             onChange={(e) => setTechnicalDetails(e.target.value)}
+                            className="w-full rounded-lg border px-3 py-2"
+                        />
+                    </div>
+                    <div>
+                        <label className="font-medium">Application Tags <span className="ml-2 text-xs font-normal text-gray-800 italic">
+                            (Enter tags separated by commas. Eg: Sulfur, power, acids)
+                        </span></label>
+                        <textarea
+                            value={applicationtags}
+                            rows={3}
+                            onChange={(e) => setapplicationtags(e.target.value)}
                             className="w-full rounded-lg border px-3 py-2"
                         />
                     </div>

@@ -171,6 +171,9 @@ namespace Poweradmin.Server.Controllers
                     shaftsealing = x.shaftsealing ?? "",
                     MOC = x.MOC ?? "",
                     pressure = x.pressure ?? "",
+                    applicationtags = x.applicationtags ?? "",
+                    slurryhandling = x.slurryhandling ?? "",
+                    impeller = x.impeller ?? "",
                     technicalDetails = x.technicalDetails ?? "",
                     applications = x.applications ?? "",
                     SubmergenceLength = x.SubmergenceLength ?? "",
@@ -508,6 +511,9 @@ namespace Poweradmin.Server.Controllers
                     MOC = dto.MOC,
                     technicalDetails = dto.technicalDetails,
                     pressure = dto.pressure,
+                    impeller = dto.impeller,
+                    slurryhandling = dto.slurryhandling,
+                    applicationtags = dto.applicationtags,
                     applications = dto.applications,
                     viscosity = dto.viscosity,
                     shaftsealing = dto.shaftsealing,
@@ -558,6 +564,9 @@ namespace Poweradmin.Server.Controllers
                 product.MOC = dto.MOC;
                 product.technicalDetails = dto.technicalDetails;
                 product.pressure = dto.pressure;
+                product.applicationtags = dto.applicationtags;
+                product.slurryhandling = dto.slurryhandling;
+                product.impeller = dto.impeller;
                 product.applications = dto.applications;
                 product.SubmergenceLength = dto.SubmergenceLength;
                 product.operating_frequency = dto.operating_frequency;
