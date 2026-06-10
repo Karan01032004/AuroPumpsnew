@@ -36,7 +36,7 @@ function ProductContent({ product, categoryTitle }) {
     );
 
     const pdfUrl = product.pdf ? `${IMAGE_BASE_URL}${product.pdf}` : "";
-     
+
     const closePdfModal = () => {
         setIsPdfModalOpen(false);
     };
@@ -50,7 +50,7 @@ function ProductContent({ product, categoryTitle }) {
     };
     const nameRegex = /^[A-Za-z\s]+$/; // only letters + space
     const phoneRegex = /^[0-9]{1,15}$/; // max 15 digits
- 
+
     const handleDownloadClick = () => {
         if (product.isFeatured) {
             setIsPdfModalOpen(true); // form open
@@ -80,7 +80,7 @@ function ProductContent({ product, categoryTitle }) {
                 productId: product.id
             });
 
-             
+
 
         } catch (err) {
             console.error(err);
@@ -92,23 +92,23 @@ function ProductContent({ product, categoryTitle }) {
         <>
             <div className="rounded-2xl border border-primary/10 bg-gradient-to-b from-white to-[#f7f6ff] p-4 shadow-[0_14px_34px_rgba(45,37,142,0.09)] lg:p-6">
                 <div className="mb-5 flex flex-wrap items-start justify-between gap-3 border-b border-primary/10 pb-4">
-                    
+
                     <h2 className="mt-1 text-xl font-bold text-slate-900 md:text-2xl">
                         {product.name}
                     </h2>
-                   
+
                     <div>
                         <span className="inline-flex rounded-full border border-primary/30 bg-white px-4 py-1.5 text-xs font-semibold tracking-[0.08em] text-primary uppercase">
                             {categoryTitle}
                         </span>
                     </div>
-                </div> 
+                </div>
                 <div className="block"> {/* Grid hata kar 'block' kar diya */}
 
                     {/* Image/Video Container */}
                     <div className="overflow-hidden rounded-2xl border border-primary/10 bg-white p-2 
                     lg:float-left lg:w-[45%] lg:mr-6 mb-5">
-                        
+
                         {product.image && product.image.toLowerCase().endsWith(".mp4") ? (
                             <video
                                 src={`${IMAGE_BASE_URL}${product.image}`}
@@ -128,7 +128,7 @@ function ProductContent({ product, categoryTitle }) {
                                 className="h-full w-full rounded-xl object-cover"
                             />
                         )}
-               
+
                     </div>
 
                     <div className="">
@@ -143,12 +143,12 @@ function ProductContent({ product, categoryTitle }) {
                             </button>
                         )}
 
-                         
+
                         <div
                             className="prose prose-sm max-w-none text-sm leading-relaxed text-gray md:text-base"
                             dangerouslySetInnerHTML={{ __html: product.description }}
-                        />  
-                        
+                        />
+
                     </div>
                 </div>
                 <div className="clear-both"></div>
@@ -163,8 +163,8 @@ function ProductContent({ product, categoryTitle }) {
                                 <div
                                     key={index}
                                     className={`grid items-start gap-2 px-4 py-3 lg:px-5 ${spec.label
-                                            ? "grid-cols-1 md:grid-cols-[1.1fr_1.9fr] md:items-center"
-                                            : "grid-cols-1"
+                                        ? "grid-cols-1 md:grid-cols-[1.1fr_1.9fr] md:items-center"
+                                        : "grid-cols-1"
                                         } ${index % 2 === 0 ? "bg-primary text-white" : "bg-[#f3f1ff] text-gray-700"
                                         }`}
                                 >
@@ -186,7 +186,7 @@ function ProductContent({ product, categoryTitle }) {
                         Applications
                     </h3>
 
-                   
+
 
                     <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
                         {applications.map((item) => (
@@ -210,7 +210,7 @@ function ProductContent({ product, categoryTitle }) {
                         <div className="flex items-start justify-between gap-4 border-b border-primary/10 px-5 py-4 sm:px-6">
                             <div>
                                 <h3 className="text-xl font-bold text-slate-900">
-                                   Contact us for more  details
+                                    Contact us for more  details
                                 </h3>
                                 <p className="mt-1 text-sm text-slate-500">
                                     Fill in your details to continue.
@@ -236,7 +236,7 @@ function ProductContent({ product, categoryTitle }) {
                                     <input
                                         type="text"
                                         name="name"
-                                         
+
                                         maxLength="50"
                                         value={pdfFormData.name}
                                         onChange={handlePdfFormChange}
@@ -323,7 +323,7 @@ function ProductContent({ product, categoryTitle }) {
                                     }}
                                     maxLength="30"
                                     placeholder="Enter your company name"
-                                    
+
                                     className="w-full rounded-sm border border-slate-200 px-4 py-3 text-sm outline-none transition focus:border-primary"
                                 />
                             </div>
