@@ -83,18 +83,17 @@ function ProductSidebar({
 
                             {/* PRODUCTS */}
                             {isOpen && (
-                                <ul className="ml-4 mt-3 space-y-3">
+                                <ul className="ml-2 mt-3 space-y-3">
                                     {products.map((product) => (
                                         <li
                                             key={product.id}
                                             onClick={() => onProductClick(product.id)}
-                                            className={`cursor-pointer flex gap-2
-                                            ${selectedProduct?.id === product.id
-                                                    ? "text-primary font-semibold"
-                                                    : "text-gray"
+                                            className={`cursor-pointer flex gap-2 hover:text-primary ${selectedProduct?.id === product.id
+                                                    ? "text-primary font-semibold !text-[14px]"
+                                                    : "text-gray !text-[14px]"
                                                 }`}
                                         >
-                                            <span className="w-1.5 h-1.5 bg-gray-400 rounded-full mt-2"></span>
+                                            <span className="w-1.5 h-1.5 shrink-0 bg-gray-400 rounded-full mt-2"></span>
                                             {product.name}
                                         </li>
                                     ))}
