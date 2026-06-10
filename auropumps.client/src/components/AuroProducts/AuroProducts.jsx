@@ -31,7 +31,7 @@ function AuroProducts() {
         const top =
             contentRef.current.getBoundingClientRect().top +
             window.scrollY -
-            100;
+            160;
 
         window.scrollTo({
             top,
