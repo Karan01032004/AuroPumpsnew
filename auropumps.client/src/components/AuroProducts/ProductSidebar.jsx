@@ -59,7 +59,7 @@ function ProductSidebar({
     return (
         <>
             {/* DESKTOP */}
-            <div className="hidden lg:block sticky top-6 bg-[#F4F3FF] rounded-2xl p-6">
+            <div className="hidden lg:block sticky top-6 bg-[#F4F3FF] rounded-2xl py-6 px-4">
                 <h3 className="text-lg text-primary font-semibold">
                     Products
                 </h3>
@@ -83,17 +83,17 @@ function ProductSidebar({
 
                             {/* PRODUCTS */}
                             {isOpen && (
-                                <ul className="ml-2 mt-3 space-y-3">
+                                <ul className="ml-2 lg:ml-0 mt-3 space-y-3">
                                     {products.map((product) => (
                                         <li
                                             key={product.id}
                                             onClick={() => onProductClick(product.id)}
-                                            className={`cursor-pointer flex gap-2 hover:text-primary ${selectedProduct?.id === product.id
-                                                    ? "text-primary font-semibold !text-[14px]"
-                                                    : "text-gray !text-[14px]"
+                                            className={`cursor-pointer flex gap-1 hover:text-primary ${selectedProduct?.id === product.id
+                                                ? "text-primary font-semibold text-[13px] tracking-[-0.02em] leading-4"
+                                                    : "text-gray text-[13px] tracking-[-0.02em] leading-4"
                                                 }`}
                                         >
-                                            <span className="w-1.5 h-1.5 shrink-0 bg-gray-400 rounded-full mt-2"></span>
+                                            <span className="w-1 h-1 shrink-0 bg-gray-400 rounded-full mt-2"></span>
                                             {product.name}
                                         </li>
                                     ))}
