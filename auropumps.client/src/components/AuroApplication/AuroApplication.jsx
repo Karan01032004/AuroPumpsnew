@@ -7,12 +7,13 @@ import api from "../../poweradmin/api/axios";
 import { IMAGE_BASE_URL } from "../../poweradmin/api/axios";
 function AuroApplication() {
 
-    const { categoryId, productId } = useParams();
+    const { categoryId } = useParams();
     const [applications, setApplications] = useState([]);
     const [loading, setLoading] = useState(true);
  
     const [activeCategory, setActiveCategory] = useState(null);
-    const [selectedProduct, setSelectedProduct] = useState(null);
+    //const [selectedProduct, setSelectedProduct] = useState(null);
+    const [applicationProducts, setApplicationProducts] = useState([]);
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -63,7 +64,7 @@ function AuroApplication() {
 
         const init = async () => {
 
-            if (categoryId && productId) {
+            if (categoryId ) {
 
                 const category = applications.find(
                     (cat) => cat.slug === categoryId
@@ -87,11 +88,18 @@ function AuroApplication() {
                         );
                     }
 
-                    const product = products.find(
-                        (p) => p.slug === productId
-                    );
+                    //const product = products.find(
+                    //    (p) => p.slug === productId
+                    //);
 
-                    setSelectedProduct(product || products[0]);
+                    //const products = await loadProductsByIds(
+                    //    category.product_ids
+                    //);
+
+                    //setSelectedProduct(product || products[0]);
+
+                    setApplicationProducts(products);
+
                 }
 
             } else if (!categoryId && applications.length > 0) {
@@ -100,14 +108,16 @@ function AuroApplication() {
                 const products = await loadProductsByIds(firstCategory.product_ids);
 
                 if (products.length > 0) {
-                    navigate(`/application/${firstCategory.slug}/${products[0].slug}`, { replace: true });
+                    navigate(`/application/${firstCategory.slug}`, {
+                        replace: true
+                    });
                 }
             }
         };
 
         init();
 
-    }, [categoryId, productId, loading, applications]);
+    }, [categoryId, loading, applications]);
     const loadProductsByIds = async (ids) => {
     
         try {
@@ -148,6 +158,7 @@ function AuroApplication() {
                     slug: data.productSlug,
                     image: `${IMAGE_BASE_URL}${selectedImg}`,
                     description: data.description,
+                    firstdescription: data.firstdescription,  
                     // Agar catelogue null ya empty hai toh pdf null rakhein
                     pdf: data.catelogue ? `${IMAGE_BASE_URL}${data.catelogue}` : null,
                     specifications: filteredSpecs
@@ -195,20 +206,11 @@ function AuroApplication() {
 
         <section className="py-8 sm:py-14 md:py-16 lg:py-20">
 
-          {/*  <div className="container mx-auto grid lg:grid-cols-[1.2fr_3fr] gap-5 lg:gap-7 items-start">*/}
+         
             <div className="container mx-auto items-start">
-                {/*<CategorySidebar*/}
-                {/*    categories={applications}*/}
-                {/*    activeCategory={activeCategory} */}
-                {/*    setActiveCategory={setActiveCategory}*/}
-                {/*    selectedProduct={selectedProduct}*/}
-                {/*    setSelectedProduct={setSelectedProduct}*/}
-                {/*    loadProductsByIds={loadProductsByIds}   // ✅ ADD THIS*/}
-                {/*    setApplications={setApplications}  */}
-                {/*/>*/}
-
+                
                 <ApplicationContent
-                    product={selectedProduct}
+                    applicationProducts={applicationProducts}
                     products={selectedCategory.images}
                     categoryTitle={selectedCategory.title}
                     categoryDescription={selectedCategory.description}

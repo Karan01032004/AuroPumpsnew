@@ -107,7 +107,7 @@ namespace AuroPumps.Server.Controllers
                 @"[^a-z0-9]+",
                 "-"
             ).Trim('-')
-                    //slug = x.title.Replace("&", "").Replace(" ", "-").ToLower()
+                   
                 })
                 .ToList();
 

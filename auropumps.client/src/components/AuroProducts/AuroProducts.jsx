@@ -13,6 +13,7 @@ function AuroProducts() {
     const contentRef = useRef(null);
     const hasMountedRef = useRef(false);
     //const { id } = useParams();
+    const [openCategory, setOpenCategory] = useState(null);
     const { categorySlug, productSlug } = useParams();
     const [selectedProduct, setSelectedProduct] = useState(null);
     const categoryList = Array.isArray(categories)
@@ -188,6 +189,9 @@ function AuroProducts() {
                     setActiveCategory={setActiveCategory}
                     onCategoryClick={scrollToContent}       
                     selectedProduct={selectedProduct}
+
+                    openCategory={openCategory}
+                    setOpenCategory={setOpenCategory}
                     onProductClick={fetchProductDetails}
                 />
                 <div ref={contentRef}>

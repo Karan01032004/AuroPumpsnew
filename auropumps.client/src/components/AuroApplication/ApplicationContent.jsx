@@ -3,15 +3,15 @@ import { IMAGE_BASE_URL } from "../../poweradmin/api/axios";
 import { FiDownload } from "react-icons/fi";
 
 function ApplicationContent({
-    product,
+    applicationProducts = [],
     products = [],
     categoryTitle,
     categoryDescription,
 }) {
-    if (!product) return null;
+    //if (!product) return null;
 
-    const isVideoProduct =
-        product.image && product.image.toLowerCase().endsWith(".mp4");
+    //const isVideoProduct =
+    //    product.image && product.image.toLowerCase().endsWith(".mp4");
 
     const [currentIndex, setCurrentIndex] = useState(0);
     const [itemsPerView, setItemsPerView] = useState(3);
@@ -158,165 +158,206 @@ function ApplicationContent({
                                 className="w-full rounded-lg border border-primary/20 bg-white px-4 py-3 text-sm font-medium text-primary"
                                 onChange={(e) => {
                                     if (e.target.value) {
-                                        window.location.href = e.target.value;
+                                        //window.location.href = e.target.value;
+                                        document
+                                            .querySelector(e.target.value)
+                                            ?.scrollIntoView({
+                                                behavior: "smooth"
+                                            });
                                     }
                                 }}
                                 defaultValue=""
                             >
-                                <option value="" disabled>
-                                    Select Product
-                                </option>
-                                <option value="#acc-end-suction-pumps">
-                                    ACC - END SUCTION PUMPS
-                                </option>
-                                <option value="#asp-non-clog-self-priming-pumps">
-                                    ASP - NON-CLOG SELF PRIMING PUMPS
-                                </option>
-                                <option value="#app-non-metallic-pp-pumps">
-                                    APP - NON METALLIC PP PUMPS
-                                </option>
-                                <option value="#va-multistage-self-priming-pumps">
-                                    VA - MULTISTAGE SELF PRIMING PUMPS
-                                </option>
+                                {/*<option value="" disabled>*/}
+                                {/*    Select Product*/}
+                                {/*</option>*/}
+                                {/*<option value="#acc-end-suction-pumps">*/}
+                                {/*    ACC - END SUCTION PUMPS*/}
+                                {/*</option>*/}
+                                {/*<option value="#asp-non-clog-self-priming-pumps">*/}
+                                {/*    ASP - NON-CLOG SELF PRIMING PUMPS*/}
+                                {/*</option>*/}
+                                {/*<option value="#app-non-metallic-pp-pumps">*/}
+                                {/*    APP - NON METALLIC PP PUMPS*/}
+                                {/*</option>*/}
+                                {/*<option value="#va-multistage-self-priming-pumps">*/}
+                                {/*    VA - MULTISTAGE SELF PRIMING PUMPS*/}
+                                {/*</option>*/}
+                                {applicationProducts.map(product => (
+
+                                    <option
+                                        key={product.id}
+                                        value={`#product-${product.slug}`}
+                                    >
+                                        {product.name}
+                                    </option>
+
+                                ))}
                             </select>
                         </div>
 
                         {/* Desktop Buttons */}
+                        {/*<div className="hidden md:flex flex-wrap items-center justify-center gap-2 sm:gap-3">*/}
+                        {/*    <a href="#acc-end-suction-pumps" className="rounded-full border border-primary/20 bg-white px-4 py-2 text-[11px] font-semibold tracking-[0.1em] text-primary uppercase transition hover:border-primary/40 hover:bg-primary/5">*/}
+                        {/*        ACC - END SUCTION PUMPS*/}
+                        {/*    </a>*/}
+
+                        {/*    <a href="#asp-non-clog-self-priming-pumps" className="rounded-full border border-primary/20 bg-white px-4 py-2 text-[11px] font-semibold tracking-[0.1em] text-primary uppercase transition hover:border-primary/40 hover:bg-primary/5">*/}
+                        {/*        ASP - NON-CLOG SELF PRIMING PUMPS*/}
+                        {/*    </a>*/}
+
+                        {/*    <a href="#app-non-metallic-pp-pumps" className="rounded-full border border-primary/20 bg-white px-4 py-2 text-[11px] font-semibold tracking-[0.1em] text-primary uppercase transition hover:border-primary/40 hover:bg-primary/5">*/}
+                        {/*        APP - NON METALLIC PP PUMPS*/}
+                        {/*    </a>*/}
+
+                        {/*    <a href="#va-multistage-self-priming-pumps" className="rounded-full border border-primary/20 bg-white px-4 py-2 text-[11px] font-semibold tracking-[0.1em] text-primary uppercase transition hover:border-primary/40 hover:bg-primary/5">*/}
+                        {/*        VA - MULTISTAGE SELF PRIMING PUMPS*/}
+                        {/*    </a>*/}
+                        {/*</div>*/}
                         <div className="hidden md:flex flex-wrap items-center justify-center gap-2 sm:gap-3">
-                            <a href="#acc-end-suction-pumps" className="rounded-full border border-primary/20 bg-white px-4 py-2 text-[11px] font-semibold tracking-[0.1em] text-primary uppercase transition hover:border-primary/40 hover:bg-primary/5">
-                                ACC - END SUCTION PUMPS
-                            </a>
 
-                            <a href="#asp-non-clog-self-priming-pumps" className="rounded-full border border-primary/20 bg-white px-4 py-2 text-[11px] font-semibold tracking-[0.1em] text-primary uppercase transition hover:border-primary/40 hover:bg-primary/5">
-                                ASP - NON-CLOG SELF PRIMING PUMPS
-                            </a>
+                            {applicationProducts.map(product => (
 
-                            <a href="#app-non-metallic-pp-pumps" className="rounded-full border border-primary/20 bg-white px-4 py-2 text-[11px] font-semibold tracking-[0.1em] text-primary uppercase transition hover:border-primary/40 hover:bg-primary/5">
-                                APP - NON METALLIC PP PUMPS
-                            </a>
+                                <a
+                                    key={product.id}
+                                    href={`#product-${product.slug}`}
+                                    className="rounded-full border border-primary/20 bg-white px-4 py-2 text-[11px] font-semibold tracking-[0.1em] text-primary uppercase"
+                                >
+                                    {product.name}
+                                </a>
 
-                            <a href="#va-multistage-self-priming-pumps" className="rounded-full border border-primary/20 bg-white px-4 py-2 text-[11px] font-semibold tracking-[0.1em] text-primary uppercase transition hover:border-primary/40 hover:bg-primary/5">
-                                VA - MULTISTAGE SELF PRIMING PUMPS
-                            </a>
+                            ))}
+
                         </div>
                     </div>
                 </div>
             </section>
-            <section className="rounded-xl border border-slate-200 bg-[#F7F5FF] shadow-[0_25px_60px_-40px_rgba(45,37,142,0.4)]" id="va-multistage-self-priming-pumps">
-                <div className="border-b rounded-t-xl border-primary/10 bg-white px-5 py-7 sm:px-7 lg:px-10">
-                   
+            {applicationProducts.map(product => {
+                const isVideoProduct =
+                    product.image?.toLowerCase().endsWith(".mp4");
 
-                    <div className="flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between">
-                        <div>
-                            <h3 className="text-3xl font-bold uppercase tracking-tight text-slate-900">
-                                {product.name}
-                            </h3>
-                            {product.firstdescription && (
-                                <p className="mt-3 max-w-3xl text-base leading-7 text-slate-600">
-                                    {product.firstdescription}
-                                </p>
-                            )}
+                return (
+
+                    <section key={product.id}
+
+                        id={`product-${product.slug}`} className="rounded-xl border border-slate-200 bg-[#F7F5FF] shadow-[0_25px_60px_-40px_rgba(45,37,142,0.4)]"   >
+
+                        <div className="border-b rounded-t-xl border-primary/10 bg-white px-5 py-7 sm:px-7 lg:px-10">
+
+
+                            <div className="flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between">
+                                <div>
+                                    <h3 className="text-3xl font-bold uppercase tracking-tight text-slate-900">
+                                        {product.name}
+                                    </h3>
+                                    {product.firstdescription && (
+                                        <p className="mt-3 max-w-3xl text-base leading-7 text-slate-600">
+                                            {product.firstdescription}
+                                        </p>
+                                    )}
+                                </div>
+
+                                {product.pdf && product.pdf !== IMAGE_BASE_URL && (
+                                    <a
+                                        href={product.pdf}
+                                        target="_blank"
+                                        rel="noreferrer"
+                                        className="inline-flex items-center gap-2 rounded-full border border-primary bg-primary px-5 py-3 text-sm font-semibold uppercase tracking-[0.08em] text-white transition hover:opacity-90"
+                                    >
+                                        <FiDownload className="h-4 w-4" />
+                                        Download PDF
+                                    </a>
+                                )}
+                            </div>
                         </div>
 
-                        {product.pdf && product.pdf !== IMAGE_BASE_URL && (
-                            <a
-                                href={product.pdf}
-                                target="_blank"
-                                rel="noreferrer"
-                                className="inline-flex items-center gap-2 rounded-full border border-primary bg-primary px-5 py-3 text-sm font-semibold uppercase tracking-[0.08em] text-white transition hover:opacity-90"
-                            >
-                                <FiDownload className="h-4 w-4" />
-                                Download PDF
-                            </a>
-                        )}
-                    </div>
-                </div>
-
-                <div className="px-5 py-6 sm:px-7 lg:px-10 lg:py-8">
-                    <div className="grid gap-8 xl:grid-cols-[minmax(320px,0.9fr)_minmax(0,1.3fr)]">
-                        <div className="xl:sticky xl:top-28 xl:self-start">
-                            <div
-                                className={`overflow-hidden ${isVideoProduct
-                                        ? ""
-                                    : "rounded-xl border border-slate-200 bg-white shadow-sm"
-                                    }`}
-                            >
-                                <div
-                                    className={`flex min-h-[300px] items-center justify-center ${
-                                        isVideoProduct
-                                            ? " p-0 "
-                                        : "bg-gradient-to-br from-white via-[#F7F5FF] to-[#EEF4FF] p-4  rounded-[20px]"
-                                    }`}
-                                >
-                                        {isVideoProduct ? (
-                                            <video
-                                                src={product.image}
-                                            className="block h-full max-h-[520px] w-full bg-white object-contain rounded-xl border border-slate-200 shadow-sm"
-                                                controls
-                                                autoPlay
-                                                muted
-                                                loop
-                                            playsInline
+                        <div className="px-5 py-6 sm:px-7 lg:px-10 lg:py-8">
+                            <div className="grid gap-8 xl:grid-cols-[minmax(320px,0.9fr)_minmax(0,1.3fr)]">
+                                <div className="xl:sticky xl:top-28 xl:self-start">
+                                    <div
+                                        className={`overflow-hidden ${isVideoProduct
+                                            ? ""
+                                            : "rounded-xl border border-slate-200 bg-white shadow-sm"
+                                            }`}
+                                    >
+                                        <div
+                                            className={`flex min-h-[300px] items-center justify-center ${isVideoProduct
+                                                    ? " p-0 "
+                                                    : "bg-gradient-to-br from-white via-[#F7F5FF] to-[#EEF4FF] p-4  rounded-[20px]"
+                                                }`}
                                         >
-                                            Your browser does not support the video tag.
-                                        </video>
-                                    ) : (
-                                        <img
-                                            src={product.image}
-                                            alt={product.name}
-                                            className="w-full object-contain max-h-[520px]"
-                                        />
+                                            {isVideoProduct ? (
+                                                <video
+                                                    src={product.image}
+                                                    className="block h-full max-h-[520px] w-full bg-white object-contain rounded-xl border border-slate-200 shadow-sm"
+                                                    controls
+                                                    autoPlay
+                                                    muted
+                                                    loop
+                                                    playsInline
+                                                >
+                                                    Your browser does not support the video tag.
+                                                </video>
+                                            ) : (
+                                                <img
+                                                    src={product.image}
+                                                    alt={product.name}
+                                                    className="w-full object-contain max-h-[520px]"
+                                                />
+                                            )}
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div className="space-y-6">
+                                    <div className="rounded-xl border border-white/70 bg-white p-6 shadow-sm">
+                                        <div className="inline-flex rounded-full border border-primary/15 bg-primary/5 px-4 py-1.5 text-sm font-semibold uppercase tracking-[0.12em] text-primary">
+                                            {product.name}
+                                        </div>
+
+                                        <p className="mt-5 text-base leading-8 text-slate-600" dangerouslySetInnerHTML={{ __html: product.description }}>
+
+                                        </p>
+                                    </div>
+
+                                    {product.specifications?.length > 0 && (
+                                        <div className="overflow-hidden rounded-xl border border-slate-200 bg-white shadow-sm">
+                                            <div className="border-b border-slate-200 px-6 py-4">
+                                                <h4 className="text-lg font-bold uppercase tracking-[0.08em] text-slate-900">
+                                                    Technical Specifications
+                                                </h4>
+                                            </div>
+
+                                            <div className="divide-y divide-slate-200">
+                                                {product.specifications.map((spec, index) => {
+                                                    const isDetailsRow = spec.label === "Details";
+
+                                                    return (
+                                                        <div
+                                                            key={`${spec.label}-${index}`}
+                                                            className={`grid gap-2 px-6 py-4 ${isDetailsRow ? "grid-cols-1" : "md:grid-cols-[220px_minmax(0,1fr)]"} ${index % 2 === 0 ? "bg-white" : "bg-slate-50"}`}
+                                                        >
+                                                            {!isDetailsRow && (
+                                                                <div className="text-sm font-semibold uppercase tracking-[0.08em] text-primary">
+                                                                    {spec.label}
+                                                                </div>
+                                                            )}
+                                                            <div className="text-sm leading-7 text-slate-700 sm:text-base">
+                                                                {spec.value}
+                                                            </div>
+                                                        </div>
+                                                    );
+                                                })}
+                                            </div>
+                                        </div>
                                     )}
                                 </div>
                             </div>
                         </div>
+                    </section>
+                );
 
-                        <div className="space-y-6">
-                            <div className="rounded-xl border border-white/70 bg-white p-6 shadow-sm">
-                                <div className="inline-flex rounded-full border border-primary/15 bg-primary/5 px-4 py-1.5 text-sm font-semibold uppercase tracking-[0.12em] text-primary">
-                                    {product.name}
-                                </div>
-
-                                <p className="mt-5 text-base leading-8 text-slate-600" dangerouslySetInnerHTML={{ __html: product.description }}>
-                                   
-                                </p>
-                            </div>
-
-                            {product.specifications?.length > 0 && (
-                                <div className="overflow-hidden rounded-xl border border-slate-200 bg-white shadow-sm">
-                                    <div className="border-b border-slate-200 px-6 py-4">
-                                        <h4 className="text-lg font-bold uppercase tracking-[0.08em] text-slate-900">
-                                            Technical Specifications
-                                        </h4>
-                                    </div>
-
-                                    <div className="divide-y divide-slate-200">
-                                        {product.specifications.map((spec, index) => {
-                                            const isDetailsRow = spec.label === "Details";
-
-                                            return (
-                                                <div
-                                                    key={`${spec.label}-${index}`}
-                                                    className={`grid gap-2 px-6 py-4 ${isDetailsRow ? "grid-cols-1" : "md:grid-cols-[220px_minmax(0,1fr)]"} ${index % 2 === 0 ? "bg-white" : "bg-slate-50"}`}
-                                                >
-                                                    {!isDetailsRow && (
-                                                        <div className="text-sm font-semibold uppercase tracking-[0.08em] text-primary">
-                                                            {spec.label}
-                                                        </div>
-                                                    )}
-                                                    <div className="text-sm leading-7 text-slate-700 sm:text-base">
-                                                        {spec.value}
-                                                    </div>
-                                                </div>
-                                            );
-                                        })}
-                                    </div>
-                                </div>
-                            )}
-                        </div>
-                    </div>
-                </div>
-            </section>
+            })}
         </div>
     );
 }

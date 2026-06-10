@@ -36,7 +36,10 @@ export default function PumpCategories() {
                         return {
                             id: app.id,
                             title: app.title,
-                            slug: app.title.toLowerCase().replace(/[^a-z0-9]+/g, "-"),
+                            slug: app.title.replace(/&/g, "")
+                                .toLowerCase()
+                                .replace(/[^a-z0-9]+/g, "-")
+                                .replace(/^-+|-+$/g, ""),
                             description: app.description,
                             image: `${IMAGE_BASE_URL}${app.image1}`, //  application image
                             products

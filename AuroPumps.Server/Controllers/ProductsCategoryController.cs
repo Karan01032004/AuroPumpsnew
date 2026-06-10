@@ -26,7 +26,11 @@ namespace Poweradmin.Server.Controllers
                 {
                     id = x.id,
                     title = x.title,
-                       slug = x.title.ToLower().Replace(" ", "-")
+                       slug = System.Text.RegularExpressions.Regex.Replace(
+                x.title.Replace("&", "").ToLower(),
+                @"[^a-z0-9]+",
+                "-"
+            ).Trim('-')
                 })
                 .ToList();
 

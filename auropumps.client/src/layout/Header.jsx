@@ -1,7 +1,7 @@
 ﻿import { useState, useEffect } from "react";
 import { NavLink, useLocation } from "react-router-dom";
 import { FiChevronDown } from "react-icons/fi";
-import  api  from "../poweradmin/api/axios";
+import api  from "../poweradmin/api/axios";
 
 const Header = () => {
     const location = useLocation();
@@ -399,13 +399,22 @@ const Header = () => {
                                                 <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4 text-sm">
 
                                                     {applications.map((app) => {
-                                                        const appProducts = getProductsByIds(app.product_ids);
+                                                        //const appProducts = getProductsByIds(app.product_ids);
 
                                                         return (
                                                             <div key={app.id}>
-                                                                <h4 className="font-semibold   pb-2">
+
+                                                                <NavLink
+                                                                    to={`/application/${app.slug}`}
+                                                                    onClick={closeAllMenus}
+                                                                    className="font-semibold pb-2 block"
+                                                                >
                                                                     {app.title}
-                                                                </h4>
+                                                                </NavLink>
+
+                                                                {/*<h4 className="font-semibold   pb-2">*/}
+                                                                {/*    {app.title}*/}
+                                                                {/*</h4>*/}
 
                                                                 {/*<ul className="space-y-2 text-white/80">*/}
                                                                 {/*    {appProducts.map((product) => (*/}

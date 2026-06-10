@@ -35,7 +35,12 @@ namespace Poweradmin.Server.Controllers
                         image = x.image1,
                         image2=x.image2,
                           x.CategoryId,
-                    slug = x.title.Replace(" ", "-").ToLower()
+                    slug = System.Text.RegularExpressions.Regex.Replace(
+                x.title.Replace("&", "").ToLower(),
+                @"[^a-z0-9]+",
+                "-"
+            ).Trim('-')
+                    
                 })
                 .ToList();
 
@@ -69,13 +74,21 @@ namespace Poweradmin.Server.Controllers
         public IActionResult GetBySlug(string slug)
         {
             var product = _db.Product
-                .Where(x => x.title.ToLower().Replace(" ", "-") == slug).OrderBy(x => x.sortorder)
+                .Where(x => System.Text.RegularExpressions.Regex.Replace(
+                x.title.Replace("&", "").ToLower(),
+                @"[^a-z0-9]+",
+                "-"
+            ).Trim('-') == slug).OrderBy(x => x.sortorder)
                 .Select(x => new {
                     x.id,
                     x.title,
                     image2 = x.image2 ?? "",
                     x.description,
-                    productSlug = x.title.Replace(" ", "-").ToLower()
+                    productSlug = System.Text.RegularExpressions.Regex.Replace(
+                x.title.Replace("&", "").ToLower(),
+                @"[^a-z0-9]+",
+                "-"
+            ).Trim('-')
                 })
                 .FirstOrDefault();
 
@@ -96,7 +109,11 @@ namespace Poweradmin.Server.Controllers
                     id = x.id,
                     productName = x.title,
                     visible = x.Visible,
-                    slug = x.title.Replace(" ", "-").ToLower()
+                    slug = System.Text.RegularExpressions.Regex.Replace(
+                x.title.Replace("&", "").ToLower(),
+                @"[^a-z0-9]+",
+                "-"
+            ).Trim('-')
                 })
                 .ToList();
 
@@ -124,7 +141,11 @@ namespace Poweradmin.Server.Controllers
                     // Category table se slug uthao
                     firstCatSlug = _db.ProductsCategory
                         .Where(c => c.id == catId)
-                        .Select(c => c.title.ToLower().Replace(" ", "-"))
+                        .Select(c => System.Text.RegularExpressions.Regex.Replace(
+                c.title.Replace("&", "").ToLower(),
+                @"[^a-z0-9]+",
+                "-"
+            ).Trim('-'))
                         .FirstOrDefault() ?? "";
                 }
             }
@@ -161,7 +182,11 @@ namespace Poweradmin.Server.Controllers
 
                     pageIETitle = x.PageIETitle ?? "",
                     meta = x.Meta ?? "",
-                    productSlug = x.title.Replace(" ", "-").ToLower(),
+                    productSlug = System.Text.RegularExpressions.Regex.Replace(
+                x.title.Replace("&", "").ToLower(),
+                @"[^a-z0-9]+",
+                "-"
+            ).Trim('-'),
                     categorySlug = firstCatSlug
                 })
                 .FirstOrDefault();

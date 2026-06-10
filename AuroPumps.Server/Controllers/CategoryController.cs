@@ -52,7 +52,11 @@ namespace Poweradmin.Server.Controllers
                     id = x.id,
                     categoryName = x.title,
                     visible = x.isvisible,
-                     slug = x.title.ToLower().Replace(" ", "-")
+                     slug = System.Text.RegularExpressions.Regex.Replace(
+                x.title.Replace("&", "").ToLower(),
+                @"[^a-z0-9]+",
+                "-"
+            ).Trim('-')
                 })
                 .ToList();
 
