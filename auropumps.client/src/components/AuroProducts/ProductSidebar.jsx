@@ -90,7 +90,7 @@ function ProductSidebar({
                                             onClick={() => onProductClick(product.id)}
                                             className={`cursor-pointer flex gap-1 hover:text-primary ${selectedProduct?.id === product.id
                                                 ? "text-primary font-semibold text-[13px] tracking-[-0.02em] leading-4"
-                                                    : "text-gray text-[13px] tracking-[-0.02em] leading-4"
+                                                : "text-gray text-[13px] tracking-[-0.02em] leading-4"
                                                 }`}
                                         >
                                             <span className="w-1 h-1 shrink-0 bg-gray-400 rounded-full mt-2"></span>

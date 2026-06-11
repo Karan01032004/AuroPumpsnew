@@ -73,9 +73,9 @@ function ApplicationContent({
 
     return (
         <div className="space-y-10">
-            <section className="overflow-hidden rounded-[28px] border border-slate-200 bg-white shadow-[0_25px_60px_-40px_rgba(15,23,42,0.35)]">
-                <div className="border-b border-slate-200 bg-gradient-to-r from-[#F5F3FF] via-white to-[#EEF4FF] px-5 py-8 sm:px-7 lg:px-10 lg:py-10">
-                    <div className="grid gap-8 lg:grid-cols-[minmax(0,1.45fr)_minmax(320px,0.8fr)] lg:items-center">
+            <section className="rounded-[28px] border border-slate-200 bg-white shadow-[0_25px_60px_-40px_rgba(15,23,42,0.35)]">
+                <div className="border-b border-slate-200 bg-gradient-to-r from-[#F5F3FF] via-white to-[#EEF4FF] px-5 py-8 sm:px-7 lg:px-10 lg:py-10 rounded-[28px]">
+                    <div className="grid gap-8 lg:grid-cols-[minmax(0,1.45fr)_minmax(320px,0.8fr)] lg:items-start">
                         <div>
                             <span className="inline-flex rounded-full border border-primary/15 bg-primary/10 px-4 py-2 text-[11px] font-bold uppercase tracking-[0.2em] text-primary">
                                 Application Area
@@ -85,11 +85,6 @@ function ApplicationContent({
                                 {categoryTitle}
                             </h2>
 
-                            {/*{categoryDescription && (*/}
-                            {/*    <p className="mt-4 max-w-4xl text-sm leading-relaxed text-gray md:text-base">*/}
-                            {/*        dangerouslySetInnerHTML={{ __html: categoryDescription }}*/}
-                            {/*    </p>*/}
-                            {/*)}*/}
                             {categoryDescription && (
                                 <div
                                     className="mt-4 max-w-4xl text-sm leading-relaxed text-gray md:text-base prose prose-slate"
@@ -99,7 +94,7 @@ function ApplicationContent({
                         </div>
 
                         {galleryItems[0] && (
-                            <div className="mx-auto w-full max-w-[420px]">
+                            <div className="mx-auto w-full max-w-[420px] lg:sticky lg:top-24 lg:self-start">
                                 <div className="overflow-hidden rounded-[24px] border border-white/70 bg-white/90 p-4 shadow-[0_20px_50px_-35px_rgba(45,37,142,0.45)]">
                                     <div className="overflow-hidden rounded-[20px] bg-gradient-to-br from-[#FFF8E8] via-white to-[#F3F1FF]">
                                         <img
@@ -113,9 +108,7 @@ function ApplicationContent({
                         )}
                     </div>
                 </div>
- 
             </section>
-
 
             <section>
 
@@ -182,10 +175,11 @@ function ApplicationContent({
 
                 return (
 
-                    <section key={product.id}
-
-                        id={`product-${product.slug}`} className="rounded-xl border border-slate-200 bg-[#F7F5FF] shadow-[0_25px_60px_-40px_rgba(45,37,142,0.4)]"   >
-
+                    <section
+                        key={product.id}
+                        id={`product-${product.slug}`}
+                        className="scroll-mt-40 rounded-xl border border-slate-200 bg-[#F7F5FF] shadow-[0_25px_60px_-40px_rgba(45,37,142,0.4)]"
+                    >
                         <div className="border-b rounded-t-xl border-primary/10 bg-white px-5 py-7 sm:px-7 lg:px-10">
 
 
@@ -216,8 +210,11 @@ function ApplicationContent({
                         </div>
 
                         <div className="px-5 py-6 sm:px-7 lg:px-10 lg:py-8">
-                            <div className="grid gap-8 xl:grid-cols-[minmax(320px,0.9fr)_minmax(0,1.3fr)]">
-                                <div className="xl:sticky xl:top-28 xl:self-start">
+                            <div className="grid gap-8 xl:grid-cols-[minmax(320px,0.9fr)_minmax(0,1.3fr)] xl:items-start">
+
+                                <div className="xl:sticky xl:self-start"
+                                    style={{ top: '2rem' }}
+                                >
                                     <div
                                         className={`overflow-hidden ${isVideoProduct
                                             ? ""
