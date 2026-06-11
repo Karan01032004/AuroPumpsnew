@@ -157,64 +157,54 @@ const PumpsRight = () => {
             <div className="relative">
                 <div className="overflow-hidden">
                     <div
-                        className={`flex ${isTransitioning
-                                ? "transition-transform duration-700 ease-in-out"
-                                : ""
-                            }`}
+                        className={`flex ${isTransitioning ? "transition-transform duration-700 ease-in-out" : ""}`}
                         style={{
-                            transform: `translateX(-${currentIndex * (100 / itemsPerView)
-                                }%)`,
+                            transform: `translateX(-${currentIndex * (100 / itemsPerView)}%)`,
                         }}
                     >
                         {extendedProducts.map((product, index) => {
-                            // 1. Media Priority: Pehle image1 check karo, agar null/empty hai toh image2 lo
-                            const displayMedia = product.image || product.image2  ;
-
-                            // 2. Check karo ki select kiya hua media video hai ya nahi
+                            const displayMedia = product.image || product.image2;
                             const isVideo = displayMedia?.toLowerCase().endsWith(".mp4");
 
                             return (
                                 <div
                                     key={index}
                                     className="flex-shrink-0 px-3"
-                                    style={{
-                                        width: `${100 / itemsPerView}%`,
-                                    }}
+                                    style={{ width: `${100 / itemsPerView}%` }}
                                 >
                                     <div
                                         onClick={() => navigate(`/products/${activeCategoryObj?.slug}/${product.slug}`)}
-                                        className="bg-white rounded-xl shadow-sm p-4 hover:shadow-md transition h-full cursor-pointer flex flex-col justify-between"
+                                        className="bg-white rounded-xl shadow-sm p-4 hover:shadow-md transition cursor-pointer h-full grid grid-rows-[208px_auto]"
                                     >
-                                        <div className="media-wrapper w-full h-48 flex items-center justify-center overflow-hidden rounded-lg">
+                                        {/* Fixed-height image area — always same size */}
+                                        <div className="w-full h-52 flex items-center justify-center overflow-hidden rounded-lg bg-gray-50">
                                             {displayMedia ? (
                                                 isVideo ? (
                                                     <video
                                                         src={`${IMAGE_BASE_URL}${displayMedia}`}
-                                                        className="w-full h-48 object-contain"
+                                                        className="w-full h-full object-contain"
                                                         autoPlay
                                                         muted
                                                         loop
                                                         playsInline
-                                                    >
-                                                        Your browser does not support the video tag.
-                                                    </video>
+                                                    />
                                                 ) : (
                                                     <img
                                                         src={`${IMAGE_BASE_URL}${displayMedia}`}
                                                         alt={product.name || product.title}
-                                                        className="w-full h-48 object-contain"
+                                                        className="w-full h-full object-contain"
                                                     />
                                                 )
                                             ) : (
-                                                /* Agar koi bhi image na mile toh fallback */
-                                                <div className="w-full h-48 bg-gray-200 flex items-center justify-center text-xs text-gray-500">
+                                                <div className="w-full h-full flex items-center justify-center text-xs text-gray-400">
                                                     No Image
                                                 </div>
                                             )}
                                         </div>
-                                       
-                                        <h4 className="mt-4 border-t border-gray-200 pt-2 text-sm font-semibold text-secondary text-center">
-                                            {product.name || product.title} 
+
+                                        {/* Title always pinned to bottom */}
+                                        <h4 className="mt-4 border-t border-gray-200 pt-3 text-sm font-semibold text-secondary text-center leading-snug">
+                                            {product.name || product.title}
                                         </h4>
                                     </div>
                                 </div>
