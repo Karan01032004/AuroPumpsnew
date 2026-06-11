@@ -65,6 +65,7 @@ function AuroProducts() {
                     { label: "Viscosity", value: data.viscosity },
                     { label: "shaft sealing options", value: data.shaftsealing },
                     { label: "Pressure", value: data.pressure },
+                    { label: "MECHANICAL SEAL", value: data.mechanicalseal },
                     { label: "Impeller", value: data.impeller },
                     { label: "Slurry Handling", value: data.slurryhandling },
                     { label: "Submergence Length", value: data.submergenceLength },

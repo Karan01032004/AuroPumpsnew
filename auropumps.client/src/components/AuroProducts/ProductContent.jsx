@@ -196,168 +196,168 @@ function ProductContent({ product, categoryTitle }) {
 
             </div>
 
-            {isPdfModalOpen && (
-                <div className="fixed inset-0 z-[70] flex items-center justify-center bg-black/50 p-4 backdrop-blur-sm">
-                    <div className="w-full max-w-2xl rounded-xl bg-white shadow-2xl">
-                        <div className="flex items-start justify-between gap-4 border-b border-primary/10 px-5 py-4 sm:px-6">
-                            <div>
-                                <h3 className="text-xl font-bold text-slate-900">
-                                    Contact us for more  details
-                                </h3>
-                                <p className="mt-1 text-sm text-slate-500">
-                                    Fill in your details to continue.
-                                </p>
+                {isPdfModalOpen && (
+                    <div className="fixed inset-0 z-[70] flex items-center justify-center bg-black/50 p-4 backdrop-blur-sm">
+                        <div className="w-full max-w-2xl rounded-xl bg-white shadow-2xl">
+                            <div className="flex items-start justify-between gap-4 border-b border-primary/10 px-5 py-4 sm:px-6">
+                                <div>
+                                    <h3 className="text-xl font-bold text-slate-900">
+                                        Contact us for more  details
+                                    </h3>
+                                    <p className="mt-1 text-sm text-slate-500">
+                                        Fill in your details to continue.
+                                    </p>
+                                </div>
+
+                                <button
+                                    type="button"
+                                    onClick={closePdfModal}
+                                    className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-slate-200 text-slate-500 transition hover:border-primary hover:text-primary"
+                                    aria-label="Close modal"
+                                >
+                                    x
+                                </button>
                             </div>
 
-                            <button
-                                type="button"
-                                onClick={closePdfModal}
-                                className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-slate-200 text-slate-500 transition hover:border-primary hover:text-primary"
-                                aria-label="Close modal"
-                            >
-                                x
-                            </button>
-                        </div>
+                            <form onSubmit={handlePdfSubmit} className="space-y-4 px-5 py-5 sm:px-6 sm:py-6">
+                                <div className="grid gap-4 md:grid-cols-2">
+                                    <div>
+                                        <label className="mb-1 block text-sm font-semibold text-slate-700">
+                                            Name <span className="text-red-600">*</span>
+                                        </label>
+                                        <input
+                                            type="text"
+                                            name="name"
 
-                        <form onSubmit={handlePdfSubmit} className="space-y-4 px-5 py-5 sm:px-6 sm:py-6">
-                            <div className="grid gap-4 md:grid-cols-2">
+                                            maxLength="50"
+                                            value={pdfFormData.name}
+                                            onChange={handlePdfFormChange}
+                                            onKeyPress={(e) => {
+                                                if (!/[a-zA-Z\s]/.test(e.key)) {
+                                                    e.preventDefault();
+                                                }
+                                            }}
+                                            placeholder="Enter your name"
+                                            required
+                                            className="w-full rounded-sm border border-slate-200 px-4 py-3 text-sm outline-none transition focus:border-primary"
+                                        />
+                                    </div>
+
+                                    <div>
+                                        <label className="mb-1 block text-sm font-semibold text-slate-700">
+                                            Email ID <span className="text-red-600">*</span>
+                                        </label>
+                                        <input
+                                            type="email"
+                                            name="email"
+                                            value={pdfFormData.email}
+                                            onChange={handlePdfFormChange}
+                                            placeholder="Enter your email"
+                                            required
+                                            className="w-full rounded-sm border border-slate-200 px-4 py-3 text-sm outline-none transition focus:border-primary"
+                                        />
+                                        {/*<p className="mt-2 text-xs text-slate-500">*/}
+                                        {/*    *You'll get the details at the email you provide here. */}
+                                        {/*</p>*/}
+                                    </div>
+
+                                    <div>
+                                        <label className="mb-1 block text-sm font-semibold text-slate-700">
+                                            Product Name
+                                        </label>
+                                        <input
+                                            type="text"
+                                            value={product.name}
+                                            disabled
+                                            className="w-full cursor-not-allowed rounded-sm border border-slate-200 bg-slate-100 px-4 py-3 text-sm text-slate-500 outline-none"
+                                        />
+                                    </div>
+
+                                    <div>
+                                        <label className="mb-1 block text-sm font-semibold text-slate-700">
+                                            Phone No <span className="text-red-600">*</span>
+                                        </label>
+                                        <input
+                                            type="tel"
+                                            name="phone"
+                                            value={pdfFormData.phone}
+                                            onChange={handlePdfFormChange}
+                                            onKeyPress={(e) => {
+                                                if (!/[0-9]/.test(e.key)) {
+                                                    e.preventDefault();
+                                                }
+                                            }}
+
+                                            onInput={(e) => {
+                                                e.target.value = e.target.value.replace(/\D/g, '').slice(0, 15);
+                                            }}
+
+                                            placeholder="Enter your phone number"
+                                            required
+                                            className="w-full rounded-sm border border-slate-200 px-4 py-3 text-sm outline-none transition focus:border-primary"
+                                        />
+                                    </div>
+                                </div>
+
                                 <div>
                                     <label className="mb-1 block text-sm font-semibold text-slate-700">
-                                        Name <span className="text-red-600">*</span>
+                                        Company Name <span className="text-red-600">*</span>
                                     </label>
                                     <input
                                         type="text"
-                                        name="name"
-
-                                        maxLength="50"
-                                        value={pdfFormData.name}
+                                        name="companyname"
+                                        value={pdfFormData.companyname}
                                         onChange={handlePdfFormChange}
                                         onKeyPress={(e) => {
                                             if (!/[a-zA-Z\s]/.test(e.key)) {
                                                 e.preventDefault();
                                             }
                                         }}
-                                        placeholder="Enter your name"
-                                        required
+                                        maxLength="30"
+                                        placeholder="Enter your company name"
+
                                         className="w-full rounded-sm border border-slate-200 px-4 py-3 text-sm outline-none transition focus:border-primary"
                                     />
                                 </div>
-
                                 <div>
                                     <label className="mb-1 block text-sm font-semibold text-slate-700">
-                                        Email ID <span className="text-red-600">*</span>
+                                        Message
                                     </label>
-                                    <input
-                                        type="email"
-                                        name="email"
-                                        value={pdfFormData.email}
-                                        onChange={handlePdfFormChange}
-                                        placeholder="Enter your email"
-                                        required
-                                        className="w-full rounded-sm border border-slate-200 px-4 py-3 text-sm outline-none transition focus:border-primary"
-                                    />
-                                    {/*<p className="mt-2 text-xs text-slate-500">*/}
-                                    {/*    *You'll get the details at the email you provide here. */}
-                                    {/*</p>*/}
-                                </div>
-
-                                <div>
-                                    <label className="mb-1 block text-sm font-semibold text-slate-700">
-                                        Product Name
-                                    </label>
-                                    <input
-                                        type="text"
-                                        value={product.name}
-                                        disabled
-                                        className="w-full cursor-not-allowed rounded-sm border border-slate-200 bg-slate-100 px-4 py-3 text-sm text-slate-500 outline-none"
-                                    />
-                                </div>
-
-                                <div>
-                                    <label className="mb-1 block text-sm font-semibold text-slate-700">
-                                        Phone No <span className="text-red-600">*</span>
-                                    </label>
-                                    <input
-                                        type="tel"
-                                        name="phone"
-                                        value={pdfFormData.phone}
+                                    <textarea
+                                        name="message"
+                                        value={pdfFormData.message}
                                         onChange={handlePdfFormChange}
                                         onKeyPress={(e) => {
-                                            if (!/[0-9]/.test(e.key)) {
+                                            if (!/[a-zA-Z0-9\s]/.test(e.key)) {
                                                 e.preventDefault();
                                             }
                                         }}
-
-                                        onInput={(e) => {
-                                            e.target.value = e.target.value.replace(/\D/g, '').slice(0, 15);
-                                        }}
-
-                                        placeholder="Enter your phone number"
-                                        required
+                                        placeholder="Enter your message"
+                                        rows="4"
                                         className="w-full rounded-sm border border-slate-200 px-4 py-3 text-sm outline-none transition focus:border-primary"
                                     />
                                 </div>
-                            </div>
 
-                            <div>
-                                <label className="mb-1 block text-sm font-semibold text-slate-700">
-                                    Company Name <span className="text-red-600">*</span>
-                                </label>
-                                <input
-                                    type="text"
-                                    name="companyname"
-                                    value={pdfFormData.companyname}
-                                    onChange={handlePdfFormChange}
-                                    onKeyPress={(e) => {
-                                        if (!/[a-zA-Z\s]/.test(e.key)) {
-                                            e.preventDefault();
-                                        }
-                                    }}
-                                    maxLength="30"
-                                    placeholder="Enter your company name"
+                                <div className="flex flex-col-reverse gap-3 pt-2 sm:flex-row sm:justify-end">
+                                    <button
+                                        type="button"
+                                        onClick={closePdfModal}
+                                        className="inline-flex items-center justify-center rounded-full border border-slate-200 px-5 py-3 text-sm font-semibold text-slate-700 transition hover:border-primary hover:text-primary"
+                                    >
+                                        Cancel
+                                    </button>
 
-                                    className="w-full rounded-sm border border-slate-200 px-4 py-3 text-sm outline-none transition focus:border-primary"
-                                />
-                            </div>
-                            <div>
-                                <label className="mb-1 block text-sm font-semibold text-slate-700">
-                                    Message
-                                </label>
-                                <textarea
-                                    name="message"
-                                    value={pdfFormData.message}
-                                    onChange={handlePdfFormChange}
-                                    onKeyPress={(e) => {
-                                        if (!/[a-zA-Z0-9\s]/.test(e.key)) {
-                                            e.preventDefault();
-                                        }
-                                    }}
-                                    placeholder="Enter your message"
-                                    rows="4"
-                                    className="w-full rounded-sm border border-slate-200 px-4 py-3 text-sm outline-none transition focus:border-primary"
-                                />
-                            </div>
-
-                            <div className="flex flex-col-reverse gap-3 pt-2 sm:flex-row sm:justify-end">
-                                <button
-                                    type="button"
-                                    onClick={closePdfModal}
-                                    className="inline-flex items-center justify-center rounded-full border border-slate-200 px-5 py-3 text-sm font-semibold text-slate-700 transition hover:border-primary hover:text-primary"
-                                >
-                                    Cancel
-                                </button>
-
-                                <button
-                                    type="submit"
-                                    className="inline-flex items-center justify-center rounded-full bg-primary px-6 py-3 text-sm font-semibold uppercase tracking-[0.08em] text-white transition hover:opacity-90"
-                                >
-                                    Submit
-                                </button>
-                            </div>
-                        </form>
+                                    <button
+                                        type="submit"
+                                        className="inline-flex items-center justify-center rounded-full bg-primary px-6 py-3 text-sm font-semibold uppercase tracking-[0.08em] text-white transition hover:opacity-90"
+                                    >
+                                        Submit
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
                     </div>
-                </div>
-            )}
+                )}
         </>
     );
 }

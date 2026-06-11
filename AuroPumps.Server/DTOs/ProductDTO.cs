@@ -19,6 +19,7 @@ namespace Poweradmin.Server.DTOs
         public string? MOC { get; set; }
         public string? applications { get; set; }
         public string? pressure { get; set; }
+        public string? mechanicalseal { get; set; }
         public string? applicationtags { get; set; }
         public string? slurryhandling { get; set; }
         public string? impeller { get; set; }

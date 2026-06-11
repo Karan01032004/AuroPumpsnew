@@ -94,6 +94,14 @@ const Header = () => {
         );
 
     const pumpProducts = flattenCategoryProducts(pumpCategories);
+    // 🔥 NAYA CODE: Products ko barabar columns me divide karne ka logic
+    const itemsPerColumn = Math.ceil(pumpProducts.length / 3);
+    const pumpColumn1 = pumpProducts.slice(0, itemsPerColumn);
+    const pumpColumn2 = pumpProducts.slice(itemsPerColumn, itemsPerColumn * 2);
+    const pumpColumn3 = pumpProducts.slice(itemsPerColumn * 2);
+
+    const allPumpColumns = [pumpColumn1, pumpColumn2, pumpColumn3];
+
     const moltenMetalSystemProducts = flattenCategoryProducts(moltenMetalSystemCategories);
     const moltenSaltSystemProducts = flattenCategoryProducts(moltenSulphurCategories);
     const verticalPumps = flattenCategoryProducts(verticalPumpsCategories);
@@ -303,22 +311,39 @@ const Header = () => {
                                                             HORIZONTAL PUMPS
                                                         </h4>
 
+                                                        {/*<div className="grid grid-cols-1 sm:grid-cols-1 gap-x-8 gap-y-2 text-xs">*/}
+                                                        {/*    {pumpColumns.map((column) => (*/}
+                                                        {/*        <ul key={column} className="space-y-2 text-white/80">*/}
+                                                        {/*            {pumpProducts*/}
+                                                        {/*                .filter((_, index) => index % 2 === column)*/}
+                                                        {/*                .map((product) => (*/}
+                                                        {/*                    <li key={product.id}>*/}
+                                                        {/*                        <NavLink*/}
+                                                        {/*                            to={`/products/${product.categorySlug}/${product.slug}`}*/}
+                                                        {/*                            onClick={closeAllMenus}*/}
+                                                        {/*                            className="block transition hover:text-white"*/}
+                                                        {/*                        >*/}
+                                                        {/*                            {product.name}*/}
+                                                        {/*                        </NavLink>*/}
+                                                        {/*                    </li>*/}
+                                                        {/*                ))}*/}
+                                                        {/*        </ul>*/}
+                                                        {/*    ))}*/}
+                                                        {/*</div>*/}
                                                         <div className="grid grid-cols-1 sm:grid-cols-1 gap-x-8 gap-y-2 text-xs">
-                                                            {pumpColumns.map((column) => (
-                                                                <ul key={column} className="space-y-2 text-white/80">
-                                                                    {pumpProducts
-                                                                        .filter((_, index) => index % 2 === column)
-                                                                        .map((product) => (
-                                                                            <li key={product.id}>
-                                                                                <NavLink
-                                                                                    to={`/products/${product.categorySlug}/${product.slug}`}
-                                                                                    onClick={closeAllMenus}
-                                                                                    className="block transition hover:text-white"
-                                                                                >
-                                                                                    {product.name}
-                                                                                </NavLink>
-                                                                            </li>
-                                                                        ))}
+                                                            {allPumpColumns.map((columnData, colIndex) => (
+                                                                <ul key={colIndex} className="space-y-2 text-white/80">
+                                                                    {columnData.map((product) => (
+                                                                        <li key={product.id}>
+                                                                            <NavLink
+                                                                                to={`/products/${product.categorySlug}/${product.slug}`}
+                                                                                onClick={closeAllMenus}
+                                                                                className="block transition hover:text-white"
+                                                                            >
+                                                                                {product.name}
+                                                                            </NavLink>
+                                                                        </li>
+                                                                    ))}
                                                                 </ul>
                                                             ))}
                                                         </div>

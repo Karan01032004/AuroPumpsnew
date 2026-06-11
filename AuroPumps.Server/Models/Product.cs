@@ -14,6 +14,7 @@ namespace Poweradmin.Server.Models
         //public string image3 { get; set; } 
         public string? technicalDetails { get; set; }
         public string? pressure { get; set; }
+        public string? mechanicalseal { get; set; }
         public string? applicationtags { get; set; }
         public string? slurryhandling { get; set; }
         public string? impeller { get; set; }

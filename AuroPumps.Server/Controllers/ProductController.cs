@@ -18,36 +18,75 @@ namespace Poweradmin.Server.Controllers
         {
             _db = db;
         }
+        //[HttpGet("list-by-category/{categoryId}")]
+        //public IActionResult GetProductsByCategory(int categoryId)
+        //{
+        //    string searchId = categoryId.ToString();
+
+        //    var products = _db.Product
+        //        .Where(x => x.Visible == true &&
+        //                    x.CategoryId != null &&
+        //                    ("," + x.CategoryId + ",").Contains("," + searchId + ","))
+        //        .OrderBy(x => x.sortorder)
+        //        .Select(x => new
+        //        {
+        //            id = x.id,
+        //            name = x.title,
+        //                image = x.image1,
+        //                image2=x.image2,
+        //                  x.CategoryId,
+        //            slug = System.Text.RegularExpressions.Regex.Replace(
+        //        x.title.Replace("&", "").ToLower(),
+        //        @"[^a-z0-9]+",
+        //        "-"
+        //    ).Trim('-')
+
+        //        })
+        //        .ToList();
+
+        //    return Ok(products);
+        //}
         [HttpGet("list-by-category/{categoryId}")]
         public IActionResult GetProductsByCategory(int categoryId)
         {
-            string searchId = categoryId.ToString();
-
-            var products = _db.Product
-                .Where(x => x.Visible == true &&
-                            x.CategoryId != null &&
-                            ("," + x.CategoryId + ",").Contains("," + searchId + ","))
-                .OrderBy(x => x.sortorder)
+            // 1. Pehle anonymous object mein Product aur uska Specific SortOrder dono ek sath database se nikalo
+            var rawData = _db.ProductCategoryMappings
+                .Where(x => x.category_id == categoryId && x.Product.Visible == true)
                 .Select(x => new
+                {
+                    ProductObj = x.Product,
+                    CategorySpecificOrder = x.sortorder //👈 Yeh mapping table wala order sath mein rakh liya
+                })
+                .OrderBy(x => x.CategorySpecificOrder) // 🔥 Ab sorting kabhi nahi bigdegi, guaranteed!
+                .ToList(); // Data memory mein aa gaya sequence ke sath
+
+            // 2. Memory mein aane ke baad safe tarike se custom structure aur slug banao
+            var products = rawData.Select(item => {
+                var x = item.ProductObj; // Kuch change nahi karna padega neeche, short form 'x' rakha hai
+
+                string titleText = x.title ?? "";
+                string cleanTitle = titleText.Replace("&", "").ToLower();
+
+                string slugUrl = System.Text.RegularExpressions.Regex.Replace(
+                    cleanTitle,
+                    @"[^a-z0-9]+",
+                    "-"
+                ).Trim('-');
+
+                return new
                 {
                     id = x.id,
                     name = x.title,
-                        image = x.image1,
-                        image2=x.image2,
-                          x.CategoryId,
-                    slug = System.Text.RegularExpressions.Regex.Replace(
-                x.title.Replace("&", "").ToLower(),
-                @"[^a-z0-9]+",
-                "-"
-            ).Trim('-')
-                    
-                })
-                .ToList();
+                    image = x.image1,
+                    image2 = x.image2,
+                    slug = slugUrl
+                };
+            }).ToList();
 
             return Ok(products);
         }
 
-         private string SaveFile(IFormFile file, string folder)
+        private string SaveFile(IFormFile file, string folder)
         {
             var uploadPath = Path.Combine(
                 Directory.GetCurrentDirectory(),
@@ -119,86 +158,165 @@ namespace Poweradmin.Server.Controllers
 
             return Ok(products);
         }
- 
         [HttpGet("{id}")]
         public IActionResult GetById(int id)
         {
-            var productData = _db.Product
-      .Where(x => x.id == id)
-      .FirstOrDefault();
+            // 1. Pehle normal database se product check karo
+            var productData = _db.Product.FirstOrDefault(x => x.id == id);
 
             if (productData == null)
                 return NotFound(new { message = "Product not found" });
-            // 2. CategorySlug nikalne ke liye logic (Memory mein)
-            string firstCatSlug = "";
-            if (!string.IsNullOrEmpty(productData.CategoryId))
-            {
-                // Pehli ID nikalna safely
-                var firstCatIdStr = productData.CategoryId.Split(',').FirstOrDefault();
 
-                if (int.TryParse(firstCatIdStr, out int catId))
-                {
-                    // Category table se slug uthao
-                    firstCatSlug = _db.ProductsCategory
-                        .Where(c => c.id == catId)
-                        .Select(c => System.Text.RegularExpressions.Regex.Replace(
-                c.title.Replace("&", "").ToLower(),
-                @"[^a-z0-9]+",
-                "-"
-            ).Trim('-'))
-                        .FirstOrDefault() ?? "";
-                }
-            }
-            var product = _db.Product
-                .Where(x => x.id == id)
+            // 2. Naye mapping table se is product ki saari categories aur unka sortorder uthao
+            var mappings = _db.ProductCategoryMappings
+                .Where(x => x.product_id == id)
                 .Select(x => new
                 {
-                    x.id,
-                    x.title,
-
-                    image1 = x.image1 ?? "",
-                    image2 = x.image2 ?? "",
-                    //x.image3,
-                    catelogue = x.catelogue ?? "",
-                    CategoryId = x.CategoryId ?? "",
-                    // x.CategoryId,
-                    x.description, 
-                    Capacity = x.Capacity ?? "",
-                    producthead = x.producthead ?? "",
-                    productsize = x.productsize ?? "",
-                    temperature = x.temperature ?? "",
-                    viscosity = x.viscosity ?? "",
-                    shaftsealing = x.shaftsealing ?? "",
-                    MOC = x.MOC ?? "",
-                    pressure = x.pressure ?? "",
-                    applicationtags = x.applicationtags ?? "",
-                    slurryhandling = x.slurryhandling ?? "",
-                    impeller = x.impeller ?? "",
-                    technicalDetails = x.technicalDetails ?? "",
-                    applications = x.applications ?? "",
-                    SubmergenceLength = x.SubmergenceLength ?? "",
-                    operating_frequency = x.operating_frequency ?? "",
-                    material = x.material ?? "",
-                    visible = x.Visible,
-                    isFeatured = x.isFeatured,
-                    isaddcontact = x.isaddcontact,
-
-                    pageIETitle = x.PageIETitle ?? "",
-                    meta = x.Meta ?? "",
-                    productSlug = System.Text.RegularExpressions.Regex.Replace(
-                x.title.Replace("&", "").ToLower(),
-                @"[^a-z0-9]+",
-                "-"
-            ).Trim('-'),
-                    categorySlug = firstCatSlug
+                    category_id = x.category_id,
+                    sortorder = x.sortorder
                 })
-                .FirstOrDefault();
+                .ToList();
 
-            if (product == null)
-                return NotFound(new { message = "Product not found" });
+            // 3. CategorySlug nikalne ke liye logic (Naye mapping table ke mutabik)
+            string firstCatSlug = "";
+            var firstMapping = mappings.FirstOrDefault();
+            if (firstMapping != null)
+            {
+                var firstCat = _db.ProductsCategory.FirstOrDefault(c => c.id == firstMapping.category_id);
+                if (firstCat != null && !string.IsNullOrEmpty(firstCat.title))
+                {
+                    firstCatSlug = System.Text.RegularExpressions.Regex.Replace(
+                        firstCat.title.Replace("&", "").ToLower(),
+                        @"[^a-z0-9]+",
+                        "-"
+                    ).Trim('-');
+                }
+            }
+
+            // 4. Final Object bana kar return karo jisme mappings bhi ho
+            var product = new
+            {
+                id = productData.id,
+                title = productData.title,
+                image1 = productData.image1 ?? "",
+                image2 = productData.image2 ?? "",
+                catelogue = productData.catelogue ?? "",
+                CategoryId = productData.CategoryId ?? "", // Backup string format (puraana flow)
+                description = productData.description,
+                Capacity = productData.Capacity ?? "",
+                producthead = productData.producthead ?? "",
+                productsize = productData.productsize ?? "",
+                temperature = productData.temperature ?? "",
+                viscosity = productData.viscosity ?? "",
+                shaftsealing = productData.shaftsealing ?? "",
+                MOC = productData.MOC ?? "",
+                pressure = productData.pressure ?? "",
+                mechanicalseal = productData.mechanicalseal ?? "",
+                applicationtags = productData.applicationtags ?? "",
+                slurryhandling = productData.slurryhandling ?? "",
+                impeller = productData.impeller ?? "",
+                technicalDetails = productData.technicalDetails ?? "",
+                applications = productData.applications ?? "",
+                SubmergenceLength = productData.SubmergenceLength ?? "",
+                operating_frequency = productData.operating_frequency ?? "",
+                material = productData.material ?? "",
+                visible = productData.Visible,
+                isFeatured = productData.isFeatured,
+                isaddcontact = productData.isaddcontact,
+                pageIETitle = productData.PageIETitle ?? "",
+                meta = productData.Meta ?? "",
+                productSlug = System.Text.RegularExpressions.Regex.Replace(
+                    (productData.title ?? "").Replace("&", "").ToLower(),
+                    @"[^a-z0-9]+",
+                    "-"
+                ).Trim('-'),
+                categorySlug = firstCatSlug,
+                 
+                productCategoryMappings = mappings
+            };
 
             return Ok(product);
         }
+
+        //  [HttpGet("{id}")]
+        //  public IActionResult GetById(int id)
+        //  {
+        //      var productData = _db.Product
+        //.Where(x => x.id == id)
+        //.FirstOrDefault();
+
+        //      if (productData == null)
+        //          return NotFound(new { message = "Product not found" });
+        //      // 2. CategorySlug nikalne ke liye logic (Memory mein)
+        //      string firstCatSlug = "";
+        //      if (!string.IsNullOrEmpty(productData.CategoryId))
+        //      {
+
+        //          var firstCatIdStr = productData.CategoryId.Split(',').FirstOrDefault();
+
+        //          if (int.TryParse(firstCatIdStr, out int catId))
+        //          {
+        //              // Category table se slug uthao
+        //              firstCatSlug = _db.ProductsCategory
+        //                  .Where(c => c.id == catId)
+        //                  .Select(c => System.Text.RegularExpressions.Regex.Replace(
+        //          c.title.Replace("&", "").ToLower(),
+        //          @"[^a-z0-9]+",
+        //          "-"
+        //      ).Trim('-'))
+        //                  .FirstOrDefault() ?? "";
+        //          }
+        //      }
+        //      var product = _db.Product
+        //          .Where(x => x.id == id)
+        //          .Select(x => new
+        //          {
+        //              x.id,
+        //              x.title,
+
+        //              image1 = x.image1 ?? "",
+        //              image2 = x.image2 ?? "",
+        //              //x.image3,
+        //              catelogue = x.catelogue ?? "",
+        //              CategoryId = x.CategoryId ?? "",
+        //              // x.CategoryId,
+        //              x.description, 
+        //              Capacity = x.Capacity ?? "",
+        //              producthead = x.producthead ?? "",
+        //              productsize = x.productsize ?? "",
+        //              temperature = x.temperature ?? "",
+        //              viscosity = x.viscosity ?? "",
+        //              shaftsealing = x.shaftsealing ?? "",
+        //              MOC = x.MOC ?? "",
+        //              pressure = x.pressure ?? "",
+        //              mechanicalseal = x.mechanicalseal ?? "",
+        //              applicationtags = x.applicationtags ?? "",
+        //              slurryhandling = x.slurryhandling ?? "",
+        //              impeller = x.impeller ?? "",
+        //              technicalDetails = x.technicalDetails ?? "",
+        //              applications = x.applications ?? "",
+        //              SubmergenceLength = x.SubmergenceLength ?? "",
+        //              operating_frequency = x.operating_frequency ?? "",
+        //              material = x.material ?? "",
+        //              visible = x.Visible,
+        //              isFeatured = x.isFeatured,
+        //              isaddcontact = x.isaddcontact, 
+        //              pageIETitle = x.PageIETitle ?? "",
+        //              meta = x.Meta ?? "",
+        //              productSlug = System.Text.RegularExpressions.Regex.Replace(
+        //          x.title.Replace("&", "").ToLower(),
+        //          @"[^a-z0-9]+",
+        //          "-"
+        //      ).Trim('-'),
+        //              categorySlug = firstCatSlug
+        //          })
+        //          .FirstOrDefault();
+
+        //      if (product == null)
+        //          return NotFound(new { message = "Product not found" });
+
+        //      return Ok(product);
+        //  }
 
         [HttpPost("send-pdf")]
         public async Task<IActionResult> SendPdf([FromBody] PdfRequestDTO dto)
@@ -465,6 +583,7 @@ namespace Poweradmin.Server.Controllers
         [HttpPost("add")]
         public IActionResult Add(
             [FromForm] ProductDTO dto,
+            [FromForm] string? CategoryMappingsJson,
             IFormFile? image1,
             IFormFile image2,
             //IFormFile image3,
@@ -511,6 +630,7 @@ namespace Poweradmin.Server.Controllers
                     MOC = dto.MOC,
                     technicalDetails = dto.technicalDetails,
                     pressure = dto.pressure,
+                    mechanicalseal = dto.mechanicalseal,
                     impeller = dto.impeller,
                     slurryhandling = dto.slurryhandling,
                     applicationtags = dto.applicationtags,
@@ -527,7 +647,26 @@ namespace Poweradmin.Server.Controllers
 
                 _db.Product.Add(product);
                 _db.SaveChanges();
-
+                if (!string.IsNullOrEmpty(CategoryMappingsJson))
+                {
+                    // JSON Parse karke List banayi
+                    var mappings = System.Text.Json.JsonSerializer.Deserialize<List<CategoryOrderMappingDTO>>(CategoryMappingsJson);
+                    if (mappings != null)
+                    {
+                        foreach (var map in mappings)
+                        {
+                            var newMapping = new ProductCategoryMapping
+                            {
+                                product_id = product.id, // Naye product ki generated ID
+                                category_id = map.category_id,
+                                sortorder = map.sortorder,
+                                created_at = DateTime.Now
+                            };
+                            _db.ProductCategoryMappings.Add(newMapping);
+                        }
+                        _db.SaveChanges();
+                    }
+                }
                 return Ok(new { message = "Product added successfully" });
             }
             catch (Exception ex)
@@ -541,6 +680,7 @@ namespace Poweradmin.Server.Controllers
         public IActionResult Update(
             int id,
             [FromForm] ProductDTO dto,
+            [FromForm] string? CategoryMappingsJson,
             IFormFile? image1,
             IFormFile? image2,
             //IFormFile? image3,
@@ -564,6 +704,7 @@ namespace Poweradmin.Server.Controllers
                 product.MOC = dto.MOC;
                 product.technicalDetails = dto.technicalDetails;
                 product.pressure = dto.pressure;
+                product.mechanicalseal = dto.mechanicalseal;
                 product.applicationtags = dto.applicationtags;
                 product.slurryhandling = dto.slurryhandling;
                 product.impeller = dto.impeller;
@@ -590,6 +731,33 @@ namespace Poweradmin.Server.Controllers
 
                 _db.Product.Update(product);
                 _db.SaveChanges();
+                if (!string.IsNullOrEmpty(CategoryMappingsJson))
+                {
+                    // 1. Purani data rows ko delete karo jo is product ID se connected thi
+                    var existingMappings = _db.ProductCategoryMappings.Where(x => x.product_id == id).ToList();
+                    if (existingMappings.Any())
+                    {
+                        _db.ProductCategoryMappings.RemoveRange(existingMappings);
+                    }
+
+                    // 2. Nayi mappings ko add karo
+                    var mappings = System.Text.Json.JsonSerializer.Deserialize<List<CategoryOrderMappingDTO>>(CategoryMappingsJson);
+                    if (mappings != null)
+                    {
+                        foreach (var map in mappings)
+                        {
+                            var newMapping = new ProductCategoryMapping
+                            {
+                                product_id = id,
+                                category_id = map.category_id,
+                                sortorder = map.sortorder,
+                                created_at = DateTime.Now
+                            };
+                            _db.ProductCategoryMappings.Add(newMapping);
+                        }
+                        _db.SaveChanges();
+                    }
+                }
 
                 return Ok(new { message = "Product updated successfully" });
             }

@@ -14,6 +14,7 @@ const AddProduct = () => {
     const navigate = useNavigate(); 
     // ================= STATES =================
     const [title, setTitle] = useState(""); 
+    const [categorySortOrders, setCategorySortOrders] = useState({});
     const [visible, setVisible] = useState("yes");
     const [isFeatured, setIsFeatured] = useState("no");
     const [isAddContact, setIsAddContact] = useState("no");
@@ -23,6 +24,7 @@ const AddProduct = () => {
     const [technicalDetails, setTechnicalDetails] = useState("");
     const [moc, setMoc] = useState("");
     const [pressure, setPressure] = useState("");
+    const [mechanicalseal, setmechanicalseal] = useState("");
     const [applicationtags, setapplicationtags] = useState("");
     const [impeller, setimpeller] = useState("");
     const [slurryhandling, setslurryhandling] = useState("");
@@ -95,6 +97,7 @@ const AddProduct = () => {
         setTechnicalDetails(p.technicalDetails);
         setMoc(p.moc);
         setPressure(p.pressure);
+        setmechanicalseal(p.mechanicalseal);
         setslurryhandling(p.slurryhandling);
         setimpeller(p.impeller);
         setapplicationtags(p.applicationtags);
@@ -111,6 +114,13 @@ const AddProduct = () => {
         setSeoTitle(p.pageIETitle);
         setMetaTags(p.meta);
         setPendingCategoryId(p.categoryId || "");
+        if (p.productCategoryMappings && p.productCategoryMappings.length > 0) {
+            const initialOrders = {};
+            p.productCategoryMappings.forEach(m => {
+                initialOrders[m.category_id.toString()] = m.sortorder || 0;
+            });
+            setCategorySortOrders(initialOrders);
+        }
         setExistingImages({
             image1: p.image1,
             image2: p.image2,
@@ -138,11 +148,18 @@ const AddProduct = () => {
             formData.append("isFeatured", isFeatured === "yes" ? "true" : "false");
             formData.append("isaddcontact", isAddContact === "yes" ? "true" : "false");
             const catIds = selectedCategories.map(x => x.value).join(",");
+
+            const customMappingArray = selectedCategories.map(cat => ({
+                category_id: parseInt(cat.value),
+                sortorder: categorySortOrders[cat.value] ?? 0
+            }));
+            formData.append("CategoryMappingsJson", JSON.stringify(customMappingArray));
             formData.append("CategoryId", catIds);
             formData.append("description", description);
             formData.append("technicalDetails", technicalDetails);
             formData.append("MOC", moc);
             formData.append("pressure", pressure);
+            formData.append("mechanicalseal ", mechanicalseal);
             formData.append("applicationtags", applicationtags);
             formData.append("impeller", impeller);
             formData.append("slurryhandling", slurryhandling);
@@ -213,16 +230,70 @@ const AddProduct = () => {
                         className="w-full rounded-lg border px-3 py-2"
                     />
                 </div>
+                {/*<div className="mt-6">*/}
+                {/*    <label className="font-medium">Select Categories  <span className="text-red-500">*</span></label>*/}
+                {/*    <Select*/}
+                {/*        isMulti*/}
+                {/*        options={categoryOptions}*/}
+                {/*        value={selectedCategories}*/}
+                {/*        onChange={setSelectedCategories}*/}
+                {/*        className="mt-2"*/}
+                {/*        placeholder="Choose categories..."*/}
+                {/*    />*/}
+                {/*</div>*/}
                 <div className="mt-6">
                     <label className="font-medium">Select Categories  <span className="text-red-500">*</span></label>
                     <Select
                         isMulti
                         options={categoryOptions}
                         value={selectedCategories}
-                        onChange={setSelectedCategories}
+                        onChange={(selected) => {
+                            const currentSelected = selected || [];
+                            setSelectedCategories(currentSelected);
+
+                            // Purane orders maintain rakhein, aur nayi category ke liye default 0 set karein
+                            const updatedOrders = { ...categorySortOrders };
+                            currentSelected.forEach(cat => {
+                                if (updatedOrders[cat.value] === undefined) {
+                                    updatedOrders[cat.value] = 0;
+                                }
+                            });
+                            setCategorySortOrders(updatedOrders);
+                        }}
                         className="mt-2"
                         placeholder="Choose categories..."
                     />
+
+                    {/* 🔥 🔥 DYNAMIC SORT ORDER INPUT FIELDS 🔥 🔥 */}
+                    {selectedCategories.length > 0 && (
+                        <div className="mt-4 rounded-xl border border-dashed border-indigo-200 bg-indigo-50/30 p-4">
+                            <p className="mb-3 text-xs font-bold text-indigo-900 uppercase tracking-wider">
+                                Set Product Sequence per Category:
+                            </p>
+                            <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 md:grid-cols-3">
+                                {selectedCategories.map((cat) => (
+                                    <div key={cat.value} className="flex items-center justify-between gap-2 rounded-lg border bg-white p-2 shadow-sm">
+                                        <span className="text-sm font-medium text-gray-700 truncate">{cat.label}</span>
+                                        <div className="flex items-center gap-1">
+                                            <span className="text-xs text-gray-400">Order:</span>
+                                            <input
+                                                type="number"
+                                                min="0"
+                                                value={categorySortOrders[cat.value] ?? 0}
+                                                onChange={(e) => {
+                                                    setCategorySortOrders({
+                                                        ...categorySortOrders,
+                                                        [cat.value]: parseInt(e.target.value) || 0
+                                                    });
+                                                }}
+                                                className="w-16 rounded border border-gray-300 px-2 py-1 text-center font-semibold text-indigo-600 focus:border-indigo-500 focus:outline-none"
+                                            />
+                                        </div>
+                                    </div>
+                                ))}
+                            </div>
+                        </div>
+                    )}
                 </div>
                  <div className="mt-6 grid grid-cols-1 md:grid-cols-4 gap-4">
                     {[
@@ -501,6 +572,14 @@ const AddProduct = () => {
                         <input
                             value={pressure}
                             onChange={(e) => setPressure(e.target.value)}
+                            className="w-full rounded-lg border px-3 py-2"
+                        />
+                    </div>
+                    <div>
+                        <label className="font-medium">Mechanical Seal</label>
+                        <input
+                            value={mechanicalseal}
+                            onChange={(e) => setmechanicalseal(e.target.value)}
                             className="w-full rounded-lg border px-3 py-2"
                         />
                     </div>
