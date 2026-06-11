@@ -4,6 +4,7 @@ import Select from "react-select";
 import PageHeader from "../../components/PageHeader";
 import api from "../../api/axios";
 import { IMAGE_BASE_URL } from "../../api/axios";
+import TinyEditor from "../../components/Forms/TinyEditor";
 
 const AddApplication = () => {
     const { id } = useParams();
@@ -198,12 +199,11 @@ const AddApplication = () => {
                 {/* DESCRIPTION */}
                 <div className="mt-6">
                     <label className="font-medium">Description  <span className="text-red-500">*</span></label>
-                    <textarea
-                        rows="5"
+                    <TinyEditor
                         value={description}
-                        onChange={(e) => setDescription(e.target.value)}
-                        className="w-full border rounded-lg px-3 py-2"
+                        onChange={setDescription}
                     />
+                     
                 </div>
 
                 {/* IMAGES */}

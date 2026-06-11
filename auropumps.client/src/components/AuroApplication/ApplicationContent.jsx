@@ -85,10 +85,16 @@ function ApplicationContent({
                                 {categoryTitle}
                             </h2>
 
+                            {/*{categoryDescription && (*/}
+                            {/*    <p className="mt-4 max-w-4xl text-sm leading-relaxed text-gray md:text-base">*/}
+                            {/*        dangerouslySetInnerHTML={{ __html: categoryDescription }}*/}
+                            {/*    </p>*/}
+                            {/*)}*/}
                             {categoryDescription && (
-                                <p className="mt-4 max-w-4xl text-sm leading-relaxed text-gray md:text-base">
-                                    {categoryDescription}
-                                </p>
+                                <div
+                                    className="mt-4 max-w-4xl text-sm leading-relaxed text-gray md:text-base prose prose-slate"
+                                    dangerouslySetInnerHTML={{ __html: categoryDescription }}
+                                />
                             )}
                         </div>
 
@@ -107,37 +113,7 @@ function ApplicationContent({
                         )}
                     </div>
                 </div>
-
-                {/*{extendedProducts.length > 0 && (*/}
-                {/*    <div className="px-4 py-5 sm:px-6 lg:px-8 lg:py-7">*/}
-                {/*        <div className="overflow-hidden rounded-[24px] bg-slate-50 p-2 sm:p-3">*/}
-                {/*            <div*/}
-                {/*                className={`flex ${isTransitioning ? "transition-transform duration-700 ease-in-out" : ""}`}*/}
-                {/*                style={{*/}
-                {/*                    transform: `translateX(-${currentIndex * (100 / itemsPerView)}%)`,*/}
-                {/*                }}*/}
-                {/*            >*/}
-                {/*                {extendedProducts.map((item, index) => (*/}
-                {/*                    <div*/}
-                {/*                        key={`${item}-${index}`}*/}
-                {/*                        className="flex-shrink-0 p-2"*/}
-                {/*                        style={{ width: `${100 / itemsPerView}%` }}*/}
-                {/*                    >*/}
-                {/*                        <div className="group h-full overflow-hidden rounded-[22px] border border-slate-200 bg-white p-4 shadow-sm transition duration-300 hover:-translate-y-1 hover:shadow-lg">*/}
-                {/*                            <div className="flex h-[220px] items-center justify-center overflow-hidden rounded-[18px] bg-gradient-to-br from-[#FFF8E8] via-white to-[#F3F1FF]">*/}
-                {/*                                <img*/}
-                {/*                                    src={`${IMAGE_BASE_URL}${item}`}*/}
-                {/*                                    alt={categoryTitle}*/}
-                {/*                                    className="h-full w-full object-cover transition duration-500 group-hover:scale-105"*/}
-                {/*                                />*/}
-                {/*                            </div>*/}
-                {/*                        </div>*/}
-                {/*                    </div>*/}
-                {/*                ))}*/}
-                {/*            </div>*/}
-                {/*        </div>*/}
-                {/*    </div>*/}
-                {/*)}*/}
+ 
             </section>
 
 
@@ -168,21 +144,7 @@ function ApplicationContent({
                                 }}
                                 defaultValue=""
                             >
-                                {/*<option value="" disabled>*/}
-                                {/*    Select Product*/}
-                                {/*</option>*/}
-                                {/*<option value="#acc-end-suction-pumps">*/}
-                                {/*    ACC - END SUCTION PUMPS*/}
-                                {/*</option>*/}
-                                {/*<option value="#asp-non-clog-self-priming-pumps">*/}
-                                {/*    ASP - NON-CLOG SELF PRIMING PUMPS*/}
-                                {/*</option>*/}
-                                {/*<option value="#app-non-metallic-pp-pumps">*/}
-                                {/*    APP - NON METALLIC PP PUMPS*/}
-                                {/*</option>*/}
-                                {/*<option value="#va-multistage-self-priming-pumps">*/}
-                                {/*    VA - MULTISTAGE SELF PRIMING PUMPS*/}
-                                {/*</option>*/}
+                               
                                 {applicationProducts.map(product => (
 
                                     <option
@@ -195,25 +157,7 @@ function ApplicationContent({
                                 ))}
                             </select>
                         </div>
-
-                        {/* Desktop Buttons */}
-                        {/*<div className="hidden md:flex flex-wrap items-center justify-center gap-2 sm:gap-3">*/}
-                        {/*    <a href="#acc-end-suction-pumps" className="rounded-full border border-primary/20 bg-white px-4 py-2 text-[11px] font-semibold tracking-[0.1em] text-primary uppercase transition hover:border-primary/40 hover:bg-primary/5">*/}
-                        {/*        ACC - END SUCTION PUMPS*/}
-                        {/*    </a>*/}
-
-                        {/*    <a href="#asp-non-clog-self-priming-pumps" className="rounded-full border border-primary/20 bg-white px-4 py-2 text-[11px] font-semibold tracking-[0.1em] text-primary uppercase transition hover:border-primary/40 hover:bg-primary/5">*/}
-                        {/*        ASP - NON-CLOG SELF PRIMING PUMPS*/}
-                        {/*    </a>*/}
-
-                        {/*    <a href="#app-non-metallic-pp-pumps" className="rounded-full border border-primary/20 bg-white px-4 py-2 text-[11px] font-semibold tracking-[0.1em] text-primary uppercase transition hover:border-primary/40 hover:bg-primary/5">*/}
-                        {/*        APP - NON METALLIC PP PUMPS*/}
-                        {/*    </a>*/}
-
-                        {/*    <a href="#va-multistage-self-priming-pumps" className="rounded-full border border-primary/20 bg-white px-4 py-2 text-[11px] font-semibold tracking-[0.1em] text-primary uppercase transition hover:border-primary/40 hover:bg-primary/5">*/}
-                        {/*        VA - MULTISTAGE SELF PRIMING PUMPS*/}
-                        {/*    </a>*/}
-                        {/*</div>*/}
+                         
                         <div className="hidden md:flex flex-wrap items-center justify-center gap-2 sm:gap-3">
 
                             {applicationProducts.map(product => (
@@ -310,16 +254,7 @@ function ApplicationContent({
                                 </div>
 
                                 <div className="space-y-6">
-                                    {/*<div className="rounded-xl border border-white/70 bg-white p-6 shadow-sm">*/}
-                                    {/*    <div className="inline-flex rounded-full border border-primary/15 bg-primary/5 px-4 py-1.5 text-sm font-semibold uppercase tracking-[0.12em] text-primary">*/}
-                                    {/*        {product.name}*/}
-                                    {/*    </div>*/}
-
-                                    {/*    <p className="mt-5 text-base leading-8 text-slate-600" dangerouslySetInnerHTML={{ __html: product.description }}>*/}
-
-                                    {/*    </p>*/}
-                                    {/*</div>*/}
-
+                                    
                                     {product.specifications?.length > 0 && (
                                         <div className="overflow-hidden rounded-xl border border-slate-200 bg-white shadow-sm">
                                             <div className="border-b border-slate-200 px-6 py-4">

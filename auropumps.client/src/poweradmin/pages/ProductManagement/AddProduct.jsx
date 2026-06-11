@@ -389,9 +389,7 @@ const AddProduct = () => {
                  EDITORS 
                 {[
                     ["Product Description", description, setDescription],
-                    //["Technical Details", technicalDetails, setTechnicalDetails],
-                    //["MOC", moc, setMoc],
-                    //["Applications", applications, setApplications],
+                    
                 ].map(([label, val, setter]) => (
                     <div className="mt-6" key={label}>
                         <label className="font-medium">{label}</label>
