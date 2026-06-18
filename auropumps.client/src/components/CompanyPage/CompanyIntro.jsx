@@ -38,18 +38,32 @@ function CompanyIntro() {
                         </p>
 
                         {/* Highlighted Description Box */}
-                        <div className="mt-5 lg:mt-20 rounded-lg text-md text-gray leading-relaxed">
-                            <p className="leading-relaxed">Founded in 1984 by our Founder and Managing Director, Mr. Jayesh G. Desai, AURO PUMPS Pvt. Ltd. has launched on a path fuelled by innovation and dedication. With technology transfer from POMPE VERGANI SpA of Italy, our company quickly established itself as a key leader in India's industrial landscape and beyond. AURO is professionally managed by Mr. Jayesh G. Desai, a pump industry veteran, and assisted by his sons, Mr. Malav J. Desai and Mr. Malhar J. Desai. The company employs over 70 experienced professionals. Over the last 36 years, we've developed and installed over 1,000,000 pumpsets, meeting important industrial demands in India and around the world.
-                        </p>
+                        <div className="mt-5 lg:mt-6 rounded-lg text-md text-gray leading-relaxed">
+                            <p className="leading-relaxed mb-4">
+                                Founded in 1984 by Mr. Jayesh G. Desai, Founder and Managing Director, AURO PUMPS Pvt. Ltd. was established through a technology transfer from POMPE VERGANI SpA of Italy. That grounding in proven European engineering, combined with a sustained commitment to innovation and quality, established AURO as a trusted name in India's industrial pumping sector and in markets across the world.
+                            </p>
+                            <p className="leading-relaxed mb-4">
+                                The company is led by Mr. Jayesh G. Desai, a veteran of the pump industry, supported by his sons, Mr. Malav J. Desai and Mr. Malhar J. Desai, together with a team of more than 70 experienced professionals.
+                            </p>
+                            <p className="hidden xl:block leading-relaxed">
+                                Quality and innovation are the foundations of the business. Every pump is inspected at each stage of production to ensure reliable performance and minimal downtime in the field, while continuous investment in research and development keeps AURO's products aligned with advances in pumping technology. Together, these priorities have earned the company a reputation for dependability and long service life, helping customers lower maintenance costs over the working life of their equipment.
+                            </p>
+                           
                         </div>
 
                     </div>
                 </div>
 
                 {/* Bottom Paragraph */}
-                <div className="mt-8 text-md text-gray leading-relaxed">
-                    <p>
-                        Quality is the foundation of our activities. Each AURO pump is meticulously inspected throughout the production process, ensuring flawless performance and minimal downtime for end users. Our strict quality control systems have earned us a reputation for dependability and durability, resulting in lower maintenance costs for our loyal customers. Our promise is to continually innovate. We stay on the forefront of technical developments by incorporating the most recent research and development into our products. This devotion enables us to provide high-quality pumps at affordable costs, allowing industries to thrive in an ever-changing market. With a global presence in over 25 countries, AURO PUMPS Pvt. Ltd. has established itself as a reliable partner in industrial pumping solutions. From the United States to Sri Lanka, our pumps provide unrivalled reliability and performance to industries around the world. As we celebrate almost three decades of achievement, our journey demonstrates our unwavering commitment to quality. Businesses can rely on AURO pumps for outstanding performance, dependability, and longevity, ensuring success today and in the future.
+                <div className="mt-4 lg:mt-8 text-md text-gray leading-relaxed">
+                    <p className="leading-relaxed block xl:hidden">
+                        Quality and innovation are the foundations of the business. Every pump is inspected at each stage of production to ensure reliable performance and minimal downtime in the field, while continuous investment in research and development keeps AURO's products aligned with advances in pumping technology. Together, these priorities have earned the company a reputation for dependability and long service life, helping customers lower maintenance costs over the working life of their equipment.
+                    </p>
+                    <p className="leading-relaxed mb-4">
+                        Over more than four decades, AURO has developed and installed pumps across India and exported to more than 40 countries, from the United States to New Zealand.
+                    </p>
+                    <p className="leading-relaxed">
+                        Beyond its standard range, AURO engineers and custom-manufactures pumping solutions for some of the most demanding applications in industry — including molten metals, molten salts, molten sulfur, sulfuric acid, and solvents — where material selection, sealing, and thermal design are critical to safe, reliable operation.
                     </p>
                 </div>
 

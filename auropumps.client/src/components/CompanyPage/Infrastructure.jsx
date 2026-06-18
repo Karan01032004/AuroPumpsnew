@@ -23,11 +23,11 @@ function Infrastructure() {
                         <div className="relative group overflow-hidden rounded-xl lg:h-full">
                             <picture>
                                 <source
-                                    srcSet={`${import.meta.env.BASE_URL}/assets/images/auro-pumps-builduing.webp`}
+                                    srcSet={`${import.meta.env.BASE_URL}/assets/images/auro-pumps-factory.webp`}
                                     type="image/webp"
                                 />
                                 <img
-                                    src={`${import.meta.env.BASE_URL}/assets/images/auro-pumps-builduing.jpg`}
+                                    src={`${import.meta.env.BASE_URL}/assets/images/auro-pumps-factory.png`}
                                     alt="Factory Building"
                                     className="w-full h-full object-cover rounded-xl"
                                     loading="lazy"
@@ -57,11 +57,11 @@ function Infrastructure() {
                             <div className="relative group overflow-hidden rounded-xl">
                                 <picture>
                                     <source
-                                        srcSet={`${import.meta.env.BASE_URL}/assets/images/infrastructure-1.webp`}
+                                        srcSet={`${import.meta.env.BASE_URL}/assets/images/auro-pumps-testbed.webp`}
                                         type="image/webp"
                                     />
                                     <img
-                                        src={`${import.meta.env.BASE_URL}/assets/images/infrastructure-1.jpg`}
+                                        src={`${import.meta.env.BASE_URL}/assets/images/auro-pumps-testbed.png`}
                                         alt="Machinery"
                                         className="w-full h-full object-cover rounded-xl"
                                         loading="lazy"
@@ -86,11 +86,11 @@ function Infrastructure() {
                             <div className="relative group overflow-hidden rounded-xl">
                                 <picture>
                                     <source
-                                        srcSet={`${import.meta.env.BASE_URL}/assets/images/infrastructure-2.webp`}
+                                        srcSet={`${import.meta.env.BASE_URL}/assets/images/auro-pumps-machine-shops.webp`}
                                         type="image/webp"
                                     />
                                     <img
-                                        src={`${import.meta.env.BASE_URL}/assets/images/infrastructure-2.jpg`}
+                                        src={`${import.meta.env.BASE_URL}/assets/images/auro-pumps-machine-shops.png`}
                                         alt="Assembly Section"
                                         className="w-full h-full object-cover rounded-xl"
                                         loading="lazy"

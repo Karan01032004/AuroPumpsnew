@@ -22,11 +22,11 @@ function IndustryTimeline() {
                         </span>
                     </h2>
 
-                    <div className="mt-8 rounded-xl overflow-hidden">
+                    <div className="mt-4 rounded-xl overflow-hidden">
                         <img
-                            src={`${import.meta.env.BASE_URL}/assets/images/timeline.png`}
+                            src={`${import.meta.env.BASE_URL}/assets/images/auro-pumps-machine.png`}
                             alt="Industry"
-                            className="w-full h-[400px] object-cover rounded-xl"
+                            className="w-full h-[460px] bg-gray-200 object-cover rounded-xl"
                         />
                     </div>
                 </div>
@@ -39,7 +39,7 @@ function IndustryTimeline() {
                             <div key={index} className="flex gap-6 mb-6">
 
                                 {/* LEFT COLUMN */}
-                                <div className="w-16 flex flex-col items-center">
+                                <div className="w-20 flex flex-col items-center">
 
                                     {/* Year */}
                                     <h3 className="text-3xl font-semibold text-primary mb-2">

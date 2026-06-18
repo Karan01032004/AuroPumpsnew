@@ -177,7 +177,7 @@ const PumpsRight = () => {
                                         className="bg-white rounded-xl shadow-sm p-4 hover:shadow-md transition cursor-pointer h-full grid grid-rows-[208px_auto]"
                                     >
                                         {/* Fixed-height image area — always same size */}
-                                        <div className="w-full h-52 flex items-center justify-center overflow-hidden rounded-lg bg-gray-50">
+                                        <div className="w-full h-52 flex items-center justify-center overflow-hidden rounded-lg bg-white">
                                             {displayMedia ? (
                                                 isVideo ? (
                                                     <video

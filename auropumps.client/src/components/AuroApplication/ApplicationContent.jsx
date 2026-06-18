@@ -3,6 +3,7 @@ import { IMAGE_BASE_URL } from "../../poweradmin/api/axios";
 import { FiDownload } from "react-icons/fi";
 import api from "../../poweradmin/api/axios";
 import { toast } from "react-hot-toast";
+import FAQ from "../FAQ/FAQ";
 
 function ApplicationContent({
     applicationProducts = [],
@@ -135,6 +136,7 @@ function ApplicationContent({
                                     dangerouslySetInnerHTML={{ __html: categoryDescription }}
                                 />
                             )}
+                            <FAQ/>
                         </div>
 
                         {galleryItems[0] && (
