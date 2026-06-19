@@ -9,11 +9,17 @@ import TinyEditor from "../../components/Forms/TinyEditor";
 const AddApplication = () => {
     const { id } = useParams();
     const isEdit = !!id;
-    const navigate = useNavigate();
-
-    // ================= STATES =================
+    const navigate = useNavigate(); 
     const [title, setTitle] = useState("");
     const [description, setDescription] = useState("");
+    const [faqs, setFaqs] = useState([
+        {
+            question: "",
+            answer: "",
+            sort_order: 1,
+            visible: true
+        }
+    ]);
     const [visible, setVisible] = useState("yes");
    
     const [productOptions, setProductOptions] = useState([]);
@@ -70,6 +76,7 @@ const AddApplication = () => {
                 setSelectedProducts(selected);
             }
 
+
             setExistingImages({
                 image1: data.image1,
                 image2: data.image2,
@@ -80,7 +87,9 @@ const AddApplication = () => {
                 image7: data.image7,
                 image8: data.image8
             });
-
+            if (data.faqs && data.faqs.length > 0) {
+                setFaqs(data.faqs);
+            }
         } catch (err) {
             console.error(err);
         }
@@ -112,7 +121,14 @@ const AddApplication = () => {
 
             const productIds = selectedProducts.map(p => p.value).join(",");
             formData.append("product_ids", productIds);
-
+            formData.append(
+                "FAQs",
+                JSON.stringify(faqs)
+            );
+            formData.append(
+                "product_ids",
+                productIds
+            );
             // images
             for (let i = 0; i < 8; i++) {
                 if (images[i]) {
@@ -138,9 +154,7 @@ const AddApplication = () => {
         } finally {
             setLoading(false);
         }
-    };
-
-    // ================= JSX =================
+    }; 
     return (
         <div className="min-h-screen">
             <PageHeader
@@ -204,47 +218,126 @@ const AddApplication = () => {
                         onChange={setDescription}
                     />
                      
+                </div> 
+                {/* FAQ SECTION */}
+                <div className="mt-8 border rounded-lg p-4 bg-gray-50">
+                    <div className="flex justify-between items-center mb-4">
+                        <h3 className="font-bold text-lg">
+                            Application FAQs
+                        </h3>
+
+                        <button
+                            type="button"
+                            onClick={() =>
+                                setFaqs([
+                                    ...faqs,
+                                    {
+                                        question: "",
+                                        answer: "",
+                                        sort_order: faqs.length + 1,
+                                        visible: true
+                                    }
+                                ])
+                            }
+                            className="bg-green-600 text-white px-3 py-2 rounded"
+                        >
+                            + Add More FAQ
+                        </button>
+                    </div>
+
+                    {faqs.map((faq, index) => (
+                        <div
+                            key={index}
+                            className="border rounded-lg p-4 mb-4 bg-white"
+                        >
+                            <div className="flex justify-between items-center mb-3">
+                                <h4 className="font-semibold">
+                                    FAQ #{index + 1}
+                                </h4>
+
+                                {faqs.length > 1 && (
+                                    <button
+                                        type="button"
+                                        onClick={() =>
+                                            setFaqs(
+                                                faqs.filter((_, i) => i !== index)
+                                            )
+                                        }
+                                        className="bg-red-500 text-white px-2 py-1 rounded"
+                                    >
+                                        Remove
+                                    </button>
+                                )}
+                            </div>
+
+                            {/* QUESTION */}
+                            <div className="mb-3">
+                                <label className="font-medium">
+                                    Title   
+                                </label>
+
+                                <input
+                                    type="text"
+                                    value={faq.question}
+                                    onChange={(e) => {
+                                        const updated = [...faqs];
+                                        updated[index].question =
+                                            e.target.value;
+                                        setFaqs(updated);
+                                    }}
+                                    className="w-full border rounded-lg px-3 py-2"
+                                />
+                            </div>
+
+                            {/* ANSWER */}
+                            <div className="mb-3">
+                                <label className="font-medium">
+                                    Description
+                                </label>
+
+                                {/*<textarea*/}
+                                {/*    rows="4"*/}
+                                {/*    value={faq.answer}*/}
+                                {/*    onChange={(e) => {*/}
+                                {/*        const updated = [...faqs];*/}
+                                {/*        updated[index].answer =*/}
+                                {/*            e.target.value;*/}
+                                {/*        setFaqs(updated);*/}
+                                {/*    }}*/}
+                                {/*    className="w-full border rounded-lg px-3 py-2"*/}
+                                {/*/>*/}
+                                <TinyEditor
+                                    value={faq.answer}
+                                    // TinyMCE direct content (HTML string) deta hai, 'e' ya 'target' nahi
+                                    onChange={(content) => {
+                                        const updated = [...faqs];
+                                        updated[index].answer = content; // Seedhe content assign karo
+                                        setFaqs(updated);
+                                    }}
+                                />
+                            </div>
+
+                            {/* SORT ORDER */}
+                            <div className="mb-3">
+                                <label className="font-medium">
+                                    Sort Order
+                                </label>
+
+                                <input
+                                    type="number"
+                                    value={faq.sort_order}
+                                    onChange={(e) => {
+                                        const updated = [...faqs];
+                                        updated[index].sort_order =
+                                            parseInt(e.target.value) || 0;
+                                        setFaqs(updated);
+                                    }}
+                                    className="w-full border rounded-lg px-3 py-2"
+                                />
+                            </div>
+                        </div>
+                    ))}
                 </div>
-
-                {/* IMAGES */}
-                {/*<div className="mt-6">*/}
-                {/*    <p className="font-medium mb-2">Application Images</p>*/}
-
-                {/*    <div className="grid grid-cols-2 md:grid-cols-4 gap-4">*/}
-                {/*        {[...Array(8)].map((_, i) => (*/}
-                {/*            <div key={i}>*/}
-                {/*                <input*/}
-                {/*                    type="file"*/}
-                {/*                    onChange={(e) => {*/}
-                {/*                        const files = [...images];*/}
-                {/*                        files[i] = e.target.files[0];*/}
-                {/*                        setImages(files);*/}
-                {/*                    }}*/}
-                {/*                    className="w-full border px-2 py-1 text-sm"*/}
-                {/*                />*/}
-                {/*            </div>*/}
-                {/*        ))}*/}
-                {/*    </div>*/}
-                {/*</div>*/}
-
-                {/* EXISTING IMAGES */}
-                {/*{isEdit && (*/}
-                {/*    <div className="mt-4">*/}
-                {/*        <p className="font-medium">Existing Images</p>*/}
-                {/*        <div className="flex flex-wrap gap-3">*/}
-                {/*            {Object.values(existingImages).map(*/}
-                {/*                (img, i) =>*/}
-                {/*                    img && (*/}
-                {/*                        <img*/}
-                {/*                            key={i}*/}
-                {/*                            src={`${IMAGE_BASE_URL}${img}`}*/}
-                {/*                            className="h-20 w-20 object-cover border rounded"*/}
-                {/*                        />*/}
-                {/*                    )*/}
-                {/*            )}*/}
-                {/*        </div>*/}
-                {/*    </div>*/}
-                {/*)}*/}
                 <div className="mt-6">
                     <p className="font-bold text-lg mb-4">Upload Application Images</p>
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
@@ -307,6 +400,5 @@ const AddApplication = () => {
             </div>
         </div>
     );
-};
-
+}; 
 export default AddApplication;

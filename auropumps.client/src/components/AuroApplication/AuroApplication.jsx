@@ -12,6 +12,7 @@ function AuroApplication() {
     const [activeCategory, setActiveCategory] = useState(null);
     const [applicationProducts, setApplicationProducts] = useState([]);
     const navigate = useNavigate();
+    const [applicationFaqs, setApplicationFaqs] = useState([]);
 
     // 1. Initial Load: Sirf ek baar chalega database se list nikalne ke liye
     useEffect(() => {
@@ -40,6 +41,16 @@ function AuroApplication() {
         loadApplications();
     }, []);
 
+    const loadApplicationDetails = async (applicationId) => {
+        try {
+            const res = await api.get(`/application/${applicationId}`);
+
+            setApplicationFaqs(res.data.faqs || []);
+        } catch (err) {
+            console.error(err);
+        }
+    };
+
     // 2. Logic Handler: CategoryId ya parameters badalne par chalega, bina applications loop ke!
     useEffect(() => {
         if (loading || !applications.length) return;
@@ -49,11 +60,10 @@ function AuroApplication() {
                 const category = applications.find((cat) => cat.slug === categoryId);
 
                 if (category) {
-                    setActiveCategory(category.id);
-
-                    // Direct API se load karo bina applications state ko bar-bar disturb kiye
+                    setActiveCategory(category.id); 
                     const products = await loadProductsByIds(category.product_ids);
                     setApplicationProducts(products);
+                    await loadApplicationDetails(category.id);
                 }
             } else if (applications.length > 0) {
                 const firstCategory = applications[0];
@@ -142,6 +152,7 @@ function AuroApplication() {
                     products={selectedCategory.images}
                     categoryTitle={selectedCategory.title}
                     categoryDescription={selectedCategory.description}
+                    faqs={applicationFaqs}
                 />
             </div>
         </section>

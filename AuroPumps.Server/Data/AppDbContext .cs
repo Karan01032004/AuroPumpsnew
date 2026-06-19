@@ -20,5 +20,6 @@ namespace Poweradmin.Server.Data
         public DbSet<Application> Application { get; set; }
         public DbSet<ProductPdfRequest> ProductPdfRequests { get; set; }
         public DbSet<ProductCategoryMapping> ProductCategoryMappings { get; set; }
+        public DbSet<ApplicationFAQ> ApplicationFAQ { get; set; }
     }
 }

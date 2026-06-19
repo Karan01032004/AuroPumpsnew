@@ -1,4 +1,5 @@
 ﻿using AuroPumps.Server.DTOs;
+using AuroPumps.Server.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Poweradmin.Server.Data;
@@ -72,6 +73,33 @@ namespace AuroPumps.Server.Controllers
 
                 _db.Application.Add(app);
                 _db.SaveChanges();
+                var faqList = string.IsNullOrEmpty(dto.FAQs)
+       ? new List<ApplicationFAQDTO>()
+       : System.Text.Json.JsonSerializer.Deserialize<List<ApplicationFAQDTO>>(dto.FAQs);
+
+                if (faqList != null && faqList.Any())
+                {
+                    foreach (var faq in faqList)
+                    {
+                        // Skip empty FAQ
+                        if (string.IsNullOrWhiteSpace(faq.question) &&
+                            string.IsNullOrWhiteSpace(faq.answer))
+                        {
+                            continue;
+                        }
+
+                        _db.ApplicationFAQ.Add(new ApplicationFAQ
+                        {
+                            Applicationid = app.id,
+                            question = faq.question?.Trim(),
+                            answer = faq.answer?.Trim(),
+                            sort_order = faq.sort_order,
+                            visible = faq.visible
+                        });
+                    }
+
+                    _db.SaveChanges();
+                }
 
                 return Ok(new { message = "Application added successfully" });
             }
@@ -134,7 +162,18 @@ namespace AuroPumps.Server.Controllers
                     x.image5,
                     x.image6,
                     x.image7,
-                    x.image8
+                    x.image8,
+                    faqs = _db.ApplicationFAQ
+    .Where(f => f.Applicationid == x.id)
+    .OrderBy(f => f.sort_order)
+    .Select(f => new
+    {
+        f.id,
+        f.question,
+        f.answer,
+        f.sort_order,
+        f.visible
+    }).ToList()
                 })
                 .FirstOrDefault();
 
@@ -180,6 +219,30 @@ namespace AuroPumps.Server.Controllers
                 if (image7 != null) app.image7 = SaveFile(image7, "applications");
                 if (image8 != null) app.image8 = SaveFile(image8, "applications");
 
+                var oldFaqs = _db.ApplicationFAQ
+    .Where(x => x.Applicationid == id)
+    .ToList();
+
+                _db.ApplicationFAQ.RemoveRange(oldFaqs);
+var faqList = string.IsNullOrEmpty(dto.FAQs)
+? new List<ApplicationFAQDTO>()
+: System.Text.Json.JsonSerializer.Deserialize<List<ApplicationFAQDTO>>(dto.FAQs);
+
+if (faqList != null && faqList.Any())
+{
+    foreach (var faq in faqList)
+    {
+        _db.ApplicationFAQ.Add(new ApplicationFAQ
+        {
+            Applicationid = id,
+            question = faq.question,
+            answer = faq.answer,
+            sort_order = faq.sort_order,
+            visible = faq.visible
+        });
+    }
+}
+
                 _db.SaveChanges();
 
                 return Ok(new { message = "Application updated successfully" });
@@ -197,6 +260,12 @@ namespace AuroPumps.Server.Controllers
             if (app == null)
                 return NotFound(new { message = "Application not found" });
 
+            var faqs = _db.ApplicationFAQ
+    .Where(x => x.Applicationid == id)
+    .ToList();
+
+
+            _db.ApplicationFAQ.RemoveRange(faqs);
             _db.Application.Remove(app);
             _db.SaveChanges();
 

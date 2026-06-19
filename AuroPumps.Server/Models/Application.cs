@@ -1,4 +1,6 @@
-﻿namespace Poweradmin.Server.Models
+﻿using AuroPumps.Server.Models;
+
+namespace Poweradmin.Server.Models
 {
     public class Application
     {
@@ -15,6 +17,8 @@
         public string? description { get; set; }
         public string? product_ids { get; set; }
         public bool? Visible { get; set; }
+        public virtual ICollection<ApplicationFAQ> FAQs { get; set; }
+      = new List<ApplicationFAQ>();
 
     }
 }

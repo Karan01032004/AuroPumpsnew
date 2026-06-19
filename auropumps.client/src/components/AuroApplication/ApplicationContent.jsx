@@ -10,6 +10,7 @@ function ApplicationContent({
     products = [],
     categoryTitle,
     categoryDescription,
+    faqs = []
 }) {
     // ================= STATES =================
     const [pdfFormData, setPdfFormData] = useState({
@@ -136,7 +137,7 @@ function ApplicationContent({
                                     dangerouslySetInnerHTML={{ __html: categoryDescription }}
                                 />
                             )}
-                            <FAQ/>
+                            <FAQ faqs={faqs} />
                         </div>
 
                         {galleryItems[0] && (

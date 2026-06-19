@@ -1,41 +1,21 @@
 import { useState } from "react";
 import { FaPlus, FaMinus } from "react-icons/fa";
-
-const faqs = [
-    {
-        question: "What services do you offer?",
-        answer:
-            "We provide web development, mobile app development, UI/UX design, and digital solutions.",
-    },
-    {
-        question: "How long does a project take?",
-        answer:
-            "Project timelines depend on requirements, but most projects are completed within 2-8 weeks.",
-    },
-    {
-        question: "Do you provide support after launch?",
-        answer:
-            "Yes, we offer ongoing maintenance and support packages after deployment.",
-    },
-    {
-        question: "Can I request custom features?",
-        answer:
-            "Absolutely! We build solutions tailored to your business requirements.",
-    },
-];
-
-export default function FAQ() {
+ 
+export default function FAQ({ faqs = [] }) {
     const [openIndex, setOpenIndex] = useState(null);
 
     const toggleFAQ = (index) => {
         setOpenIndex(openIndex === index ? null : index);
     };
+    if (!faqs || faqs.length === 0) {
+        return null;
+    }
 
     return (
         <section className="pt-4 lg:pt-6">
             <div className="max-w-4xl mx-auto">
                
-                <div className="space-y-4">
+                <div className="space-y-4"> 
                     {faqs.map((faq, index) => {
                         const isOpen = openIndex === index;
 
@@ -69,9 +49,10 @@ export default function FAQ() {
                                     className={`transition-all duration-300 ease-in-out overflow-hidden ${isOpen ? "max-h-40 opacity-100" : "max-h-0 opacity-0"
                                         }`}
                                 >
-                                    <p className="px-5 pb-5 text-gray-600 leading-relaxed">
-                                        {faq.answer}
-                                    </p>
+                                    <p className="px-5 pb-5 text-gray-600 leading-relaxed"
+                                     
+                                        dangerouslySetInnerHTML={{ __html: faq.answer }}
+                                    />
                                 </div>
                             </div>
                         );
