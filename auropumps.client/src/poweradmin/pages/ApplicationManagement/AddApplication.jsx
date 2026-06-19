@@ -101,10 +101,10 @@ const AddApplication = () => {
             alert("Title required");
             return;
         }
-        if (!description.trim()) {
-            alert("Description is required");
-            return;
-        }
+        //if (!description.trim()) {
+        //    alert("Description is required");
+        //    return;
+        //}
         if (!images[0] && !existingImages.image1) {
             alert("Image 1 is required (Shows on Home Page)");
             return;

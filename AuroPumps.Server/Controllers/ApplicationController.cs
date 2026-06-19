@@ -219,29 +219,30 @@ namespace AuroPumps.Server.Controllers
                 if (image7 != null) app.image7 = SaveFile(image7, "applications");
                 if (image8 != null) app.image8 = SaveFile(image8, "applications");
 
-                var oldFaqs = _db.ApplicationFAQ
-    .Where(x => x.Applicationid == id)
-    .ToList();
+                var faqList = string.IsNullOrEmpty(dto.FAQs)
+               ? new List<ApplicationFAQDTO>()
+               : System.Text.Json.JsonSerializer.Deserialize<List<ApplicationFAQDTO>>(dto.FAQs);
 
-                _db.ApplicationFAQ.RemoveRange(oldFaqs);
-var faqList = string.IsNullOrEmpty(dto.FAQs)
-? new List<ApplicationFAQDTO>()
-: System.Text.Json.JsonSerializer.Deserialize<List<ApplicationFAQDTO>>(dto.FAQs);
+                if (faqList != null && faqList.Any())
+                {
+                    foreach (var faq in faqList)
+                    {
+                        // Skip empty FAQ
+                        if (string.IsNullOrWhiteSpace(faq.question))
+                        {
+                            continue;
+                        }
 
-if (faqList != null && faqList.Any())
-{
-    foreach (var faq in faqList)
-    {
-        _db.ApplicationFAQ.Add(new ApplicationFAQ
-        {
-            Applicationid = id,
-            question = faq.question,
-            answer = faq.answer,
-            sort_order = faq.sort_order,
-            visible = faq.visible
-        });
-    }
-}
+                        _db.ApplicationFAQ.Add(new ApplicationFAQ
+                        {
+                            Applicationid = id,
+                            question = faq.question?.Trim(),
+                            answer = faq.answer?.Trim(),
+                            sort_order = faq.sort_order,
+                            visible = faq.visible
+                        });
+                    }
+                }
 
                 _db.SaveChanges();
 

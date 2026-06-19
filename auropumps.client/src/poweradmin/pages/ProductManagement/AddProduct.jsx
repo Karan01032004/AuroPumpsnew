@@ -207,7 +207,8 @@ const AddProduct = () => {
     return (
         <div className="min-h-screen">
             <PageHeader
-                title="Add Product"
+                title={isEdit ? "Edit Product" : "Add Product"}
+                
                 breadcrumbs={[
                     { label: "Dashboard", href: "/poweradmin" },
                     { label: isEdit ? "Edit Product" : "Add Product" },

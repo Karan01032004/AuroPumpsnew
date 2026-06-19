@@ -46,7 +46,7 @@ export default function FAQ({ faqs = [] }) {
                                 </button>
 
                                 <div
-                                    className={`transition-all duration-300 ease-in-out overflow-hidden ${isOpen ? "max-h-40 opacity-100" : "max-h-0 opacity-0"
+                                    className={`transition-all duration-300 ease-in-out ${isOpen ? "opacity-100" : "max-h-0 opacity-0"
                                         }`}
                                 >
                                     <p className="px-5 pb-5 text-gray-600 leading-relaxed"

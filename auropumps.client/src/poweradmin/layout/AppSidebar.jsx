@@ -384,7 +384,7 @@ const AppSidebar = ({ open, collapsed, onClose }) => {
                     )}
                     {/* Other Items */}
                     {[
-                        { to: "/poweradmin/page-content", label: "Page Content", Icon: RiFileEditLine },
+                        //{ to: "/poweradmin/page-content", label: "Page Content", Icon: RiFileEditLine },
                         { to: "/poweradmin/inquiry", label: "Inquiry Managements", Icon: FaWpforms },
                         { to: "/poweradmin/pdf-inquiry", label: "Products PDF Inquiry", Icon: FaWpforms },
                     ].map((item) => {
