@@ -219,6 +219,12 @@ namespace AuroPumps.Server.Controllers
                 if (image7 != null) app.image7 = SaveFile(image7, "applications");
                 if (image8 != null) app.image8 = SaveFile(image8, "applications");
 
+                var oldFaqs = _db.ApplicationFAQ
+    .Where(x => x.Applicationid == id)
+    .ToList();
+
+                _db.ApplicationFAQ.RemoveRange(oldFaqs);
+
                 var faqList = string.IsNullOrEmpty(dto.FAQs)
                ? new List<ApplicationFAQDTO>()
                : System.Text.Json.JsonSerializer.Deserialize<List<ApplicationFAQDTO>>(dto.FAQs);

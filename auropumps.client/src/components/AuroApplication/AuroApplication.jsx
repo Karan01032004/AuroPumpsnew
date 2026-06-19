@@ -23,7 +23,7 @@ function AuroApplication() {
                 const formatted = res.data.map(app => ({
                     id: app.id,
                     title: app.title,
-                    description: app.description,
+                    description: app.description || "",
                     slug: app.slug,
                     product_ids: app.product_ids,
                     images: [
