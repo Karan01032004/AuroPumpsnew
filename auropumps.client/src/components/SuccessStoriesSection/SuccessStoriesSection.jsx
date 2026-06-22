@@ -51,7 +51,7 @@ const SuccessStoriesSection = () => {
                     >
                         {successStoriesData.map((story) => (
                             <SwiperSlide key={story.id} className="!h-auto pt-8">
-                                <article className="group h-[600px] rounded-xl [perspective:1400px] sm:h-[480px]">
+                                <article className="group h-[620px] rounded-xl [perspective:1400px] lg:h-[580px]">
                                     <div className="flex h-full flex-col overflow-hidden rounded-xl border border-white/30 bg-white/5 backdrop-blur-md transition duration-500 ease-out group-hover:-translate-y-2">
 
                                         {/* Image */}
@@ -65,7 +65,7 @@ const SuccessStoriesSection = () => {
                                                     width="1200"
                                                     height="160"
                                                     loading="lazy"
-                                                    className="h-[200px] w-full object-cover transition duration-500 group-hover:scale-105"
+                                                    className="h-[280px] w-full object-center object-cover transition duration-500 group-hover:scale-105"
                                                 />
                                             </picture>
                                         </div>
