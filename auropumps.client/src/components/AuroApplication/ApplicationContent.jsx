@@ -4,7 +4,10 @@ import { FiDownload } from "react-icons/fi";
 import api from "../../poweradmin/api/axios";
 import { toast } from "react-hot-toast";
 import FAQ from "../FAQ/FAQ";
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Autoplay } from "swiper/modules";
 
+import "swiper/css";
 function ApplicationContent({
     applicationProducts = [],
     products = [],
@@ -140,15 +143,33 @@ function ApplicationContent({
                             <FAQ faqs={faqs} />
                         </div>
 
-                        {galleryItems[0] && (
+                        {galleryItems?.length > 0 && (
                             <div className="mx-auto w-full max-w-[420px] lg:sticky lg:top-24 lg:self-start">
                                 <div className="overflow-hidden rounded-[24px] border border-white/70 bg-white/90 p-4 shadow-[0_20px_50px_-35px_rgba(45,37,142,0.45)]">
                                     <div className="overflow-hidden rounded-[20px] bg-gradient-to-br from-[#FFF8E8] via-white to-[#F3F1FF]">
-                                        <img
-                                            src={`${IMAGE_BASE_URL}${galleryItems[0]}`}
-                                            alt={categoryTitle}
-                                            className="h-[260px] w-full object-cover sm:h-[300px]"
-                                        />
+
+                                        <Swiper
+                                            modules={[Autoplay]}
+                                            loop={galleryItems.length > 1}
+                                            speed={1000}
+                                            spaceBetween={24}
+                                            autoplay={{
+                                                delay: 4000,
+                                                disableOnInteraction: false,
+                                                pauseOnMouseEnter: true,
+                                            }}
+                                        >
+                                            {galleryItems.map((item, index) => (
+                                                <SwiperSlide key={index}>
+                                                    <img
+                                                        src={`${IMAGE_BASE_URL}${item}`}
+                                                        alt={`${categoryTitle} ${index + 1}`}
+                                                        className="w-full h-auto object-contain"
+                                                    />
+                                                </SwiperSlide>
+                                            ))}
+                                        </Swiper>
+
                                     </div>
                                 </div>
                             </div>
@@ -251,7 +272,7 @@ function ApplicationContent({
                                                 <video
                                                     src={product.image}
                                                     className="block h-full max-h-[520px] w-full bg-white object-contain rounded-xl border border-slate-200 shadow-sm"
-                                                    controls autoPlay muted loop playsInline
+                                                     autoPlay muted loop playsInline
                                                 />
                                             ) : (
                                                 <img

@@ -95,53 +95,49 @@ function ProductContent({ product, categoryTitle }) {
                         </span>
                     </div>
                 </div>
-                <div className="block"> {/* Grid hata kar 'block' kar diya */}
+                <div className="space-y-6">
 
-                    {/* Image/Video Container */}
-                    <div className="overflow-hidden rounded-2xl border border-primary/10 bg-white p-2 
-                    lg:float-left lg:w-[45%] lg:mr-6 mb-5">
+                    <div className="relative mx-auto w-full max-w-4xl overflow-hidden rounded-2xl border border-primary/10 bg-white p-3">
 
-                        {product.image && product.image.toLowerCase().endsWith(".mp4") ? (
-                            <video
-                                src={`${IMAGE_BASE_URL}${product.image}`}
-                                className="h-full w-full rounded-xl object-cover"
-                                controls
-                                autoPlay
-                                muted
-                                loop
-                                playsInline
-                            >
-                                Your browser does not support the video tag.
-                            </video>
-                        ) : (
-                            <img
-                                src={`${IMAGE_BASE_URL}${product.image}`}
-                                alt={product.name}
-                                className="h-full w-full rounded-xl object-cover"
-                            />
-                        )}
-
-                    </div>
-
-                    <div className="">
+                        {/* Download Button */}
                         {product.pdf && (
                             <button
                                 type="button"
                                 onClick={handleDownloadClick}
-                                className="mb-5 inline-flex items-center gap-2 rounded-full border border-primary/25 bg-primary/5 px-4 py-2 text-xs font-semibold tracking-[0.08em] text-primary uppercase transition hover:bg-primary hover:text-white"
+                                className="absolute top-5 right-5 z-20 inline-flex items-center gap-2 rounded-full border border-primary/25 bg-primary/5 px-4 py-2 text-xs font-semibold uppercase tracking-[0.08em] text-primary backdrop-blur-md shadow-md transition hover:bg-primary hover:text-white"
                             >
                                 <FiDownload className="h-4 w-4" />
                                 Download PDF
                             </button>
                         )}
 
-
-                        <div
-                            className="prose prose-sm max-w-none text-sm leading-relaxed text-gray md:text-base"
-                            dangerouslySetInnerHTML={{ __html: product.description }}
-                        />
+                        <div className="flex items-center justify-center h-[355px] bg-white rounded-xl">
+                            {product.image &&
+                                product.image.toLowerCase().endsWith(".mp4") ? (
+                                <video
+                                    src={`${IMAGE_BASE_URL}${product.image}`}
+                                    className="max-h-full max-w-full object-contain"
+                                    autoPlay
+                                    muted
+                                    loop
+                                    playsInline
+                                />
+                            ) : (
+                                <img
+                                    src={`${IMAGE_BASE_URL}${product.image}`}
+                                    alt={product.name}
+                                    className="max-h-full max-w-full object-contain"
+                                />
+                            )}
+                        </div>
 
                     </div>
+
+                    {/* Description */}
+                    <div
+                        className="prose prose-sm max-w-none text-sm leading-relaxed text-gray md:text-base"
+                        dangerouslySetInnerHTML={{ __html: product.description }}
+                    />
                 </div>
                 <div className="clear-both"></div>
                 {specifications.length > 0 && (

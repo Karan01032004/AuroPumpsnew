@@ -154,7 +154,7 @@ const ContactSection = () => {
                                     Registered Office & Works
                                 </h4>
                                 <p className="text-md text-secondary mt-1">
-                                    <strong>AURO PUMPS PVT.LTD.</strong><br />
+                                    <strong className="font-rockwell">AURO PUMPS PVT.LTD.</strong><br />
                                     Plot No. 104/5 & 6
                                     G.I.D.C. Palej,<br /> Bharuch District, Gujarat – 392220, India 
                                 </p>
@@ -182,7 +182,7 @@ const ContactSection = () => {
                                     Corporate Office
                                 </h4>
                                 <p className="text-md text-secondary mt-1">
-                                    <strong>AURO PUMPS PVT.LTD.</strong><br />
+                                    <strong className="font-rockwell">AURO PUMPS PVT.LTD.</strong><br />
                                     309 Nilamber Primero,
                                     Vasna - Bhayli Road,<br />
                                     Vadodara - 391410,
@@ -199,7 +199,7 @@ const ContactSection = () => {
 
                             <div>
                                 <h4 className="font-semibold text-[#4B4B4B] text-lg">
-                                    Mobile Numbers
+                                    Sales Inquiry
                                 </h4>
 
                                 <div className="text-md text-secondary mt-1 space-y-1">
@@ -255,12 +255,12 @@ const ContactSection = () => {
                                         sales@auropumps.com
                                     </a>
 
-                                    <a
-                                        href="mailto:purchase@auropumps.com"
-                                        className="block hover:text-[#2D258E] transition-colors duration-300"
-                                    >
-                                        purchase@auropumps.com
-                                    </a>
+                                    {/*<a*/}
+                                    {/*    href="mailto:purchase@auropumps.com"*/}
+                                    {/*    className="block hover:text-[#2D258E] transition-colors duration-300"*/}
+                                    {/*>*/}
+                                    {/*    purchase@auropumps.com*/}
+                                    {/*</a>*/}
                                 </p>
                             </div>
                         </div>

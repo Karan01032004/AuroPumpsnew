@@ -17,7 +17,7 @@ const Header = () => {
     const navLinks = [
         { name: "Home", path: "/" },
         { name: "Products", path: "/products" },
-        { name: "Application", path: "/application" },
+        { name: "Applications", path: "/application" },
         { name: "Company", path: "/company" },
         { name: "Clients", path: "/clients" },
     ]; 
@@ -229,18 +229,17 @@ const Header = () => {
                                 }`}
                         >
                             {/* MAIN TITLE */}
-                            <span className="hidden lg:block text-xl sm:text-3xl md:text-[18px] font-bold leading-tight  text-primary drop-shadow-[0_8px_30px_rgba(0,0,0,0.9)] uppercase">
+                            <span className="hidden font-bold lg:block text-xl sm:text-3xl md:text-[18px] font-rockwell tracking-wide leading-tight text-primary uppercase">
                                 Auro Pumps Pvt Ltd
                             </span>
 
                             {/* SUBTITLE */}
-                            <span className="hidden lg:block text-slate-900 font-bold text-[10px] xl:text-[11px]  mt-[2px]">
+                            <span className="hidden lg:block text-slate-900 text-[10px] xl:text-[11px] mt-[5px]">
                                 Est in 1984 with technology from Pompe Vergani SpA, Italy
                             </span>
                         </div>
                     </NavLink>
 
-                    {/* DESKTOP NAV */}
                     {/* DESKTOP NAV */}
                     <nav className="hidden md:flex items-center xl:gap-6">
 
@@ -391,7 +390,7 @@ const Header = () => {
                             }
 
                             // 🔥 APPLICATION
-                            if (item.name === "Application") {
+                            if (item.name === "Applications") {
                                 return (
                                     <div
                                         key={i}
@@ -578,7 +577,7 @@ const Header = () => {
                                     </div>
                                 );
                             }
-                            if (item.name === "Application") {
+                            if (item.name === "Applications") {
                                 return (
                                     <div key={i} className="bg-white/5 rounded-xl">
 

@@ -55,17 +55,14 @@ const SuccessStoriesSection = () => {
                                     <div className="flex h-full flex-col overflow-hidden rounded-xl border border-white/30 bg-white/5 backdrop-blur-md transition duration-500 ease-out group-hover:-translate-y-2">
 
                                         {/* Image */}
-                                        <div>
+                                        <div className="overflow-hidden rounded-t-xl">
                                             <picture>
                                                 <source srcSet={story.imageWebp} type="image/webp" />
                                                 <source srcSet={story.imagePng} type="image/png" />
                                                 <img
                                                     src={story.imagePng}
                                                     alt={story.alt}
-                                                    width="1200"
-                                                    height="160"
-                                                    loading="lazy"
-                                                    className="h-[280px] w-full object-center object-cover transition duration-500 group-hover:scale-105"
+                                                    className="h-[280px] w-full object-contain transition-transform duration-500 group-hover:scale-105"
                                                 />
                                             </picture>
                                         </div>
