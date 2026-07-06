@@ -351,7 +351,7 @@ const Header = () => {
                                                     <div className="col-span-2 md:col-span-4 lg:col-span-4 space-y-6">
                                                         <div>
                                                             <h4 className="mb-3 border-b border-white/20 pb-2 font-semibold text-sm">
-                                                                MOLTEN METAL SYSTEMS
+                                                                MOLTEN METAL EQUIPMENTS
                                                             </h4>
                                                             {moltenMetalSystemProducts.map((product) => (
                                                                 <NavLink
@@ -366,7 +366,7 @@ const Header = () => {
                                                         </div>
                                                         <div>
                                                             <h4 className="mb-3 border-b border-white/20 pb-2 font-semibold text-sm">
-                                                                MOLTEN SALT SYSTEMS
+                                                                MOLTEN SALT EQUIPMENTS
                                                             </h4>
                                                             {moltenSaltSystemProducts.map((product) => (
                                                                 <NavLink
