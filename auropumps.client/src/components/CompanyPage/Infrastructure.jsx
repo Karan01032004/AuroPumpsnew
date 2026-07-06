@@ -1,3 +1,7 @@
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Autoplay } from "swiper/modules";
+import infrastructureData from "../../data/infrastructureData";
+import "swiper/css";
 function Infrastructure() {
     return (
         <section>
@@ -15,103 +19,59 @@ function Infrastructure() {
                 </h2>
 
                 {/* Grid Layout */}
-                <div className="mt-8 grid lg:grid-cols-[3fr_2fr] gap-6">
+                <Swiper
+                    modules={[Autoplay]}
+                    loop={true}
+                    speed={1000} // 1 second transition
+                    spaceBetween={24}
+                    autoplay={{
+                        delay: 4000, // Wait 4 seconds before next slide
+                        disableOnInteraction: false,
+                        pauseOnMouseEnter: true,
+                    }}
+                    breakpoints={{
+                        0: {
+                            slidesPerView: 1,
+                        },
+                        768: {
+                            slidesPerView: 2,
+                        },
+                        992: {
+                            slidesPerView: 3,
+                        },
+                    }}
+                    className="mt-10 infrastructureSwiper"
+                >
+                    {infrastructureData.map((item, index) => (
+                        <SwiperSlide key={index}>
+                            <div className="group bg-white rounded-xl overflow-hidden border border-gray-200 shadow-md flex flex-col h-full">
+                                <div className="overflow-hidden">
+                                    <picture>
+                                        <source
+                                            srcSet={`${import.meta.env.BASE_URL}/assets/images/${item.image}.webp`}
+                                            type="image/webp"
+                                        />
 
-                    {/* Card 1 */}
-                    <div>
-                        {/*<div className="relative group overflow-hidden rounded-xl lg:h-[520px]">*/}
-                        <div className="relative group overflow-hidden rounded-xl lg:h-full">
-                            <picture>
-                                <source
-                                    srcSet={`${import.meta.env.BASE_URL}/assets/images/auro-pumps-factory.webp`}
-                                    type="image/webp"
-                                />
-                                <img
-                                    src={`${import.meta.env.BASE_URL}/assets/images/auro-pumps-factory.png`}
-                                    alt="Factory Building"
-                                    className="w-full h-full object-cover rounded-xl"
-                                    loading="lazy"
-                                />
-                            </picture>
-
-                            {/* Desktop hover overlay */}
-                            <div className="hidden lg:flex absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition duration-500 items-end p-6">
-                                <p className="text-white text-md leading-relaxed">
-                                    AURO PUMPS has a fully equipped in-house facility with advanced technology, including machine, fabrication, assembly, testing, and packing sections. All components are manufactured and tested in-house at our GIDC Palej plant to ensure strict quality standards.
-                                </p>
-                            </div>
-                        </div>
-
-                        {/* Mobile text */}
-                        <p className="lg:hidden mt-4 text-gray-700 text-md leading-relaxed">
-                            AURO PUMPS has a fully equipped in-house facility with advanced technology, including machine, fabrication, assembly, testing, and packing sections. All components are manufactured and tested in-house at our GIDC Palej plant to ensure strict quality standards.
-                        </p>
-                    </div>
-
-
-                    {/* Right column */}
-                    {/*<div className="grid gap-6 lg:grid-rows-2 lg:h-[520px]">*/}
-                    <div className="grid gap-6">
-                        {/* Card 2 */}
-                        <div>
-                            <div className="relative group overflow-hidden rounded-xl">
-                                <picture>
-                                    <source
-                                        srcSet={`${import.meta.env.BASE_URL}/assets/images/auro-pumps-testbed.webp`}
-                                        type="image/webp"
-                                    />
-                                    <img
-                                        src={`${import.meta.env.BASE_URL}/assets/images/auro-pumps-testbed.png`}
-                                        alt="Machinery"
-                                        className="w-full h-full object-cover rounded-xl"
-                                        loading="lazy"
-                                    />
-                                </picture>
-
-                                <div className="hidden lg:flex absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition duration-500 items-end p-6">
-                                    <p className="text-white text-md">
-                                        AURO's Engineering and R&D team uses advanced CAD-CAM software and innovations to ensure our pumps are durable and exceed industry standards.
-                                    </p>
+                                        <img
+                                            src={`${import.meta.env.BASE_URL}/assets/images/${item.image}.png`}
+                                            alt={item.title}
+                                            loading="lazy"
+                                            className="w-full h-64 object-cover transition-transform duration-700 ease-in-out group-hover:scale-110"
+                                        />
+                                    </picture>
                                 </div>
-                            </div>
 
-                            <p className="lg:hidden mt-4 text-gray-700 text-md">
-                                AURO's Engineering and R&D team uses advanced CAD-CAM software and innovations to ensure our pumps are durable and exceed industry standards.
-                            </p>
-                        </div>
-
-
-                        {/* Card 3 */}
-                        <div>
-                            <div className="relative group overflow-hidden rounded-xl">
-                                <picture>
-                                    <source
-                                        srcSet={`${import.meta.env.BASE_URL}/assets/images/auro-pumps-machine-shops.webp`}
-                                        type="image/webp"
-                                    />
-                                    <img
-                                        src={`${import.meta.env.BASE_URL}/assets/images/auro-pumps-machine-shops.png`}
-                                        alt="Assembly Section"
-                                        className="w-full h-full object-cover rounded-xl"
-                                        loading="lazy"
-                                    />
-                                </picture>
-
-                                <div className="hidden lg:flex absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition duration-500 items-end p-6">
-                                    <p className="text-white text-md">
-                                        Our machine shop is equipped with advanced CNC and conventional machines. Each pump is rigorously tested on our in-house test bed per IS 5120 and API 610 standards to ensure quality and customer satisfaction.
+                                <div className="p-4 md:p-5 flex-1 flex flex-col">
+                                    <p className="text-gray leading-relaxed">
+                                        {item.description}
                                     </p>
+
                                 </div>
+
                             </div>
-
-                            <p className="lg:hidden mt-4 text-gray-700 text-md">
-                                Our machine shop is equipped with advanced CNC and conventional machines. Each pump is rigorously tested on our in-house test bed per IS 5120 and API 610 standards to ensure quality and customer satisfaction.
-                            </p>
-                        </div>
-
-                    </div>
-
-                </div>
+                        </SwiperSlide>
+                    ))}
+                </Swiper>
             </div>
         </section>
     );

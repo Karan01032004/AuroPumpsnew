@@ -1,41 +1,104 @@
 import ThemeButton from "../../components/ThemeButton";
+import bannerData from "../../data/bannerData";
+import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Autoplay, Navigation } from "swiper/modules";
+import { useRef } from "react";
+import "swiper/css";
+import "swiper/css/navigation";
+
 const HeroSection = () => {
+    const swiperRef = useRef(null);
     return (
         <section className="relative w-full h-[55vh] sm:h-[60vh] md:h-[75vh] lg:h-[90vh] xl:h-screen overflow-hidden">
 
-            {/* Background Image */}
-            <img
-                src={`${import.meta.env.BASE_URL}/assets/images/home-banner.png`}
-                alt="Premier Pumping Solutions"
-                className="hero-image-zoom absolute inset-0 w-full h-full object-cover will-change-transform"
-            />
+            <Swiper
+                modules={[Autoplay]}
+                onSwiper={(swiper) => (swiperRef.current = swiper)}
+                slidesPerView={1}
+                loop
+                speed={1000}
+                autoplay={{
+                    delay: 4000,
+                    disableOnInteraction: false,
+                }}
+                className="h-full w-full"
+            >
+                {bannerData.map((banner) => (
+                    <SwiperSlide className="!w-full" key={banner.id}>
+                        <div className="relative w-full h-[55vh] sm:h-[60vh] md:h-[75vh] lg:h-[90vh] xl:h-screen">
 
-            {/* Dark Gradient Overlay */}
-            <div className="absolute inset-0 bg-gradient-to-r from-black/75 via-black/40 to-transparent"></div>
-            <div className="hero-soft-glow absolute -left-24 top-1/4 h-60 w-60 rounded-full bg-white/20 blur-3xl"></div>
+                            {/* Background Image */}
+                            <div className="absolute inset-0 overflow-hidden">
+                                <img
+                                    src={banner.image}
+                                    alt={banner.title}
+                                    className="hero-image-zoom w-full h-full object-cover"
+                                />
+                            </div>
 
-            {/* Content */}
-            <div className="relative z-10 container mx-auto h-full flex items-center">
-                <div className="hero-content-rise max-w-2xl text-white">
+                            {/* Overlay */}
+                            <div className="absolute inset-0 bg-gradient-to-r from-black/75 via-black/40 to-transparent"></div>
 
-                    <h1 className="text-xl sm:text-3xl md:text-4xl font-bold leading-tight mb-4 text-white drop-shadow-[0_8px_30px_rgba(0,0,0,0.9)]">
-                        Premier Pumping Solutions,
-                        <br className="hidden md:block" />
-                        Powered by Decades of Expertise
-                    </h1>
+                            <div className="hero-soft-glow absolute -left-24 top-1/4 h-60 w-60 rounded-full bg-white/20 blur-3xl"></div>
 
-                    <p className="text-sm sm:text-base md:text-lg text-gray-200 mb-6 drop-shadow-[0_4px_20px_rgba(0,0,0,0.9)]">
-                        Since 1984, our commitment to innovation and quality has positioned us as a trusted leader in the pump manufacturing industry, backed by extensive experience and advanced materials know-how.
-                    </p>
+                            {/* Content */}
+                            <div className="relative z-10 container mx-auto h-full flex items-center">
+                                <div className="hero-content-rise lg:ms-14 max-w-2xl text-white">
 
-                    <ThemeButton
-                        text="DISCOVER SOLUTIONS"
-                        link="company"
-                        className="uppercase text-sm font-medium"
-                    />
+                                    {/*<h1 className="text-xl sm:text-3xl md:text-4xl font-bold leading-tight mb-4 text-white drop-shadow-[0_8px_30px_rgba(0,0,0,0.9)] whitespace-pre-line">*/}
+                                    {/*    {banner.title}*/}
+                                    {/*</h1>*/}
 
-                </div>
-            </div>
+                                    <p className="text-sm sm:text-base md:text-lg text-gray-200 mb-6 drop-shadow-[0_4px_20px_rgba(0,0,0,0.9)]">
+                                        {banner.description}
+                                    </p>
+
+                                    <ThemeButton
+                                        text="DISCOVER SOLUTIONS"
+                                        link="company"
+                                        className="uppercase text-sm font-medium"
+                                    />
+
+                                </div>
+                            </div>
+
+                        </div>
+                    </SwiperSlide>
+                ))}
+            </Swiper>
+
+            {/* Previous */}
+            <button
+                onClick={() => swiperRef.current?.slidePrev()}
+                className="absolute left-6 top-1/2 -translate-y-1/2 z-20
+               flex items-center justify-center
+               w-10 h-14
+               rounded-md
+               bg-black/35
+               backdrop-blur-sm
+               text-white
+               hover:bg-primary
+               transition-all duration-300"
+            >
+                <FaChevronLeft className="text-lg" />
+            </button>
+
+            {/* Next */}
+            <button
+                onClick={() => swiperRef.current?.slideNext()}
+                className="absolute right-6 top-1/2 -translate-y-1/2 z-20
+               flex items-center justify-center
+               w-10 h-14
+               rounded-md
+               bg-black/45
+               backdrop-blur-sm
+               text-white
+               hover:bg-primary
+               transition-all duration-300"
+            >
+                <FaChevronRight className="text-lg" />
+            </button>
 
         </section>
     );

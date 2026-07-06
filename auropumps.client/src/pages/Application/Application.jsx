@@ -3,7 +3,7 @@ import AuroApplication from "../../components/AuroApplication/AuroApplication";
 function Application() {
   return (
       <>
-          <BannerSection title="APPLICATION" />
+          <BannerSection title="APPLICATIONS" />
           <AuroApplication />
 
       </>

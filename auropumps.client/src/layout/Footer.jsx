@@ -119,18 +119,18 @@ const Footer = () => {
                             sales@auropumps.com
                         </a>
 
-                        <span className="hidden lg:inline">|</span>
+                        {/*<span className="hidden lg:inline">|</span>*/}
 
                         {/* Mobile */}
-                        <div className="flex items-center gap-2 lg:hidden">
-                            <FaEnvelope size={12} />
-                            <a href="mailto:purchase@auropumps.com">purchase@auropumps.com</a>
-                        </div>
+                        {/*<div className="flex items-center gap-2 lg:hidden">*/}
+                        {/*    <FaEnvelope size={12} />*/}
+                        {/*    <a href="mailto:purchase@auropumps.com">purchase@auropumps.com</a>*/}
+                        {/*</div>*/}
 
                         {/* Desktop */}
-                        <a href="mailto:purchase@auropumps.com" className="hidden lg:inline hover:text-white">
-                            purchase@auropumps.com
-                        </a>
+                        {/*<a href="mailto:purchase@auropumps.com" className="hidden lg:inline hover:text-white">*/}
+                        {/*    purchase@auropumps.com*/}
+                        {/*</a>*/}
 
                     </div>
                 </div>

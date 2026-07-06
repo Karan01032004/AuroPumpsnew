@@ -1,6 +1,32 @@
 @import "tailwindcss";
 @config "../tailwind.config.js"; /*@import "tw-animate-css";*/ /*@custom-variant dark (&:is(.dark *));*/
+@font-face {
+    font-family: "Rockwell";
+    src: url("/fonts/Rockwell-Regular.woff2") format("woff2");
+    font-weight: 400;
+    font-style: normal;
+}
 
+@font-face {
+    font-family: "Rockwell";
+    src: url("/fonts/Rockwell-Bold.woff2") format("woff2");
+    font-weight: 700;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: "Rockwell";
+    src: url("/fonts/Rockwell-Light.woff2") format("woff2");
+    font-weight: 300;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: "Rockwell";
+    src: url("/fonts/Rockwell-Extra-Bold.woff2") format("woff2");
+    font-weight: 800;
+    font-style: normal;
+}
 @layer base {
     html, body {
         @apply font-primary text-base leading-relaxed tracking-wide;
@@ -645,3 +671,18 @@
         animation: none;
     }
 }
+
+.infrastructureSwiper .swiper-wrapper {
+    align-items: stretch;
+}
+
+.infrastructureSwiper .swiper-slide {
+    display: flex;
+    height: auto;
+}
+
+    .infrastructureSwiper .swiper-slide > div {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+    }    

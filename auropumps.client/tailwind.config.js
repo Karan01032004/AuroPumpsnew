@@ -42,6 +42,7 @@ export default {
             fontFamily: {
                 //primary: ["Geist", "sans-serif"],
                 primary: ["Inter", "sans-serif"],
+                rockwell: ["Rockwell", "serif"],
             },
             backgroundImage: {
                 'primary-gradient': 'linear-gradient(90deg, #F89B32 0%, #CF3A38 100%)',

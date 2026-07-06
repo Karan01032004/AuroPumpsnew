@@ -17,16 +17,32 @@ const CompanyOverview = () => {
                     {/* ================= LEFT IMAGE ================= */}
                     <div className="relative group">
 
-                        {/* Main Image */}
                         <div className="relative overflow-hidden rounded-xl shadow-2xl border border-white/20">
 
                             <img
-                                src={`${import.meta.env.BASE_URL}/assets/images/comapny-overview.png`}
+                                src={`${import.meta.env.BASE_URL}/assets/images/comapny-overview-new.png`}
                                 alt="Industrial Pump"
                                 className="w-full h-full object-cover transition duration-700 group-hover:scale-104"
                             />
 
-         
+                            {/* Bottom Gradient */}
+                            <div className="absolute inset-x-0 bottom-0 h-40 bg-gradient-to-t from-black/90 via-black/50 to-transparent"></div>
+
+                            {/* Experience Content */}
+                            <div className="absolute bottom-5 left-6 right-2 flex justify-end items-end gap-4 text-white">
+
+                                <h3 className="text-5xl md:text-6xl font-bold leading-none">
+                                    41+
+                                </h3>
+
+                                <p className="text-sm md:text-lg leading-tight max-w-[240px] mb-2">
+                                    Years of Experience of
+                                    
+                                    working in Industry
+                                </p>
+
+                            </div>
+
                         </div>
 
                     </div>
