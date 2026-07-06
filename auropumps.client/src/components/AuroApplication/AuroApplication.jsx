@@ -27,8 +27,8 @@ function AuroApplication() {
                     slug: app.slug,
                     product_ids: app.product_ids,
                     images: [
-                        app.image1, app.image2, app.image3, app.image4,
-                        app.image5, app.image6, app.image7, app.image8
+                        app.image1, app.image2, app.image3 
+                        
                     ].filter(Boolean)
                 }));
                 setApplications(formatted);

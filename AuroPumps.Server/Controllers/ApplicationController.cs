@@ -125,11 +125,7 @@ namespace AuroPumps.Server.Controllers
                     x.image1,
                     x.image2,
                     x.image3,
-                    x.image4,
-                    x.image5,
-                    x.image6,
-                    x.image7,
-                    x.image8,
+                    
                     slug = System.Text.RegularExpressions.Regex.Replace(
                 x.title.Replace("&", "").ToLower(),
                 @"[^a-z0-9]+",
@@ -181,21 +177,22 @@ namespace AuroPumps.Server.Controllers
                 return NotFound(new { message = "Application not found" });
 
             return Ok(app);
-        } 
-        // ✅ UPDATE
+        }
+
         [HttpPut("update/{id}")]
         public IActionResult Update(
-            int id,
-            [FromForm] ApplicationDTO dto,
-            IFormFile? image1,
-            IFormFile? image2,
-            IFormFile? image3,
-            IFormFile? image4,
-            IFormFile? image5,
-            IFormFile? image6,
-            IFormFile? image7,
-            IFormFile? image8
-        )
+      int id,
+      [FromForm] ApplicationDTO dto,
+      [FromForm] string? deleted_images, // 🔥 Frontend se aayi hui deleted keys yahan milegi
+      IFormFile? image1,
+      IFormFile? image2,
+      IFormFile? image3,
+      IFormFile? image4,
+      IFormFile? image5,
+      IFormFile? image6,
+      IFormFile? image7,
+      IFormFile? image8
+  )
         {
             try
             {
@@ -209,35 +206,50 @@ namespace AuroPumps.Server.Controllers
                 app.product_ids = dto.product_ids;
                 app.Visible = dto.Visible;
 
-                // 🔥 only update if new image uploaded
-                if (image1 != null) app.image1 = SaveFile(image1, "applications");
-                if (image2 != null) app.image2 = SaveFile(image2, "applications");
-                if (image3 != null) app.image3 = SaveFile(image3, "applications");
-                if (image4 != null) app.image4 = SaveFile(image4, "applications");
-                if (image5 != null) app.image5 = SaveFile(image5, "applications");
-                if (image6 != null) app.image6 = SaveFile(image6, "applications");
-                if (image7 != null) app.image7 = SaveFile(image7, "applications");
-                if (image8 != null) app.image8 = SaveFile(image8, "applications");
+                // 🔥 STEP 1: Pehle database se image field ko null karenge agar frontend se delete request aayi hai
+                if (!string.IsNullOrEmpty(deleted_images))
+                {
+                    var deletedKeys = System.Text.Json.JsonSerializer.Deserialize<List<string>>(deleted_images);
 
-                var oldFaqs = _db.ApplicationFAQ
-    .Where(x => x.Applicationid == id)
-    .ToList();
+                    if (deletedKeys != null && deletedKeys.Any())
+                    {
+                        foreach (var key in deletedKeys)
+                        {
+                            if (key == "image1" && image1 == null) { app.image1 = null; }
+                            if (key == "image2" && image2 == null) { app.image2 = null; }
+                            if (key == "image3" && image3 == null) { app.image3 = null; }
+                            if (key == "image4" && image4 == null) { app.image4 = null; }
+                            if (key == "image5" && image5 == null) { app.image5 = null; }
+                            if (key == "image6" && image6 == null) { app.image6 = null; }
+                            if (key == "image7" && image7 == null) { app.image7 = null; }
+                            if (key == "image8" && image8 == null) { app.image8 = null; }
+                        }
+                    }
+                }
 
+                // 🔥 STEP 2: Agar user ne usi key pe nayi image upload kar di hai, toh wo save ho jayegi
+                if (image1 != null) { app.image1 = SaveFile(image1, "applications"); }
+                if (image2 != null) { app.image2 = SaveFile(image2, "applications"); }
+                if (image3 != null) { app.image3 = SaveFile(image3, "applications"); }
+                if (image4 != null) { app.image4 = SaveFile(image4, "applications"); }
+                if (image5 != null) { app.image5 = SaveFile(image5, "applications"); }
+                if (image6 != null) { app.image6 = SaveFile(image6, "applications"); }
+                if (image7 != null) { app.image7 = SaveFile(image7, "applications"); }
+                if (image8 != null) { app.image8 = SaveFile(image8, "applications"); }
+
+                // ================= FAQ Logic =================
+                var oldFaqs = _db.ApplicationFAQ.Where(x => x.Applicationid == id).ToList();
                 _db.ApplicationFAQ.RemoveRange(oldFaqs);
 
                 var faqList = string.IsNullOrEmpty(dto.FAQs)
-               ? new List<ApplicationFAQDTO>()
-               : System.Text.Json.JsonSerializer.Deserialize<List<ApplicationFAQDTO>>(dto.FAQs);
+                    ? new List<ApplicationFAQDTO>()
+                    : System.Text.Json.JsonSerializer.Deserialize<List<ApplicationFAQDTO>>(dto.FAQs);
 
                 if (faqList != null && faqList.Any())
                 {
                     foreach (var faq in faqList)
                     {
-                        // Skip empty FAQ
-                        if (string.IsNullOrWhiteSpace(faq.question))
-                        {
-                            continue;
-                        }
+                        if (string.IsNullOrWhiteSpace(faq.question)) continue;
 
                         _db.ApplicationFAQ.Add(new ApplicationFAQ
                         {
@@ -251,14 +263,91 @@ namespace AuroPumps.Server.Controllers
                 }
 
                 _db.SaveChanges();
-
                 return Ok(new { message = "Application updated successfully" });
             }
             catch (Exception ex)
             {
                 return StatusCode(500, new { message = ex.Message });
             }
-        }
+        } // <-- Method ka closing bracket bilkul sahi laga diya hai
+
+        // ✅ UPDATE
+        //    [HttpPut("update/{id}")]
+        //    public IActionResult Update(
+        //        int id,
+        //        [FromForm] ApplicationDTO dto,
+        //        IFormFile? image1,
+        //        IFormFile? image2,
+        //        IFormFile? image3,
+        //        IFormFile? image4,
+        //        IFormFile? image5,
+        //        IFormFile? image6,
+        //        IFormFile? image7,
+        //        IFormFile? image8
+        //    )
+        //    {
+        //        try
+        //        {
+        //            var app = _db.Application.FirstOrDefault(x => x.id == id);
+
+        //            if (app == null)
+        //                return NotFound(new { message = "Application not found" });
+
+        //            app.title = dto.title;
+        //            app.description = dto.description;
+        //            app.product_ids = dto.product_ids;
+        //            app.Visible = dto.Visible;
+
+        //            // 🔥 only update if new image uploaded
+        //            if (image1 != null) app.image1 = SaveFile(image1, "applications");
+        //            if (image2 != null) app.image2 = SaveFile(image2, "applications");
+        //            if (image3 != null) app.image3 = SaveFile(image3, "applications");
+        //            if (image4 != null) app.image4 = SaveFile(image4, "applications");
+        //            if (image5 != null) app.image5 = SaveFile(image5, "applications");
+        //            if (image6 != null) app.image6 = SaveFile(image6, "applications");
+        //            if (image7 != null) app.image7 = SaveFile(image7, "applications");
+        //            if (image8 != null) app.image8 = SaveFile(image8, "applications");
+
+        //            var oldFaqs = _db.ApplicationFAQ
+        //.Where(x => x.Applicationid == id)
+        //.ToList();
+
+        //            _db.ApplicationFAQ.RemoveRange(oldFaqs);
+
+        //            var faqList = string.IsNullOrEmpty(dto.FAQs)
+        //           ? new List<ApplicationFAQDTO>()
+        //           : System.Text.Json.JsonSerializer.Deserialize<List<ApplicationFAQDTO>>(dto.FAQs);
+
+        //            if (faqList != null && faqList.Any())
+        //            {
+        //                foreach (var faq in faqList)
+        //                {
+        //                    // Skip empty FAQ
+        //                    if (string.IsNullOrWhiteSpace(faq.question))
+        //                    {
+        //                        continue;
+        //                    }
+
+        //                    _db.ApplicationFAQ.Add(new ApplicationFAQ
+        //                    {
+        //                        Applicationid = id,
+        //                        question = faq.question?.Trim(),
+        //                        answer = faq.answer?.Trim(),
+        //                        sort_order = faq.sort_order,
+        //                        visible = faq.visible
+        //                    });
+        //                }
+        //            }
+
+        //            _db.SaveChanges();
+
+        //            return Ok(new { message = "Application updated successfully" });
+        //        }
+        //        catch (Exception ex)
+        //        {
+        //            return StatusCode(500, new { message = ex.Message });
+        //        }
+        //    }
         [HttpDelete("delete/{id}")]
         public IActionResult Delete(int id)
         {
