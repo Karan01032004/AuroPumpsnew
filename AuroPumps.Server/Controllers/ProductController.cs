@@ -6,6 +6,7 @@ using Poweradmin.Server.DTOs;
 using Poweradmin.Server.Models;
 using System.Net;
 using System.Net.Mail;
+using System.Xml;
 
 namespace Poweradmin.Server.Controllers
 {
@@ -207,6 +208,15 @@ namespace Poweradmin.Server.Controllers
                 producthead = productData.producthead ?? "",
                 productsize = productData.productsize ?? "",
                 temperature = productData.temperature ?? "",
+
+                Immersionlength = productData.Immersionlength ??"",
+                Installation = productData.Installation ?? "",
+                Drive = productData.Drive ??"",
+                Rotationspeedcontrol = productData.Rotationspeedcontrol ?? "",
+                propellertype = productData.propellertype ?? "",
+                OperatingTemperature = productData.OperatingTemperature ?? "",
+
+
                 viscosity = productData.viscosity ?? "",
                 shaftsealing = productData.shaftsealing ?? "",
                 MOC = productData.MOC ?? "",
@@ -236,285 +246,7 @@ namespace Poweradmin.Server.Controllers
             };
 
             return Ok(product);
-        }
-
-        //  [HttpGet("{id}")]
-        //  public IActionResult GetById(int id)
-        //  {
-        //      var productData = _db.Product
-        //.Where(x => x.id == id)
-        //.FirstOrDefault();
-
-        //      if (productData == null)
-        //          return NotFound(new { message = "Product not found" });
-        //      // 2. CategorySlug nikalne ke liye logic (Memory mein)
-        //      string firstCatSlug = "";
-        //      if (!string.IsNullOrEmpty(productData.CategoryId))
-        //      {
-
-        //          var firstCatIdStr = productData.CategoryId.Split(',').FirstOrDefault();
-
-        //          if (int.TryParse(firstCatIdStr, out int catId))
-        //          {
-        //              // Category table se slug uthao
-        //              firstCatSlug = _db.ProductsCategory
-        //                  .Where(c => c.id == catId)
-        //                  .Select(c => System.Text.RegularExpressions.Regex.Replace(
-        //          c.title.Replace("&", "").ToLower(),
-        //          @"[^a-z0-9]+",
-        //          "-"
-        //      ).Trim('-'))
-        //                  .FirstOrDefault() ?? "";
-        //          }
-        //      }
-        //      var product = _db.Product
-        //          .Where(x => x.id == id)
-        //          .Select(x => new
-        //          {
-        //              x.id,
-        //              x.title,
-
-        //              image1 = x.image1 ?? "",
-        //              image2 = x.image2 ?? "",
-        //              //x.image3,
-        //              catelogue = x.catelogue ?? "",
-        //              CategoryId = x.CategoryId ?? "",
-        //              // x.CategoryId,
-        //              x.description, 
-        //              Capacity = x.Capacity ?? "",
-        //              producthead = x.producthead ?? "",
-        //              productsize = x.productsize ?? "",
-        //              temperature = x.temperature ?? "",
-        //              viscosity = x.viscosity ?? "",
-        //              shaftsealing = x.shaftsealing ?? "",
-        //              MOC = x.MOC ?? "",
-        //              pressure = x.pressure ?? "",
-        //              mechanicalseal = x.mechanicalseal ?? "",
-        //              applicationtags = x.applicationtags ?? "",
-        //              slurryhandling = x.slurryhandling ?? "",
-        //              impeller = x.impeller ?? "",
-        //              technicalDetails = x.technicalDetails ?? "",
-        //              applications = x.applications ?? "",
-        //              SubmergenceLength = x.SubmergenceLength ?? "",
-        //              operating_frequency = x.operating_frequency ?? "",
-        //              material = x.material ?? "",
-        //              visible = x.Visible,
-        //              isFeatured = x.isFeatured,
-        //              isaddcontact = x.isaddcontact, 
-        //              pageIETitle = x.PageIETitle ?? "",
-        //              meta = x.Meta ?? "",
-        //              productSlug = System.Text.RegularExpressions.Regex.Replace(
-        //          x.title.Replace("&", "").ToLower(),
-        //          @"[^a-z0-9]+",
-        //          "-"
-        //      ).Trim('-'),
-        //              categorySlug = firstCatSlug
-        //          })
-        //          .FirstOrDefault();
-
-        //      if (product == null)
-        //          return NotFound(new { message = "Product not found" });
-
-        //      return Ok(product);
-        //  }
-
-        //        [HttpPost("send-pdf")]
-        //        public async Task<IActionResult> SendPdf([FromBody] PdfRequestDTO dto)
-        //        {
-        //            var product = _db.Product.FirstOrDefault(x => x.id == dto.ProductId);
-
-        //            if (product == null)
-        //                return BadRequest("Invalid product");
-
-        //            // ✅ SAVE TO DB
-        //            var request = new ProductPdfRequest
-        //            {
-        //                ProductId = dto.ProductId,
-        //                Name = dto.Name,
-        //                Email = dto.Email,
-        //                Phone = dto.Phone,
-        //                CompanyName = dto.CompanyName,
-        //                Message = dto.Message
-        //            };
-
-        //            _db.ProductPdfRequests.Add(request);
-        //            //await _db.SaveChangesAsync();
-        //            try
-        //            {
-        //                await _db.SaveChangesAsync();
-        //            }
-        //            catch (Exception ex)
-        //            {
-        //                // Yahan mouse le jao 'ex' par aur InnerException check karo
-        //                var msg = ex.InnerException?.Message ?? ex.Message;
-        //                return BadRequest(msg);
-        //            }
-        //            // ✅ SEND EMAIL
-        //            var pdfPath = Path.Combine(
-        //                Directory.GetCurrentDirectory(),
-        //                "wwwroot",
-        //                product.catelogue.TrimStart('/')
-        //            );
-
-        //            if (!System.IO.File.Exists(pdfPath))
-        //                return BadRequest("PDF not found");
-
-        //            var bytes = await System.IO.File.ReadAllBytesAsync(pdfPath);
-
-        //            using (var smtp = new SmtpClient("smtp.gmail.com", 587))
-        //            {
-        //                smtp.Credentials = new NetworkCredential("sales.palej@auropumps.com", "mdig soep resa oebr");
-        //                smtp.EnableSsl = true;
-
-        //                var mail = new MailMessage();
-        //                mail.From = new MailAddress("sales.palej@auropumps.com");
-        //                mail.To.Add(dto.Email);
-        //                mail.Subject = "Product PDF Inquiry";
-        //                mail.IsBodyHtml = true;
-        //                mail.Body = $@"
-        //<html>
-        //<head>
-        //    <style>
-        //        body {{
-        //            font-family: Arial, sans-serif;
-        //            background-color: #f4f4f4;
-        //            margin: 0;
-        //            padding: 0;
-        //        }}
-        //        .container {{
-        //            max-width: 600px;
-        //            margin: auto;
-        //            background: #ffffff;
-        //            padding: 20px;
-        //            border-radius: 8px;
-        //        }}
-        //        .header {{
-        //            background: #2c7a7b;
-        //            color: #ffffff;
-        //            padding: 15px;
-        //            text-align: center;
-        //            border-radius: 8px 8px 0 0;
-        //        }}
-        //        .content {{
-
-        //            color: #333;
-        //        }}
-        //        .footer {{
-        //            font-size: 12px;
-        //            color: #777;
-        //            text-align: center;
-
-        //        }}
-        //        .btn {{
-        //            display: inline-block;
-        //            padding: 10px 20px;
-        //            background-color: #2c7a7b;
-        //            color: #ffffff !important;
-        //            text-decoration: none;
-        //            border-radius: 5px;
-        //            margin-top: 10px;
-        //        }}
-        //    </style>
-        //</head>
-        //<body>
-        //    <div class='container'>
-
-        //        <div class='header'>
-        //            <h2>Auro Pumps</h2>
-        //        </div>
-
-        //        <div class='content'>
-        //            <p>Dear <strong>{dto.Name}</strong>,</p>
-
-        //            <p>Thank you for your interest in our product {product.title}.</p>
-
-        //            <p> We have received your inquiry. We will share the product catalogue with you shortly.</p>
-
-        //            <p>If you have any questions or need further assistance, feel free to contact us.</p>
-
-        //            <p>Best Regards,<br/>
-        //            <strong>Auro Pumps Team</strong></p>
-        //        </div>
-
-        //        <div class='footer'>
-        //            © {DateTime.Now.Year} Auro Pumps Pvt. Ltd. All rights reserved.
-        //        </div>
-
-        //    </div>
-        //</body>
-        //</html>
-        //";
-
-        //                //mail.Body = $"Hello {dto.Name},\n\nPlease find attached PDF.";
-
-        //                //mail.Attachments.Add(new Attachment(new MemoryStream(bytes), "Product.pdf"));
-
-        //                await smtp.SendMailAsync(mail);
-
-
-        //                var adminMail = new MailMessage();
-        //                adminMail.From = new MailAddress("sales.palej@auropumps.com");
-
-        //                // Admin email
-        //                adminMail.To.Add("karan@dotscoms.com"); // ya jo admin email ho
-        //                //adminMail.To.Add("sales.palej@auropumps.com"); // ya jo admin email ho
-
-        //                adminMail.Subject = $"New PDF Inquiry - {product.title}";
-
-        //                adminMail.IsBodyHtml = true;
-
-        //                adminMail.Body = $@"
-        //<html>
-        //<body style='font-family:Arial,sans-serif;'>
-
-        //    <h2 style='color:#2c7a7b;'>New Product PDF Inquiry Received</h2>
-
-        //    <table border='1' cellpadding='8' cellspacing='0' style='border-collapse:collapse;width:100%;'>
-        //        <tr>
-        //            <td><strong>Product</strong></td>
-        //            <td>{product.title}</td>
-        //        </tr>
-        //        <tr>
-        //            <td><strong>Name</strong></td>
-        //            <td>{dto.Name}</td>
-        //        </tr>
-        //        <tr>
-        //            <td><strong>Email</strong></td>
-        //            <td>{dto.Email}</td>
-        //        </tr>
-        //        <tr>
-        //            <td><strong>Phone</strong></td>
-        //            <td>{dto.Phone}</td>
-        //        </tr>
-        //        <tr>
-        //            <td><strong>Company Name</strong></td>
-        //            <td>{dto.CompanyName}</td>
-        //        </tr>
-        //        <tr>
-        //            <td><strong>Message</strong></td>
-        //            <td>{dto.Message}</td>
-        //        </tr>
-        //        <tr>
-        //            <td><strong>Inquiry Date</strong></td>
-        //            <td>{DateTime.Now:dd-MM-yyyy HH:mm:ss}</td>
-        //        </tr>
-        //    </table>
-
-        //    <br/>
-
-        //    <p>
-        //        This customer has requested the PDF catalogue for the above product.
-        //    </p>
-
-        //</body>
-        //</html>";
-
-        //                await smtp.SendMailAsync(adminMail);
-        //            }
-
-        //            return Ok(new { message = "Email sent successfully" });
-        //        }
-
+        } 
         [HttpPost("send-pdf")]
         public async Task<IActionResult> SendPdf([FromBody] PdfRequestDTO dto)
         {
@@ -805,6 +537,14 @@ namespace Poweradmin.Server.Controllers
                     producthead = dto.producthead,
                     productsize = dto.productsize,
                     temperature = dto.temperature,
+
+                    Immersionlength=dto.Immersionlength,
+                    Installation=dto.Installation,
+                    Drive  =dto.Drive,
+                    Rotationspeedcontrol=dto.Rotationspeedcontrol,
+                    propellertype=dto.propellertype,
+                    OperatingTemperature=dto.OperatingTemperature,
+
                     MOC = dto.MOC,
                     technicalDetails = dto.technicalDetails,
                     pressure = dto.pressure,
@@ -877,6 +617,15 @@ namespace Poweradmin.Server.Controllers
                 product.producthead = dto.producthead;
                 product.productsize = dto.productsize;
                 product.temperature = dto.temperature;
+
+                product.Immersionlength = dto.Immersionlength;
+                product.Installation = dto.Installation;
+                product.Drive = dto.Drive;
+                product.Rotationspeedcontrol = dto.Rotationspeedcontrol;
+                product.propellertype = dto.propellertype;
+                product.OperatingTemperature = dto.OperatingTemperature;
+
+
                 product.viscosity = dto.viscosity;
                 product.shaftsealing = dto.shaftsealing;
                 product.MOC = dto.MOC;

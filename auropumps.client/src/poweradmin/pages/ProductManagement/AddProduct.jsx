@@ -36,6 +36,12 @@ const AddProduct = () => {
     const [productHead, setProductHead] = useState("");
     const [productSize, setProductSize] = useState("");
     const [temperature, setTemperature] = useState("");
+    const [immersionlength, setImmersionlength] = useState("");
+    const [installation, setInstallation] = useState("");
+    const [drive, setDrive] = useState("");
+    const [rotationspeedcontrol, setRotationspeedcontrol] = useState("");
+    const [propellertype, setpropellertype] = useState("");
+    const [operatingTemperature, setOperatingTemperature] = useState("");
     const [viscosity, setViscosity] = useState("");
     const [shaftsealing, setshaftsealing] = useState("");
     const [submergenceLength, setSubmergenceLength] = useState("");
@@ -106,6 +112,12 @@ const AddProduct = () => {
         setProductHead(p.producthead || "");
         setProductSize(p.productsize || "");
         setTemperature(p.temperature || "");
+        setImmersionlength(p.immersionlength || "");
+        setInstallation(p.installation || "");
+        setDrive(p.drive || "");
+        setRotationspeedcontrol(p.rotationspeedcontrol || "");
+        setpropellertype(p.propellertype || "");
+        setOperatingTemperature(p.operatingTemperature || "");
         setViscosity(p.viscosity || "");
         setshaftsealing(p.shaftsealing || "");
         setSubmergenceLength(p.submergenceLength || "");
@@ -159,7 +171,7 @@ const AddProduct = () => {
             formData.append("technicalDetails", technicalDetails);
             formData.append("MOC", moc);
             formData.append("pressure", pressure);
-            formData.append("mechanicalseal ", mechanicalseal);
+            formData.append("mechanicalseal", mechanicalseal);
             formData.append("applicationtags", applicationtags);
             formData.append("impeller", impeller);
             formData.append("slurryhandling", slurryhandling);
@@ -168,6 +180,12 @@ const AddProduct = () => {
             formData.append("producthead", productHead);
             formData.append("productsize", productSize);
             formData.append("temperature", temperature);
+            formData.append("Immersionlength", immersionlength);
+            formData.append("Installation", installation);
+            formData.append("Drive", drive);
+            formData.append("Rotationspeedcontrol", rotationspeedcontrol);
+            formData.append("propellertype", propellertype);
+            formData.append("OperatingTemperature", operatingTemperature);
             formData.append("viscosity", viscosity);
             formData.append("shaftsealing", shaftsealing);
             formData.append("SubmergenceLength", submergenceLength);
@@ -597,6 +615,54 @@ const AddProduct = () => {
                         <input
                             value={slurryhandling}
                             onChange={(e) => setslurryhandling(e.target.value)}
+                            className="w-full rounded-lg border px-3 py-2"
+                        />
+                    </div>
+                    <div>
+                        <label className="font-medium">Immersion Length </label>
+                        <input
+                            value={immersionlength}
+                            onChange={(e) => setImmersionlength(e.target.value)}
+                            className="w-full rounded-lg border px-3 py-2"
+                        />
+                    </div>
+                    <div>
+                        <label className="font-medium">Installation</label>
+                        <input
+                            value={installation}
+                            onChange={(e) => setInstallation(e.target.value)}
+                            className="w-full rounded-lg border px-3 py-2"
+                        />
+                    </div>
+                    <div>
+                        <label className="font-medium">Drive</label>
+                        <input
+                            value={drive}
+                            onChange={(e) => setDrive(e.target.value)}
+                            className="w-full rounded-lg border px-3 py-2"
+                        />
+                    </div>
+                    <div>
+                        <label className="font-medium">Rotation Speed Control </label>
+                        <input
+                            value={rotationspeedcontrol}
+                            onChange={(e) => setRotationspeedcontrol(e.target.value)}
+                            className="w-full rounded-lg border px-3 py-2"
+                        />
+                    </div>
+                    <div>
+                        <label className="font-medium">Propeller type </label>
+                        <input
+                            value={propellertype}
+                            onChange={(e) => setpropellertype(e.target.value)}
+                            className="w-full rounded-lg border px-3 py-2"
+                        />
+                    </div>
+                    <div>
+                        <label className="font-medium">OperatingTemperature </label>
+                        <input
+                            value={operatingTemperature}
+                            onChange={(e) => setOperatingTemperature(e.target.value)}
                             className="w-full rounded-lg border px-3 py-2"
                         />
                     </div>
