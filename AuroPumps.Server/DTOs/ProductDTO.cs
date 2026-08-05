@@ -8,7 +8,7 @@ namespace Poweradmin.Server.DTOs
         public string? title { get; set; }
 
         public bool? Visible { get; set; }
-        public bool? isFeatured { get; set; }
+        public bool  isFeatured { get; set; }
         public bool? isaddcontact { get; set; }
 
         public string? PageIETitle { get; set; }

@@ -32,7 +32,7 @@ namespace Poweradmin.Server.Models
         public DateTime? modifyDate { get; set; }
         public string? modifyIp { get; set; }
 
-        public bool? isFeatured { get; set; }
+        public bool isFeatured { get; set; }
         public bool? isaddcontact { get; set; }
 
         public string? PageIETitle { get; set; }  // Browser Title

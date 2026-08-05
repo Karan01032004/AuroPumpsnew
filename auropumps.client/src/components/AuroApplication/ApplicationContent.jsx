@@ -35,22 +35,29 @@ function ApplicationContent({
     const navigate = useNavigate();
 
     // ================= HANDLERS =================
+    //const handleDownloadClick = (productItem) => {
+    //    if (!productItem) return;
+
+    //    // ? LOGIC: Agar product isFeatured true hai toh modal form open karo
+    //    if (productItem.isFeatured) {
+    //        setSelectedProductForPdf(productItem);
+    //        setIsPdfModalOpen(true);
+    //    } else {
+    //        // Direct download if not featured
+    //        const directPdfUrl = productItem.pdf ? `${productItem.pdf}` : "";
+    //        if (directPdfUrl) {
+    //            window.open(directPdfUrl, "_blank");
+    //        } else {
+    //            toast.error("PDF path not found!");
+    //        }
+    //    }
+    //};
     const handleDownloadClick = (productItem) => {
         if (!productItem) return;
 
-        // ? LOGIC: Agar product isFeatured true hai toh modal form open karo
-        if (productItem.isFeatured) {
-            setSelectedProductForPdf(productItem);
-            setIsPdfModalOpen(true);
-        } else {
-            // Direct download if not featured
-            const directPdfUrl = productItem.pdf ? `${productItem.pdf}` : "";
-            if (directPdfUrl) {
-                window.open(directPdfUrl, "_blank");
-            } else {
-                toast.error("PDF path not found!");
-            }
-        }
+        // Ab Featured ho ya na ho, form hamesha khulega
+        setSelectedProductForPdf(productItem);
+        setIsPdfModalOpen(true);
     };
 
     const closePdfModal = () => {

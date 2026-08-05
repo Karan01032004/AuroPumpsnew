@@ -107,6 +107,35 @@ function App() {
             document.removeEventListener("contextmenu", disableMediaContextMenu);
         };
     }, []);
+
+
+    useEffect(() => {
+
+        const disableContextMenu = (e) => {
+            e.preventDefault();
+        };
+
+        const disableKeys = (e) => {
+            if (
+                e.key === "F12" ||
+                (e.ctrlKey && e.shiftKey && ["I", "J", "C"].includes(e.key.toUpperCase())) ||
+                (e.ctrlKey && e.key.toUpperCase() === "U") ||
+                (e.ctrlKey && e.key.toUpperCase() === "S")
+            ) {
+                e.preventDefault();
+                return false;
+            }
+        };
+
+        document.addEventListener("contextmenu", disableContextMenu);
+        document.addEventListener("keydown", disableKeys);
+
+        return () => {
+            document.removeEventListener("contextmenu", disableContextMenu);
+            document.removeEventListener("keydown", disableKeys);
+        };
+
+    }, []);
         
     return (
         <>

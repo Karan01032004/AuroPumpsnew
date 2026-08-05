@@ -29,7 +29,7 @@ function ProductContent({ product, categoryTitle }) {
         (spec) => spec?.value && String(spec.value).trim() !== ""
     );
 
-    const pdfUrl = product.pdf ? `${IMAGE_BASE_URL}${product.pdf}` : "";
+    
 
     const closePdfModal = () => {
         setIsPdfModalOpen(false);
@@ -42,17 +42,20 @@ function ProductContent({ product, categoryTitle }) {
             [name]: value,
         }));
     };
-    const nameRegex = /^[A-Za-z\s]+$/; // only letters + space
-    const phoneRegex = /^[0-9]{1,15}$/; // max 15 digits
+ 
 
+    //const handleDownloadClick = () => {
+    //    if (product.isFeatured) {
+    //        setIsPdfModalOpen(true); // form open
+    //    } else {
+    //        if (pdfUrl) {
+    //            window.open(pdfUrl, "_blank");
+    //        }
+    //    }
+    //};
     const handleDownloadClick = () => {
-        if (product.isFeatured) {
-            setIsPdfModalOpen(true); // form open
-        } else {
-            if (pdfUrl) {
-                window.open(pdfUrl, "_blank");
-            }
-        }
+        
+        setIsPdfModalOpen(true);
     };
     const handlePdfSubmit = async (event) => {
         event.preventDefault();

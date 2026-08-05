@@ -64,7 +64,7 @@ namespace Poweradmin.Server.Controllers
             {
                 string fromEmail = "sales.palej@auropumps.com";
                 string password = "mdig soep resa oebr";
-                string toEmail = "karan@dotscoms.com";
+                string toEmail = "sales.palej@auropumps.com";
 
                 MailMessage mail = new MailMessage();
                 mail.From = new MailAddress(fromEmail);
