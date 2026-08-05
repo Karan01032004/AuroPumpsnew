@@ -6,6 +6,8 @@ import { toast } from "react-hot-toast";
 import FAQ from "../FAQ/FAQ";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay } from "swiper/modules";
+import { useNavigate } from "react-router-dom";
+import { IoArrowBack } from "react-icons/io5";
 
 import "swiper/css";
 function ApplicationContent({
@@ -30,6 +32,7 @@ function ApplicationContent({
     const [isTransitioning, setIsTransitioning] = useState(true);
 
     const galleryItems = Array.isArray(products) ? products : [];
+    const navigate = useNavigate();
 
     // ================= HANDLERS =================
     const handleDownloadClick = (productItem) => {
@@ -121,8 +124,18 @@ function ApplicationContent({
 
     return (
         <div className="space-y-10">
+            <div className="flex justify-end mb-5">
+                <button
+                    onClick={() => navigate("/application")}
+                    className="inline-flex items-center gap-2 rounded-full border border-primary/20 bg-white px-5 py-2 text-[11px] font-semibold tracking-[0.12em] uppercase text-primary transition-all duration-300 hover:border-primary hover:bg-primary/5"
+                >
+                    <IoArrowBack className="text-sm" />
+                    Back
+                </button>
+            </div>
             {/* MAIN CATEGORY JUMBOTRON CARD */}
             <section className="rounded-[28px] border border-slate-200 bg-white shadow-[0_25px_60px_-40px_rgba(15,23,42,0.35)]">
+               
                 <div className="border-b border-slate-200 bg-gradient-to-r from-[#F5F3FF] via-white to-[#EEF4FF] px-5 py-8 sm:px-7 lg:px-10 lg:py-10 rounded-[28px]">
                     <div className="grid gap-8 lg:grid-cols-[minmax(0,1.45fr)_minmax(320px,0.8fr)] lg:items-start">
                         <div>

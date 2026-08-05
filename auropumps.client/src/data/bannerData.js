@@ -22,7 +22,7 @@ const bannerData = [
     },
     {
         id: 4,
-        image: `${import.meta.env.BASE_URL}/assets/images/home-banner-4.png`,
+        image: `${import.meta.env.BASE_URL}/assets/images/home-banner-5.png`,
         title: "Trusted Partner\nAcross Industries",
         description:
             "Quality Without Compromise - ISO 9001:2015 Certified & CE Marked.",

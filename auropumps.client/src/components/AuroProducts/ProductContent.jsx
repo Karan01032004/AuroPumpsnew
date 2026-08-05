@@ -4,6 +4,8 @@ import { FiDownload } from "react-icons/fi";
 import api from "../../poweradmin/api/axios";
 import { toast } from "react-hot-toast";
 
+import { IoArrowBack } from "react-icons/io5";
+import { Link } from "react-router-dom";
 function ProductContent({ product, categoryTitle }) {
 
    
@@ -82,6 +84,17 @@ function ProductContent({ product, categoryTitle }) {
 
     return (
         <>
+
+            <div className="flex justify-end mb-5">
+                <Link
+                    to="/products"
+                    replace
+                    className="inline-flex items-center gap-2 rounded-full border border-primary/20 bg-white px-5 py-2 text-[11px] font-semibold tracking-[0.12em] uppercase text-primary transition-all duration-300 hover:border-primary hover:bg-primary/5"
+                >
+                    <IoArrowBack className="text-sm" />
+                    Back
+                </Link>
+            </div>
             <div className="rounded-2xl border border-primary/10 bg-gradient-to-b from-white to-[#f7f6ff] p-4 shadow-[0_14px_34px_rgba(45,37,142,0.09)] lg:p-6">
                 <div className="mb-5 flex flex-wrap items-start justify-between gap-3 border-b border-primary/10 pb-4">
 

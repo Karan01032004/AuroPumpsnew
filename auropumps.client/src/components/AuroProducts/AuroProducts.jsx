@@ -102,9 +102,11 @@ function AuroProducts() {
     // 2. Load Categories on Mount
     useEffect(() => {
         const loadCategories = async () => {
-            setLoading(true); //   start loading
+            setLoading(true);
+
             try {
                 const res = await api.get("/ProductsCategory/category-list");
+
                 const nextCategories = Array.isArray(res.data)
                     ? res.data
                     : Array.isArray(res.data?.data)
@@ -112,17 +114,28 @@ function AuroProducts() {
                         : [];
 
                 setCategories(nextCategories);
-                if (nextCategories.length > 0) {
+
+                if (categorySlug) {
+                    const matched = nextCategories.find(
+                        item => item.slug === categorySlug
+                    );
+
+                    if (matched) {
+                        setActiveCategory(matched.id);
+                    }
+                } else if (nextCategories.length) {
                     setActiveCategory(nextCategories[0].id);
                 }
+
             } catch (err) {
                 console.error(err);
             } finally {
-                setLoading(false); //   stop loading
+                setLoading(false);
             }
         };
+
         loadCategories();
-    }, []);
+    }, [categorySlug]);
 
 
     // 3. Load Products when category changes
