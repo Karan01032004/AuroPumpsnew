@@ -27,6 +27,14 @@ namespace Poweradmin.Server.DTOs
         public string? producthead { get; set; }
         public string? productsize { get; set; }
         public string? temperature { get; set; }
+
+        public string? Immersionlength { get; set; }
+        public string? Installation { get; set; }
+        public string? Drive { get; set; }
+        public string? Rotationspeedcontrol { get; set; }
+        public string? propellertype { get; set; }
+        public string? OperatingTemperature { get; set; }
+
         public string? viscosity { get; set; }
         public string? shaftsealing { get; set; }
         public string? SubmergenceLength { get; set; }
