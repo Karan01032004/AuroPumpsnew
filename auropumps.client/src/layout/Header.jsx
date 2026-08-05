@@ -607,9 +607,13 @@ const Header = () => {
 
                                                     return (
                                                         <div key={app.id}>
-                                                            <h4 className="font-semibold mb-3 border-b border-white/20 pb-2">
+                                                            <NavLink
+                                                                to={`/application/${app.slug}`}
+                                                                onClick={closeAllMenus}
+                                                                className="font-semibold mb-3 border-b border-white/20 pb-2 block hover:text-white"
+                                                            >
                                                                 {app.title}
-                                                            </h4>
+                                                            </NavLink>
 
                                                             {/*<ul className="space-y-2 text-white/80">*/}
                                                             {/*    {appProducts.map((product) => (*/}
@@ -644,7 +648,13 @@ const Header = () => {
                                 </NavLink>
                             );
                         })}
-
+                        <NavLink
+                            to="/contact-us"
+                            onClick={closeAllMenus}
+                            className="block mt-5 mx-1 rounded-xl bg-white text-primary text-center font-semibold py-3 hover:bg-gray-100 transition"
+                        >
+                            Contact Us →
+                        </NavLink>
                     </div>
                 </div>
             </div>
