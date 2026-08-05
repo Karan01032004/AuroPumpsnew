@@ -1,6 +1,6 @@
 const infrastructureData = [
     {
-        image: "auro-pumps-testbed",
+        image: "cad-cam",
         title: "Engineering & R&D",
         description:
             "Our Engineering and R&D team utilizes advanced CAD-CAM software and modern technologies to design reliable, high-performance pumps."
