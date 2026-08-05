@@ -66,7 +66,7 @@ function PdfInquiryTable() {
         { title: "EMAIL", data: "email" },
         { title: "PHONE", data: "phone" },
         { title: "COMPANY", data: "companyName" },
-        { title: "PRODUCT", data: "productName" },
+        { title: "PRODUCT", data: "productName", render: (data) => data ? data.substring(0, 40) + "..." : "-" },
         {
             title: "MESSAGE",
             data: "message",
