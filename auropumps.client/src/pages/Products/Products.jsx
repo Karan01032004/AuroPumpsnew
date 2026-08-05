@@ -5,7 +5,10 @@ import { useParams } from "react-router-dom";
 
 function Products() {
     const { categorySlug, productSlug } = useParams();
-    const isDetailView = Boolean(categorySlug || productSlug);
+
+    const isDetailView =
+        categorySlug !== undefined &&
+        productSlug !== undefined;
 
   return (
       <>

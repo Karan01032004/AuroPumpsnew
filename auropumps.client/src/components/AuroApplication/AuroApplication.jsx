@@ -65,10 +65,7 @@ function AuroApplication() {
                     setApplicationProducts(products);
                     await loadApplicationDetails(category.id);
                 }
-            } else if (applications.length > 0) {
-                const firstCategory = applications[0];
-                navigate(`/application/${firstCategory.slug}`, { replace: true });
-            }
+            } 
         };
 
         init();

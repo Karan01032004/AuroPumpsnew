@@ -12,25 +12,20 @@ const infrastructureData = [
             "Equipped with CNC and conventional machines, our machine shop ensures precision manufacturing and consistent product quality."
     },
     {
-        image: "infrastructure-4",
+        image: "infrastructure-4-new",
         title: "Quality Testing",
         description:
             "Every pump undergoes rigorous testing in our modern testing facility in accordance with international quality standards."
     },
     {
-        image: "infrastructure-3",
+        image: "infrastructure-6",
         title: "Assembly Section",
         description:
             "Our skilled assembly team follows stringent quality procedures to ensure every pump is assembled with precision and reliability."
     },
+   
     {
-        image: "infrastructure-5",
-        title: "Warehouse & Packing",
-        description:
-            "A well-organized warehouse and advanced packing section ensure safe storage and secure delivery to customers worldwide."
-    },
-    {
-        image: "infrastructure-6",
+        image: "infrastructure-3",
         title: "Dispatch Area",
         description:
             "AURO PUMPS has a fully equipped in-house manufacturing facility with advanced machining, fabrication, assembly, testing, and packing sections."

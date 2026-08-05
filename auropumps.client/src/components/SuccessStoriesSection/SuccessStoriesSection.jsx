@@ -62,7 +62,7 @@ const SuccessStoriesSection = () => {
                                                 <img
                                                     src={story.imagePng}
                                                     alt={story.alt}
-                                                    className="h-[280px] w-full object-contain transition-transform duration-500 group-hover:scale-105"
+                                                    className="h-[280px] w-full object-cover transition-transform duration-500 group-hover:scale-105"
                                                 />
                                             </picture>
                                         </div>

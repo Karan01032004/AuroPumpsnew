@@ -62,6 +62,51 @@ function App() {
             window.clearTimeout(hideLoader);
         };
     }, []);
+
+    //useEffect(() => {
+
+    //    const disableContextMenu = (e) => {
+    //        e.preventDefault();
+    //    };
+
+    //    const disableKeys = (e) => {
+    //        if (
+    //            e.key === "F12" ||
+    //            (e.ctrlKey && e.shiftKey && ["I", "J", "C"].includes(e.key.toUpperCase())) ||
+    //            (e.ctrlKey && e.key.toUpperCase() === "U") ||
+    //            (e.ctrlKey && e.key.toUpperCase() === "S")
+    //        ) {
+    //            e.preventDefault();
+    //            return false;
+    //        }
+    //    };
+
+    //    document.addEventListener("contextmenu", disableContextMenu);
+    //    document.addEventListener("keydown", disableKeys);
+
+    //    return () => {
+    //        document.removeEventListener("contextmenu", disableContextMenu);
+    //        document.removeEventListener("keydown", disableKeys);
+    //    };
+
+    //}, []);
+
+    useEffect(() => {
+        const disableMediaContextMenu = (e) => {
+            if (
+                e.target.closest("img") ||
+                e.target.closest("video")
+            ) {
+                e.preventDefault();
+            }
+        };
+
+        document.addEventListener("contextmenu", disableMediaContextMenu);
+
+        return () => {
+            document.removeEventListener("contextmenu", disableMediaContextMenu);
+        };
+    }, []);
         
     return (
         <>
@@ -95,8 +140,8 @@ function App() {
                         </div>
 
                         <div className="app-loader__text-wrap">
-                            <p className="app-loader__eyebrow">Technology Transfer from Pompe Vergani SpA of Italy</p>
-                            <h1 className="app-loader__title">AURO PUMPS PVT.LTD.</h1>
+                            <p className="app-loader__eyebrow">Est in 1984 with technology from Pompe Vergani SpA, Italy</p>
+                            <h1 className="app-loader__title font-rockwell">AURO PUMPS PVT.LTD.</h1>
                            
                             <div className="app-loader__pulse-track">
                                 <span className="app-loader__pulse-line"></span>
@@ -121,7 +166,7 @@ function App() {
                         <Route path="application/:categoryId" element={<Application />} />
                         <Route path="products" element={<Products />} />
                         {/*<Route path="products/:id" element={<Products />} />*/}
-                        <Route path="/products/:categorySlug/:productSlug" element={<Products />} />
+                        {/*<Route path="/products/:categorySlug/:productSlug" element={<Products />} />*/}
                         <Route path="/products/:productSlug" element={<Products />} />
                         <Route path="/products/:categorySlug/:productSlug" element={<Products />} />
                         <Route
