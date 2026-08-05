@@ -56,7 +56,7 @@ const CompanyOverview = () => {
                         </span>
 
                         {/* Heading */}
-                        <h2 className="mt-5 text-3xl sm:text-4xl font-bold text-slate-900 leading-tight">
+                        <h2 className="mt-5 text-xl sm:text-4xl font-bold text-slate-900 leading-tight">
                             Decades of Expertise in
                             <span className="block text-primary mt-2">
                                 Precision Pumping Solutions

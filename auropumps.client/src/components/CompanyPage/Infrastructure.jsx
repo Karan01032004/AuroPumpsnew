@@ -13,7 +13,7 @@ function Infrastructure() {
                 </span>
 
                 {/* Heading */}
-                <h2 className="mt-5 text-3xl sm:text-4xl font-bold text-slate-900 leading-tight">
+                <h2 className="mt-5 text-xl sm:text-4xl font-bold text-slate-900 leading-tight">
                     Powering Your Industry   <span className="text-primary"> With Our Technology</span>
                    
                 </h2>

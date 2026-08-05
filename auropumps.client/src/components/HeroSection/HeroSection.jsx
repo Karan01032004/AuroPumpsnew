@@ -50,14 +50,14 @@ const HeroSection = () => {
                                     {/*    {banner.title}*/}
                                     {/*</h1>*/}
 
-                                    <p className="text-sm sm:text-base md:text-lg text-gray-200 mb-6 drop-shadow-[0_4px_20px_rgba(0,0,0,0.9)]">
+                                    <p className="text-sm sm:text-base px-10 lg:px-0 md:text-lg text-gray-200 mb-6 drop-shadow-[0_4px_20px_rgba(0,0,0,0.9)]">
                                         {banner.description}
                                     </p>
 
                                     <ThemeButton
                                         text="DISCOVER SOLUTIONS"
                                         link="company"
-                                        className="uppercase text-sm font-medium"
+                                        className="uppercase text-sm font-medium mx-10 lg:mx-0" 
                                     />
 
                                 </div>
@@ -71,9 +71,10 @@ const HeroSection = () => {
             {/* Previous */}
             <button
                 onClick={() => swiperRef.current?.slidePrev()}
-                className="absolute left-6 top-1/2 -translate-y-1/2 z-20
-               flex items-center justify-center
-               w-10 h-14
+                className="absolute left-2 min-[576px]:left-6 top-1/2 -translate-y-1/2 z-20
+               flex items-center justify-center w-6 h-8
+               min-[576px]:w-8 min-[576px]:h-10
+                lg:w-10 lg:h-14
                rounded-md
                bg-black/35
                backdrop-blur-sm
@@ -81,15 +82,17 @@ const HeroSection = () => {
                hover:bg-primary
                transition-all duration-300"
             >
-                <FaChevronLeft className="text-lg" />
+                <FaChevronLeft className="lg:text-lg" />
             </button>
 
             {/* Next */}
             <button
                 onClick={() => swiperRef.current?.slideNext()}
-                className="absolute right-6 top-1/2 -translate-y-1/2 z-20
+                className="absolute right-2 min-[576px]:right-6 top-1/2 -translate-y-1/2 z-20
                flex items-center justify-center
-               w-10 h-14
+             w-6 h-8
+               min-[576px]:w-8 min-[576px]:h-10
+                lg:w-10 lg:h-14
                rounded-md
                bg-black/45
                backdrop-blur-sm
@@ -97,7 +100,7 @@ const HeroSection = () => {
                hover:bg-primary
                transition-all duration-300"
             >
-                <FaChevronRight className="text-lg" />
+                <FaChevronRight className="lg:text-lg" />
             </button>
 
         </section>

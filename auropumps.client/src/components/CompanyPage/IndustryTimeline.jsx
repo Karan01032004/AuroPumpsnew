@@ -15,7 +15,7 @@ function IndustryTimeline() {
                     </span>
 
                     {/* Heading */}
-                    <h2 className="mt-5 text-3xl sm:text-4xl font-bold text-slate-900 leading-tight">
+                    <h2 className="mt-5 text-xl sm:text-4xl font-bold text-slate-900 leading-tight">
                         Powering Your Industry 
                         <span className="block text-primary mt-2">
                             With Our Technology
@@ -36,13 +36,13 @@ function IndustryTimeline() {
                     <div className="pr-6">
 
                         {timelineData.map((item, index) => (
-                            <div key={index} className="flex gap-6 mb-6">
+                            <div key={index} className="flex gap-2 md:gap-6 mb-6">
 
                                 {/* LEFT COLUMN */}
                                 <div className="w-20 flex flex-col items-center">
 
                                     {/* Year */}
-                                    <h3 className="text-3xl font-semibold text-primary mb-2">
+                                    <h3 className="text-xl md:text-3xl font-semibold text-primary mb-2">
                                         {item.year}
                                     </h3>
 

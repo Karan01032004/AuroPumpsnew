@@ -51,7 +51,7 @@ const AllProductsCatalog = () => {
                     <span className="inline-block rounded-full border border-primary/20 bg-primary/10 px-4 py-2 text-[11px] tracking-[0.22em] font-semibold text-primary uppercase">
                         Product Portfolio
                     </span>
-                    <h2 className="mt-5 text-3xl sm:text-4xl font-bold text-slate-900 leading-tight">
+                    <h2 className="mt-5 text-xl sm:text-4xl font-bold text-slate-900 leading-tight">
                         Explore All Product Categories
                     </h2>
                 </div>
@@ -88,7 +88,7 @@ const AllProductsCatalog = () => {
                                 <p className="inline-block text-[11px] sm:text-xs tracking-[0.22em] font-bold text-primary uppercase">
                                     {category.accent || "Category"}
                                 </p>
-                                <h3 className="mt-3 text-3xl sm:text-3xl font-bold text-slate-900 leading-tight">
+                                <h3 className="mt-3 text-xl sm:text-3xl font-bold text-slate-900 leading-tight">
                                     {category.title}
                                 </h3>
                             </div>
