@@ -267,15 +267,28 @@ const ContactSection = () => {
 
                         {/* Map */}
                         <a
-                            href="https://www.google.com/maps/search/?api=1&query=Plot+No.+104/5+%26+6+GIDC+Palej+Bharuch+Gujarat+392220+India"
+                            href="https://www.google.com/maps/search/?api=1&query=AURO+PUMPS+PVT+LTD+Plot+No.+104%2F5+%26+6+GIDC+Palej+Bharuch+Gujarat+392220+India"
                             target="_blank"
                             rel="noopener noreferrer"
                             className="block rounded-lg overflow-hidden shadow-sm"
                         >
                             <iframe
-                                title="Registered Office Location"
-                                src="https://www.google.com/maps?q=Plot+No.+104/5+%26+6+GIDC+Palej+Bharuch+Gujarat+392220+India&output=embed"
-                                className="w-full lg:h-96 border-0 pointer-events-none"
+                                title="Registered Office & Works"
+                                src="https://www.google.com/maps?q=AURO+PUMPS+PVT+LTD+Plot+No.+104%2F5+%26+6+GIDC+Palej+Bharuch+Gujarat+392220+India&output=embed"
+                                className="w-full h-60 lg:h-75 border-0 pointer-events-none"
+                                loading="lazy"
+                            />
+                        </a>
+                        <a
+                            href="https://www.google.com/maps/search/?api=1&query=AURO+PUMPS+PVT+LTD+309+Nilamber+Primero+Vasna+Bhayli+Road+Vadodara+391410+Gujarat+India"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="block rounded-lg overflow-hidden shadow-sm mt-6"
+                        >
+                            <iframe
+                                title="Corporate Office"
+                                src="https://www.google.com/maps?q=AURO+PUMPS+PVT+LTD+309+Nilamber+Primero+Vasna+Bhayli+Road+Vadodara+391410+Gujarat+India&output=embed"
+                                className="w-full h-60 lg:h-75 border-0 pointer-events-none"
                                 loading="lazy"
                             />
                         </a>
@@ -299,11 +312,11 @@ const ContactSection = () => {
                             </span>
                         </h2>
 
-                        <form className="mt-6 space-y-4" onSubmit={handleSubmit}>
+                        <form className="mt-6 space-y-4 lg:space-y-6" onSubmit={handleSubmit}>
 
                             {/* First Name */}
                             <div>
-                                <label className="block text-md font-medium text-[#4B4B4B] mb-1">
+                                <label className="block text-md font-medium text-[#4B4B4B] mb-2">
                                     First Name *
                                 </label>
                                 {/*<input*/}
@@ -326,7 +339,7 @@ const ContactSection = () => {
 
                             {/* Company Name */}
                             <div>
-                                <label className="block text-md font-medium text-[#4B4B4B] mb-1">
+                                <label className="block text-md font-medium text-[#4B4B4B] mb-2">
                                     Company Name *
                                 </label>
                                 {/*<input*/}
@@ -349,7 +362,7 @@ const ContactSection = () => {
 
                             {/* Email ID */}
                             <div>
-                                <label className="block text-md font-medium text-[#4B4B4B] mb-1">
+                                <label className="block text-md font-medium text-[#4B4B4B] mb-2">
                                     Email ID *
                                 </label>
                                 {/*<input*/}
@@ -373,7 +386,7 @@ const ContactSection = () => {
 
                             {/* Contact Number */}
                             <div>
-                                <label className="block text-md font-medium text-[#4B4B4B] mb-1">
+                                <label className="block text-md font-medium text-[#4B4B4B] mb-2">
                                     Contact Number *
                                 </label>
                                 {/*<input*/}
@@ -400,7 +413,7 @@ const ContactSection = () => {
 
                             {/* Message */}
                             <div>
-                                <label className="block text-md font-medium text-[#4B4B4B] mb-1">
+                                <label className="block text-md font-medium text-[#4B4B4B] mb-2">
                                     Message *
                                 </label>
                                 {/*<textarea*/}
@@ -409,7 +422,7 @@ const ContactSection = () => {
                                 {/*    className="w-full px-4 py-3 rounded-md bg-white text-md outline-none border border-gray-200 placeholder:text-gray-400 resize-none focus:border-primary transition"*/}
                                 {/*></textarea>*/}
                                 <textarea
-                                    rows="4"
+                                    rows="5"
                                     name="message"
  
                                     value={formData.message}
@@ -422,7 +435,7 @@ const ContactSection = () => {
                                 )}
                             </div>
                             <div>
-                                <label className="block text-md font-medium text-[#4B4B4B] mb-1">
+                                <label className="block text-md font-medium text-[#4B4B4B] mb-2">
                                     Captcha *
                                 </label>
 
