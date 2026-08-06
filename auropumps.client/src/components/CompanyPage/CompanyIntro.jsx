@@ -10,11 +10,11 @@ function CompanyIntro() {
                     <div className="w-full lg:w-1/3">
                         <picture>
                             <source
-                                srcSet={`${import.meta.env.BASE_URL}/assets/images/jayesh-desai.webp`}
+                                srcSet={`${import.meta.env.BASE_URL}assets/images/jayesh-desai.webp`}
                                 type="image/webp"
                             />
                             <img
-                                src={`${import.meta.env.BASE_URL}/assets/images/jayesh-desai.png`}
+                                src={`${import.meta.env.BASE_URL}assets/images/jayesh-desai.png`}
                                 alt="Mr. Jayesh G. Desai"
                                 className="w-full rounded-lg object-cover"
                                 loading="lazy"

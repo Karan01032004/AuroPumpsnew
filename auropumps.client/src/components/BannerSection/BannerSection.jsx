@@ -5,7 +5,7 @@ const BannerSection = ({ title, pageName }) => {
         <div
             className="relative w-full bg-cover bg-center py-10 sm:py-12 md:py-14 lg:py-16 text-center"
             style={{
-                backgroundImage: `url(${import.meta.env.BASE_URL}/assets/images/auro-pumps-banner.png)`
+                backgroundImage: `url(${import.meta.env.BASE_URL}assets/images/auro-pumps-banner.png)`
             }}
         >
             <div className="absolute inset-0 bg-black/20"></div>

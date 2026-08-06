@@ -48,12 +48,12 @@ function Infrastructure() {
                                 <div className="overflow-hidden">
                                     <picture>
                                         <source
-                                            srcSet={`${import.meta.env.BASE_URL}/assets/images/${item.image}.webp`}
+                                            srcSet={`${import.meta.env.BASE_URL}assets/images/${item.image}.webp`}
                                             type="image/webp"
                                         />
 
                                         <img
-                                            src={`${import.meta.env.BASE_URL}/assets/images/${item.image}.png`}
+                                            src={`${import.meta.env.BASE_URL}assets/images/${item.image}.png`}
                                             alt={item.title}
                                             loading="lazy"
                                             className="w-full h-64 object-cover transition-transform duration-720 ease-in-out group-hover:scale-110"

@@ -109,33 +109,7 @@ function App() {
     }, []);
 
 
-    useEffect(() => {
 
-        const disableContextMenu = (e) => {
-            e.preventDefault();
-        };
-
-        const disableKeys = (e) => {
-            if (
-                e.key === "F12" ||
-                (e.ctrlKey && e.shiftKey && ["I", "J", "C"].includes(e.key.toUpperCase())) ||
-                (e.ctrlKey && e.key.toUpperCase() === "U") ||
-                (e.ctrlKey && e.key.toUpperCase() === "S")
-            ) {
-                e.preventDefault();
-                return false;
-            }
-        };
-
-        document.addEventListener("contextmenu", disableContextMenu);
-        document.addEventListener("keydown", disableKeys);
-
-        return () => {
-            document.removeEventListener("contextmenu", disableContextMenu);
-            document.removeEventListener("keydown", disableKeys);
-        };
-
-    }, []);
         
     return (
         <>
@@ -161,7 +135,7 @@ function App() {
                             <div className="app-loader__logo-shell">
                                 <div className="app-loader__logo-glow"></div>
                                 <img
-                                    src="/auropumps_com/assets/images/auropumps-loader-logo.png"
+                                    src={`${import.meta.env.BASE_URL}assets/images/auropumps-loader-logo.png`}
                                     alt="Auro Pumps"
                                     className="app-loader__logo"
                                 />
@@ -181,7 +155,7 @@ function App() {
                 </div>
             )}
 
-            <BrowserRouter basename="/auropumps_com">
+            <BrowserRouter basename="/">
                 <ScrollToTop />
                 <ScrollToHash />
                 <Routes>

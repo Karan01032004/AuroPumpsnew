@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from "react";
 
 const clients = [
-    { name: "INTAS", logo: `${import.meta.env.BASE_URL}/assets/images/intas.png` },
-    { name: "JSW", logo: `${import.meta.env.BASE_URL}/assets/images/jsw.png` },
-    { name: "Raymond", logo: `${import.meta.env.BASE_URL}/assets/images/raymond.png` },
-    { name: "Oil India", logo: `${import.meta.env.BASE_URL}/assets/images/oil-india.png` },
-    { name: "Aarti Industries", logo: `${import.meta.env.BASE_URL}/assets/images/aarti-industries.png` },
+    { name: "INTAS", logo: `${import.meta.env.BASE_URL}assets/images/intas.png` },
+    { name: "JSW", logo: `${import.meta.env.BASE_URL}assets/images/jsw.png` },
+    { name: "Raymond", logo: `${import.meta.env.BASE_URL}assets/images/raymond.png` },
+    { name: "Oil India", logo: `${import.meta.env.BASE_URL}assets/images/oil-india.png` },
+    { name: "Aarti Industries", logo: `${import.meta.env.BASE_URL}assets/images/aarti-industries.png` },
 ];
 
 const ClienteleSection = () => {

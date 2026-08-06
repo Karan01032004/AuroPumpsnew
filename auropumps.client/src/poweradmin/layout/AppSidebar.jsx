@@ -57,7 +57,7 @@ const AppSidebar = ({ open, collapsed, onClose }) => {
                     >
                         
                         <img
-                            src={`${import.meta.env.BASE_URL}/assets/images/auropumps-loader-logo.png`}
+                            src={`${import.meta.env.BASE_URL}assets/images/auropumps-loader-logo.png`}
                             alt="Logo Icon"
                             className={`
             h-11 w-12 transition-all
@@ -66,7 +66,7 @@ const AppSidebar = ({ open, collapsed, onClose }) => {
                         />
          
         {/*                <img*/}
-        {/*                    src={`${import.meta.env.BASE_URL}/assets/images/auro-pumps-logo.png`}*/}
+        {/*                    src={`${import.meta.env.BASE_URL}assets/images/auro-pumps-logo.png`}*/}
                           
         {/*                    alt="Logo"*/}
         {/*                    className={`*/}
@@ -75,7 +75,7 @@ const AppSidebar = ({ open, collapsed, onClose }) => {
         {/*`}*/}
                         {/*                />*/}
                         <img
-                            src={`${import.meta.env.BASE_URL}/assets/images/auro-pumps-logo.png`}
+                            src={`${import.meta.env.BASE_URL}assets/images/auro-pumps-logo.png`}
                             alt="Logo"
                             className={`
                 h-17 w-auto transition-all  /* h-10 se badha kar h-16 kar diya hai */

@@ -102,11 +102,11 @@ function SiteMap() {
                           <span className="bg-primary p-2 rounded-full flex-shrink-0">
                               <picture>
                                   <source
-                                      srcSet={`${import.meta.env.BASE_URL}/assets/images/location-icon.webp`}
+                                      srcSet={`${import.meta.env.BASE_URL}assets/images/location-icon.webp`}
                                       type="image/webp"
                                   />
                                   <img
-                                      src={`${import.meta.env.BASE_URL}/assets/images/location-icon.png`}
+                                      src={`${import.meta.env.BASE_URL}assets/images/location-icon.png`}
                                       alt="Location"
                                       className="h-4 w-4 object-contain"
                                   />
@@ -126,11 +126,11 @@ function SiteMap() {
                           <span className="bg-primary p-2 rounded-full flex-shrink-0">
                               <picture>
                                   <source
-                                      srcSet={`${import.meta.env.BASE_URL}/assets/images/email-icon.webp`}
+                                      srcSet={`${import.meta.env.BASE_URL}assets/images/email-icon.webp`}
                                       type="image/webp"
                                   />
                                   <img
-                                      src={`${import.meta.env.BASE_URL}/assets/images/email-icon.png`}
+                                      src={`${import.meta.env.BASE_URL}assets/images/email-icon.png`}
                                       alt="Email"
                                       className="h-4 w-4 object-contain"
                                   />
