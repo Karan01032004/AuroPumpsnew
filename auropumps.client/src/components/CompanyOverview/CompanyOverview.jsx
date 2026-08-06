@@ -20,7 +20,7 @@ const CompanyOverview = () => {
                         <div className="relative overflow-hidden rounded-xl shadow-2xl border border-white/20">
 
                             <img
-                                src={`${import.meta.env.BASE_URL}/assets/images/comapny-overview-new.png`}
+                                src={`${import.meta.env.BASE_URL}assets/images/comapny-overview-new.png`}
                                 alt="Industrial Pump"
                                 className="w-full h-full object-cover transition duration-700 group-hover:scale-104"
                             />
@@ -87,7 +87,7 @@ const CompanyOverview = () => {
                                     aria-label="CE Certificate"
                                 >
                                     <img
-                                        src={`${import.meta.env.BASE_URL}/assets/images/ce-certification-mark-europe-compliance-logo-dark.png`}
+                                        src={`${import.meta.env.BASE_URL}assets/images/ce-certification-mark-europe-compliance-logo-dark.png`}
                                         alt="CE Certified"
                                         className="h-12 sm:h-16 lg:h-22 w-auto hover:scale-105 transition-transform"
                                     />
@@ -100,7 +100,7 @@ const CompanyOverview = () => {
                                     aria-label="ISO Certificate"
                                 >
                                     <img
-                                        src={`${import.meta.env.BASE_URL}/assets/images/iso-9001-2015-quality-certification-logo-dark.png`}
+                                        src={`${import.meta.env.BASE_URL}assets/images/iso-9001-2015-quality-certification-logo-dark.png`}
                                         alt="ISO 9001:2015"
                                         className="h-12 sm:h-16 lg:h-22 w-auto hover:scale-105 transition-transform"
                                     />

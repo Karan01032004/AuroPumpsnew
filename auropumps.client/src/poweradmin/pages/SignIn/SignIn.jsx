@@ -52,8 +52,8 @@ const SignIn = () => {
                     {/* Logo */}
                     <div className="flex justify-center mb-6">
                         <img
-                          src={`${import.meta.env.BASE_URL}/assets/images/auro-pumps-logo.png`}
-                          //  src={`${import.meta.env.BASE_URL}/assets/images/poweradmin-logo.png`}
+                          src={`${import.meta.env.BASE_URL}assets/images/auro-pumps-logo.png`}
+                          //  src={`${import.meta.env.BASE_URL}assets/images/poweradmin-logo.png`}
                             alt="Logo"
                             className="h-24 w-auto object-contain"
                         />

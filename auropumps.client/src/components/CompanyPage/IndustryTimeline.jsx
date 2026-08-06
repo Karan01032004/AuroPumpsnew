@@ -24,7 +24,7 @@ function IndustryTimeline() {
 
                     <div className="mt-4 rounded-xl overflow-hidden">
                         <img
-                            src={`${import.meta.env.BASE_URL}/assets/images/auro-pumps-machine.png`}
+                            src={`${import.meta.env.BASE_URL}assets/images/auro-pumps-machine.png`}
                             alt="Industry"
                             className="w-full h-[460px] bg-gray-200 object-cover rounded-xl"
                         />

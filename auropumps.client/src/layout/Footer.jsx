@@ -13,11 +13,11 @@ const Footer = () => {
                 <NavLink to="/" className="flex justify-center lg:justify-start">
                     <picture>
                         <source
-                            srcSet={`${import.meta.env.BASE_URL}/assets/images/auropumps-technology-transfer-from-pompe-vergani-spa-of-italy.webp`}
+                            srcSet={`${import.meta.env.BASE_URL}assets/images/auropumps-technology-transfer-from-pompe-vergani-spa-of-italy.webp`}
                             type="image/webp"
                         />
                         <img
-                            src={`${import.meta.env.BASE_URL}/assets/images/auropumps-technology-transfer-from-pompe-vergani-spa-of-italy.png`}
+                            src={`${import.meta.env.BASE_URL}assets/images/auropumps-technology-transfer-from-pompe-vergani-spa-of-italy.png`}
                             alt="Auro Pumps"
                             className="h-20 lg:h-28 w-auto"
                         />
@@ -146,11 +146,11 @@ const Footer = () => {
                     >
                         <picture>
                             <source
-                                srcSet={`${import.meta.env.BASE_URL}/assets/images/ce-certification-mark-europe-compliance-logo.webp`}
+                                srcSet={`${import.meta.env.BASE_URL}assets/images/ce-certification-mark-europe-compliance-logo.webp`}
                                 type="image/webp"
                             />
                             <img
-                                src={`${import.meta.env.BASE_URL}/assets/images/ce-certification-mark-europe-compliance-logo.png`}
+                                src={`${import.meta.env.BASE_URL}assets/images/ce-certification-mark-europe-compliance-logo.png`}
                                 alt="CE Certification"
                                 className="h-12 lg:h-18 w-auto hover:opacity-100 transition"
                                 loading="lazy"
@@ -166,11 +166,11 @@ const Footer = () => {
                     >
                         <picture>
                             <source
-                                srcSet={`${import.meta.env.BASE_URL}/assets/images/iso-9001-2015-quality-certification-logo.webp`}
+                                srcSet={`${import.meta.env.BASE_URL}assets/images/iso-9001-2015-quality-certification-logo.webp`}
                                 type="image/webp"
                             />
                             <img
-                                src={`${import.meta.env.BASE_URL}/assets/images/iso-9001-2015-quality-certification-logo.png`}
+                                src={`${import.meta.env.BASE_URL}assets/images/iso-9001-2015-quality-certification-logo.png`}
                                 alt="ISO Certification"
                                 className="h-12 lg:h-18 w-auto hover:opacity-100 transition"
                                 loading="lazy"

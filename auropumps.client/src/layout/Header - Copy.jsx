@@ -211,7 +211,7 @@ const Header = () => {
                         <div className={`relative overflow-hidden transition-all duration-500 ease-out ${scrolled ? "h-12 w-12 rounded-lg" : "h-20 w-20 rounded-xl"
                             } bg-white/95 shadow-md ring-1 ring-white/30 flex items-center justify-center`}>
                             <img
-                                src={`${import.meta.env.BASE_URL}/assets/images/auropumps-logo.png`}
+                                src={`${import.meta.env.BASE_URL}assets/images/auropumps-logo.png`}
                                 alt="Auro Pumps"
                                 className="w-full h-full object-contain"
                             />
