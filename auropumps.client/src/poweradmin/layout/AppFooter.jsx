@@ -9,7 +9,7 @@ const AppFooter = () => {
                     rel="noopener noreferrer"
                     className="font-medium text-neutral-900 dark:text-white hover:underline underline-offset-4 transition"
                 >
-                    DNC
+                    Dots and Coms
                 </a>
             </div>
         </footer>

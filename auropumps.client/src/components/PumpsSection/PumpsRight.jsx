@@ -133,7 +133,7 @@ const PumpsRight = () => {
                                 {tab.title}
                             </div>
                         ))}
-                    </div>
+                    </div>  
                 )}
             </div>
 

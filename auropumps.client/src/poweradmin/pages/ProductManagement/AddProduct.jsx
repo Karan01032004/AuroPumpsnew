@@ -317,7 +317,7 @@ const AddProduct = () => {
                  <div className="mt-6 grid grid-cols-1 md:grid-cols-4 gap-4">
                     {[
                         ["Display on Frontend? ", visible, setVisible],
-                        ["PDF Send on Mail?", isFeatured, setIsFeatured],
+                        ["Direct PDF Download", isFeatured, setIsFeatured],
                         //["Only Viw Contact Button?", isAddContact, setIsAddContact],
                       
                     ].map(([label, value, setter]) => (
