@@ -63,33 +63,33 @@ function App() {
         };
     }, []);
 
-    //useEffect(() => {
+    useEffect(() => {
 
-    //    const disableContextMenu = (e) => {
-    //        e.preventDefault();
-    //    };
+        const disableContextMenu = (e) => {
+            e.preventDefault();
+        };
 
-    //    const disableKeys = (e) => {
-    //        if (
-    //            e.key === "F12" ||
-    //            (e.ctrlKey && e.shiftKey && ["I", "J", "C"].includes(e.key.toUpperCase())) ||
-    //            (e.ctrlKey && e.key.toUpperCase() === "U") ||
-    //            (e.ctrlKey && e.key.toUpperCase() === "S")
-    //        ) {
-    //            e.preventDefault();
-    //            return false;
-    //        }
-    //    };
+        const disableKeys = (e) => {
+            if (
+                e.key === "F12" ||
+                (e.ctrlKey && e.shiftKey && ["I", "J", "C"].includes(e.key.toUpperCase())) ||
+                (e.ctrlKey && e.key.toUpperCase() === "U") ||
+                (e.ctrlKey && e.key.toUpperCase() === "S")
+            ) {
+                e.preventDefault();
+                return false;
+            }
+        };
 
-    //    document.addEventListener("contextmenu", disableContextMenu);
-    //    document.addEventListener("keydown", disableKeys);
+        document.addEventListener("contextmenu", disableContextMenu);
+        document.addEventListener("keydown", disableKeys);
 
-    //    return () => {
-    //        document.removeEventListener("contextmenu", disableContextMenu);
-    //        document.removeEventListener("keydown", disableKeys);
-    //    };
+        return () => {
+            document.removeEventListener("contextmenu", disableContextMenu);
+            document.removeEventListener("keydown", disableKeys);
+        };
 
-    //}, []);
+    }, []);
 
     useEffect(() => {
         const disableMediaContextMenu = (e) => {

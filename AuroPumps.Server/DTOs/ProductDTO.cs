@@ -36,6 +36,13 @@ namespace Poweradmin.Server.DTOs
         public string? OperatingTemperature { get; set; }
 
         public string? viscosity { get; set; }
+        public string? operation { get; set; }
+        public string? bucketConstruction { get; set; }
+        public string? frameStructure { get; set; }
+        public string? kettleDepthCapability { get; set; }
+        public string? scoopCapacity { get; set; }
+        public string? liftArrangement { get; set; }
+        public string? options { get; set; }
         public string? shaftsealing { get; set; }
         public string? SubmergenceLength { get; set; }
         public string? operating_frequency { get; set; }

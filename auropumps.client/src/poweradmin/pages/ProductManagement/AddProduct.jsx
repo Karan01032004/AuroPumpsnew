@@ -43,6 +43,18 @@ const AddProduct = () => {
     const [propellertype, setpropellertype] = useState("");
     const [operatingTemperature, setOperatingTemperature] = useState("");
     const [viscosity, setViscosity] = useState("");
+
+    const [operation, setoperation] = useState("");
+    const [bucketConstruction, setbucketConstruction] = useState("");
+    const [frameStructure, setframeStructure] = useState("");
+    const [kettleDepthCapability, setkettleDepthCapability] = useState("");
+    const [scoopCapacity, setscoopCapacity] = useState("");
+    const [liftArrangement, setliftArrangement] = useState("");
+    const [options, setoptions] = useState("");
+
+
+
+
     const [shaftsealing, setshaftsealing] = useState("");
     const [submergenceLength, setSubmergenceLength] = useState("");
     const [operatingFrequency, setOperatingFrequency] = useState("");
@@ -104,6 +116,7 @@ const AddProduct = () => {
         setMoc(p.moc);
         setPressure(p.pressure);
         setmechanicalseal(p.mechanicalseal);
+        setshaftsealing(p.shaftsealing);
         setslurryhandling(p.slurryhandling);
         setimpeller(p.impeller);
         setapplicationtags(p.applicationtags);
@@ -119,7 +132,14 @@ const AddProduct = () => {
         setpropellertype(p.propellertype || "");
         setOperatingTemperature(p.operatingTemperature || "");
         setViscosity(p.viscosity || "");
-        setshaftsealing(p.shaftsealing || "");
+        setoperation(p.operation || "");
+        setbucketConstruction(p.bucketConstruction || "");
+        setframeStructure(p.frameStructure || "");
+        setkettleDepthCapability(p.kettleDepthCapability || "");
+        setscoopCapacity(p.scoopCapacity || "");
+       
+        setliftArrangement(p.liftArrangement || "");
+        setoptions(p.options || "");
         setSubmergenceLength(p.submergenceLength || "");
         setOperatingFrequency(p.operating_frequency || "");
         setMaterial(p.material || "");
@@ -150,6 +170,10 @@ const AddProduct = () => {
     const handleSubmit = async () => {
         if (!title.trim()) {
             alert("Product name is required");
+            return;
+        } 
+        if (!description.trim()) {
+            alert("Product description is required");
             return;
         } 
         setLoading(true); 
@@ -186,7 +210,14 @@ const AddProduct = () => {
             formData.append("Rotationspeedcontrol", rotationspeedcontrol);
             formData.append("propellertype", propellertype);
             formData.append("OperatingTemperature", operatingTemperature);
+            formData.append("operation", operation);
             formData.append("viscosity", viscosity);
+            formData.append("bucketConstruction", bucketConstruction);
+            formData.append("frameStructure", frameStructure);
+            formData.append("kettleDepthCapability", kettleDepthCapability);
+            formData.append("scoopCapacity", scoopCapacity);
+            formData.append("liftArrangement", liftArrangement);
+            formData.append("options", options);
             formData.append("shaftsealing", shaftsealing);
             formData.append("SubmergenceLength", submergenceLength);
             formData.append("operating_frequency", operatingFrequency);
@@ -541,6 +572,62 @@ const AddProduct = () => {
                         <input
                             value={viscosity}
                             onChange={(e) => setViscosity(e.target.value)}
+                            className="w-full rounded-lg border px-3 py-2"
+                        />
+                    </div>
+                    <div>
+                        <label className="font-medium">Operation</label>
+                        <input
+                            value={operation}
+                            onChange={(e) => setoperation(e.target.value)}
+                            className="w-full rounded-lg border px-3 py-2"
+                        />
+                    </div>
+                    <div>
+                        <label className="font-medium">Bucket Construction</label>
+                        <input
+                            value={bucketConstruction}
+                            onChange={(e) => setbucketConstruction(e.target.value)}
+                            className="w-full rounded-lg border px-3 py-2"
+                        />
+                    </div>
+                    <div>
+                        <label className="font-medium">Frame / Structure</label>
+                        <input
+                            value={frameStructure}
+                            onChange={(e) => setframeStructure(e.target.value)}
+                            className="w-full rounded-lg border px-3 py-2"
+                        />
+                    </div>
+                    <div>
+                        <label className="font-medium">Kettle Depth Capability</label>
+                        <input
+                            value={kettleDepthCapability}
+                            onChange={(e) => setkettleDepthCapability(e.target.value)}
+                            className="w-full rounded-lg border px-3 py-2"
+                        />
+                    </div>
+                    <div>
+                        <label className="font-medium">Scoop Capacity</label>
+                        <input
+                            value={scoopCapacity}
+                            onChange={(e) => setscoopCapacity(e.target.value)}
+                            className="w-full rounded-lg border px-3 py-2"
+                        />
+                    </div>
+                    <div>
+                        <label className="font-medium">lift Arrangement</label>
+                        <input
+                            value={liftArrangement}
+                            onChange={(e) => setliftArrangement(e.target.value)}
+                            className="w-full rounded-lg border px-3 py-2"
+                        />
+                    </div>
+                    <div>
+                        <label className="font-medium">Options</label>
+                        <input
+                            value={options}
+                            onChange={(e) => setoptions(e.target.value)}
                             className="w-full rounded-lg border px-3 py-2"
                         />
                     </div>

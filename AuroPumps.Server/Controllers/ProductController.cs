@@ -218,6 +218,14 @@ namespace Poweradmin.Server.Controllers
 
 
                 viscosity = productData.viscosity ?? "",
+
+                operation = productData.operation ?? "",
+                bucketConstruction = productData.bucketConstruction ?? "",
+                frameStructure = productData.frameStructure ?? "",
+                kettleDepthCapability = productData.kettleDepthCapability ?? "",
+                scoopCapacity = productData.scoopCapacity ?? "",
+                liftArrangement = productData.liftArrangement ?? "",
+                options = productData.options ?? "",
                 shaftsealing = productData.shaftsealing ?? "",
                 MOC = productData.MOC ?? "",
                 pressure = productData.pressure ?? "",
@@ -554,6 +562,15 @@ namespace Poweradmin.Server.Controllers
                     applicationtags = dto.applicationtags,
                     applications = dto.applications,
                     viscosity = dto.viscosity,
+
+                    operation=dto.operation,
+                    bucketConstruction = dto.bucketConstruction,
+                    frameStructure = dto.frameStructure,
+                    kettleDepthCapability = dto.kettleDepthCapability,
+                    scoopCapacity = dto.scoopCapacity,
+                    liftArrangement = dto.liftArrangement,
+                    options = dto.options,
+
                     shaftsealing = dto.shaftsealing,
                     SubmergenceLength = dto.SubmergenceLength,
                     operating_frequency = dto.operating_frequency,
@@ -627,6 +644,15 @@ namespace Poweradmin.Server.Controllers
 
 
                 product.viscosity = dto.viscosity;
+
+                product.operation=dto.operation;
+                product.bucketConstruction=dto.bucketConstruction;
+                product.frameStructure=dto.frameStructure;
+                product.kettleDepthCapability = dto.kettleDepthCapability;
+                product.scoopCapacity = dto.scoopCapacity;
+                product.liftArrangement = dto.liftArrangement;
+                product.options = dto.options;
+
                 product.shaftsealing = dto.shaftsealing;
                 product.MOC = dto.MOC;
                 product.technicalDetails = dto.technicalDetails;

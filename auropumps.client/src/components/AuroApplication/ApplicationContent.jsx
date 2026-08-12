@@ -306,8 +306,9 @@ function ApplicationContent({
                                 </div>
 
                                 {/* SPECIFICATIONS PANEL CARD */}
+                                {/* SPECIFICATIONS PANEL CARD */}
                                 <div className="space-y-6">
-                                    {product.specifications?.length > 0 && (
+                                    {product.specifications?.length > 0 ? (
                                         <div className="overflow-hidden rounded-xl border border-slate-200 bg-white shadow-sm">
                                             <div className="border-b border-slate-200 px-6 py-4">
                                                 <h4 className="text-lg font-bold uppercase tracking-[0.08em] text-slate-900">
@@ -322,13 +323,20 @@ function ApplicationContent({
                                                     return (
                                                         <div
                                                             key={`${spec.label}-${index}`}
-                                                            className={`grid gap-2 px-6 py-4 ${isDetailsRow ? "grid-cols-1" : "md:grid-cols-[220px_minmax(0,1fr)]"} ${index % 2 === 0 ? "bg-white" : "bg-slate-50"}`}
+                                                            className={`grid gap-2 px-6 py-4 ${isDetailsRow
+                                                                    ? "grid-cols-1"
+                                                                    : "md:grid-cols-[220px_minmax(0,1fr)]"
+                                                                } ${index % 2 === 0
+                                                                    ? "bg-white"
+                                                                    : "bg-slate-50"
+                                                                }`}
                                                         >
                                                             {!isDetailsRow && (
                                                                 <div className="text-sm font-semibold uppercase tracking-[0.08em] text-primary">
                                                                     {spec.label}
                                                                 </div>
                                                             )}
+
                                                             <div className="text-sm leading-7 text-slate-700 sm:text-base">
                                                                 {spec.value}
                                                             </div>
@@ -336,6 +344,23 @@ function ApplicationContent({
                                                     );
                                                 })}
                                             </div>
+                                        </div>
+                                    ) : (
+                                        <div className="rounded-xl border border-primary/15 bg-white p-6 text-center shadow-sm">
+                                            <h4 className="text-lg font-bold text-slate-900">
+                                                    Please contact us for detailed information about this product.
+                                            </h4>
+
+                                       
+
+                                            <a
+                                                href="https://www.auropumps.com/contact-us"
+                                         
+                                                rel="noopener noreferrer"
+                                                className="mt-5 inline-flex items-center justify-center rounded-full bg-primary px-6 py-3 text-sm font-semibold uppercase tracking-[0.08em] text-white transition hover:opacity-90"
+                                            >
+                                                Contact for Product Details
+                                            </a>
                                         </div>
                                     )}
                                 </div>
