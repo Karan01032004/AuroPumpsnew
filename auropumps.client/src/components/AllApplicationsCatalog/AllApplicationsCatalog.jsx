@@ -87,7 +87,7 @@ function AllApplicationsCatalog() {
                                 <Link
                                     key={app.id}
                                     id={app.slug}
-                                    to={`/application/${app.slug}`}
+                                    to={`/industrial-pump-applications/${app.slug}`}
                                     className="group overflow-hidden rounded-xl border border-slate-200 bg-white transition duration-300 hover:-translate-y-1.5 hover:border-primary/40 hover:shadow-[0_18px_38px_rgba(45,37,142,0.16)]"
                                 >
 

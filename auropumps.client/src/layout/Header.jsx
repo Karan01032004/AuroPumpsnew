@@ -560,7 +560,7 @@ const Header = () => {
                                                             {(productsMap[category.id] || []).map((product) => (
                                                                 <li key={product.id}>
                                                                     <NavLink
-                                                                        to={`/products/${category.slug}/${product.slug}`} // ✅ slug URL
+                                                                        to={`/metal-pumps-manufacturer-india/${category.slug}/${product.slug}`} // ✅ slug URL
                                                                         onClick={closeAllMenus}
                                                                         className="hover:text-white block transition border-b border-white/10"
                                                                     >
