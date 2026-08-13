@@ -5,12 +5,13 @@ import PageHeader from "../../components/PageHeader";
 import api from "../../api/axios";
 import { IMAGE_BASE_URL } from "../../api/axios";
 import TinyEditor from "../../components/Forms/TinyEditor";
-
+import SeoMetaSection from "../../components/Forms/SeoMetaSection";
 const AddApplication = () => {
     const { id } = useParams();
     const isEdit = !!id;
     const navigate = useNavigate();
     const [title, setTitle] = useState("");
+    const [metaTags, setMetaTags] = useState("");
     const [description, setDescription] = useState("");
     const [faqs, setFaqs] = useState([
         {
@@ -66,7 +67,7 @@ const AddApplication = () => {
             setTitle(data.title);
             setDescription(data.description);
             setVisible(data.visible ? "yes" : "no");
-
+            setMetaTags(data.meta);
             if (data.product_ids) {
                 const idsArray = data.product_ids.split(",");
                 const selected = options.filter(opt =>
@@ -126,7 +127,7 @@ const AddApplication = () => {
             formData.append("title", title);
             formData.append("description", description);
             formData.append("Visible", visible === "yes" ? "true" : "false");
-
+            formData.append("meta", metaTags);
             const productIds = selectedProducts.map(p => p.value).join(",");
             formData.append("product_ids", productIds);
             formData.append("FAQs", JSON.stringify(faqs));
@@ -377,6 +378,11 @@ const AddApplication = () => {
                     </div>
                 )}
 
+                <SeoMetaSection
+                   
+                    metaTags={metaTags}
+                    setMetaTags={setMetaTags}
+                />
                 {/* SUBMIT */}
                 <div className="mt-8 text-right">
                     <button

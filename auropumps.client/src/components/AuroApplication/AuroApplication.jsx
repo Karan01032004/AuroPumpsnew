@@ -24,6 +24,7 @@ function AuroApplication() {
                     id: app.id,
                     title: app.title,
                     description: app.description || "",
+                    meta: app.meta || "",
                     slug: app.slug,
                     product_ids: app.product_ids,
                     images: [
@@ -123,6 +124,7 @@ function AuroApplication() {
                     slug: data.productSlug,
                     image: `${IMAGE_BASE_URL}${selectedImg}`,
                     description: data.description,
+                    meta: data.meta,
                     firstdescription: data.firstdescription,
                     isFeatured: data.isFeatured,
                     pdf: data.catelogue ? data.catelogue : null, // direct download tracking path
@@ -163,6 +165,7 @@ function AuroApplication() {
                     categoryTitle={selectedCategory.title}
                     categoryDescription={selectedCategory.description}
                     faqs={applicationFaqs}
+                    meta={selectedCategory.meta}
                 />
             </div>
         </section>

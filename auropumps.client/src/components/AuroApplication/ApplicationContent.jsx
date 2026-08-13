@@ -8,14 +8,15 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay } from "swiper/modules";
 import { useNavigate } from "react-router-dom";
 import { IoArrowBack } from "react-icons/io5";
-
+import { Helmet } from "react-helmet-async";
 import "swiper/css";
 function ApplicationContent({
     applicationProducts = [],
     products = [],
     categoryTitle,
     categoryDescription,
-    faqs = []
+    faqs = [],
+    meta = ""
 }) {
     // ================= STATES =================
     const [pdfFormData, setPdfFormData] = useState({
@@ -25,6 +26,36 @@ function ApplicationContent({
         message: "",
         companyname: "" // ?? Handled Form Key
     });
+    const extractMetaContent = (html, name) => {
+        if (!html) return "";
+
+        const regex = new RegExp(
+            `<meta\\s+name=["']${name}["']\\s+content=["']([^"']*)["']`,
+            "i"
+        );
+
+        return html.match(regex)?.[1]?.trim() || "";
+    };
+
+    const extractTitle = (html) => {
+        if (!html) return "";
+
+        return html.match(
+            /<title[^>]*>([\s\S]*?)<\/title>/i
+        )?.[1]?.trim() || "";
+    };
+
+    const extractCanonical = (html) => {
+        if (!html) return "";
+
+        return html.match(
+            /<link\s+rel=["']canonical["']\s+href=["']([^"']+)["']/i
+        )?.[1]?.trim() || "";
+    };
+    const seoTitle = extractTitle(meta);
+    const seoDescription = extractMetaContent(meta, "description");
+    const seoKeywords = extractMetaContent(meta, "keywords");
+    const canonicalUrl = extractCanonical(meta);
     const [isPdfModalOpen, setIsPdfModalOpen] = useState(false);
     const [selectedProductForPdf, setSelectedProductForPdf] = useState(null);
     const [currentIndex, setCurrentIndex] = useState(0);
@@ -130,7 +161,34 @@ function ApplicationContent({
     }, []);
 
     return (
+
         <div className="space-y-10">
+            <Helmet>
+                {seoTitle && (
+                    <title>{seoTitle}</title>
+                )}
+
+                {seoDescription && (
+                    <meta
+                        name="description"
+                        content={seoDescription}
+                    />
+                )}
+
+                {seoKeywords && (
+                    <meta
+                        name="keywords"
+                        content={seoKeywords}
+                    />
+                )}
+
+                {canonicalUrl && (
+                    <link
+                        rel="canonical"
+                        href={canonicalUrl}
+                    />
+                )}
+            </Helmet>
             <div className="flex justify-end mb-5">
                 <button
                     onClick={() => navigate("/industrial-pump-applications")}

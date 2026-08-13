@@ -58,6 +58,7 @@ namespace AuroPumps.Server.Controllers
                 {
                     title = dto.title,
                     description = dto.description,
+                    meta = dto.meta,
                     product_ids = dto.product_ids,
                     Visible = dto.Visible,
 
@@ -120,6 +121,7 @@ namespace AuroPumps.Server.Controllers
                     x.id,
                     x.title,
                     x.description,
+                    x.meta,
                     x.product_ids,
                     x.Visible,
                     x.image1,
@@ -149,6 +151,7 @@ namespace AuroPumps.Server.Controllers
                     x.id,
                     x.title,
                     x.description,
+                    x.meta,
                     x.product_ids,
                     x.Visible,
                     x.image1,
@@ -203,6 +206,7 @@ namespace AuroPumps.Server.Controllers
 
                 app.title = dto.title;
                 app.description = dto.description;
+                app.meta = dto.meta;
                 app.product_ids = dto.product_ids;
                 app.Visible = dto.Visible;
 

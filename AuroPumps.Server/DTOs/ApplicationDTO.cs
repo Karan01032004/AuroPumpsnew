@@ -4,6 +4,7 @@
     {
         public string title { get; set; }
         public string? description { get; set; }
+        public string? meta { get; set; }
         public string? product_ids { get; set; }
         public bool? Visible { get; set; }
         public string? FAQs { get; set; }

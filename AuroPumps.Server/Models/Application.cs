@@ -15,6 +15,7 @@ namespace Poweradmin.Server.Models
         public string? image7 { get; set; }
         public string? image8 { get; set; }
         public string? description { get; set; }
+        public string? meta { get; set; }
         public string? product_ids { get; set; }
         public bool? Visible { get; set; }
         public virtual ICollection<ApplicationFAQ> FAQs { get; set; }
