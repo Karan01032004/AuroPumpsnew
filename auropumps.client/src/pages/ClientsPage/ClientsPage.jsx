@@ -2,12 +2,32 @@
 
 import BannerSection from "../../components/BannerSection/BannerSection";
 import clientsData from "../../data/clientsData";
+import { Helmet } from "react-helmet-async";
 
 function ClientsPage() {
     const getWebpLogo = (logoPath) => logoPath.replace(/\.jpg$/i, ".webp");
 
     return (
         <>
+            <Helmet>
+                <title>Pump Manufacturer in India</title>
+
+                <meta
+                    name="description"
+                    content="See the steel, galvanizing, chemical, solar & petrochemical companies across India and abroad that rely on Auro Pumps for molten salt & metal pumps."
+                />
+
+                <meta
+                    name="keywords"
+                    content="Auro Pumps clientele, galvalume pump manufacturer clients, molten sulfur pump manufacturer clients, pump manufacturer India clientele, pump manufacturer trusted by steel and chemical companies, industrial pump supplier clientele across India"
+                />
+
+                <link
+                    rel="canonical"
+                    href="https://auropumps.com/clients"
+                />
+            </Helmet>
+
             <BannerSection title="Clients" />
         
         <section className="bg-gradient-to-b from-white to-slate-50 py-14 md:py-20">

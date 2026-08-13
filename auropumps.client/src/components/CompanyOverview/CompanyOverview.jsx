@@ -75,7 +75,7 @@ const CompanyOverview = () => {
                         <div className="mt-8 md:mt-1 flex items-end justify-between gap-4">
                             <ThemeButton
                                 text="Learn More"
-                                link="company"
+                                link="about-molten-salt-pump-manufacturer"
                                 className="uppercase text-sm font-semibold px-6 py-3"
                             />
 
