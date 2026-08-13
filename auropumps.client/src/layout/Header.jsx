@@ -295,7 +295,7 @@ const Header = () => {
                                                             {verticalPumps.map((product) => (
                                                                 <NavLink
                                                                     key={product.id}
-                                                                    to={`/products/${product.categorySlug}/${product.slug}`}
+                                                                    to={`/metal-pumps-manufacturer-india/${product.categorySlug}/${product.slug}`}
                                                                     onClick={closeAllMenus}
                                                                     className="block py-1 text-white/80 transition hover:text-white"
                                                                 >
@@ -335,7 +335,7 @@ const Header = () => {
                                                                     {columnData.map((product) => (
                                                                         <li key={product.id}>
                                                                             <NavLink
-                                                                                to={`/products/${product.categorySlug}/${product.slug}`}
+                                                                                to={`/metal-pumps-manufacturer-india/${product.categorySlug}/${product.slug}`}
                                                                                 onClick={closeAllMenus}
                                                                                 className="block transition hover:text-white"
                                                                             >
@@ -356,7 +356,7 @@ const Header = () => {
                                                             {moltenMetalSystemProducts.map((product) => (
                                                                 <NavLink
                                                                     key={product.id}
-                                                                    to={`/products/${product.categorySlug}/${product.slug}`}
+                                                                    to={`/metal-pumps-manufacturer-india/${product.categorySlug}/${product.slug}`}
                                                                     onClick={closeAllMenus}
                                                                     className="block py-1 text-white/80 transition hover:text-white text-xs"
                                                                 >
@@ -371,7 +371,7 @@ const Header = () => {
                                                             {moltenSaltSystemProducts.map((product) => (
                                                                 <NavLink
                                                                     key={product.id}
-                                                                    to={`/products/${product.categorySlug}/${product.slug}`}
+                                                                    to={`/metal-pumps-manufacturer-india/${product.categorySlug}/${product.slug}`}
                                                                     onClick={closeAllMenus}
                                                                     className="block py-1 text-white/80 transition hover:text-white text-xs"
                                                                 >
@@ -429,7 +429,7 @@ const Header = () => {
                                                             <div key={app.id}>
 
                                                                 <NavLink
-                                                                    to={`/application/${app.slug}`}
+                                                                    to={`/industrial-pump-applications/${app.slug}`}
                                                                     onClick={closeAllMenus}
                                                                     className="font-semibold pb-2 block"
                                                                 >
@@ -608,7 +608,7 @@ const Header = () => {
                                                     return (
                                                         <div key={app.id}>
                                                             <NavLink
-                                                                to={`/application/${app.slug}`}
+                                                                to={`/industrial-pump-applications/${app.slug}`}
                                                                 onClick={closeAllMenus}
                                                                 className="font-semibold mb-3 border-b border-white/20 pb-2 block hover:text-white"
                                                             >

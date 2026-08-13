@@ -133,7 +133,7 @@ function ApplicationContent({
         <div className="space-y-10">
             <div className="flex justify-end mb-5">
                 <button
-                    onClick={() => navigate("/application")}
+                    onClick={() => navigate("/industrial-pump-applications")}
                     className="inline-flex items-center gap-2 rounded-full border border-primary/20 bg-white px-5 py-2 text-[11px] font-semibold tracking-[0.12em] uppercase text-primary transition-all duration-300 hover:border-primary hover:bg-primary/5"
                 >
                     <IoArrowBack className="text-sm" />
