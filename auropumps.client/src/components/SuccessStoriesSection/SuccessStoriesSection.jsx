@@ -78,7 +78,7 @@ const SuccessStoriesSection = () => {
                                             </p>
 
                                             <Link
-                                                to="/contact-us"
+                                                to="/contact-us-for-molten-metal-pumps"
                                                 className="mt-4 inline-flex w-fit items-center rounded-full border border-white/60 px-4 py-2 text-xs font-semibold uppercase tracking-[0.08em] text-white transition hover:bg-white/10"
                                             >
                                                 Request Consultation

@@ -30,7 +30,7 @@ function SiteMap() {
 
                   {/* ================= PRODUCTS ================= */}
                   <h2 className="text-2xl font-bold text-primary mb-3">
-                      <Link to="/products" className="hover:underline">
+                      <Link to="/metal-pumps-manufacturer-india" className="hover:underline">
                           Products
                       </Link>
                   </h2>
@@ -48,7 +48,7 @@ function SiteMap() {
 
                   {/* ================= APPLICATION ================= */}
                   <h2 className="text-2xl font-bold text-primary mb-3">
-                      <Link to="/application" className="hover:underline">
+                      <Link to="/industrial-pump-applications" className="hover:underline">
                           Application
                       </Link>
                   </h2>
@@ -65,7 +65,7 @@ function SiteMap() {
 
                   {/* ================= COMPANY ================= */}
                   <h2 className="text-2xl font-bold text-primary mb-3">
-                      <Link to="/company" className="hover:underline">
+                      <Link to="/about-molten-salt-pump-manufacturer" className="hover:underline">
                           Company
                       </Link>
                   </h2>
@@ -82,7 +82,7 @@ function SiteMap() {
 
                   {/* ================= CONTACT ================= */}
                   <h2 className="text-2xl font-bold text-primary mb-3">
-                      <Link to="/contact-us" className="hover:underline">
+                      <Link to="/contact-us-for-molten-metal-pumps" className="hover:underline">
                           Contact
                       </Link>
                   </h2>

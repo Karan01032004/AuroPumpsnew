@@ -16,9 +16,9 @@ const Header = () => {
     const [applications, setApplications] = useState([]);
     const navLinks = [
         { name: "Home", path: "/" },
-        { name: "Products", path: "/products" },
-        { name: "Applications", path: "/application" },
-        { name: "Company", path: "/company" },
+        { name: "Products", path: "/metal-pumps-manufacturer-india" },
+        { name: "Applications", path: "/industrial-pump-applications" },
+        { name: "Company", path: "/about-molten-salt-pump-manufacturer" },
         { name: "Clients", path: "/clients" },
     ]; 
     const normalizeCategoryValue = (value) =>
@@ -480,7 +480,7 @@ const Header = () => {
 
                         {/* CONTACT */}
                         <NavLink
-                            to="/contact-us"
+                            to="/contact-us-for-molten-metal-pumps"
                             onClick={closeAllMenus}
                             className="ml-3 px-5 lg:px-2 xl:px-5 py-2 rounded-lg text-[14px] lg:text-[12px] xl:text-[14px] font-medium border text-white border-white/30 bg-primary hover:bg-primary/10 transition"
                         >
@@ -649,7 +649,7 @@ const Header = () => {
                             );
                         })}
                         <NavLink
-                            to="/contact-us"
+                            to="/contact-us-for-molten-metal-pumps"
                             onClick={closeAllMenus}
                             className="block mt-5 mx-1 rounded-xl bg-white text-primary text-center font-semibold py-3 hover:bg-gray-100 transition"
                         >

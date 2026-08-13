@@ -31,7 +31,7 @@ const PumpsLeft = () => {
             <div className="mt-6">
                 <ThemeButton
                     text="View All Products"
-                    link="products"
+                    link="metal-pumps-manufacturer-india"
                     className="uppercase text-xs sm:text-sm font-semibold px-5 py-2.5"
                 />
             </div>

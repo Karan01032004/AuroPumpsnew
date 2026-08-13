@@ -162,16 +162,16 @@ function App() {
                     {/* Layout Route */}
                     <Route element={<AppLayout />}>
                         <Route path="/" element={<Home />} />
-                        <Route path="contact-us" element={<ContactUs />} />
-                        <Route path="company" element={<Company />} />
+                        <Route path="contact-us-for-molten-metal-pumps" element={<ContactUs />} />
+                        <Route path="about-molten-salt-pump-manufacturer" element={<Company />} />
                         <Route path="clients" element={<ClientsPage />} />
-                        <Route path="application" element={<Application />} />
-                        <Route path="application/:categoryId" element={<Application />} />
-                        <Route path="products" element={<Products />} />
+                        <Route path="industrial-pump-applications" element={<Application />} />
+                        <Route path="industrial-pump-applications/:categoryId" element={<Application />} />
+                        <Route path="metal-pumps-manufacturer-india" element={<Products />} />
                         {/*<Route path="products/:id" element={<Products />} />*/}
                         {/*<Route path="/products/:categorySlug/:productSlug" element={<Products />} />*/}
-                        <Route path="/products/:productSlug" element={<Products />} />
-                        <Route path="/products/:categorySlug/:productSlug" element={<Products />} />
+                        <Route path="/metal-pumps-manufacturer-india/:productSlug" element={<Products />} />
+                        <Route path="/metal-pumps-manufacturer-india/:categorySlug/:productSlug" element={<Products />} />
                         <Route
                             path="/thank-you"
                             element={<ThankYou />}
