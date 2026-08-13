@@ -90,7 +90,7 @@ function ProductContent({ product, categoryTitle }) {
 
             <div className="flex justify-end mb-5">
                 <Link
-                    to="/products"
+                    to="/metal-pumps-manufacturer-india"
                     replace
                     className="inline-flex items-center gap-2 rounded-full border border-primary/20 bg-white px-5 py-2 text-[11px] font-semibold tracking-[0.12em] uppercase text-primary transition-all duration-300 hover:border-primary hover:bg-primary/5"
                 >
