@@ -84,7 +84,16 @@ const SeoMetaSection = ({
                 placeholder="Paste meta tags here..."
                 className="w-full rounded-lg border border-gray-300 px-3 py-2"
             />
-
+            <p className="mt-1 text-xs text-gray-500">
+                Example:
+                <br />
+                <code className="block mt-1 bg-gray-100 p-2 rounded text-[10px] overflow-x-auto">
+                    {`<meta name="keywords" content="Enter your keywords here" />
+<title>Enter your keywords here</title>
+<link rel="canonical" href="https://www.Enter-your-canonical-here.com" />
+<meta name="description" content="Enter your description here" />`}
+                </code>
+            </p>
             {/* Modal */}
             {open && (
                 <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 p-4">

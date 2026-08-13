@@ -173,7 +173,7 @@ const PumpsRight = () => {
                                     style={{ width: `${100 / itemsPerView}%` }}
                                 >
                                     <div
-                                        onClick={() => navigate(`/products/${activeCategoryObj?.slug}/${product.slug}`)}
+                                        onClick={() => navigate(`/metal-pumps-manufacturer-india/${activeCategoryObj?.slug}/${product.slug}`)}
                                         className="bg-white rounded-xl shadow-sm p-4 hover:shadow-md transition cursor-pointer h-full grid grid-rows-[208px_auto]"
                                     >
                                         {/* Fixed-height image area — always same size */}

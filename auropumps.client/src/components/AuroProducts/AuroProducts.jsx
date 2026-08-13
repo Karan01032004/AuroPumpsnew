@@ -54,6 +54,7 @@ function AuroProducts() {
                 pdf: data.catelogue,
                 isFeatured: data.isFeatured,
                 applicationtags: data.applicationtags,
+                meta: data.meta,
                 description: data.description,
                 specifications: [
                     { label: "Capacity", value: data.capacity },

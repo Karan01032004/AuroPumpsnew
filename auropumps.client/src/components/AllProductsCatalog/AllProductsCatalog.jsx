@@ -97,7 +97,7 @@ const AllProductsCatalog = () => {
                                 {(productsMap[category.id] || []).map((product) => (
                                     <Link
                                         key={`${category.id}-${product.slug}-${product.name}`}
-                                        to={`/products/${category.slug}/${product.slug}`} // ? 
+                                        to={`/metal-pumps-manufacturer-india/${category.slug}/${product.slug}`} // ? 
                                         className="group overflow-hidden rounded-xl border border-slate-200 bg-white transition duration-300 hover:-translate-y-1.5 hover:border-primary/40 hover:shadow-[0_18px_38px_rgba(45,37,142,0.16)]"
                                     >
                                         <div className={`flex h-[190px] items-center justify-center p-4 ${index % 2 === 0 ? "bg-gradient-to-b from-slate-50 to-white" : "bg-gradient-to-b from-[#f7f6ff] to-white"}`}>

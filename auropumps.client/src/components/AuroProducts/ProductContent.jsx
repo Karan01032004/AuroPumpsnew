@@ -3,7 +3,7 @@ import { IMAGE_BASE_URL } from "../../poweradmin/api/axios";
 import { FiDownload } from "react-icons/fi";
 import api from "../../poweradmin/api/axios";
 import { toast } from "react-hot-toast";
-
+import { Helmet } from "react-helmet-async";
 import { IoArrowBack } from "react-icons/io5";
 import { Link } from "react-router-dom";
 function ProductContent({ product, categoryTitle }) {
@@ -28,8 +28,7 @@ function ProductContent({ product, categoryTitle }) {
     const specifications = (product.specifications || []).filter(
         (spec) => spec?.value && String(spec.value).trim() !== ""
     );
-
-    
+     
 
     const closePdfModal = () => {
         setIsPdfModalOpen(false);
@@ -42,8 +41,37 @@ function ProductContent({ product, categoryTitle }) {
             [name]: value,
         }));
     };
- 
+ const extractMetaContent = (html, name) => {
+    if (!html) return "";
 
+    const regex = new RegExp(
+        `<meta\\s+name=["']${name}["']\\s+content=["']([^"']*)["']`,
+        "i"
+    );
+
+    return html.match(regex)?.[1] || "";
+};
+
+const extractTitle = (html) => {
+    if (!html) return "";
+
+    return html.match(
+        /<title[^>]*>([\s\S]*?)<\/title>/i
+    )?.[1]?.trim() || "";
+    };
+    const extractCanonical = (html) => {
+        if (!html) return "";
+
+        return html.match(
+            /<link\s+rel=["']canonical["']\s+href=["']([^"']+)["']/i
+        )?.[1]?.trim() || "";
+    };
+    const metaHtml = product.meta || "";
+
+    const seoTitle = extractTitle(metaHtml);
+    const seoDescription = extractMetaContent(metaHtml, "description");
+    const seoKeywords = extractMetaContent(metaHtml, "keywords");
+    const canonicalUrl = extractCanonical(metaHtml);
     //const handleDownloadClick = () => {
     //    if (product.isFeatured) {
     //        setIsPdfModalOpen(true); // form open
@@ -87,6 +115,29 @@ function ProductContent({ product, categoryTitle }) {
 
     return (
         <>
+            <Helmet>
+                {seoTitle && <title>{seoTitle}</title>}
+
+                {seoDescription && (
+                    <meta
+                        name="description"
+                        content={seoDescription}
+                    />
+                )}
+
+                {seoKeywords && (
+                    <meta
+                        name="keywords"
+                        content={seoKeywords}
+                    />
+                )}
+                {canonicalUrl && (
+                    <link
+                        rel="canonical"
+                        href={canonicalUrl}
+                    />
+                )}
+            </Helmet>
 
             <div className="flex justify-end mb-5">
                 <Link
