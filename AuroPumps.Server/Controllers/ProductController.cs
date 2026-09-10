@@ -48,6 +48,7 @@ namespace Poweradmin.Server.Controllers
         //    return Ok(products);
         //}
         [HttpGet("list-by-category/{categoryId}")]
+
         public IActionResult GetProductsByCategory(int categoryId)
         {
             // 1. Pehle anonymous object mein Product aur uska Specific SortOrder dono ek sath database se nikalo
@@ -85,8 +86,7 @@ namespace Poweradmin.Server.Controllers
             }).ToList();
 
             return Ok(products);
-        }
-
+        } 
         private string SaveFile(IFormFile file, string folder)
         {
             var uploadPath = Path.Combine(

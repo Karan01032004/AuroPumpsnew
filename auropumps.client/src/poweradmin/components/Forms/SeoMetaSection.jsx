@@ -12,7 +12,7 @@ const SeoMetaSection = ({
     metaTags,
     setMetaTags,
     productSlug = "your-product-slug",
-    baseUrl = "https://www.yoursite.com",
+    baseUrl = "https://www.auropumps.com",
 }) => {
     const [open, setOpen] = useState(false);
     const [copied, setCopied] = useState(false);

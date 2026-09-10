@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using Poweradmin.Server.Data;
+using AuroPumps.Server.Middleware;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddCors(options => {
@@ -27,7 +28,7 @@ builder.Services.AddSwaggerGen();
 var app = builder.Build();
 
 // 4. Configure the HTTP request pipeline
-//app.UsePathBase("/auropumps/");
+app.UseMiddleware<SeoMiddleware>();
 app.UseDefaultFiles();
 app.UseStaticFiles();
 
@@ -39,6 +40,6 @@ if (app.Environment.IsDevelopment() || app.Environment.IsProduction())
 app.UseHttpsRedirection();
 app.UseAuthorization();
 app.MapControllers();
-app.MapFallbackToFile("/index.html");
+app.MapFallbackToFile("/spa-shell.html");
 
 app.Run();

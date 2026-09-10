@@ -6,7 +6,11 @@
   "homepage": "/auro-pumps/",
   "scripts": {
     "dev": "vite",
-    "build": "vite build",
+    "build": "vite build && node scripts/generate-seo-catalog.mjs && node scripts/prerender.mjs && node scripts/qa-prerender.mjs && node scripts/deploy-dist-to-wwwroot.mjs",
+    "seo:catalog": "node scripts/generate-seo-catalog.mjs",
+    "prerender": "node scripts/generate-seo-catalog.mjs && node scripts/prerender.mjs",
+    "qa:prerender": "node scripts/qa-prerender.mjs",
+    "sync:wwwroot": "node scripts/deploy-dist-to-wwwroot.mjs",
     "lint": "eslint .",
     "preview": "vite preview"
   },
@@ -36,6 +40,7 @@
     "eslint-plugin-react-hooks": "^7.0.1",
     "eslint-plugin-react-refresh": "^0.4.24",
     "globals": "^16.5.0",
+    "playwright": "^1.63.0",
     "tailwindcss": "^4.2.1",
     "vite": "^7.3.1"
   }
