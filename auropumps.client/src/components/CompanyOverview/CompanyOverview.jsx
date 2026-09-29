@@ -81,7 +81,7 @@ const CompanyOverview = () => {
 
                             <div className="flex items-start gap-3 shrink-0">
                                 <a
-                                    href={`${import.meta.env.BASE_URL}/assets/pdf/auro-pumps-ce-certificate-md.pdf`}
+                                    href="https://www.auropumps.com/assets/pdf/auro-pumps-ce-certificate-md.pdf"
                                     target="_blank"
                                     rel="noopener noreferrer"
                                     aria-label="CE Certificate"
@@ -94,7 +94,7 @@ const CompanyOverview = () => {
                                 </a>
 
                                 <a
-                                    href={`${import.meta.env.BASE_URL}/assets/pdf/auro-pumps-iso-9001-2015-certificate.pdf`}
+                                    href="https://www.auropumps.com/assets/pdf/auro-pumps-iso-9001-2015-certificate.pdf"
                                     target="_blank"
                                     rel="noopener noreferrer"
                                     aria-label="ISO Certificate"
