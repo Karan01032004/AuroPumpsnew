@@ -139,7 +139,7 @@ const Footer = () => {
                 <div className="flex items-center gap-4 lg:gap-5 justify-center mt-2 lg:mt-0">
 
                     <a
-                        href="https://www.auropumps.com/assets/pdf/auro-pumps-ce-certificate-md.pdf"
+                        href="https://auropumps.com/assets/pdf/auro-pumps-ce-certificate-md.pdf"
                         target="_blank"
                         rel="noopener noreferrer"
                         aria-label="View CE Certificate"
@@ -159,7 +159,7 @@ const Footer = () => {
                     </a>
 
                     <a
-                        href="https://www.auropumps.com/assets/pdf/auro-pumps-iso-9001-2015-certificate.pdf"
+                        href="https://auropumps.com/assets/pdf/auro-pumps-iso-9001-2015-certificate.pdf"
                         target="_blank"
                         rel="noopener noreferrer"
                         aria-label="View ISO 9001:2015 Certificate"

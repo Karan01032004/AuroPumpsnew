@@ -286,10 +286,10 @@ const ContactSection = () => {
                             className="block rounded-lg overflow-hidden shadow-sm mt-6"
                         >
                             <iframe
-                                title="Corporate Office"
-                                src="https://www.google.com/maps?q=AURO+PUMPS+PVT+LTD+309+Nilamber+Primero+Vasna+Bhayli+Road+Vadodara+391410+Gujarat+India&output=embed"
+                                title="Vertical and Horizontal precision Pumps Manufacturer in Vadodara "
+                                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3691.5503426244622!2d73.15607097506923!3d22.295016879690397!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x395fc6282d3bd023%3A0x59baeb7b5ce84eff!2sAuro%20Pumps%20Pvt%20Ltd!5e0!3m2!1sen!2sin!4v1791800055382!5m2!1sen!2sin"
                                 className="w-full h-60 lg:h-75 border-0 pointer-events-none"
-                                loading="lazy"
+                                loading="lazy"   
                             />
                         </a>
 

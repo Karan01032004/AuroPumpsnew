@@ -9,7 +9,7 @@ function SiteMap() {
           <section className="w-full py-10 sm:py-14 md:py-16 lg:py-100">
               <div className="container mx-auto">
 
-                  
+                  <h1 className="sr-only">Auro Pumps Sitemap</h1>
                   {/* ================= HOME ================= */}
                   <h2 className="text-2xl font-bold text-primary mb-3">
                       <Link to="/" className="hover:underline">

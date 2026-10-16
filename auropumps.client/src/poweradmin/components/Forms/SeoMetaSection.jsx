@@ -12,7 +12,7 @@ const SeoMetaSection = ({
     metaTags,
     setMetaTags,
     productSlug = "your-product-slug",
-    baseUrl = "https://www.auropumps.com",
+    baseUrl = "https://auropumps.com",
 }) => {
     const [open, setOpen] = useState(false);
     const [copied, setCopied] = useState(false);
@@ -36,10 +36,11 @@ const SeoMetaSection = ({
 <meta property="og:image" content="${baseUrl}/images/${productSlug}.jpg" />
 
 <!-- Twitter -->
-<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:card" content="summary" />
 <meta name="twitter:title" content="${seoTitle || "Product Name"}" />
 <meta name="twitter:description" content="Buy ${seoTitle || "this product"} at best price." />
-<meta name="twitter:image" content="${baseUrl}/images/${productSlug}.jpg" />`,
+<meta name="twitter:site" content="@Auropumps">
+<meta name="twitter:image" content="https://auropumps.com/favicon-32x32.png" />`,
         [seoTitle, pageUrl, baseUrl, productSlug]
     );
 

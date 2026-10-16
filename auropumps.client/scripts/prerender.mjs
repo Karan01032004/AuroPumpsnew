@@ -148,8 +148,13 @@ try {
 
       let html = await page.content();
 
-      // Ensure no trailing duplicate titles remained
-      html = html.replace(/(<title[^>]*>[\s\S]*?<\/title>)[\s\S]*?<title[^>]*>[\s\S]*?<\/title>/gi, '$1');
+      // Ensure strictly single <title> tag remains in HTML
+      const titleMatches = html.match(/<title[^>]*>[\s\S]*?<\/title>/gi);
+      if (titleMatches && titleMatches.length > 1) {
+        const lastTitle = titleMatches[titleMatches.length - 1];
+        html = html.replace(/<title[^>]*>[\s\S]*?<\/title>/gi, '');
+        html = html.replace(/(<head[^>]*>)/i, `$1\n  ${lastTitle}`);
+      }
 
       // Determine save path
       let savePath;
@@ -177,3 +182,4 @@ try {
   server.close();
   console.log('[Prerender] Server closed. Prerendering complete.');
 }
+

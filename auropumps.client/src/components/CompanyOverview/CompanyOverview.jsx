@@ -31,9 +31,9 @@ const CompanyOverview = () => {
                             {/* Experience Content */}
                             <div className="absolute bottom-5 left-6 right-2 flex justify-end items-end gap-4 text-white">
 
-                                <h3 className="text-5xl md:text-6xl font-bold leading-none">
+                                <h1 className="text-5xl md:text-6xl font-bold leading-none">
                                     41+
-                                </h3>
+                                </h1>
 
                                 <p className="text-sm md:text-lg leading-tight max-w-[240px] mb-2">
                                     Years of Experience of
@@ -81,7 +81,7 @@ const CompanyOverview = () => {
 
                             <div className="flex items-start gap-3 shrink-0">
                                 <a
-                                    href="https://www.auropumps.com/assets/pdf/auro-pumps-ce-certificate-md.pdf"
+                                    href="https://auropumps.com/assets/pdf/auro-pumps-ce-certificate-md.pdf"
                                     target="_blank"
                                     rel="noopener noreferrer"
                                     aria-label="CE Certificate"
@@ -94,7 +94,7 @@ const CompanyOverview = () => {
                                 </a>
 
                                 <a
-                                    href="https://www.auropumps.com/assets/pdf/auro-pumps-iso-9001-2015-certificate.pdf"
+                                    href="https://auropumps.com/assets/pdf/auro-pumps-iso-9001-2015-certificate.pdf"
                                     target="_blank"
                                     rel="noopener noreferrer"
                                     aria-label="ISO Certificate"

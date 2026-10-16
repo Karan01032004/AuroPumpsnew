@@ -1,4 +1,4 @@
-﻿import { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import CategorySidebar from "./CategorySidebar";
 import ApplicationContent from "./ApplicationContent";
@@ -62,6 +62,7 @@ function AuroApplication() {
 
                 if (category) {
                     setActiveCategory(category.id); 
+                    setApplicationProducts([]); // <--- Immediate feedback
                     const products = await loadProductsByIds(category.product_ids);
                     setApplicationProducts(products);
                     await loadApplicationDetails(category.id);

@@ -74,9 +74,9 @@ function AllApplicationsCatalog() {
                                 Application Area
                             </p>
 
-                            <h3 className="mt-3 text-3xl font-bold text-slate-900">
+                            <div className="mt-3 text-3xl font-bold text-slate-900">
                                 Applications
-                            </h3>
+                            </div>
 
                         </div>
 

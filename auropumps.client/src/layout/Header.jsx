@@ -1,4 +1,4 @@
-﻿import { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { NavLink, useLocation } from "react-router-dom";
 import { FiChevronDown } from "react-icons/fi";
 import api  from "../poweradmin/api/axios";
@@ -94,7 +94,7 @@ const Header = () => {
         );
 
     const pumpProducts = flattenCategoryProducts(pumpCategories);
-    // 🔥 NAYA CODE: Products ko barabar columns me divide karne ka logic
+    // ?? NAYA CODE: Products ko barabar columns me divide karne ka logic
     const itemsPerColumn = Math.ceil(pumpProducts.length / 3);
     const pumpColumn1 = pumpProducts.slice(0, itemsPerColumn);
     const pumpColumn2 = pumpProducts.slice(itemsPerColumn, itemsPerColumn * 2);
@@ -114,12 +114,12 @@ const Header = () => {
 
         const idArray = ids.split(",").map(id => parseInt(id));
 
-        const uniqueProducts = new Map(); // ✅ duplicate remove karega
+        const uniqueProducts = new Map(); // ? duplicate remove karega
 
         Object.values(productsMap).forEach((productList) => {
             productList.forEach((product) => {
                 if (idArray.includes(product.id)) {
-                    uniqueProducts.set(product.id, product); // ✅ overwrite same id
+                    uniqueProducts.set(product.id, product); // ? overwrite same id
                 }
             });
         });
@@ -129,7 +129,7 @@ const Header = () => {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                // 🔥 categories
+                // ?? categories
                 const catRes = await api.get("/ProductsCategory/category-list");
 
                 const catData = Array.isArray(catRes.data)
@@ -138,7 +138,7 @@ const Header = () => {
 
                 setCategories(catData);
 
-                // 🔥 products per category
+                // ?? products per category
                 catData.forEach(async (cat) => {
                     try {
                         const prodRes = await api.get(`/product/list-by-category/${cat.id}`);
@@ -215,7 +215,7 @@ const Header = () => {
                 <div className="container mx-auto px-4 sm:px-6 lg:px-2 xl:px-8 h-full flex items-center justify-between">
 
                     {/* LOGO */}
-                    <NavLink to="/" onClick={closeAllMenus} className="flex items-center shrink-0 gap-2">
+                    <NavLink to="/"  className="flex items-center shrink-0 gap-2">
                         <div className={`relative overflow-hidden transition-all duration-500 ease-out ${scrolled ? "h-12 w-12 rounded-lg" : "h-22 w-22 rounded-xl"
                             }  flex items-center justify-center`}>
                             <img
@@ -255,7 +255,7 @@ const Header = () => {
       after:bottom-[4px] after:h-[2px] after:rounded-full after:bg-primary
       after:transition-all after:duration-300`;
 
-                            // 🔥 PRODUCTS
+                            // ?? PRODUCTS
                             if (item.name === "Products") {
                                 return (
                                     <div
@@ -265,7 +265,7 @@ const Header = () => {
                                         onMouseLeave={() => setActiveDesktopMenu(null)}
                                     >
 
-                                        <NavLink to={item.path} onClick={closeAllMenus} className={navClass}>
+                                        <NavLink to={item.path}  className={navClass}>
                                             {item.name}
                                         </NavLink>
 
@@ -296,7 +296,7 @@ const Header = () => {
                                                                 <NavLink
                                                                     key={product.id}
                                                                     to={`/metal-pumps-manufacturer-india/${product.categorySlug}/${product.slug}`}
-                                                                    onClick={closeAllMenus}
+                                                                    
                                                                     className="block py-1 text-white/80 transition hover:text-white"
                                                                 >
                                                                     {product.name}
@@ -319,7 +319,7 @@ const Header = () => {
                                                         {/*                    <li key={product.id}>*/}
                                                         {/*                        <NavLink*/}
                                                         {/*                            to={`/products/${product.categorySlug}/${product.slug}`}*/}
-                                                        {/*                            onClick={closeAllMenus}*/}
+                                                        {/*                            */}
                                                         {/*                            className="block transition hover:text-white"*/}
                                                         {/*                        >*/}
                                                         {/*                            {product.name}*/}
@@ -336,7 +336,7 @@ const Header = () => {
                                                                         <li key={product.id}>
                                                                             <NavLink
                                                                                 to={`/metal-pumps-manufacturer-india/${product.categorySlug}/${product.slug}`}
-                                                                                onClick={closeAllMenus}
+                                                                                
                                                                                 className="block transition hover:text-white"
                                                                             >
                                                                                 {product.name}
@@ -357,7 +357,7 @@ const Header = () => {
                                                                 <NavLink
                                                                     key={product.id}
                                                                     to={`/metal-pumps-manufacturer-india/${product.categorySlug}/${product.slug}`}
-                                                                    onClick={closeAllMenus}
+                                                                    
                                                                     className="block py-1 text-white/80 transition hover:text-white text-xs"
                                                                 >
                                                                     {product.name}
@@ -372,7 +372,7 @@ const Header = () => {
                                                                 <NavLink
                                                                     key={product.id}
                                                                     to={`/metal-pumps-manufacturer-india/${product.categorySlug}/${product.slug}`}
-                                                                    onClick={closeAllMenus}
+                                                                    
                                                                     className="block py-1 text-white/80 transition hover:text-white text-xs"
                                                                 >
                                                                     {product.name}
@@ -389,7 +389,7 @@ const Header = () => {
                                 );
                             }
 
-                            // 🔥 APPLICATION
+                            // ?? APPLICATION
                             if (item.name === "Applications") {
                                 return (
                                     <div
@@ -399,7 +399,7 @@ const Header = () => {
                                         onMouseLeave={() => setActiveDesktopMenu(null)}
                                     >
 
-                                        <NavLink to={item.path} onClick={closeAllMenus} className={navClass}>
+                                        <NavLink to={item.path}  className={navClass}>
                                             {item.name}
                                         </NavLink>
 
@@ -430,7 +430,7 @@ const Header = () => {
 
                                                                 <NavLink
                                                                     to={`/industrial-pump-applications/${app.slug}`}
-                                                                    onClick={closeAllMenus}
+                                                                    
                                                                     className="font-semibold pb-2 block"
                                                                 >
                                                                     {app.title}
@@ -445,7 +445,7 @@ const Header = () => {
                                                                 {/*        <li key={product.id}>*/}
                                                                 {/*            <NavLink*/}
                                                                 {/*                to={`/application/${app.slug}/${product.slug}`} // ya full route*/}
-                                                                {/*                onClick={closeAllMenus}*/}
+                                                                {/*                */}
                                                                 {/*                className="hover:text-white block transition"*/}
                                                                 {/*            >*/}
                                                                 {/*                {product.name}*/}
@@ -464,12 +464,12 @@ const Header = () => {
                                 );
                             }
 
-                            // 🔥 NORMAL LINKS
+                            // ?? NORMAL LINKS
                             return (
                                 <NavLink
                                     key={i}
                                     to={item.path}
-                                    onClick={closeAllMenus}
+                                    
                                     end={item.path === "/"}
                                     className={navClass}
                                 >
@@ -481,10 +481,10 @@ const Header = () => {
                         {/* CONTACT */}
                         <NavLink
                             to="/contact-us-for-molten-metal-pumps"
-                            onClick={closeAllMenus}
+                            
                             className="ml-3 px-5 lg:px-2 xl:px-5 py-2 rounded-lg text-[14px] lg:text-[12px] xl:text-[14px] font-medium border text-white border-white/30 bg-primary hover:bg-primary/10 transition"
                         >
-                            Contact Us →
+                            Contact Us ?
                         </NavLink>
 
                     </nav>
@@ -493,7 +493,7 @@ const Header = () => {
                         onClick={() => setOpen(true)}
                         className="md:hidden text-black p-2"
                     >
-                        ☰
+                        ?
                     </button>
                 </div>
             </header>
@@ -517,13 +517,13 @@ const Header = () => {
                         }`}
                 >
 
-                    {/* 🔥 HEADER */}
+                    {/* ?? HEADER */}
                     <div className="flex items-center justify-between px-5 py-4 border-b border-white/10 sticky top-0 bg-primary z-10">
                         <span className="font-semibold text-lg">Menu</span>
-                        <button onClick={() => setOpen(false)} className="text-xl">✕</button>
+                        <button onClick={() => setOpen(false)} className="text-xl">?</button>
                     </div>
 
-                    {/* 🔥 SCROLL AREA */}
+                    {/* ?? SCROLL AREA */}
                     <div className="flex-1 overflow-y-auto px-4 py-4 space-y-3">
 
                         {navLinks.map((item, i) => {
@@ -560,8 +560,8 @@ const Header = () => {
                                                             {(productsMap[category.id] || []).map((product) => (
                                                                 <li key={product.id}>
                                                                     <NavLink
-                                                                        to={`/metal-pumps-manufacturer-india/${category.slug}/${product.slug}`} // ✅ slug URL
-                                                                        onClick={closeAllMenus}
+                                                                        to={`/metal-pumps-manufacturer-india/${category.slug}/${product.slug}`} // ? slug URL
+                                                                        
                                                                         className="hover:text-white block transition border-b border-white/10"
                                                                     >
                                                                         {product.name}
@@ -581,7 +581,7 @@ const Header = () => {
                                 return (
                                     <div key={i} className="bg-white/5 rounded-xl">
 
-                                        {/* 🔥 TOGGLE */}
+                                        {/* ?? TOGGLE */}
                                         <button
                                             onClick={() => setMobileApplicationOpen(!mobileApplicationOpen)}
                                             className="w-full flex justify-between items-center px-4 py-3 text-left font-medium"
@@ -595,7 +595,7 @@ const Header = () => {
                                             </span>
                                         </button>
 
-                                        {/* 🔥 CONTENT */}
+                                        {/* ?? CONTENT */}
                                         <div
                                             className={`overflow-hidden transition-all duration-300 ${mobileApplicationOpen ? "max-h-[900px] pb-4" : "max-h-0"
                                                 }`}
@@ -609,7 +609,7 @@ const Header = () => {
                                                         <div key={app.id}>
                                                             <NavLink
                                                                 to={`/industrial-pump-applications/${app.slug}`}
-                                                                onClick={closeAllMenus}
+                                                                
                                                                 className="font-semibold mb-3 border-b border-white/20 pb-2 block hover:text-white"
                                                             >
                                                                 {app.title}
@@ -650,10 +650,10 @@ const Header = () => {
                         })}
                         <NavLink
                             to="/contact-us-for-molten-metal-pumps"
-                            onClick={closeAllMenus}
+                            
                             className="block mt-5 mx-1 rounded-xl bg-white text-primary text-center font-semibold py-3 hover:bg-gray-100 transition"
                         >
-                            Contact Us →
+                            Contact Us ?
                         </NavLink>
                     </div>
                 </div>

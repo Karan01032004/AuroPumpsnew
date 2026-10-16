@@ -144,7 +144,7 @@ function App() {
 
                         <div className="app-loader__text-wrap">
                             <p className="app-loader__eyebrow">Est in 1984 with technology from Pompe Vergani SpA, Italy</p>
-                            <h1 className="app-loader__title font-rockwell">AURO PUMPS PVT.LTD.</h1>
+                            <div className="app-loader__title font-rockwell">AURO PUMPS PVT.LTD.</div>
                            
                             <div className="app-loader__pulse-track">
                                 <span className="app-loader__pulse-line"></span>

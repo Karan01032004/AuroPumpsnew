@@ -8,8 +8,37 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay } from "swiper/modules";
 import { useNavigate } from "react-router-dom";
 import { IoArrowBack } from "react-icons/io5";
-import { Helmet } from "react-helmet-async";
 import "swiper/css";
+const extractMetaContent = (html, name) => {
+    if (!html) return "";
+    const regex = new RegExp(
+        `<meta\\s+name=["']${name}["']\\s+content=["']([^"']*)["']`,
+        "i"
+    );
+    return html.match(regex)?.[1]?.trim() || "";
+};
+
+const extractTitle = (html) => {
+    if (!html) return "";
+    return html.match(/<title[^>]*>([\s\S]*?)<\/title>/i)?.[1]?.trim() || "";
+};
+
+const extractCanonical = (html) => {
+    if (!html) return "";
+    return html.match(
+        /<link\s+rel=["']canonical["']\s+href=["']([^"']+)["']/i
+    )?.[1]?.trim() || "";
+};
+
+const upsertHeadTag = (selector, tagName, attrs) => {
+    let el = document.head.querySelector(selector);
+    if (!el) {
+        el = document.createElement(tagName);
+        document.head.appendChild(el);
+    }
+    Object.entries(attrs).forEach(([key, value]) => el.setAttribute(key, value));
+};
+
 function ApplicationContent({
     applicationProducts = [],
     products = [],
@@ -26,36 +55,11 @@ function ApplicationContent({
         message: "",
         companyname: "" // ?? Handled Form Key
     });
-    const extractMetaContent = (html, name) => {
-        if (!html) return "";
-
-        const regex = new RegExp(
-            `<meta\\s+name=["']${name}["']\\s+content=["']([^"']*)["']`,
-            "i"
-        );
-
-        return html.match(regex)?.[1]?.trim() || "";
-    };
-
-    const extractTitle = (html) => {
-        if (!html) return "";
-
-        return html.match(
-            /<title[^>]*>([\s\S]*?)<\/title>/i
-        )?.[1]?.trim() || "";
-    };
-
-    const extractCanonical = (html) => {
-        if (!html) return "";
-
-        return html.match(
-            /<link\s+rel=["']canonical["']\s+href=["']([^"']+)["']/i
-        )?.[1]?.trim() || "";
-    };
-    const seoTitle = extractTitle(meta);
-    const seoDescription = extractMetaContent(meta, "description");
-    const seoKeywords = extractMetaContent(meta, "keywords");
-    const canonicalUrl = extractCanonical(meta);
+ 
+    //const seoTitle = extractTitle(meta);
+    //const seoDescription = extractMetaContent(meta, "description");
+    //const seoKeywords = extractMetaContent(meta, "keywords");
+    //const canonicalUrl = extractCanonical(meta);
     const [isPdfModalOpen, setIsPdfModalOpen] = useState(false);
     const [selectedProductForPdf, setSelectedProductForPdf] = useState(null);
     const [currentIndex, setCurrentIndex] = useState(0);
@@ -64,25 +68,33 @@ function ApplicationContent({
 
     const galleryItems = Array.isArray(products) ? products : [];
     const navigate = useNavigate();
+    useEffect(() => {
+        if (!meta) return;
 
-    // ================= HANDLERS =================
-    //const handleDownloadClick = (productItem) => {
-    //    if (!productItem) return;
+        const seoTitle = extractTitle(meta);
+        const seoDescription = extractMetaContent(meta, "description");
+        const seoKeywords = extractMetaContent(meta, "keywords");
+        const canonicalUrl = extractCanonical(meta);
 
-    //    // ? LOGIC: Agar product isFeatured true hai toh modal form open karo
-    //    if (productItem.isFeatured) {
-    //        setSelectedProductForPdf(productItem);
-    //        setIsPdfModalOpen(true);
-    //    } else {
-    //        // Direct download if not featured
-    //        const directPdfUrl = productItem.pdf ? `${productItem.pdf}` : "";
-    //        if (directPdfUrl) {
-    //            window.open(directPdfUrl, "_blank");
-    //        } else {
-    //            toast.error("PDF path not found!");
-    //        }
-    //    }
-    //};
+        if (seoTitle) {
+            document.title = seoTitle;
+            upsertHeadTag('meta[property="og:title"]', "meta", { property: "og:title", content: seoTitle });
+            upsertHeadTag('meta[name="twitter:title"]', "meta", { name: "twitter:title", content: seoTitle });
+        }
+        if (seoDescription) {
+            upsertHeadTag('meta[name="description"]', "meta", { name: "description", content: seoDescription });
+            upsertHeadTag('meta[property="og:description"]', "meta", { property: "og:description", content: seoDescription });
+            upsertHeadTag('meta[name="twitter:description"]', "meta", { name: "twitter:description", content: seoDescription });
+        }
+        if (seoKeywords) {
+            upsertHeadTag('meta[name="keywords"]', "meta", { name: "keywords", content: seoKeywords });
+        }
+        if (canonicalUrl) {
+            upsertHeadTag('link[rel="canonical"]', "link", { rel: "canonical", href: canonicalUrl });
+            upsertHeadTag('meta[property="og:url"]', "meta", { property: "og:url", content: canonicalUrl });
+        }
+    }, [meta]);
+    
     const handleDownloadClick = (productItem) => {
         if (!productItem) return;
 
@@ -163,32 +175,9 @@ function ApplicationContent({
     return (
 
         <div className="space-y-10">
-            <Helmet>
-                {seoTitle && (
-                    <title>{seoTitle}</title>
-                )}
-
-                {seoDescription && (
-                    <meta
-                        name="description"
-                        content={seoDescription}
-                    />
-                )}
-
-                {seoKeywords && (
-                    <meta
-                        name="keywords"
-                        content={seoKeywords}
-                    />
-                )}
-
-                {canonicalUrl && (
-                    <link
-                        rel="canonical"
-                        href={canonicalUrl}
-                    />
-                )}
-            </Helmet>
+            
+                
+            
             <div className="flex justify-end mb-5">
                 <button
                     onClick={() => navigate("/industrial-pump-applications")}
@@ -207,7 +196,7 @@ function ApplicationContent({
                             <span className="inline-flex rounded-full border border-primary/15 bg-primary/10 px-4 py-2 text-[11px] font-bold uppercase tracking-[0.2em] text-primary">
                                 Application Area
                             </span>
-
+                            <h1 className="sr-only">  {categoryTitle} Auro Pumps</h1>
                             <h2 className="mt-5 text-3xl sm:text-4xl font-bold text-slate-900 leading-tight">
                                 {categoryTitle}
                             </h2>
@@ -412,7 +401,7 @@ function ApplicationContent({
                                        
 
                                             <a
-                                                href="https://www.auropumps.com/contact-us"
+                                                    href="https://auropumps.com/contact-us-for-molten-metal-pumps"
                                          
                                                 rel="noopener noreferrer"
                                                 className="mt-5 inline-flex items-center justify-center rounded-full bg-primary px-6 py-3 text-sm font-semibold uppercase tracking-[0.08em] text-white transition hover:opacity-90"

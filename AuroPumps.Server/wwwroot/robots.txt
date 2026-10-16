@@ -2,4 +2,4 @@ User-agent: Googlebot
 Disallow: 
 User-agent: *
 Disallow: 
-Sitemap: https://www.auropumps.com/sitemap.xml
+Sitemap: https://auropumps.com/sitemap.xml

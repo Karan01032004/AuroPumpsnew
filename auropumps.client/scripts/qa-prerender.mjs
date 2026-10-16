@@ -62,7 +62,7 @@ for (const route of publicRoutes) {
   }
 
   // Check Canonical
-  const canonicalMatch = html.match(/<link\s+rel=["']canonical["']\s+href=["']([^"']+)["']/i);
+  const canonicalMatch = html.match(/<link[^>]*rel=["']canonical["'][^>]*href=["']([^"']+)["']/i);
   const canonical = canonicalMatch ? canonicalMatch[1].trim() : '';
   if (!canonical || canonical !== route.canonical) {
     console.error(`❌ FAIL: Canonical mismatch for ${route.path}. Expected "${route.canonical}", found "${canonical}"`);

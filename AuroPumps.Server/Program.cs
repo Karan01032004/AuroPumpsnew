@@ -23,11 +23,37 @@ builder.Services.AddDbContext<AppDbContext>(options =>
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-
-// 3. AB BUILD KAREIN
+builder.Services.AddHsts(options =>
+{
+    options.MaxAge = TimeSpan.FromDays(365);
+    options.IncludeSubDomains = false;
+    options.Preload = false;
+});
 var app = builder.Build();
+// 0. HSTS header (sirf HTTPS response par jata hai)
+if (!app.Environment.IsDevelopment())
+{
+    app.UseHsts();
+}
+// 1. WWW -> non-WWW (sabse pehle)
+app.Use(async (context, next) =>
+{
+    var host = context.Request.Host.Host;
 
-// 4. Configure the HTTP request pipeline
+    if (host.StartsWith("www.", StringComparison.OrdinalIgnoreCase))
+    {
+        var newUrl = $"https://{host.Substring(4)}{context.Request.Path}{context.Request.QueryString}";
+        context.Response.Redirect(newUrl, permanent: true);
+        return;
+    }
+
+    await next();
+});
+
+// 2. HTTP -> HTTPS (static files se pehle, taaki http pe bhi redirect ho)
+app.UseHttpsRedirection();
+
+// 3. Baaki pipeline
 app.UseMiddleware<SeoMiddleware>();
 app.UseDefaultFiles();
 app.UseStaticFiles();
@@ -36,8 +62,9 @@ if (app.Environment.IsDevelopment() || app.Environment.IsProduction())
 {
     app.UseSwagger();
     app.UseSwaggerUI();
-} 
-app.UseHttpsRedirection();
+}
+
+app.UseCors("AllowReact");
 app.UseAuthorization();
 app.MapControllers();
 app.MapFallbackToFile("/spa-shell.html");

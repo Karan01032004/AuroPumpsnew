@@ -39,23 +39,93 @@ namespace AuroPumps.Server.Middleware
         {
             var rawPath = context.Request.Path.Value ?? "/";
 
-            // Ignore API, Swagger, and static assets (.js, .css, .png, .jpg, .webp, .svg, .ico, .woff, .pdf)
+            var env = context.RequestServices.GetRequiredService<Microsoft.AspNetCore.Hosting.IWebHostEnvironment>();
+            var wwwroot = env.WebRootPath ?? Path.Combine(env.ContentRootPath, "wwwroot");
+
+            // Ignore API and Swagger
             if (rawPath.StartsWith("/api", StringComparison.OrdinalIgnoreCase) ||
-                rawPath.StartsWith("/swagger", StringComparison.OrdinalIgnoreCase) ||
-                IsStaticAsset(rawPath))
+                rawPath.StartsWith("/swagger", StringComparison.OrdinalIgnoreCase))
             {
                 await _next(context);
                 return;
             }
-
-            var env = context.RequestServices.GetRequiredService<Microsoft.AspNetCore.Hosting.IWebHostEnvironment>();
-            var wwwroot = env.WebRootPath ?? Path.Combine(env.ContentRootPath, "wwwroot");
 
             // Normalize path
             var cleanPath = rawPath.TrimEnd('/');
             if (string.IsNullOrEmpty(cleanPath) || cleanPath.Equals("/index.html", StringComparison.OrdinalIgnoreCase))
             {
                 cleanPath = "/";
+            }
+
+            // 0. Direct handlers for robots.txt, llms.txt, llms-full.txt, ai.txt, sitemap.xml
+            if (cleanPath.Equals("/robots.txt", StringComparison.OrdinalIgnoreCase))
+            {
+                var robotsPath = Path.Combine(wwwroot, "robots.txt");
+                string content = File.Exists(robotsPath)
+                    ? await File.ReadAllTextAsync(robotsPath)
+                    : "User-agent: Googlebot\nDisallow: \nUser-agent: *\nDisallow: \nSitemap: https://auropumps.com/sitemap.xml\n";
+
+                context.Response.ContentType = "text/plain; charset=utf-8";
+                context.Response.StatusCode = StatusCodes.Status200OK;
+                await context.Response.WriteAsync(content);
+                return;
+            }
+
+            if (cleanPath.Equals("/llms.txt", StringComparison.OrdinalIgnoreCase))
+            {
+                var file = Path.Combine(wwwroot, "llms.txt");
+                if (File.Exists(file))
+                {
+                    context.Response.ContentType = "text/plain; charset=utf-8";
+                    context.Response.StatusCode = StatusCodes.Status200OK;
+                    await context.Response.SendFileAsync(file);
+                    return;
+                }
+            }
+
+            if (cleanPath.Equals("/llms-full.txt", StringComparison.OrdinalIgnoreCase))
+            {
+                var file = Path.Combine(wwwroot, "llms-full.txt");
+                if (File.Exists(file))
+                {
+                    context.Response.ContentType = "text/plain; charset=utf-8";
+                    context.Response.StatusCode = StatusCodes.Status200OK;
+                    await context.Response.SendFileAsync(file);
+                    return;
+                }
+            }
+
+            if (cleanPath.Equals("/ai.txt", StringComparison.OrdinalIgnoreCase))
+            {
+                var file = Path.Combine(wwwroot, "ai.txt");
+                if (File.Exists(file))
+                {
+                    context.Response.ContentType = "text/plain; charset=utf-8";
+                    context.Response.StatusCode = StatusCodes.Status200OK;
+                    await context.Response.SendFileAsync(file);
+                    return;
+                }
+            }
+
+            if (cleanPath.Equals("/sitemap.xml", StringComparison.OrdinalIgnoreCase))
+            {
+                var file = Path.Combine(wwwroot, "sitemap.xml");
+                if (File.Exists(file))
+                {
+                    context.Response.ContentType = "application/xml; charset=utf-8";
+                    context.Response.StatusCode = StatusCodes.Status200OK;
+                    await context.Response.SendFileAsync(file);
+                    return;
+                }
+            }
+
+            // Direct serving for any physical file in wwwroot (assets, images, fonts, pdf, css, js)
+            if (IsPhysicalFile(wwwroot, rawPath, out string physicalPath))
+            {
+                context.Response.ContentType = GetContentType(physicalPath);
+                context.Response.StatusCode = StatusCodes.Status200OK;
+                await context.Response.SendFileAsync(physicalPath);
+                return;
             }
 
             // 0. Check Legacy 301 Redirects
@@ -162,16 +232,25 @@ namespace AuroPumps.Server.Middleware
                 }
             }
 
-            // 4. Dynamic Application Detail Route: /industrial-pump-applications/:categoryId
+            // 4. Dynamic Application Detail Route: /industrial-pump-applications/:categorySlugOrId
             if (cleanPath.StartsWith("/industrial-pump-applications/", StringComparison.OrdinalIgnoreCase))
             {
                 var segments = cleanPath.Split('/', StringSplitOptions.RemoveEmptyEntries);
-                if (segments.Length >= 2 && int.TryParse(segments[1], out int appId))
+                if (segments.Length >= 2)
                 {
+                    var appSlugOrId = segments[segments.Length - 1].ToLowerInvariant();
                     using var scope = context.RequestServices.CreateScope();
                     var db = scope.ServiceProvider.GetRequiredService<AppDbContext>();
 
-                    var app = db.Application.FirstOrDefault(a => a.id == appId && a.Visible == true);
+                    var apps = db.Application.Where(a => a.Visible == true).ToList();
+                    var app = apps.FirstOrDefault(a =>
+                    {
+                        if (a.id.ToString() == appSlugOrId) return true;
+
+                        var slug = Regex.Replace((a.title ?? "").Replace("&", "").ToLowerInvariant(), @"[^a-z0-9]+", "-").Trim('-');
+                        return slug == appSlugOrId;
+                    });
+
                     if (app != null)
                     {
                         var title = $"{app.title} - Industrial Pump Applications - Auro Pumps";
@@ -180,7 +259,7 @@ namespace AuroPumps.Server.Middleware
                             : $"Industrial pump solutions for {app.title} by Auro Pumps.";
                         if (description.Length > 200) description = description.Substring(0, 197) + "...";
 
-                        var canonical = $"https://auropumps.com/industrial-pump-applications/{appId}";
+                        var canonical = $"https://auropumps.com/industrial-pump-applications/{appSlugOrId}";
                         var bodyContent = $"<h2>{WebUtility.HtmlEncode(app.title)}</h2><div>{app.description}</div>";
 
                         var injectedHtml = InjectSeoMetaAndBody(baseShell, title, description, "", canonical, app.title, bodyContent);
@@ -217,18 +296,80 @@ namespace AuroPumps.Server.Middleware
             var ext = Path.GetExtension(path);
             if (string.IsNullOrEmpty(ext)) return false;
 
-            var assetExts = new[] { ".js", ".css", ".png", ".jpg", ".jpeg", ".webp", ".svg", ".ico", ".woff", ".woff2", ".ttf", ".eot", ".pdf", ".mp4", ".json" };
+            var assetExts = new[] {
+                ".js", ".mjs", ".css", ".png", ".jpg", ".jpeg", ".webp", ".gif", ".svg",
+                ".ico", ".bmp", ".tiff", ".woff", ".woff2", ".ttf", ".eot", ".otf",
+                ".pdf", ".mp4", ".webm", ".json", ".txt", ".xml", ".webmanifest", ".map"
+            };
             return assetExts.Contains(ext.ToLowerInvariant());
+        }
+
+        private static bool IsPhysicalFile(string wwwroot, string path, out string fullPath)
+        {
+            fullPath = string.Empty;
+            if (string.IsNullOrWhiteSpace(path) || path == "/" ||
+                path.Equals("/index.html", StringComparison.OrdinalIgnoreCase) ||
+                path.Equals("/spa-shell.html", StringComparison.OrdinalIgnoreCase))
+            {
+                return false;
+            }
+
+            var relativePath = path.TrimStart('/').Replace('/', Path.DirectorySeparatorChar);
+            var candidate = Path.Combine(wwwroot, relativePath);
+
+            if (File.Exists(candidate))
+            {
+                fullPath = candidate;
+                return true;
+            }
+            return false;
+        }
+
+        private static string GetContentType(string filePath)
+        {
+            var ext = Path.GetExtension(filePath).ToLowerInvariant();
+            return ext switch
+            {
+                ".txt" => "text/plain; charset=utf-8",
+                ".xml" => "application/xml; charset=utf-8",
+                ".json" => "application/json; charset=utf-8",
+                ".js" or ".mjs" => "text/javascript; charset=utf-8",
+                ".css" => "text/css; charset=utf-8",
+                ".html" => "text/html; charset=utf-8",
+                ".png" => "image/png",
+                ".jpg" or ".jpeg" => "image/jpeg",
+                ".gif" => "image/gif",
+                ".webp" => "image/webp",
+                ".svg" => "image/svg+xml",
+                ".ico" => "image/x-icon",
+                ".pdf" => "application/pdf",
+                ".woff" => "font/woff",
+                ".woff2" => "font/woff2",
+                ".ttf" => "font/ttf",
+                ".eot" => "application/vnd.ms-fontobject",
+                _ => "application/octet-stream"
+            };
         }
 
         private static string CleanUpTitles(string html)
         {
-            var matches = Regex.Matches(html, @"<title[^>]*>([\s\S]*?)</title>", RegexOptions.IgnoreCase);
-            if (matches.Count > 1)
+            if (string.IsNullOrWhiteSpace(html)) return html;
+
+            var titleMatches = Regex.Matches(html, @"<title[^>]*>([\s\S]*?)</title>", RegexOptions.IgnoreCase);
+            if (titleMatches.Count > 1)
             {
-                var firstTitle = matches[0].Value;
+                string chosenTitle = titleMatches[0].Value;
+                for (int i = titleMatches.Count - 1; i >= 0; i--)
+                {
+                    if (!string.IsNullOrWhiteSpace(titleMatches[i].Groups[1].Value))
+                    {
+                        chosenTitle = titleMatches[i].Value;
+                        break;
+                    }
+                }
+
                 html = Regex.Replace(html, @"<title[^>]*>[\s\S]*?</title>", "", RegexOptions.IgnoreCase);
-                html = html.Replace("<head>", $"<head>{firstTitle}", StringComparison.OrdinalIgnoreCase);
+                html = Regex.Replace(html, @"(<head[^>]*>)", $"$1\n    {chosenTitle}", RegexOptions.IgnoreCase);
             }
             return html;
         }
@@ -337,7 +478,9 @@ namespace AuroPumps.Server.Middleware
 
         private static string InjectSeoMetaAndBody(string shell, string title, string description, string keywords, string canonical, string heading, string bodyHtml)
         {
-            // Remove existing titles
+            if (string.IsNullOrWhiteSpace(shell)) return shell;
+
+            // Remove all existing title tags
             shell = Regex.Replace(shell, @"<title[^>]*>[\s\S]*?</title>", "", RegexOptions.IgnoreCase);
 
             var metaBuilder = new StringBuilder();
@@ -345,8 +488,10 @@ namespace AuroPumps.Server.Middleware
 
             if (!string.IsNullOrWhiteSpace(description))
             {
-                // Remove any existing description
                 shell = Regex.Replace(shell, @"<meta\s+name=[""]description[""][\s\S]*?>", "", RegexOptions.IgnoreCase);
+                shell = Regex.Replace(shell, @"<meta\s+property=[""]og:description[""][\s\S]*?>", "", RegexOptions.IgnoreCase);
+                shell = Regex.Replace(shell, @"<meta\s+name=[""]twitter:description[""][\s\S]*?>", "", RegexOptions.IgnoreCase);
+
                 metaBuilder.AppendLine($"<meta name=\"description\" content=\"{WebUtility.HtmlEncode(description)}\" />");
                 metaBuilder.AppendLine($"<meta property=\"og:description\" content=\"{WebUtility.HtmlEncode(description)}\" />");
                 metaBuilder.AppendLine($"<meta name=\"twitter:description\" content=\"{WebUtility.HtmlEncode(description)}\" />");
@@ -359,13 +504,19 @@ namespace AuroPumps.Server.Middleware
             if (!string.IsNullOrWhiteSpace(canonical))
             {
                 shell = Regex.Replace(shell, @"<link\s+rel=[""]canonical[""][\s\S]*?>", "", RegexOptions.IgnoreCase);
+                shell = Regex.Replace(shell, @"<meta\s+property=[""]og:url[""][\s\S]*?>", "", RegexOptions.IgnoreCase);
+
                 metaBuilder.AppendLine($"<link rel=\"canonical\" href=\"{WebUtility.HtmlEncode(canonical)}\" />");
                 metaBuilder.AppendLine($"<meta property=\"og:url\" content=\"{WebUtility.HtmlEncode(canonical)}\" />");
             }
+
+            shell = Regex.Replace(shell, @"<meta\s+property=[""]og:title[""][\s\S]*?>", "", RegexOptions.IgnoreCase);
+            shell = Regex.Replace(shell, @"<meta\s+name=[""]twitter:title[""][\s\S]*?>", "", RegexOptions.IgnoreCase);
+
             metaBuilder.AppendLine($"<meta property=\"og:title\" content=\"{WebUtility.HtmlEncode(title)}\" />");
             metaBuilder.AppendLine($"<meta name=\"twitter:title\" content=\"{WebUtility.HtmlEncode(title)}\" />");
 
-            shell = shell.Replace("<head>", $"<head>{metaBuilder}", StringComparison.OrdinalIgnoreCase);
+            shell = Regex.Replace(shell, @"(<head[^>]*>)", $"$1\n{metaBuilder}", RegexOptions.IgnoreCase);
 
             if (!string.IsNullOrWhiteSpace(heading) || !string.IsNullOrWhiteSpace(bodyHtml))
             {

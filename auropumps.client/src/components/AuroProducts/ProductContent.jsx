@@ -1,11 +1,47 @@
-import { useState } from "react";
 import { IMAGE_BASE_URL } from "../../poweradmin/api/axios";
 import { FiDownload } from "react-icons/fi";
 import api from "../../poweradmin/api/axios";
 import { toast } from "react-hot-toast";
-import { Helmet } from "react-helmet-async";
 import { IoArrowBack } from "react-icons/io5";
 import { Link } from "react-router-dom";
+import { useState, useEffect } from "react";
+
+
+const extractMetaContent = (html, name) => {
+    if (!html) return "";
+
+    const regex = new RegExp(
+        `<meta\\s+name=["']${name}["']\\s+content=["']([^"']*)["']`,
+        "i"
+    );
+
+    return html.match(regex)?.[1] || "";
+};
+
+const extractTitle = (html) => {
+    if (!html) return "";
+
+    return html.match(
+        /<title[^>]*>([\s\S]*?)<\/title>/i
+    )?.[1]?.trim() || "";
+};
+const extractCanonical = (html) => {
+    if (!html) return "";
+
+    return html.match(
+        /<link\s+rel=["']canonical["']\s+href=["']([^"']+)["']/i
+    )?.[1]?.trim() || "";
+};
+//const metaHtml = product.meta || "";
+
+const upsertHeadTag = (selector, tagName, attrs) => {
+    let el = document.head.querySelector(selector);
+    if (!el) {
+        el = document.createElement(tagName);
+        document.head.appendChild(el);
+    }
+    Object.entries(attrs).forEach(([key, value]) => el.setAttribute(key, value));
+};
 function ProductContent({ product, categoryTitle }) {
 
    
@@ -16,6 +52,34 @@ function ProductContent({ product, categoryTitle }) {
         phone: "",
         message: "",
     });
+
+    useEffect(() => {
+        if (!product?.meta) return;
+
+        const metaHtml = product.meta;
+        const seoTitle = extractTitle(metaHtml);
+        const seoDescription = extractMetaContent(metaHtml, "description");
+        const seoKeywords = extractMetaContent(metaHtml, "keywords");
+        const canonicalUrl = extractCanonical(metaHtml);
+
+        if (seoTitle) {
+            document.title = seoTitle;
+            upsertHeadTag('meta[property="og:title"]', "meta", { property: "og:title", content: seoTitle });
+            upsertHeadTag('meta[name="twitter:title"]', "meta", { name: "twitter:title", content: seoTitle });
+        }
+        if (seoDescription) {
+            upsertHeadTag('meta[name="description"]', "meta", { name: "description", content: seoDescription });
+            upsertHeadTag('meta[property="og:description"]', "meta", { property: "og:description", content: seoDescription });
+            upsertHeadTag('meta[name="twitter:description"]', "meta", { name: "twitter:description", content: seoDescription });
+        }
+        if (seoKeywords) {
+            upsertHeadTag('meta[name="keywords"]', "meta", { name: "keywords", content: seoKeywords });
+        }
+        if (canonicalUrl) {
+            upsertHeadTag('link[rel="canonical"]', "link", { rel: "canonical", href: canonicalUrl });
+            upsertHeadTag('meta[property="og:url"]', "meta", { property: "og:url", content: canonicalUrl });
+        }
+    }, [product]);
 
     if (!product) return null;
 
@@ -41,37 +105,8 @@ function ProductContent({ product, categoryTitle }) {
             [name]: value,
         }));
     };
- const extractMetaContent = (html, name) => {
-    if (!html) return "";
-
-    const regex = new RegExp(
-        `<meta\\s+name=["']${name}["']\\s+content=["']([^"']*)["']`,
-        "i"
-    );
-
-    return html.match(regex)?.[1] || "";
-};
-
-const extractTitle = (html) => {
-    if (!html) return "";
-
-    return html.match(
-        /<title[^>]*>([\s\S]*?)<\/title>/i
-    )?.[1]?.trim() || "";
-    };
-    const extractCanonical = (html) => {
-        if (!html) return "";
-
-        return html.match(
-            /<link\s+rel=["']canonical["']\s+href=["']([^"']+)["']/i
-        )?.[1]?.trim() || "";
-    };
-    const metaHtml = product.meta || "";
-
-    const seoTitle = extractTitle(metaHtml);
-    const seoDescription = extractMetaContent(metaHtml, "description");
-    const seoKeywords = extractMetaContent(metaHtml, "keywords");
-    const canonicalUrl = extractCanonical(metaHtml);
+ 
+    
     //const handleDownloadClick = () => {
     //    if (product.isFeatured) {
     //        setIsPdfModalOpen(true); // form open
@@ -115,30 +150,8 @@ const extractTitle = (html) => {
 
     return (
         <>
-            <Helmet>
-                {seoTitle && <title>{seoTitle}</title>}
-
-                {seoDescription && (
-                    <meta
-                        name="description"
-                        content={seoDescription}
-                    />
-                )}
-
-                {seoKeywords && (
-                    <meta
-                        name="keywords"
-                        content={seoKeywords}
-                    />
-                )}
-                {canonicalUrl && (
-                    <link
-                        rel="canonical"
-                        href={canonicalUrl}
-                    />
-                )}
-            </Helmet>
-
+            
+                
             <div className="flex justify-end mb-5">
                 <Link
                     to="/metal-pumps-manufacturer-india"
@@ -151,7 +164,7 @@ const extractTitle = (html) => {
             </div>
             <div className="rounded-2xl border border-primary/10 bg-gradient-to-b from-white to-[#f7f6ff] p-4 shadow-[0_14px_34px_rgba(45,37,142,0.09)] lg:p-6">
                 <div className="mb-5 flex flex-wrap items-start justify-between gap-3 border-b border-primary/10 pb-4">
-
+                    <h1 className="sr-only">{product.name} Product </h1>
                     <h2 className="mt-1 text-xl font-bold text-slate-900 md:text-2xl">
                         {product.name}
                     </h2>
@@ -426,3 +439,4 @@ const extractTitle = (html) => {
 }
 
 export default ProductContent;
+
