@@ -199,7 +199,7 @@ const Footer = () => {
                 <p className="mt-2 md:mt-0">
                     Website Design by{" "}
                     <a
-                        href="https://www.dotsandcoms.in/"
+                        href="https://www.dotsandcoms.in/auro-pumps-case-study-traditional-to-digital-lead-engine"
                         target="_blank"
                         rel="noopener noreferrer"
                         className="hover:text-white transition"
