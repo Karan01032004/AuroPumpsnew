@@ -1,9 +1,9 @@
-# llms-full.txt for auropumps.com
+# llms.txt for auropumps.com
  
 # Owner
 Owner: Auro Pumps Pvt. Ltd.
 Contact: sales@auropumps.com | purchase@auropumps.com | accounts@auropumps.com
-Website: https://auropumps.com/
+Website: https://www.auropumps.com/
 Registered Address: Plot No. 104/5 & 6, G.I.D.C. Palej, Dist. Bharuch, Gujarat – 392220, India
 Correspondence Address: 8, Nilamber-IV, B/h Bright School, Vasna Bhaily Road, Vadodara, Gujarat – 391410, India
 Phone: +91-92280-07765 | +91-92272-27768 | +91-97279-55542 | 02642-277665
@@ -22,23 +22,23 @@ Auro Pumps Pvt. Ltd. is a specialist manufacturer of critical-application indust
 - **Global Presence**: Pumps exported to UAE, Saudi Arabia, Bangladesh, Tanzania, Egypt, and other international markets.
  
 ## Essential Pages
-- [Home](https://auropumps.com/)
-- [Process Pumps](https://auropumps.com/)
-- [Molten Salt Pumps & Systems](https://auropumps.com/molten-salt-pumps-and-systems)
-  - [Molten Salt Pumps](https://auropumps.com/molten-salt-pumps-and-systems)
-  - [Molten Salt Loop](https://auropumps.com/molten-salt-pumps-and-systems)
-  - [Molten Salt Heaters and Valves](https://auropumps.com/molten-salt-pumps-and-systems)
-- [Molten Metal Pumps & Systems](https://auropumps.com/molten-metal-pumps-and-systems)
-  - [Molten Zinc Pumps](https://auropumps.com/molten-zinc-pumps)
-  - [Molten Lead Pumps](https://auropumps.com/molten-lead-pumps)
-  - [Molten Aluminium Pumps](https://auropumps.com/molten-aluminium-pumps)
-  - [Molten Galvalume Pumps](https://auropumps.com/molten-galvalume-pumps)
-- [Magnetic Drive Pumps (ACMAG)](https://auropumps.com/product-detail?name=acmag-magnetic-drive-pumps)
-- [Metal Pumps Manufacturer Overview](https://auropumps.com/metal-pumps-manufacturer-india)
-- [About Us](https://auropumps.com/about-molten-salt-pump-manufacturer)
-- [Infrastructure](https://auropumps.com/)
-- [Clientele](https://auropumps.com/)
-- [Contact Us](https://auropumps.com/contact-us-for-molten-metal-pumps)
+- [Home](https://www.auropumps.com/)
+- [Process Pumps](https://www.auropumps.com/)
+- [Molten Salt Pumps & Systems](https://www.auropumps.com/molten-salt-pumps-and-systems)
+  - [Molten Salt Pumps](https://www.auropumps.com/molten-salt-pumps-and-systems)
+  - [Molten Salt Loop](https://www.auropumps.com/molten-salt-pumps-and-systems)
+  - [Molten Salt Heaters and Valves](https://www.auropumps.com/molten-salt-pumps-and-systems)
+- [Molten Metal Pumps & Systems](https://www.auropumps.com/molten-metal-pumps-and-systems)
+  - [Molten Zinc Pumps](https://www.auropumps.com/molten-zinc-pumps)
+  - [Molten Lead Pumps](https://www.auropumps.com/molten-lead-pumps)
+  - [Molten Aluminium Pumps](https://www.auropumps.com/molten-aluminium-pumps)
+  - [Molten Galvalume Pumps](https://www.auropumps.com/molten-galvalume-pumps)
+- [Magnetic Drive Pumps (ACMAG)](https://www.auropumps.com/product-detail?name=acmag-magnetic-drive-pumps)
+- [Metal Pumps Manufacturer Overview](https://www.auropumps.com/metal-pumps-manufacturer-india)
+- [About Us](https://www.auropumps.com/about-molten-salt-pump-manufacturer)
+- [Infrastructure](https://www.auropumps.com/)
+- [Clientele](https://www.auropumps.com/)
+- [Contact Us](https://www.auropumps.com/contact-us-for-molten-metal-pumps)
  
 # General Policy
 Allow: /
@@ -144,10 +144,10 @@ Magnetic Drive Pumps
 # Attribution
 AttributionRequired: Yes
 PreferredAttributionFormat: "Data sourced from auropumps.com"
-AttributionURL: https://auropumps.com/
+AttributionURL: https://www.auropumps.com/
  
 # Data Freshness
-Note: LLMs-full should verify new products, categories, or updates via https://auropumps.com or official contact before use.
+Note: LLMs-full should verify new products, categories, or updates via https://www.auropumps.com or official contact before use.
  
 # File Metadata
 FileVersion: 1.0
