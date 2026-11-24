@@ -289,9 +289,13 @@ const Header = () => {
                                                 <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-12 gap-10 text-xs">
                                                     <div className="col-span-2 md:col-span-4 lg:col-span-4 space-y-6">
                                                         <div>
-                                                            <h4 className="mb-3 border-b border-white/20 pb-2 font-semibold text-sm">
+                                                            <NavLink
+                                                                to={`/products/${verticalPumpsCategories[0]?.slug || "vertical-pumps"}`}
+                                                                onClick={() => setActiveDesktopMenu(null)}
+                                                                className="block mb-3 border-b border-white/20 pb-2 font-semibold text-sm hover:text-[#f89b32] transition"
+                                                            >
                                                                 VERTICAL PUMPS
-                                                            </h4>
+                                                            </NavLink>
                                                             {verticalPumps.map((product) => (
                                                                 <NavLink
                                                                     key={product.id}
@@ -306,9 +310,13 @@ const Header = () => {
 
                                                     </div>
                                                     <div className="col-span-2 md:col-span-4 lg:col-span-4">
-                                                        <h4 className="mb-4 border-b border-white/20 pb-2 font-semibold text-sm">
+                                                        <NavLink
+                                                            to={`/products/${pumpCategories[0]?.slug || "horizontal-pumps"}`}
+                                                            onClick={() => setActiveDesktopMenu(null)}
+                                                            className="block mb-4 border-b border-white/20 pb-2 font-semibold text-sm hover:text-[#f89b32] transition"
+                                                        >
                                                             HORIZONTAL PUMPS
-                                                        </h4>
+                                                        </NavLink>
 
                                                         {/*<div className="grid grid-cols-1 sm:grid-cols-1 gap-x-8 gap-y-2 text-xs">*/}
                                                         {/*    {pumpColumns.map((column) => (*/}
@@ -350,9 +358,13 @@ const Header = () => {
                                                   
                                                     <div className="col-span-2 md:col-span-4 lg:col-span-4 space-y-6">
                                                         <div>
-                                                            <h4 className="mb-3 border-b border-white/20 pb-2 font-semibold text-sm">
+                                                            <NavLink
+                                                                to={`/products/${moltenMetalSystemCategories[0]?.slug || "molten-metal-equipments"}`}
+                                                                onClick={() => setActiveDesktopMenu(null)}
+                                                                className="block mb-3 border-b border-white/20 pb-2 font-semibold text-sm hover:text-[#f89b32] transition"
+                                                            >
                                                                 MOLTEN METAL EQUIPMENTS
-                                                            </h4>
+                                                            </NavLink>
                                                             {moltenMetalSystemProducts.map((product) => (
                                                                 <NavLink
                                                                     key={product.id}
@@ -365,9 +377,13 @@ const Header = () => {
                                                             ))}
                                                         </div>
                                                         <div>
-                                                            <h4 className="mb-3 border-b border-white/20 pb-2 font-semibold text-sm">
+                                                            <NavLink
+                                                                to={`/products/${moltenSulphurCategories[0]?.slug || "molten-salt-equipments"}`}
+                                                                onClick={() => setActiveDesktopMenu(null)}
+                                                                className="block mb-3 border-b border-white/20 pb-2 font-semibold text-sm hover:text-[#f89b32] transition"
+                                                            >
                                                                 MOLTEN SALT EQUIPMENTS
-                                                            </h4>
+                                                            </NavLink>
                                                             {moltenSaltSystemProducts.map((product) => (
                                                                 <NavLink
                                                                     key={product.id}
@@ -552,9 +568,13 @@ const Header = () => {
 
                                                 {categories.map((category) => (
                                                     <div key={category.id}>
-                                                        <h4 className="font-bold mb-4 border-b border-white/20 pb-2">
+                                                        <NavLink
+                                                            to={`/products/${category.slug}`}
+                                                            onClick={() => setOpen(false)}
+                                                            className="font-bold mb-4 border-b border-white/20 pb-2 block hover:text-[#f89b32] transition"
+                                                        >
                                                             {category.title}
-                                                        </h4>
+                                                        </NavLink>
 
                                                         <ul className="space-y-2 text-white/80">
                                                             {(productsMap[category.id] || []).map((product) => (

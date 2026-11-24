@@ -70,5 +70,41 @@
     "canonical": "https://auropumps.com/thank-you",
     "prerender": true,
     "sitemap": false
+  },
+  {
+    "path": "/products/vertical-pumps",
+    "title": "Vertical Submerged & Cantilever Pumps - Auro Pumps",
+    "description": "Auro Pumps engineers heavy-duty vertical pumps designed for reliable liquid transfer from deep sumps, tanks, and pits without priming issues.",
+    "keywords": "vertical submerged pumps, cantilever pumps, molten metal vertical pumps, steam jacketed vertical pumps",
+    "canonical": "https://auropumps.com/products/vertical-pumps",
+    "prerender": false,
+    "sitemap": true
+  },
+  {
+    "path": "/products/horizontal-pumps",
+    "title": "Horizontal Process & Chemical Pumps - Auro Pumps",
+    "description": "Auro Pumps manufactures a versatile portfolio of horizontal centrifugal pumps engineered for continuous, heavy-duty fluid handling across chemical, pharmaceutical, and industrial process plants.",
+    "keywords": "horizontal process pumps, chemical pumps, end suction centrifugal pumps, steam jacketed pumps",
+    "canonical": "https://auropumps.com/products/horizontal-pumps",
+    "prerender": false,
+    "sitemap": true
+  },
+  {
+    "path": "/products/molten-metal-equipments",
+    "title": "Molten Metal Handling Equipment - Auro Pumps",
+    "description": "Auro Pumps engineers specialized high-temperature equipment built to withstand the extreme thermal shock, corrosion, and erosion of metallurgical operations.",
+    "keywords": "molten metal equipment, molten zinc pumps, galvalume pumps, molten lead pumps",
+    "canonical": "https://auropumps.com/products/molten-metal-equipments",
+    "prerender": false,
+    "sitemap": true
+  },
+  {
+    "path": "/products/molten-salt-equipments",
+    "title": "Molten Salt Pumps & Thermal Storage Systems - Auro Pumps",
+    "description": "Auro Pumps engineers ultra-high-temperature vertical pumps and integrated thermal systems designed to safely circulate nitrate and chloride molten salts in extreme thermal environments.",
+    "keywords": "molten salt pumps, thermal storage systems, cantilever molten salt pumps",
+    "canonical": "https://auropumps.com/products/molten-salt-equipments",
+    "prerender": false,
+    "sitemap": true
   }
 ]

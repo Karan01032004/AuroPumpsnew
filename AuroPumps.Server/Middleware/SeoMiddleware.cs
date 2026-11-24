@@ -272,6 +272,47 @@ namespace AuroPumps.Server.Middleware
                 }
             }
 
+            // 4.1 Dynamic Product Category Route: /products/:categorySlug
+            if (cleanPath.StartsWith("/products/", StringComparison.OrdinalIgnoreCase))
+            {
+                var segments = cleanPath.Split('/', StringSplitOptions.RemoveEmptyEntries);
+                if (segments.Length >= 2)
+                {
+                    var catSlug = segments[1].ToLowerInvariant();
+                    string title = "Product Category - Auro Pumps";
+                    string description = "Auro Pumps manufactures heavy-duty process pumps, molten salt and molten metal pumps.";
+
+                    if (catSlug.Contains("vertical"))
+                    {
+                        title = "Vertical Submerged & Cantilever Pumps | Auro Pumps";
+                        description = "Auro Pumps engineers heavy-duty vertical pumps designed for reliable liquid transfer from deep sumps, tanks, and pits without priming issues. Available in extended-shaft submerged (ACCV), bearing-free cantilever (ACCV-C), steam-jacketed (ACCV-J), non-metallic (APPV), sealless magnetic drive (ACVMAG), and specialized molten metal configurations.";
+                    }
+                    else if (catSlug.Contains("horizontal"))
+                    {
+                        title = "Horizontal Process & Chemical Pumps | Auro Pumps";
+                        description = "Auro Pumps manufactures a versatile portfolio of horizontal centrifugal pumps engineered for continuous, heavy-duty fluid handling across chemical, pharmaceutical, and industrial process plants.";
+                    }
+                    else if (catSlug.Contains("metal"))
+                    {
+                        title = "Molten Metal Handling Equipment | Auro Pumps";
+                        description = "Auro Pumps engineers specialized high-temperature equipment built to withstand the extreme thermal shock, corrosion, and erosion of metallurgical operations.";
+                    }
+                    else if (catSlug.Contains("salt"))
+                    {
+                        title = "Molten Salt Pumps & Thermal Storage Systems | Auro Pumps";
+                        description = "Auro Pumps engineers ultra-high-temperature vertical pumps and integrated thermal systems designed to safely circulate nitrate and chloride molten salts in extreme thermal environments.";
+                    }
+
+                    var canonical = $"https://auropumps.com{cleanPath}";
+                    var injectedHtml = InjectSeoMetaAndBody(baseShell, title, description, "", canonical, title, $"<h2>{WebUtility.HtmlEncode(title)}</h2><p>{WebUtility.HtmlEncode(description)}</p>");
+
+                    context.Response.ContentType = "text/html; charset=utf-8";
+                    context.Response.StatusCode = StatusCodes.Status200OK;
+                    await context.Response.WriteAsync(injectedHtml);
+                    return;
+                }
+            }
+
             // 5. Admin / Auth SPA Fallback Routes
             if (cleanPath.Equals("/signin", StringComparison.OrdinalIgnoreCase) ||
                 cleanPath.Equals("/forgot-password", StringComparison.OrdinalIgnoreCase) ||
