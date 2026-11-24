@@ -43,7 +43,7 @@ import AddProductCategory from "./poweradmin/pages/ProductManagement/AddCategory
 import ViewProductCategory from "./poweradmin/pages/ProductManagement/ViewCategory";
 import ClientsPage from "./pages/ClientsPage/ClientsPage";
 import PdfInquiryDetails from "./poweradmin/pages/InquiryManagement/PdfInquiryDetails";
-
+import ProductCategory from "./pages/Products/ProductCategory/ProductCategory";
 function App() {
     const [showLoader, setShowLoader] = useState(true);
     const [loaderExit, setLoaderExit] = useState(false);
@@ -170,6 +170,12 @@ function App() {
                         <Route path="metal-pumps-manufacturer-india" element={<Products />} />
                         {/*<Route path="products/:id" element={<Products />} />*/}
                         {/*<Route path="/products/:categorySlug/:productSlug" element={<Products />} />*/}
+
+                        <Route
+                            path="/products/:categorySlug"
+                            element={<ProductCategory />}
+                        />
+
                         <Route path="/metal-pumps-manufacturer-india/:productSlug" element={<Products />} />
                         <Route path="/metal-pumps-manufacturer-india/:categorySlug/:productSlug" element={<Products />} />
                         <Route

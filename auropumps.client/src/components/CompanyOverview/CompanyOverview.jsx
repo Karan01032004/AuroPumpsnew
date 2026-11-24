@@ -32,7 +32,7 @@ const CompanyOverview = () => {
                             <div className="absolute bottom-5 left-6 right-2 flex justify-end items-end gap-4 text-white">
 
                                 <h1 className="text-5xl md:text-6xl font-bold leading-none">
-                                    41+
+                                    42+
                                 </h1>
 
                                 <p className="text-sm md:text-lg leading-tight max-w-[240px] mb-2">
