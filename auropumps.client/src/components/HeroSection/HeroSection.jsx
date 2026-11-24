@@ -56,7 +56,7 @@ const HeroSection = () => {
 
                                     <ThemeButton
                                         text="DISCOVER SOLUTIONS"
-                                        link="about-molten-salt-pump-manufacturer"
+                                        link="metal-pumps-manufacturer-india"
                                         className="uppercase text-sm font-medium mx-10 lg:mx-0" 
                                     />
 

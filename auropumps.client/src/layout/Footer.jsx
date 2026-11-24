@@ -31,13 +31,13 @@ const Footer = () => {
                     <p>
                         {/* Desktop */}
                         <span className="hidden lg:inline">
-                            WORKS: 104/5/6, G.I.D.C., Palej - 32220, Bharuch, Gujarat, India
+                            WORKS: 104/5/6, G.I.D.C., Palej - 392220, Bharuch, Gujarat, India
                         </span>
 
                         {/* Mobile */}
                         <span className="lg:hidden font-semibold">WORKS:</span>
                         <span className="lg:hidden block ">
-                            104/5/6, G.I.D.C., Palej - 32220<br />
+                            104/5/6, G.I.D.C., Palej - 392220<br />
                             Bharuch, Gujarat, India
                         </span>
                     </p>

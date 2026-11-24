@@ -3,7 +3,7 @@
 # Owner
 Owner: Auro Pumps Pvt. Ltd.
 Contact: sales@auropumps.com | purchase@auropumps.com | accounts@auropumps.com
-Website: https://www.auropumps.com/
+Website: https://auropumps.com/
 Registered Address: Plot No. 104/5 & 6, G.I.D.C. Palej, Dist. Bharuch, Gujarat – 392220, India
 Correspondence Address: 8, Nilamber-IV, B/h Bright School, Vasna Bhaily Road, Vadodara, Gujarat – 391410, India
 Phone: +91-92280-07765 | +91-92272-27768 | +91-97279-55542 | 02642-277665
@@ -15,43 +15,67 @@ Auro Pumps Pvt. Ltd. is a specialist manufacturer of critical-application indust
 - **Molten Metal Pumps**: In-house designed and manufactured pumps for molten Zinc, Lead, Aluminium, Galvalume, Tin, and Magnesium handling.
 - **Molten Salt Pumps & Systems**: Proprietary, specially engineered pumps and complete loop/heater/valve systems for molten salt up to 800°C, serving chemical, solar, and nuclear sectors.
 - **Slurry & Cantilever Pumps**: Vertical heavy slurry pumps engineered for the most abrasive, erosive, and corrosive slurries, including high-concentration and large-particle applications.
-- **Magnetic Drive Pumps**: ACMAG series leak-free, containment-shell-sealed pumps for chemical, molten salt, molten metal, and hot oil transfer.
+- **Magnetic Drive Pumps**: ACMAG & ACVMAG series leak-free, containment-shell-sealed pumps for chemical, molten salt, molten metal, and hot oil transfer.
 - **Non-Metallic & Vertical Submerged Pumps**: APPV series non-metallic vertical PP pumps and ACCV series vertical submerged pumps for corrosive and solvent applications.
-- **Snout Pumps**: Pump-based snout de-drossing (push-pull) systems for Zinc/Galvalume continuous galvanizing lines.
+- **Snout Pumps & Molten Metal Equipment**: Molten lead agitators (AAG), pneumatic dross grabbers (ADG), and pump-based de-drossing systems for Zinc/Galvalume continuous galvanizing lines.
 - **High Temperature & High Pressure Pumps**: Air/water-cooled thermic fluid pumps (up to 410°C) and high-pressure chemical & LPG pumps (up to 300°C).
 - **Global Presence**: Pumps exported to UAE, Saudi Arabia, Bangladesh, Tanzania, Egypt, and other international markets.
  
 ## Essential Pages
-- [Home](https://www.auropumps.com/)
-- [Process Pumps](https://www.auropumps.com/)
-- [Molten Salt Pumps & Systems](https://www.auropumps.com/molten-salt-pumps-and-systems)
-  - [Molten Salt Pumps](https://www.auropumps.com/molten-salt-pumps-and-systems)
-  - [Molten Salt Loop](https://www.auropumps.com/molten-salt-pumps-and-systems)
-  - [Molten Salt Heaters and Valves](https://www.auropumps.com/molten-salt-pumps-and-systems)
-- [Molten Metal Pumps & Systems](https://www.auropumps.com/molten-metal-pumps-and-systems)
-  - [Molten Zinc Pumps](https://www.auropumps.com/molten-zinc-pumps)
-  - [Molten Lead Pumps](https://www.auropumps.com/molten-lead-pumps)
-  - [Molten Aluminium Pumps](https://www.auropumps.com/molten-aluminium-pumps)
-  - [Molten Galvalume Pumps](https://www.auropumps.com/molten-galvalume-pumps)
-- [Magnetic Drive Pumps (ACMAG)](https://www.auropumps.com/product-detail?name=acmag-magnetic-drive-pumps)
-- [Metal Pumps Manufacturer Overview](https://www.auropumps.com/metal-pumps-manufacturer-india)
-- [About Us](https://www.auropumps.com/about-molten-salt-pump-manufacturer)
-- [Infrastructure](https://www.auropumps.com/)
-- [Clientele](https://www.auropumps.com/)
-- [Contact Us](https://www.auropumps.com/contact-us-for-molten-metal-pumps)
+- [Home](https://auropumps.com/)
+- [All Products Overview](https://auropumps.com/metal-pumps-manufacturer-india)
+  - [Vertical Pumps](https://auropumps.com/metal-pumps-manufacturer-india#vertical-pumps)
+    - [ACCV - Extended Shaft Vertical Submerged Pumps](https://auropumps.com/metal-pumps-manufacturer-india/vertical-pumps/accv-extended-shaft-vertical-submerged-pumps)
+    - [ACCV-C - Vertical Submerged Cantilever Pumps](https://auropumps.com/metal-pumps-manufacturer-india/vertical-pumps/accv-c-vertical-submerged-cantilever-pumps)
+    - [ACCV-J - Extended Shaft Vertical Jacketed Pumps](https://auropumps.com/metal-pumps-manufacturer-india/vertical-pumps/accv-j-extended-shaft-vertical-jacketed-pumps)
+    - [APPV - Non Metallic Extended Shaft Vertical Pumps](https://auropumps.com/metal-pumps-manufacturer-india/vertical-pumps/appv-non-metallic-extended-shaft-vertical-pumps)
+    - [AMZ - Molten Zinc and Galvalume Pumps](https://auropumps.com/metal-pumps-manufacturer-india/vertical-pumps/amz-molten-zinc-and-galvalume-pumps)
+    - [AML - Molten Lead & Tin Pumps](https://auropumps.com/metal-pumps-manufacturer-india/vertical-pumps/aml-molten-lead-tin-pumps)
+    - [ACVMAG - Vertical Magnetic Drive Pumps](https://auropumps.com/metal-pumps-manufacturer-india/vertical-pumps/acvmag)
+  - [Horizontal Pumps](https://auropumps.com/metal-pumps-manufacturer-india#horizontal-pumps)
+    - [ACC - End Suction Pumps](https://auropumps.com/metal-pumps-manufacturer-india/horizontal-pumps/acc-end-suction-pumps)
+    - [ACC-J - Jacketed End Suction Pumps](https://auropumps.com/metal-pumps-manufacturer-india/horizontal-pumps/acc-j-jacketed-end-suction-pumps)
+    - [ACTF - Aircooled Thermic Fluid Pumps](https://auropumps.com/metal-pumps-manufacturer-india/horizontal-pumps/actf-aircooled-thermic-fluid-pumps)
+    - [ACCTF - Water Cooled Thermic Fluid Pumps](https://auropumps.com/metal-pumps-manufacturer-india/horizontal-pumps/acctf-water-cooled-thermic-fluid-pumps)
+    - [ASP - Non-Clog Self Priming Pumps](https://auropumps.com/metal-pumps-manufacturer-india/horizontal-pumps/asp-non-clog-self-priming-pumps)
+    - [ACM - Close Coupled Pumps](https://auropumps.com/metal-pumps-manufacturer-india/horizontal-pumps/acm-close-coupled-pumps)
+    - [ACVI - Vertical Inline Pumps](https://auropumps.com/metal-pumps-manufacturer-india/horizontal-pumps/acvi-vertical-inline-pumps)
+    - [ACMAG - Magnetic Drive Pumps](https://auropumps.com/metal-pumps-manufacturer-india/horizontal-pumps/acmag-magnetic-drive-pumps)
+    - [APP - Non Metallic PP Pumps](https://auropumps.com/metal-pumps-manufacturer-india/horizontal-pumps/app-non-metallic-pp-pumps)
+    - [PN - Multistage High Pressure Pumps](https://auropumps.com/metal-pumps-manufacturer-india/horizontal-pumps/pn-multistage-high-pressure-pumps)
+    - [VA - Multistage Self Priming Pumps](https://auropumps.com/metal-pumps-manufacturer-india/horizontal-pumps/va-multistage-self-priming-pumps)
+  - [Molten Metal Equipments](https://auropumps.com/metal-pumps-manufacturer-india#molten-metal-equipments)
+    - [AAG - Molten Lead Agitators](https://auropumps.com/metal-pumps-manufacturer-india/molten-metal-equipments/aag-molten-lead-agitators)
+    - [ADG - Pneumatic Dross Grabber](https://auropumps.com/metal-pumps-manufacturer-india/molten-metal-equipments/adg-pneumatic-dross-grabber)
+    - [AMZ - Molten Zinc and Galvalume Pumps](https://auropumps.com/metal-pumps-manufacturer-india/molten-metal-equipments/amz-molten-zinc-and-galvalume-pumps)
+    - [AML - Molten Lead & Tin Pumps](https://auropumps.com/metal-pumps-manufacturer-india/molten-metal-equipments/aml-molten-lead-tin-pumps)
+  - [Molten Salt Equipments](https://auropumps.com/metal-pumps-manufacturer-india#molten-salt-equipments)
+    - [ACCV - Molten Salt Pumps](https://auropumps.com/metal-pumps-manufacturer-india/molten-salt-equipments/accv-molten-salt-pumps)
+    - [MSL - Molten Salt Systems](https://auropumps.com/metal-pumps-manufacturer-india/molten-salt-equipments/msl-molten-salt-systems)
+- [Industrial Pump Applications](https://auropumps.com/industrial-pump-applications)
+  - [Caustic Soda](https://auropumps.com/industrial-pump-applications#caustic-soda)
+  - [Solvents](https://auropumps.com/industrial-pump-applications#solvents)
+  - [Molten Sulfur](https://auropumps.com/industrial-pump-applications/molten-sulfur)
+  - [Molten Zinc & Galvalume](https://auropumps.com/industrial-pump-applications/molten-zinc-galvalum)
+  - [Molten Lead & Tin](https://auropumps.com/industrial-pump-applications/molten-lead-tin)
+  - [Molten Salts](https://auropumps.com/industrial-pump-applications/molten-salts)
+  - [Sulfuric Acid & Oleum](https://auropumps.com/industrial-pump-applications/sulfuric-acid-oleum)
+- [About Us](https://auropumps.com/about-molten-salt-pump-manufacturer)
+- [Clientele](https://auropumps.com/clients)
+- [Contact Us](https://auropumps.com/contact-us-for-molten-metal-pumps)
  
 # General Policy
 Allow: /
-Allow: /molten-salt-pumps-and-systems
-Allow: /molten-metal-pumps-and-systems
-Allow: /molten-zinc-pumps
-Allow: /molten-lead-pumps
-Allow: /molten-aluminium-pumps
-Allow: /molten-galvalume-pumps
 Allow: /metal-pumps-manufacturer-india
+Allow: /metal-pumps-manufacturer-india/vertical-pumps/
+Allow: /metal-pumps-manufacturer-india/horizontal-pumps/
+Allow: /metal-pumps-manufacturer-india/molten-metal-equipments/
+Allow: /metal-pumps-manufacturer-india/molten-salt-equipments/
+Allow: /industrial-pump-applications
+Allow: /industrial-pump-applications/
 Allow: /about-molten-salt-pump-manufacturer
+Allow: /clients
 Allow: /contact-us-for-molten-metal-pumps
-Allow: /product-detail
  
 # Permissions
 AllowLLMUse: Yes
@@ -65,10 +89,10 @@ DisallowUseCases: None
  
 # Content & Compliance Rules
 ContentRules:
-  - All public content from auropumps.com may be used for summarization, awareness, or AI dataset development.
-  - Maintain tone: industrial, technical, professional, and reliability-focused.
-  - Do not alter product specifications, temperature/pressure ratings, company history, or contact details.
-  - Attribute content when referenced externally.
+- All public content from auropumps.com may be used for summarization, awareness, or AI dataset development.
+- Maintain tone: industrial, technical, professional, and reliability-focused.
+- Do not alter product specifications, temperature/pressure ratings, company history, or contact details.
+- Attribute content when referenced externally.
  
 # Localization & Region
 Localization: en-IN
@@ -144,15 +168,15 @@ Magnetic Drive Pumps
 # Attribution
 AttributionRequired: Yes
 PreferredAttributionFormat: "Data sourced from auropumps.com"
-AttributionURL: https://www.auropumps.com/
+AttributionURL: https://auropumps.com/
  
 # Data Freshness
-Note: LLMs-full should verify new products, categories, or updates via https://www.auropumps.com or official contact before use.
+Note: LLMs-full should verify new products, categories, or updates via https://auropumps.com or official contact before use.
  
 # File Metadata
-FileVersion: 1.0
+FileVersion: 1.1
 Maintainer: Web Team
 RobotsDirective: follow, index
  
 # Last Updated
-LastUpdated: 2026-08-11
+LastUpdated: 2026-11-23
