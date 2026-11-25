@@ -55,6 +55,39 @@ const AllProductsCatalog = () => {
                         Explore All Product Categories
                     </h2>
                 </div>
+                <p className="mt-5 lg:mt-6 mx-auto text-slate-600 lg:max-w-6xl">
+                    Auro Pumps has engineered and manufactured specialized pumping systems in technical collaboration with Pompe Vergani SpA (Italy). Built in-house at our Palej facility and 100% hydraulically tested prior to dispatch, our product portfolio covers vertical submerged pumps, horizontal chemical pumps, molten metal equipment, and molten salt systems rated for extreme temperatures up to 900&deg;C.
+                </p>
+
+                <div className="mt-5 mx-auto lg:max-w-6xl text-slate-600">
+
+                    <p className="mb-3">
+                        Our products fall into four groups:
+                    </p>
+
+                    <ul className="list-disc pl-6 space-y-1">
+                        <li>
+                            <strong>Vertical pumps:</strong> submerged and cantilever slurry pumps (ACCV) for pits, sumps and tanks, including heavy and abrasive duties.
+                        </li>
+
+                        <li>
+                            <strong>Horizontal pumps:</strong> thermic fluid (ATCF), magnetic drive (ACMAG), sulphuric acid and caustic soda pumps for process lines.
+                        </li>
+
+                        <li>
+                            <strong>Molten metal equipment:</strong> pumps for zinc, galvanum, lead, aluminium and sulphur, used in galvanizing, battery recycling and metal processing.
+                        </li>
+
+                        <li>
+                            <strong>Molten salt equipment:</strong> pumps, loops, heaters and valves for solar thermal plants and thermal energy storage.
+                        </li>
+                    </ul>
+
+                    <p className="mt-5">
+                        Each pump is built to your conditions. We select the materials, sealing and shaft arrangement based on your fluid, temperature, flow and running hours. Our quality system is certified to ISO 9001:2015, and our pumps carry the CE mark.
+                    </p>
+
+                </div>
 
                 <div className="mt-7 flex flex-wrap items-center justify-center gap-2 sm:gap-3">
                     {/*{allProductsData.map((category) => (*/}

@@ -46,6 +46,10 @@ function AllApplicationsCatalog() {
 
                 </div>
 
+                <p className="mt-5 lg:mt-6 mx-auto text-slate-600 lg:max-w-6xl">
+                    Auro Pumps engineers specialized pumping solutions for extreme temperatures, high viscosity, and aggressively corrosive media. From molten metals and salts to volatile solvents and concentrated acids, select an application category below to explore our recommended pump technologies and industry capabilities.
+                </p>
+
                 {/* Chips */}
 
                 <div className="mt-7 flex flex-wrap items-center justify-center gap-2 sm:gap-3">
@@ -110,6 +114,8 @@ function AllApplicationsCatalog() {
                                         <h4 className="text-center text-[15px] font-semibold leading-snug text-slate-800">
                                             {app.title}
                                         </h4>
+
+                                        <p className="mt-3 text-sm text-slate-600">Safe, leak-free transfer and circulation of sodium hydroxide (NaOH) across chlor-alkali plants, pulp and paper mills, and chemical processing units using corrosion-resistant alloys and precision sealing.</p>
 
                                         <p className="mt-2 text-center text-[11px] font-semibold tracking-[0.12em] text-primary uppercase opacity-0 transition group-hover:opacity-100">
                                             View Details
