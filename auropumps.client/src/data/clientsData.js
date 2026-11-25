@@ -33,8 +33,8 @@ const clientsData = [
     },
     {
         id: 7,
-        name: "L&T",
-        logo: "assets/images/logos/larsen-and-toubro-engineering-client-logo.jpg",
+        name: "Hindustan Zinc Limited",
+        logo: "assets/images/logos/hindustan-zinc-limited-client-logo.jpg",
     },
 
     {
@@ -65,23 +65,23 @@ const clientsData = [
     {
         id: 13,
         name: "BARC",
-        logo: "assets/images/logos/torrent-power-india-corporate-client-logo.jpg",
+        logo: "assets/images/logos/barc-bhabha-atomic-research-centre-client-logo.jpg",
     },
 
     {
         id: 14,
         name: "DAE",
-        logo: "assets/images/logos/bhabha-atomic-research-centre-client-logo.jpg",
+        logo: "assets/images/logos/department-of-atomic-energy-india-logo.jpg",
     },
     {
         id: 15,
         name: "ISRO",
-        logo: "assets/images/logos/department-of-atomic-energy-india-logo.jpg",
+        logo: "assets/images/logos/indian-space-research-organisation-isro-client-logo.jpg",
     },
     {
         id: 16,
         name: "NFC",
-        logo: "assets/images/logos/ntpc-national-thermal-power-client-logo.jpg",
+        logo: "assets/images/logos/nuclear-fuel-complex-nfc-client-logo.jpg",
     },
     {
         id: 17,
@@ -106,7 +106,7 @@ const clientsData = [
     },
     {
         id: 21,
-        name: "GNFC",
+        name: "GSFC",
         logo: "assets/images/logos/gujarat-state-fertilizers-and-chemicals-client-logo.jpg",
     },
     {

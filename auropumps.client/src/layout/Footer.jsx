@@ -190,6 +190,12 @@ const Footer = () => {
                 <p>
                     ©{new Date().getFullYear()} Auro Pumps, All rights reserved |{" "}
                     <NavLink
+                        to="/faq"
+                        className="hover:text-white transition"
+                    >
+                        FAQs
+                    </NavLink> {" "} |{" "}
+                    <NavLink
                         to="/sitemap"
                         className="hover:text-white transition"
                     >

@@ -1,6 +1,22 @@
+import { useEffect } from "react";
 import BannerSection from "../../components/BannerSection/BannerSection";
 import { Link } from "react-router-dom";
+import { applySeo } from "../../utils/seoHead";
+
+const ERROR_SEO = {
+    title: "Page Not Found (404) | Auro Pumps",
+    description:
+        "The page you are looking for may have been moved or no longer exists. Explore Auro Pumps' industrial pumps, molten metal pumps, molten salt systems, and applications.",
+    keywords:
+        "Auro Pumps 404, page not found, industrial pumps, molten metal pumps, molten salt pumps, Auro Pumps India",
+};
+
 function Error() {
+
+    useEffect(() => {
+        applySeo(ERROR_SEO);
+    }, []);
+
   return (
       <>
           <BannerSection
