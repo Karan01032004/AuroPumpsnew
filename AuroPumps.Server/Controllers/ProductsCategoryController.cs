@@ -25,12 +25,17 @@ namespace Poweradmin.Server.Controllers
                 .Select(x => new
                 {
                     id = x.id,
+                    categoryName = x.title,
+                    name = x.title,
+                    accent = x.title,
                     title = x.title,
-                       slug = System.Text.RegularExpressions.Regex.Replace(
-                x.title.Replace("&", "").ToLower(),
-                @"[^a-z0-9]+",
-                "-"
-            ).Trim('-')
+                    page_title = x.page_title,
+                    description = x.description,
+                    slug = System.Text.RegularExpressions.Regex.Replace(
+                        x.title.Replace("&", "").ToLower(),
+                        @"[^a-z0-9]+",
+                        "-"
+                    ).Trim('-')
                 })
                 .ToList();
 
@@ -48,6 +53,8 @@ namespace Poweradmin.Server.Controllers
             var category = new ProductsCategory
             {
                 title = dto.title,
+                page_title = dto.page_title,
+                description = dto.description,
                 isvisible = dto.isvisible,
                 created_at = DateTime.Now
             };
@@ -68,6 +75,9 @@ namespace Poweradmin.Server.Controllers
                 {
                     id = x.id,
                     categoryName = x.title,
+                    title = x.title,
+                    page_title = x.page_title,
+                    description = x.description,
                     visible = x.isvisible
                 })
                 .ToList();
@@ -97,12 +107,15 @@ namespace Poweradmin.Server.Controllers
             return Ok(new
             {
                 id = category.id,
+                categoryName = category.title,
                 title = category.title,
+                page_title = category.page_title,
+                description = category.description,
                 isvisible = category.isvisible
             });
         }
         [HttpPut("update/{id}")]
-        public IActionResult UpdateCategory(int id, CategoryDTO dto)
+        public IActionResult UpdateCategory(int id, ProductsCategoryDTO dto)
         {
             var category = _db.ProductsCategory.FirstOrDefault(x => x.id == id);
 
@@ -113,6 +126,8 @@ namespace Poweradmin.Server.Controllers
                 return BadRequest(new { message = "Category title is required" });
 
             category.title = dto.title;
+            category.page_title = dto.page_title;
+            category.description = dto.description;
             category.isvisible = dto.isvisible;
 
             _db.SaveChanges();

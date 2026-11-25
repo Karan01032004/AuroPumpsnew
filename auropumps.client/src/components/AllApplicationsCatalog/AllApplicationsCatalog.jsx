@@ -3,6 +3,21 @@ import { useEffect, useState } from "react";
 import api from "../../poweradmin/api/axios";
 import { IMAGE_BASE_URL } from "../../poweradmin/api/axios";
 
+const getSnippet = (html) => {
+    if (!html) return "";
+    try {
+        const doc = new DOMParser().parseFromString(html, "text/html");
+        const text = doc.body.textContent || "";
+        const clean = text.replace(/\s+/g, " ").trim();
+        if (clean.toLowerCase() === "no data") return "";
+        return clean;
+    } catch {
+        const clean = String(html).replace(/<[^>]+>/g, " ").replace(/\s+/g, " ").trim();
+        if (clean.toLowerCase() === "no data") return "";
+        return clean;
+    }
+};
+
 function AllApplicationsCatalog() {
     const [applications, setApplications] = useState([]);
 
@@ -115,7 +130,9 @@ function AllApplicationsCatalog() {
                                             {app.title}
                                         </h4>
 
-                                        <p className="mt-3 text-sm text-slate-600">Safe, leak-free transfer and circulation of sodium hydroxide (NaOH) across chlor-alkali plants, pulp and paper mills, and chemical processing units using corrosion-resistant alloys and precision sealing.</p>
+                                        <p className="mt-3 text-sm text-slate-600 line-clamp-3">
+                                            {getSnippet(app.description) || "Safe, leak-free transfer and circulation of sodium hydroxide (NaOH) across chlor-alkali plants, pulp and paper mills, and chemical processing units using corrosion-resistant alloys and precision sealing."}
+                                        </p>
 
                                         <p className="mt-2 text-center text-[11px] font-semibold tracking-[0.12em] text-primary uppercase opacity-0 transition group-hover:opacity-100">
                                             View Details

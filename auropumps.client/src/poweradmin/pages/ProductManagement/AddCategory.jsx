@@ -6,6 +6,8 @@ import { useParams } from "react-router-dom";
 const AddCategory = () => {
     const [displayOnFrontend, setDisplayOnFrontend] = useState("yes");
     const [categoryName, setCategoryName] = useState("");
+    const [title, setTitle] = useState("");
+    const [description, setDescription] = useState("");
 
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState("");
@@ -25,10 +27,12 @@ const AddCategory = () => {
     const fetchCategory = async () => {
         try {
             const res = await api.get(`/ProductsCategory/${id}`);
-            setCategoryName(res.data.title);
+            setCategoryName(res.data.categoryName || res.data.title || "");
+            setTitle(res.data.page_title || "");
+            setDescription(res.data.description || "");
             setDisplayOnFrontend(res.data.isvisible ? "yes" : "no");
         } catch (err) {
-            setError("Failed to load category",err);
+            setError("Failed to load category", err);
         }
     };
 
@@ -43,21 +47,22 @@ const AddCategory = () => {
         setLoading(true);
 
         try {   
+            const payload = {
+                title: categoryName,
+                page_title: title,
+                description: description,
+                isvisible: displayOnFrontend === "yes",
+            };
+
             if (isEditMode) {
-              
-                const res = await api.put(`/ProductsCategory/update/${id}`, {
-                    title: categoryName,
-                    isvisible: displayOnFrontend === "yes",
-                });
+                const res = await api.put(`/ProductsCategory/update/${id}`, payload);
                 setSuccess(res.data.message);
             } else {
-             
-                const res = await api.post("/ProductsCategory/add", {
-                    title: categoryName,
-                    isvisible: displayOnFrontend === "yes",
-                });
+                const res = await api.post("/ProductsCategory/add", payload);
                 setSuccess(res.data.message);
                 setCategoryName("");
+                setTitle("");
+                setDescription("");
                 setDisplayOnFrontend("yes");
             }
         } catch (err) {
@@ -70,15 +75,15 @@ const AddCategory = () => {
     return (
         <div className="min-h-screen">
             <PageHeader
-                title="Add Product Category"
+                title={isEditMode ? "Edit Product Category" : "Add Product Category"}
                 breadcrumbs={[
                     { label: "Dashboard", href: "/poweradmin" },
-                    { label: "View Category" },
+                    { label: "View Category", href: "/poweradmin/view-Productcategory" },
                 ]}
             /> 
             <div className="rounded-2xl border border-gray-200 bg-white dark:border-gray-800 dark:bg-white/[0.03] shadow-sm p-6">
                 <h2 className="mb-6 text-xl font-semibold text-gray-800 dark:text-white">
-                    Add Product Category
+                    {isEditMode ? "Edit Product Category" : "Add Product Category"}
                 </h2>
 
                 {/* ERROR */}
@@ -135,8 +140,35 @@ const AddCategory = () => {
                     <input
                         value={categoryName}
                         onChange={(e) => setCategoryName(e.target.value)}
-                        placeholder="Enter Product  category name"
-                        className="w-full rounded-lg border border-gray-300 px-3 py-2"
+                        placeholder="Enter Product category name"
+                        className="w-full rounded-lg border border-gray-300 px-3 py-2 text-gray-700 dark:border-gray-700 dark:bg-gray-800 dark:text-white"
+                    />
+                </div>
+
+                {/* Title */}
+                <div className="mt-6">
+                    <label className="mb-1 block font-medium text-gray-700 dark:text-white">
+                       Title
+                    </label>
+                    <input
+                        value={title}
+                        onChange={(e) => setTitle(e.target.value)}
+                        placeholder="Enter category title"
+                        className="w-full rounded-lg border border-gray-300 px-3 py-2 text-gray-700 dark:border-gray-700 dark:bg-gray-800 dark:text-white"
+                    />
+                </div>
+
+                {/* Description */}
+                <div className="mt-6">
+                    <label className="mb-1 block font-medium text-gray-700 dark:text-white">
+                       Description
+                    </label>
+                    <textarea
+                        value={description}
+                        onChange={(e) => setDescription(e.target.value)}
+                        placeholder="Enter category description"
+                        rows={5}
+                        className="w-full rounded-lg border border-gray-300 px-3 py-2 text-gray-700 dark:border-gray-700 dark:bg-gray-800 dark:text-white"
                     />
                 </div>
 
@@ -144,7 +176,7 @@ const AddCategory = () => {
                     <button
                         onClick={handleSubmit}
                         disabled={loading}
-                        className="rounded-lg bg-indigo-600 px-6 py-2 text-white hover:bg-indigo-700 disabled:opacity-60"
+                        className="rounded-lg bg-indigo-600 px-6 py-2 text-white hover:bg-indigo-700 disabled:opacity-60 cursor-pointer"
                     >
                         {loading ? "Saving..." : "Save Category"}
                     </button>

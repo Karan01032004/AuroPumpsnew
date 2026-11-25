@@ -136,9 +136,9 @@ function ProductCategory() {
 
                 const enrichedCategory = {
                     ...selectedCategory,
-                    accent: meta?.accent || selectedCategory.title || "Product Category",
-                    title: meta?.title || selectedCategory.title || "Product Category",
-                    description: meta?.description || selectedCategory.description || "",
+                    accent: selectedCategory.accent || selectedCategory.category_name || selectedCategory.title || meta?.accent || "Product Category",
+                    title: selectedCategory.page_title || meta?.title || selectedCategory.title || "Product Category",
+                    description: (selectedCategory.description && selectedCategory.description.trim()) ? selectedCategory.description : (meta?.description || ""),
                 };
 
                 setCategory(enrichedCategory);

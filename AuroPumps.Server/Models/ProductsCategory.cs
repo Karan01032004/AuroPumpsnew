@@ -12,6 +12,8 @@ namespace Poweradmin.Server.Models
         [Required]
         [StringLength(255)]
         public string title { get; set; }
+        public string? page_title { get; set; }
+        public string? description { get; set; }
         public int? shortorder { get; set; }
         public bool isvisible { get; set; } = true; 
         public DateTime created_at { get; set; } = DateTime.Now;
