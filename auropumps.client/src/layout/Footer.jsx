@@ -188,7 +188,7 @@ const Footer = () => {
             <div className="container mx-auto px-4 py-3 lg:py-4 flex flex-col md:flex-row justify-between items-center text-xs lg:text-sm text-white text-center md:text-left">
 
                 <p>
-                    ©{new Date().getFullYear()} Auro Pumps, All rights reserved |{" "}
+                    ©{new Date().getFullYear()} Auro Pumps, All rights reserved. |{" "}
                     <NavLink
                         to="/faq"
                         className="hover:text-white transition"
