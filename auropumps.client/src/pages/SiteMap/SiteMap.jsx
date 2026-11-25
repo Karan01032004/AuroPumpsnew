@@ -1,6 +1,21 @@
+import { useEffect } from "react";
 import BannerSection from "../../components/BannerSection/BannerSection";
 import { Link } from "react-router-dom";
+import { applySeo } from "../../utils/seoHead";
+
+const SITEMAP_SEO = {
+    title: "Sitemap | Auro Pumps",
+    description:
+        "Explore the Auro Pumps website sitemap to find industrial pump products, molten metal and molten salt equipment, applications, company information, clients and contact details.",
+    keywords:
+        "Auro Pumps sitemap, Auro Pumps website pages, industrial pumps, vertical pumps, horizontal pumps, molten metal pumps, molten salt pumps, industrial pump manufacturer India",
+    canonical: "https://auropumps.com/sitemap",
+};
+
 function SiteMap() {
+    useEffect(() => {
+        applySeo(SITEMAP_SEO);
+    }, []);
   return (
       <>
           <BannerSection

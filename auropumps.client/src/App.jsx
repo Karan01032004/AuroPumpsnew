@@ -9,6 +9,7 @@ import Products from "./pages/Products/Products";
 import ThankYou from "./pages/ThankYou/ThankYou";
 import Error from "./pages/Error/Error";
 import SiteMap from "./pages/SiteMap/SiteMap";
+import FAQ from "./pages/FAQ/FAQ";
 import ScrollToTop from "./components/Common/ScrollToTop";
 import ScrollToHash from "./components/Common/ScrollToHash";
 
@@ -179,6 +180,10 @@ function App() {
                         <Route path="/metal-pumps-manufacturer-india/:productSlug" element={<Products />} />
                         <Route path="/metal-pumps-manufacturer-india/:categorySlug/:productSlug" element={<Products />} />
                         <Route
+                            path="/faq"
+                            element={<FAQ />}
+                        />
+                        <Route
                             path="/thank-you"
                             element={<ThankYou />}
                         />
@@ -187,7 +192,7 @@ function App() {
                             element={<SiteMap />}
                         />
                         <Route
-                            path="/error" 
+                            path="*" 
                             element={<Error />}
                         />
                     </Route>

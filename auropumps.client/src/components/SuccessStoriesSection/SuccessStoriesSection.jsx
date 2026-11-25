@@ -21,9 +21,9 @@ const SuccessStoriesSection = () => {
                     <span className="inline-block rounded-full border border-white/30 bg-white/20 px-4 py-2 text-[11px] tracking-[0.22em] text-white uppercase backdrop-blur-md">
                         Proven In Critical Applications
                     </span>
-                    <h2 className="mt-4 text-xl sm:text-2xl lg:text-3xl font-semibold leading-snug text-white">
+                    <h1 className="mt-4 text-xl sm:text-2xl lg:text-3xl font-semibold leading-snug text-white">
                         Our Success Stories in Critical Applications
-                    </h2>
+                    </h1>
                 </div>
 
                 {/* Slider */}
