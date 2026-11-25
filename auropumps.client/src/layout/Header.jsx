@@ -10,6 +10,10 @@ const Header = () => {
     const [activeDesktopMenu, setActiveDesktopMenu] = useState(null);
     const [mobileProductOpen, setMobileProductOpen] = useState(false);
     const [mobileApplicationOpen, setMobileApplicationOpen] = useState(false);
+    const [isVerticalOpen, setIsVerticalOpen] = useState(false);
+    const [isMoltenMetalOpen, setIsMoltenMetalOpen] = useState(false);
+    const [isMoltenSaltOpen, setIsMoltenSaltOpen] = useState(false);
+    const [isHorizontalOpen, setIsHorizontalOpen] = useState(false);
     const headerHeight = scrolled ? 76 : 100;
     const [categories, setCategories] = useState([]);
     const [productsMap, setProductsMap] = useState({});
@@ -284,40 +288,90 @@ const Header = () => {
       transform: activeDesktopMenu === "Products" ? "translateY(0)" : undefined,
   }}
 >
-                                            <div className="max-w-[1380px] mx-auto px-6 lg:px-0 py-8">
+                                            <div className="max-w-[1380px] mx-auto px-6 lg:px-10 py-8">
 
                                                 <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-12 gap-10 text-xs">
                                                     <div className="col-span-2 md:col-span-4 lg:col-span-4 space-y-6">
-                                                        <div>
-                                                            <NavLink
-                                                                to={`/products/${verticalPumpsCategories[0]?.slug || "vertical-pumps"}`}
-                                                                onClick={() => setActiveDesktopMenu(null)}
-                                                                className="block mb-3 border-b border-white/20 pb-2 font-semibold text-sm hover:text-[#f89b32] transition"
-                                                            >
-                                                                VERTICAL PUMPS
-                                                            </NavLink>
-                                                            {verticalPumps.map((product) => (
+                                                        <div
+                                                            className="relative"
+                                                            onMouseEnter={() => setIsVerticalOpen(true)}
+                                                            onMouseLeave={() => setIsVerticalOpen(false)}
+                                                        >
+                                                            <div className="flex items-center justify-between mb-3 border-b border-white/20 pb-2">
                                                                 <NavLink
-                                                                    key={product.id}
-                                                                    to={`/metal-pumps-manufacturer-india/${product.categorySlug}/${product.slug}`}
-                                                                    
-                                                                    className="block py-1 text-white/80 transition hover:text-white"
+                                                                    to={`/products/${verticalPumpsCategories[0]?.slug || "vertical-pumps"}`}
+                                                                    onClick={() => setActiveDesktopMenu(null)}
+                                                                    className="font-semibold text-sm hover:text-[#f89b32] transition"
                                                                 >
-                                                                    {product.name}
+                                                                    VERTICAL PUMPS
                                                                 </NavLink>
-                                                            ))}
+
+                                                                <button
+                                                                    type="button"
+                                                                    onClick={() => setIsVerticalOpen((prev) => !prev)}
+                                                                    className="ml-3 text-white hover:text-[#f89b32] transition"
+                                                                    aria-label="Toggle vertical pumps submenu"
+                                                                >
+                                                                    <FiChevronDown
+                                                                        size={18}
+                                                                        className={`transition-transform duration-200 ${isVerticalOpen ? "rotate-180" : ""
+                                                                            }`}
+                                                                    />
+                                                                </button>
+                                                            </div>
+
+                                                            {isVerticalOpen && (
+                                                                <div>
+                                                                    {verticalPumps.map((product) => (
+                                                                        <NavLink
+                                                                            key={product.id}
+                                                                            to={`/metal-pumps-manufacturer-india/${product.categorySlug}/${product.slug}`}
+                                                                            onClick={() => {
+                                                                                setActiveDesktopMenu(null);
+                                                                                setIsVerticalOpen(false);
+                                                                            }}
+                                                                            className="block py-1 text-white/80 transition hover:text-white"
+                                                                        >
+                                                                            {product.name}
+                                                                        </NavLink>
+                                                                    ))}
+                                                                </div>
+                                                            )}
                                                         </div>
 
                                                     </div>
-                                                    <div className="col-span-2 md:col-span-4 lg:col-span-4">
-                                                        <NavLink
-                                                            to={`/products/${pumpCategories[0]?.slug || "horizontal-pumps"}`}
-                                                            onClick={() => setActiveDesktopMenu(null)}
-                                                            className="block mb-4 border-b border-white/20 pb-2 font-semibold text-sm hover:text-[#f89b32] transition"
-                                                        >
-                                                            HORIZONTAL PUMPS
-                                                        </NavLink>
 
+                                                    <div
+                                                        className="col-span-2 md:col-span-4 lg:col-span-4"
+                                                        onMouseEnter={() => setIsHorizontalOpen(true)}
+                                                        onMouseLeave={() => setIsHorizontalOpen(false)}
+                                                    >
+                                                        <div className="flex items-center justify-between mb-4 border-b border-white/20 pb-2">
+                                                            <NavLink
+                                                                to={`/products/${pumpCategories[0]?.slug || "horizontal-pumps"}`}
+                                                                onClick={() => {
+                                                                    setActiveDesktopMenu(null);
+                                                                    setIsHorizontalOpen(false);
+                                                                }}
+                                                                className="font-semibold text-sm hover:text-[#f89b32] transition"
+                                                            >
+                                                                HORIZONTAL PUMPS
+                                                            </NavLink>
+
+                                                            <button
+                                                                type="button"
+                                                                onClick={() => setIsHorizontalOpen((prev) => !prev)}
+                                                                className="ml-3 text-white hover:text-[#f89b32] transition"
+                                                                aria-label="Toggle horizontal pumps submenu"
+                                                                aria-expanded={isHorizontalOpen}
+                                                            >
+                                                                <FiChevronDown
+                                                                    size={18}
+                                                                    className={`transition-transform duration-200 ${isHorizontalOpen ? "rotate-180" : ""
+                                                                        }`}
+                                                                />
+                                                            </button>
+                                                        </div>
                                                         {/*<div className="grid grid-cols-1 sm:grid-cols-1 gap-x-8 gap-y-2 text-xs">*/}
                                                         {/*    {pumpColumns.map((column) => (*/}
                                                         {/*        <ul key={column} className="space-y-2 text-white/80">*/}
@@ -337,64 +391,144 @@ const Header = () => {
                                                         {/*        </ul>*/}
                                                         {/*    ))}*/}
                                                         {/*</div>*/}
-                                                        <div className="grid grid-cols-1 sm:grid-cols-1 gap-x-8 gap-y-2 text-xs">
-                                                            {allPumpColumns.map((columnData, colIndex) => (
-                                                                <ul key={colIndex} className="space-y-2 text-white/80">
-                                                                    {columnData.map((product) => (
-                                                                        <li key={product.id}>
-                                                                            <NavLink
-                                                                                to={`/metal-pumps-manufacturer-india/${product.categorySlug}/${product.slug}`}
-                                                                                
-                                                                                className="block transition hover:text-white"
-                                                                            >
-                                                                                {product.name}
-                                                                            </NavLink>
-                                                                        </li>
-                                                                    ))}
-                                                                </ul>
-                                                            ))}
-                                                        </div>
+
+                                                        {isHorizontalOpen && (
+                                                            <div className="grid grid-cols-1 sm:grid-cols-1 gap-x-8 gap-y-2 text-xs">
+                                                                {allPumpColumns.map((columnData, colIndex) => (
+                                                                    <ul
+                                                                        key={colIndex}
+                                                                        className="space-y-2 text-white/80"
+                                                                    >
+                                                                        {columnData.map((product) => (
+                                                                            <li key={product.id}>
+                                                                                <NavLink
+                                                                                    to={`/metal-pumps-manufacturer-india/${product.categorySlug}/${product.slug}`}
+                                                                                    onClick={() => {
+                                                                                        setActiveDesktopMenu(null);
+                                                                                        setIsHorizontalOpen(false);
+                                                                                    }}
+                                                                                    className="block transition hover:text-white"
+                                                                                >
+                                                                                    {product.name}
+                                                                                </NavLink>
+                                                                            </li>
+                                                                        ))}
+                                                                    </ul>
+                                                                ))}
+                                                            </div>
+                                                        )}
                                                     </div>
+
                                                   
                                                     <div className="col-span-2 md:col-span-4 lg:col-span-4 space-y-6">
-                                                        <div>
-                                                            <NavLink
-                                                                to={`/products/${moltenMetalSystemCategories[0]?.slug || "molten-metal-equipments"}`}
-                                                                onClick={() => setActiveDesktopMenu(null)}
-                                                                className="block mb-3 border-b border-white/20 pb-2 font-semibold text-sm hover:text-[#f89b32] transition"
-                                                            >
-                                                                MOLTEN METAL EQUIPMENTS
-                                                            </NavLink>
-                                                            {moltenMetalSystemProducts.map((product) => (
+
+                                                        <div
+                                                            className="relative"
+                                                            onMouseEnter={() => setIsMoltenMetalOpen(true)}
+                                                            onMouseLeave={() => setIsMoltenMetalOpen(false)}
+                                                        >
+                                                            <div className="flex items-center justify-between mb-3 border-b border-white/20 pb-2">
                                                                 <NavLink
-                                                                    key={product.id}
-                                                                    to={`/metal-pumps-manufacturer-india/${product.categorySlug}/${product.slug}`}
-                                                                    
-                                                                    className="block py-1 text-white/80 transition hover:text-white text-xs"
+                                                                    to={`/products/${moltenMetalSystemCategories[0]?.slug || "molten-metal-equipments"}`}
+                                                                    onClick={() => {
+                                                                        setActiveDesktopMenu(null);
+                                                                        setIsMoltenMetalOpen(false);
+                                                                    }}
+                                                                    className="font-semibold text-sm hover:text-[#f89b32] transition"
                                                                 >
-                                                                    {product.name}
+                                                                    MOLTEN METAL EQUIPMENTS
                                                                 </NavLink>
-                                                            ))}
+
+                                                                <button
+                                                                    type="button"
+                                                                    onClick={() =>
+                                                                        setIsMoltenMetalOpen((prev) => !prev)
+                                                                    }
+                                                                    className="ml-3 text-white hover:text-[#f89b32] transition"
+                                                                    aria-label="Toggle molten metal equipments submenu"
+                                                                    aria-expanded={isMoltenMetalOpen}
+                                                                >
+                                                                    <FiChevronDown
+                                                                        size={18}
+                                                                        className={`transition-transform duration-200 ${isMoltenMetalOpen ? "rotate-180" : ""
+                                                                            }`}
+                                                                    />
+                                                                </button>
+                                                            </div>
+
+                                                            {isMoltenMetalOpen && (
+                                                                <div>
+                                                                    {moltenMetalSystemProducts.map((product) => (
+                                                                        <NavLink
+                                                                            key={product.id}
+                                                                            to={`/metal-pumps-manufacturer-india/${product.categorySlug}/${product.slug}`}
+                                                                            onClick={() => {
+                                                                                setActiveDesktopMenu(null);
+                                                                                setIsMoltenMetalOpen(false);
+                                                                            }}
+                                                                            className="block py-1 text-white/80 transition hover:text-white text-xs"
+                                                                        >
+                                                                            {product.name}
+                                                                        </NavLink>
+                                                                    ))}
+                                                                </div>
+                                                            )}
                                                         </div>
-                                                        <div>
-                                                            <NavLink
-                                                                to={`/products/${moltenSulphurCategories[0]?.slug || "molten-salt-equipments"}`}
-                                                                onClick={() => setActiveDesktopMenu(null)}
-                                                                className="block mb-3 border-b border-white/20 pb-2 font-semibold text-sm hover:text-[#f89b32] transition"
-                                                            >
-                                                                MOLTEN SALT EQUIPMENTS
-                                                            </NavLink>
-                                                            {moltenSaltSystemProducts.map((product) => (
+
+
+                                                        <div
+                                                            className="relative"
+                                                            onMouseEnter={() => setIsMoltenSaltOpen(true)}
+                                                            onMouseLeave={() => setIsMoltenSaltOpen(false)}
+                                                        >
+                                                            <div className="flex items-center justify-between mb-3 border-b border-white/20 pb-2">
                                                                 <NavLink
-                                                                    key={product.id}
-                                                                    to={`/metal-pumps-manufacturer-india/${product.categorySlug}/${product.slug}`}
-                                                                    
-                                                                    className="block py-1 text-white/80 transition hover:text-white text-xs"
+                                                                    to={`/products/${moltenSulphurCategories[0]?.slug || "molten-salt-equipments"}`}
+                                                                    onClick={() => {
+                                                                        setActiveDesktopMenu(null);
+                                                                        setIsMoltenSaltOpen(false);
+                                                                    }}
+                                                                    className="font-semibold text-sm hover:text-[#f89b32] transition"
                                                                 >
-                                                                    {product.name}
+                                                                    MOLTEN SALT EQUIPMENTS
                                                                 </NavLink>
-                                                            ))}
+
+                                                                <button
+                                                                    type="button"
+                                                                    onClick={() =>
+                                                                        setIsMoltenSaltOpen((prev) => !prev)
+                                                                    }
+                                                                    className="ml-3 text-white hover:text-[#f89b32] transition"
+                                                                    aria-label="Toggle molten salt equipments submenu"
+                                                                    aria-expanded={isMoltenSaltOpen}
+                                                                >
+                                                                    <FiChevronDown
+                                                                        size={18}
+                                                                        className={`transition-transform duration-200 ${isMoltenSaltOpen ? "rotate-180" : ""
+                                                                            }`}
+                                                                    />
+                                                                </button>
+                                                            </div>
+
+                                                            {isMoltenSaltOpen && (
+                                                                <div>
+                                                                    {moltenSaltSystemProducts.map((product) => (
+                                                                        <NavLink
+                                                                            key={product.id}
+                                                                            to={`/metal-pumps-manufacturer-india/${product.categorySlug}/${product.slug}`}
+                                                                            onClick={() => {
+                                                                                setActiveDesktopMenu(null);
+                                                                                setIsMoltenSaltOpen(false);
+                                                                            }}
+                                                                            className="block py-1 text-white/80 transition hover:text-white text-xs"
+                                                                        >
+                                                                            {product.name}
+                                                                        </NavLink>
+                                                                    ))}
+                                                                </div>
+                                                            )}
                                                         </div>
+
                                                       
                                                     </div>
 
